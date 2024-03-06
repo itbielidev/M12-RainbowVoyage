@@ -16,7 +16,7 @@
     "@vueuse/core": "10.9.0",
     "axios": "^1.6.7",
     "pinia": "2.1.7",
-    "primevue": "3.49.1",
+    "primevue": "^3.49.1",
     "vue": "3.4.15",
     "vue-router": "4.2.5",
     "zod": "^3.22.4"

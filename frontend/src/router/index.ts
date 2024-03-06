@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TodosView from '@/views/TodosView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,10 @@ const router = createRouter({
       path: '/todos',
       name: 'todos',
       component: TodosView
+    },  {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView
     }
   ]
 })
