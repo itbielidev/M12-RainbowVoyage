@@ -11,7 +11,7 @@ const courseImg = ["pishing.png", "user-password.png", "password.png", "pirata.p
 </script>
 
 <template>
-  <h1>Formación usuarios</h1>
+  <h1 style="color: #3c4858; font-size: 2.5rem;">Formación usuarios</h1>
   <main class="courses">
     <section class="course" v-for="(value, key) in courses" :key="key">
       <img class="formation-image" :src="`/${value.image}`">
@@ -21,12 +21,16 @@ const courseImg = ["pishing.png", "user-password.png", "password.png", "pirata.p
       </article>
     </section>
   </main>
+  <footer>
+    <span>Logos</span>
+  </footer>
 </template>
 
 <style scoped>
 main.courses {
   display: flex;
   flex-direction: column;
+  padding: 0 20rem;
 }
 
 section.course {
@@ -55,5 +59,17 @@ article.formation p {
 
 img.formation-image {
   height: 200px;
+}
+
+footer{
+  background-color: black;
+  color:white;
+  height: 5rem;
+  font-family: "Roboto", serif;
+  font-weight:500;
+  text-align: center;
+padding: 1rem;
+font-size: 2rem;
+margin: 0px;
 }
 </style>
