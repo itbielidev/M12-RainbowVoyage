@@ -4,22 +4,56 @@ import coursesDescription from "../coursesDescription.json"
 
 const courses = ref(coursesDescription)
 
-const coursesName = ["Anti-phishing","Autentificación de 2 factores (2FA)", "Contraseñas seguras", "Descargas piratas y webs maliciosas","Evitar conexiones de Wi-Fi públicas","Mesas Limpias","Reporte de incidentes de seguridad","Seguridad en la web"]
+const coursesName = ["Anti-phishing", "Autentificación de 2 factores (2FA)", "Contraseñas seguras", "Descargas piratas y webs maliciosas", "Evitar conexiones de Wi-Fi públicas", "Mesas Limpias", "Reporte de incidentes de seguridad", "Seguridad en la web"]
+
+const courseImg = ["pishing.png", "user-password.png", "password.png", "pirata.png", "wifi.png", "mesasLimpias2.png", "Reporte-errores.png", "hhtp"]
 
 </script>
 
 <template>
-    <h1>Formación usuarios</h1>
-    <main class="courses">
-    <section class="course" v-for="(course, index) in courses" :key="index">
-      <img :src="" alt="">
-      <article>
-        <h3>{{ coursesName[index] }}</h3>
-        <p>{{ course.definicion }}</p>
+  <h1>Formación usuarios</h1>
+  <main class="courses">
+    <section class="course" v-for="(value, key) in courses" :key="key">
+      <img class="formation-image" :src="`/${value.image}`">
+      <article class="formation">
+        <h3>{{ key }}</h3>
+        <p>{{ value.definicion }}</p>
       </article>
     </section>
-  </main>    
+  </main>
 </template>
 
 <style scoped>
+main.courses {
+  display: flex;
+  flex-direction: column;
+}
+
+section.course {
+  display: flex;
+  flex-direction: row;
+}
+
+article.formation {
+  display: flex;
+  flex-direction: column;
+}
+
+article.formation h3 {
+  color: #6dd7a3;
+  font-size: 1.4rem;
+}
+
+article.formation p {
+  font-family: "Roboto", serif;
+  font-weight: 300;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-size: 1.3rem;
+  line-height: 2rem;
+}
+
+img.formation-image {
+  height: 200px;
+}
 </style>
