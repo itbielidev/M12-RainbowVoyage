@@ -1,34 +1,28 @@
 <template>
-  <div>
-    <section>
-      <h1>Cursos formativos</h1>
-      <article class="article-container">
-        <div class="image-container">
-          <img src="../../public/Técnico.png" alt="Imagen" />
+  <div class="capa">
+    <section class="container">
+      <h1>Cursos de formación</h1>
+      <div class="image-text-container text-center">
+        <div class="item">
+          <img src="../../public/Técnico.png">
+          <div class="text">
+            <h4>CURSOS DE FORMACIÓN PARA TÉCNICOS</h4>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet possimus dicta fuga consequatur veniam consectetur rem hic dolores officia, aperiam quam minus, tempora laboriosam, natus recusandae a velit quas at!</p>
+          </div>
         </div>
-        <div class="text-container">
-          <p>CURSOS DE FORMACIÓN PARA USUARIOS</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab optio accusantium rem dolores
-            eius facere cumque. Dicta perferendis ea maxime quod deleniti asperiores, recusandae quasi
-            explicabo voluptatibus libero quaerat voluptate.
-          </p>
+        <div class="item">
+          <img src="../../public/Técnico.png">
+          <div class="text">
+            <h4>CURSOS DE FORMACIÓN PARA USUARIOS</h4>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet possimus dicta fuga consequatur veniam consectetur rem hic dolores officia, aperiam quam minus, tempora laboriosam, natus recusandae a velit quas at!</p>
+          </div>
         </div>
-      </article>
+      </div>
+    </section>
 
-      <article class="article-container">
-        <div class="image-container">
-          <img src="" width="50" alt="Imagen" />
-        </div>
-        <div class="text-container">
-          <p>CURSOS DE FORMACIÓN PARA USUARIOS</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab optio accusantium rem dolores
-            eius facere cumque. Dicta perferendis ea maxime quod deleniti asperiores, recusandae quasi
-            explicabo voluptatibus libero quaerat voluptate.
-          </p>
-        </div>
-      </article>
+    <section class="container">
+      <h1>Nuestras formaciones</h1>
+      
     </section>
   </div>
 </template>
@@ -36,20 +30,45 @@
 <script setup lang="ts"></script>
 
 <style scoped>
-h1 {
-  text-align: center;
+.capa {
+  background-color: white;
 }
 
-.article-container {
-  display: grid;
-  grid-template-columns: auto 1fr; /* La imagen ocupa el ancho automático y el texto ocupa el espacio restante */
-  gap: 20px; /* Espacio entre la imagen y el texto */
+.image-text-container {
+  display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 
-.image-container img {
-  max-width: 100px; /* Tamaño máximo para la imagen */
-  width: 100%; /* Ajusta la imagen al contenedor */
-  height: auto;
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+img {
+  border-radius: 3px;
+  width: 250px;
+}
+
+.text {
+  margin-left: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #3c4858;
+  font-weight: 700;
+  font-size: 37px;
+  font-family: "Roboto Slab", "Times New Roman", serif;
+}
+
+h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
 }
 </style>
