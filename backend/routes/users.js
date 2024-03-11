@@ -9,8 +9,8 @@ export const createUserRouter = (userModel) => {
   const userController = new UserController(userModel);
 
   // userRouter.get("/", userController.getAll);
-  // userRouter.post("/register", userController.register);
-  // userRouter.post("/login", userController.login);
+  userRouter.post("/register", userController.register);
+  userRouter.post("/login", userController.login);
   // userRouter.delete("/delete", userController.delete);
   // userRouter.delete("/deactivate", authenticateToken, userController.deactivate);
   // userRouter.post("/activate", userController.activate);
