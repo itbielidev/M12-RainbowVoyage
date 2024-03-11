@@ -1,74 +1,33 @@
 <template>
-  <!-- <nav class="navbar navbar-default navbar-fixed-top navbar-color-on-scroll navbar-transparent hestia_left">
-    <div class="container">
-      <div class="navbar-header">
-        <div class="title-logo-wrapper">
-          <a class="navbar-brand" href="https://aegis.webwizzardss.com/" title="Aegis">
-            <div class="hestia-title-with-logo hestia-text-right">
-              <div class="hestia-logo">
-                <img src="https://aegis.webwizzardss.com/wp-content/uploads/2024/01/Proposta-2.png" alt="Aegis" width="4134" height="4465">
-              </div>
-              <div class="hestia-title-tagline-wrap">
-                <div class="site-title">Aegis</div>
-                <small></small>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="navbar-toggle-wrapper">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="sr-only">Cambiar modo de navegación</span>
-          </button>
-        </div>
-      </div>
-      <div id="main-navigation" class="collapse navbar-collapse">
-        <ul id="menu-inicio" class="nav navbar-nav">
-          <li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-32">
-            <a title="Perfil" href="https://aegis.webwizzardss.com/perfil/">
-              <i class="obfx-menu-icon dashicons dashicons-admin-users"></i>Perfil
-            </a>
-          </li>
-          <li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31">
-            <a title="Registrarse" href="https://aegis.webwizzardss.com/registrarse/">
-              <i class="obfx-menu-icon dashicons dashicons-format-aside"></i>Registrarse
-            </a>
-          </li>
-        </ul>
-      </div>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark d-flex">
+    <a class="navbar-brand" href="#"><img src="../../public/logo.png">Aegis</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <font-awesome-icon icon="fa-solid fa-user"/><a class="nav-link" href="#">PERFIL</a>
+        </li>
+        <li class="nav-item">
+          <font-awesome-icon icon="fa-solid fa-file"/><a class="nav-link disabled" href="#">REGISTRARSE</a>
+        </li>
+      </ul>
     </div>
-  </nav> -->
+  </nav>
 </template>
+
 <script setup lang="ts">
 
 </script>
 
 <style scoped>
-/* .navbar.navbar-transparent {
-  color: #fff;
-  background-color: transparent;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+img {
+  width: 100px;
+  height: 100px;
 }
 
-.navbar {
-  background-color: #fff;
-  color: #555;
-  border-radius: 0;
-  position: fixed;
-  border: none;
-  padding: 0;
-  transition: none;
-  font-size: 12px;
+.navbar-brand {
+  display: inline-flex; 
+  align-items: center; 
+  text-decoration: none; 
+  color: inherit; 
 }
-
-.navbar-fixed-top,
-.navbar-fixed-bottom {
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 1030;
-} */
 </style>
