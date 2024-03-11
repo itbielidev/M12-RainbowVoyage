@@ -19,7 +19,30 @@ enum UserTypes {
 }
 
 export interface User {
-    alias : string,
-    email : string,
+    id : number
+    alias : string
+    email : string
     type : UserTypes
+}
+
+export interface Category {
+    id : number
+    name : string
+    courses ?: Course[]
+}
+
+export interface Course {
+    id : number
+    name: string
+    main_text: string
+    form_id: number
+    form: any
+    categories ?: Category[]
+}
+
+export interface Form {
+    id: number
+    name: string
+    correct_combination : number[]
+    users : User[]
 }

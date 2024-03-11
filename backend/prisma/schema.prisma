@@ -46,7 +46,8 @@ model Form {
   id                  Int         @id @default(autoincrement())
   name                String
   correct_combination Int[]
-  Course              Course[]
+  courseId            Int         @unique
+  Course              Course      @relation(fields: [courseId], references: [id])
   User_Form           User_Form[]
 }
 
@@ -55,9 +56,10 @@ model Course {
   name            String
   main_text       String
   main_photo      String
-  form_id         Int
-  form            Form              @relation(fields: [form_id], references: [id])
+  type            UserTypes
+  form            Form?
   Category_Course Category_Course[]
+  formId          Int?
 }
 
 model Category {
