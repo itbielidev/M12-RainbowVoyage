@@ -32,7 +32,7 @@ export const useFetch = <T>(): FetchReturn<T> => {
 
         const axiosConfig: AxiosRequestConfig = {
             method,
-            url: url, //Cambiar esto por apiEndpoint !!!!!!!
+            url: apiEndpoint, //Cambiar esto por apiEndpoint !!!!!!!
             data: payload,
         };
 

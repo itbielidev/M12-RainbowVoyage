@@ -12,3 +12,74 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum UserTypes {
+  employee
+  technician
+}
+
+model User {
+  id            Int         @id @default(autoincrement())
+  name          String
+  surnames      String
+  alias         String
+  email         String      @unique @db.VarChar(255)
+  password_hash String      @db.VarChar(255)
+  salt_hash     String      @db.VarChar(255)
+  type          UserTypes
+  registered_at DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime    @default(now()) @db.Timestamptz(6)
+  status        Boolean     @default(true)
+  company_id    Int
+  company       Company     @relation(fields: [company_id], references: [id])
+  User_Form     User_Form[]
+}
+
+model Company {
+  id    Int    @id @default(autoincrement())
+  name  String
+  logo  String
+  users User[]
+}
+
+model Form {
+  id                  Int         @id @default(autoincrement())
+  name                String
+  correct_combination Int[]
+  Course              Course[]
+  User_Form           User_Form[]
+}
+
+model Course {
+  id              Int               @id @default(autoincrement())
+  name            String
+  main_text       String
+  main_photo      String
+  form_id         Int
+  form            Form              @relation(fields: [form_id], references: [id])
+  Category_Course Category_Course[]
+}
+
+model Category {
+  id              Int               @id @default(autoincrement())
+  name            String
+  Category_Course Category_Course[]
+}
+
+//N-M Entities
+model Category_Course {
+  id          Int      @id @default(autoincrement())
+  course_id   Int
+  course      Course   @relation(fields: [course_id], references: [id])
+  category_id Int
+  category    Category @relation(fields: [category_id], references: [id])
+}
+
+model User_Form {
+  id        Int     @id @default(autoincrement())
+  user_id   Int
+  user      User    @relation(fields: [user_id], references: [id])
+  form_id   Int
+  form      Form    @relation(fields: [form_id], references: [id])
+  completed Boolean
+}
