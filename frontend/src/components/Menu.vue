@@ -1,13 +1,17 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top d-flex w-100" :class="{ 'navbar-scrolled': scrolled }">
+  <nav class="navbar navbar-expand-md fixed-top d-flex w-100">
     <a class="navbar-brand logo" href="#"><img src="../../public/logo.png">Aegis</a>
     <div class="collapse navbar-collapse menu" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#"><font-awesome-icon icon="fa-solid fa-user" :class="{ 'icon-white': !scrolled }"></font-awesome-icon> PERFIL</a>
+        <li class="nav-item">
+          <button class="nav-link profile-button register" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+            <font-awesome-icon icon="fa-solid fa-file" class="icon"></font-awesome-icon> REGISTRO
+          </button>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><font-awesome-icon icon="fa-solid fa-file" :class="{ 'icon-white': !scrolled }"></font-awesome-icon> REGISTRARSE</a>
+          <button class="nav-link profile-button" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+            <font-awesome-icon icon="fa-solid fa-user" class="icon"></font-awesome-icon> PERFIL
+          </button>
         </li>
       </ul>
     </div>
@@ -16,34 +20,25 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-
-const scrolled = ref(false);
-
-window.addEventListener('scroll', () => {
-  scrolled.value = window.scrollY > 0;
-});
+const hoverButton = ref(false);
 </script>
 
 <style scoped>
-.navbar {
-  background-color: transparent; 
-  font-family: "Roboto", sans-serif;
-  color: white;
-  background-color: transparent; 
-  transition: background-color 0.3s ease-in-out; 
+.navbar{
+  background-color: white;
 }
-
 .navbar-brand {
   font-size: 18px;
 }
 
-img {
-  width: 50px;
-  height: 50px;
+.logo{
+  color: #D90594;
 }
 
-.logo {
-  margin-left: 200px;
+img {
+  width: 150px;
+  height: 100px;
+  margin-left: 120px;
 }
 
 .menu {
@@ -56,26 +51,25 @@ img {
   text-decoration: none; 
 }
 
-.navbar-scrolled {
-  background-color: white; 
+.profile-button {
+  background-color: #D90594; 
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.5s; 
+  color: white; 
+}
+
+.profile-button:hover{
+  background-color: #FFB6C1;
 }
 
 .icon {
-  margin-right: 5px;
-  color: black !important;  
+  color: white; 
 }
 
-.icon-white {
-  color: white !important;
-}
-
-a:hover {
-  color: #6dd7a3;
-}
-
-.navbar,
-.navbar-scrolled .navbar-brand,
-.navbar-scrolled .nav-link {
-  color: black !important; 
+.register{
+  margin-right: 15px;
 }
 </style>

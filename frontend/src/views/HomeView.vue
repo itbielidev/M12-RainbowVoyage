@@ -2,18 +2,20 @@
   <Menu></Menu>
   <div class="image-container">
     <div class="header-filter"></div>
-    <img src="../../public/fondoImagenPrincipal.jpeg" width="100%">
-    <div class="text-container">
-      <h1>BIENVENIDO A AEGIS</h1>
-      <span class="sub-title">Ciberseguridad para microempresas y autónomos</span>
+    <img src="../../public/metro.png" width="100%">
+    <div class="text-container bg-dark">
+      <h3>"Descubre destinos inclusivos con nuestra web para el colectivo LGTBIQ"</h3>
     </div>
   </div>
-  <Cursos></Cursos>
+  <div class="info-container">
+    <p>El colectivo LGTBIQ reúne a personas con orientaciones sexuales o identidades de género no convencionales. Han luchado por igualdad y visibilidad, enfrentando discriminación. Su historia está marcada por el activismo y avances legales. Siguen abogando por inclusión y respeto.</p>
+  </div>
+  <Ciudad></Ciudad>
 </template>
 
 <script setup lang="ts">
 import Menu from "@/components/Menu.vue";
-import Cursos from "@/components/CursosFormación.vue"
+import Ciudad from "@/components/Ciudades.vue"
 </script>
 
 <style>
@@ -22,36 +24,29 @@ import Cursos from "@/components/CursosFormación.vue"
   text-align: center;
 }
 
-.header-filter {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-}
-
 img {
   width: 100%;
 }
 
 .text-container {
   position: absolute;
-  top: 50%;
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  text-align: center; 
+  text-align: center;
+  padding: 30px;
 }
 
-h1,
-span {
-  font-size: 67px;
-  font-family: "Roboto", sans-serif;
-  line-height: 1.4;
+h3 {
+  font-size: 40px;
 }
 
-span {
-  font-size: 18px;
+p {
+  text-align: center;
+  font-size: 36px;
+  margin-top: 150px; 
+  margin-left: 315px; /* Separación a los lados */
+  margin-right: 315px; /* Separación a los lados */
 }
 </style>
