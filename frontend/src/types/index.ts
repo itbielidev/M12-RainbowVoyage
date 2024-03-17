@@ -69,10 +69,10 @@ export interface User {
     name: string
     last_name: string
     email: string
-    dni: string
-    address: string
-    city: string
-    phone: string
+    dni?: string
+    address?: string
+    city?: string
+    phone?: string
     preference?: UserPreference
     reservations?: Reservation[]
 }
