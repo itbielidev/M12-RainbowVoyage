@@ -1,4 +1,4 @@
-import { validateLogin, validateUser } from '../schemas/users.js'
+import { validateRegister, validateUpdate, validateLogin } from '../schemas/users.js'
 import "dotenv/config";
 
 export class UserController {
