@@ -3,6 +3,6 @@
 </script>
 
 <template>
-<h1>Aegis</h1>
+<h1>Rainbow home page</h1>
 
 </template>
