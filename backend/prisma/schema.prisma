@@ -14,72 +14,105 @@ datasource db {
 }
 
 enum UserTypes {
-  employee
-  technician
+  client
+  admin
+}
+
+enum ExperienceTypes {
+  gastronomic
+  cultural
+  festive
+}
+
+enum ReservationState {
+  completed
+  cancelled
+  pending
 }
 
 model User {
-  id            Int         @id @default(autoincrement())
+  id            Int             @id @default(autoincrement())
   name          String
-  surnames      String
-  alias         String
-  email         String      @unique @db.VarChar(255)
-  password_hash String      @db.VarChar(255)
-  salt_hash     String      @db.VarChar(255)
+  last_name     String
+  email         String          @unique @db.VarChar(255)
+  dni           String?         @unique @db.VarChar(9)
+  address       String?
+  city          String?
+  phone         String?         @db.VarChar(9)
+  password_hash String          @db.VarChar(255)
+  salt_hash     String          @db.VarChar(255)
   type          UserTypes
-  registered_at DateTime    @default(now()) @db.Timestamptz(6)
-  updated_at    DateTime    @default(now()) @db.Timestamptz(6)
-  status        Boolean     @default(true)
-  company_id    Int
-  company       Company     @relation(fields: [company_id], references: [id])
-  User_Form     User_Form[]
+  registered_at DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime        @default(now()) @db.Timestamptz(6)
+  status        Boolean         @default(true)
+  preference    UserPreference? @relation(fields: [preference_id], references: [id])
+  preference_id Int?            @unique
+  Reservation   Reservation[]
 }
 
-model Company {
-  id    Int    @id @default(autoincrement())
-  name  String
-  logo  String
-  users User[]
+model UserPreference {
+  id             Int               @id @default(autoincrement())
+  price_min      Int?
+  price_max      Int?
+  types          ExperienceTypes[]
+  num_people_min Int?
+  num_people_max Int?
+  duration_min   Int?
+  duration_max   Int?
+  user           User?
 }
 
-model Form {
-  id                  Int         @id @default(autoincrement())
-  name                String
-  correct_combination Int[]
-  Course              Course[]
-  User_Form           User_Form[]
+model City {
+  id          Int          @id @default(autoincrement())
+  name        String
+  images      String[]
+  experiences Experience[]
 }
 
-model Course {
+model Experience {
+  id                Int             @id @default(autoincrement())
+  city_id           Int
+  city              City            @relation(fields: [city_id], references: [id])
+  duration          Int
+  type              ExperienceTypes
+  num_people        Int
+  descriptions      String[]        @db.Text
+  days_descriptions String[]        @db.Text
+  images            String[]
+  plans             Plan[]
+}
+
+model Plan {
   id              Int               @id @default(autoincrement())
+  price           Int
+  content         String            @db.Text
   name            String
-  main_text       String
-  main_photo      String
-  form_id         Int
-  form            Form              @relation(fields: [form_id], references: [id])
-  Category_Course Category_Course[]
+  images          String[]
+  experience      Experience?       @relation(fields: [experience_id], references: [id])
+  experience_id   Int?
+  DateAvailabilty DateAvailabilty[]
+  Reservation     Reservation[]
 }
 
-model Category {
-  id              Int               @id @default(autoincrement())
-  name            String
-  Category_Course Category_Course[]
+model DateAvailabilty {
+  id             Int      @id @default(autoincrement())
+  start_date     DateTime
+  end_date       DateTime
+  max_people     Int
+  current_people Int      @default(0)
+  month          String
+  year           String
+  plan           Plan?    @relation(fields: [plan_id], references: [id])
+  plan_id        Int?
 }
 
-//N-M Entities
-model Category_Course {
-  id          Int      @id @default(autoincrement())
-  course_id   Int
-  course      Course   @relation(fields: [course_id], references: [id])
-  category_id Int
-  category    Category @relation(fields: [category_id], references: [id])
-}
-
-model User_Form {
-  id        Int     @id @default(autoincrement())
-  user_id   Int
-  user      User    @relation(fields: [user_id], references: [id])
-  form_id   Int
-  form      Form    @relation(fields: [form_id], references: [id])
-  completed Boolean
+model Reservation {
+  id            Int              @id @default(autoincrement())
+  plan_id       Int
+  plan          Plan?            @relation(fields: [plan_id], references: [id])
+  user          User?            @relation(fields: [user_id], references: [id])
+  user_id       Int
+  date_creation DateTime
+  state         ReservationState
+  num_people    Int
 }

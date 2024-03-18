@@ -1,16 +1,18 @@
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
-import { computed, ref, type Ref } from "vue";
+import { computed, type Ref } from "vue";
 import type {LoginPayLoad, RegisterPayLoad, User} from "@/types/index";
 import { useFetch } from "@/composables/useFetch";
 
 export const useAuthStore = defineStore('auth', () => {
 
-    const token: Ref<string> = useStorage("token", "");
-    const userIsLoggedIn = computed(() => token.value !== "" ? true : false);
     const {post} = useFetch<User>();
 
-    const user: Ref<User | null> = useStorage("user", null);
+    const token: Ref<string> = useStorage("token", "", sessionStorage);
+    const userIsLoggedIn = computed(() => token.value !== "" ? true : false);
+    
+    const user: Ref<User | null> = useStorage("user", null, sessionStorage);
+    
     // const username: Ref<string | null> = useStorage("username", "");
     // const email: Ref<string | null> = useStorage("email", "");
     // const type: Ref<string| null> = useStorage('type', "");
