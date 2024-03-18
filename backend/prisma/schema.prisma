@@ -12,3 +12,107 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum UserTypes {
+  client
+  admin
+}
+
+enum ExperienceTypes {
+  gastronomic
+  cultural
+  festive
+}
+
+enum ReservationState {
+  completed
+  cancelled
+  pending
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  name          String
+  last_name     String
+  email         String          @unique @db.VarChar(255)
+  dni           String?         @unique @db.VarChar(9)
+  address       String?
+  city          String?
+  phone         String?         @db.VarChar(9)
+  password_hash String          @db.VarChar(255)
+  salt_hash     String          @db.VarChar(255)
+  type          UserTypes
+  registered_at DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime        @default(now()) @db.Timestamptz(6)
+  status        Boolean         @default(true)
+  preference    UserPreference? @relation(fields: [preference_id], references: [id])
+  preference_id Int?            @unique
+  Reservation   Reservation[]
+}
+
+model UserPreference {
+  id             Int               @id @default(autoincrement())
+  price_min      Int?
+  price_max      Int?
+  types          ExperienceTypes[]
+  num_people_min Int?
+  num_people_max Int?
+  duration_min   Int?
+  duration_max   Int?
+  user           User?
+}
+
+model City {
+  id          Int          @id @default(autoincrement())
+  name        String
+  images      String[]
+  experiences Experience[]
+}
+
+model Experience {
+  id                Int             @id @default(autoincrement())
+  city_id           Int
+  city              City            @relation(fields: [city_id], references: [id])
+  duration          Int
+  type              ExperienceTypes
+  num_people        Int
+  descriptions      String[]        @db.Text
+  days_descriptions String[]        @db.Text
+  images            String[]
+  plans             Plan[]
+}
+
+model Plan {
+  id              Int               @id @default(autoincrement())
+  price           Int
+  content         String            @db.Text
+  name            String
+  images          String[]
+  experience      Experience?       @relation(fields: [experience_id], references: [id])
+  experience_id   Int?
+  DateAvailabilty DateAvailabilty[]
+  Reservation     Reservation[]
+}
+
+model DateAvailabilty {
+  id             Int      @id @default(autoincrement())
+  start_date     DateTime
+  end_date       DateTime
+  max_people     Int
+  current_people Int      @default(0)
+  month          String
+  year           String
+  plan           Plan?    @relation(fields: [plan_id], references: [id])
+  plan_id        Int?
+}
+
+model Reservation {
+  id            Int              @id @default(autoincrement())
+  plan_id       Int
+  plan          Plan?            @relation(fields: [plan_id], references: [id])
+  user          User?            @relation(fields: [user_id], references: [id])
+  user_id       Int
+  date_creation DateTime
+  state         ReservationState
+  num_people    Int
+}
