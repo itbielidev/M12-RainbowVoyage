@@ -27,7 +27,7 @@
             <p style="font-size: 20px; display: flex; align-items: center;">
               <font-awesome-icon icon="fa-solid fa-envelope"
                 style="color: #ffffff; font-size: 40px; margin-right: 20px;"></font-awesome-icon>
-              <span>rainbow@gamil.com</span>
+              <span>rainbow@gmail.com</span>
             </p>
           </div>
         </div>

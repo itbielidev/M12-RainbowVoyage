@@ -37,6 +37,11 @@ function toggleMenu() {
 </script>
 
 <style scoped>
+
+nav{
+  height: 5rem;
+}
+
 .navbar-brand {
   display: flex;
   align-items: center;
