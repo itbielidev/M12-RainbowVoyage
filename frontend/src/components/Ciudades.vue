@@ -70,7 +70,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); /* Cambiamos el degradado por un color sólido con transparencia */
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
@@ -80,7 +80,7 @@ img {
 
 .overlay p {
   color: white;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .col-md-6:hover .overlay {

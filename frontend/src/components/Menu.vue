@@ -1,25 +1,27 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="#">
-      <img src="../../public/logo.png" alt="Logo" class="logo">
-      <span class="inicio">INICIO</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <button class="nav-link profile-button register" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
-            <font-awesome-icon icon="fa-solid fa-file" class="icon"></font-awesome-icon> REGISTRO
-          </button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-link profile-button" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
-            <font-awesome-icon icon="fa-solid fa-user" class="icon"></font-awesome-icon> PERFIL
-          </button>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top navbar-pink">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="../../public/logo.png" alt="Logo" class="logo">
+        <span class="inicio">INICIO</span>
+      </a>
+      <button class="navbar-toggler" type="button" @click="toggleMenu" style="background: none; border: none;">
+        <font-awesome-icon icon="fa-solid fa-bars" style="color: #d90594;"></font-awesome-icon>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ 'show': isMenuOpen }">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <button class="nav-link profile-button register" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+              <font-awesome-icon icon="fa-solid fa-file" class="icon" style="color: #d90594;"></font-awesome-icon> REGISTRO
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link profile-button" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+              <font-awesome-icon icon="fa-solid fa-user" class="icon" style="color: #d90594;"></font-awesome-icon> PERFIL
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </template>
@@ -27,6 +29,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 const hoverButton = ref(false);
+const isMenuOpen = ref(false);
+
+function toggleMenu() {
+  isMenuOpen.value = !isMenuOpen.value;
+}
 </script>
 
 <style scoped>
@@ -39,21 +46,20 @@ const hoverButton = ref(false);
 .logo {
   width: 150px;
   height: 100px;
-  margin-right: 10px; /* Adjust as needed */
+  margin-right: 10px;
 }
 
 .inicio {
-  color: #D90594; /* Color rosa */
+  color: #D90594; 
 }
 
 .profile-button {
-  background-color: #D90594; /* Color rosa */
+  background-color: transparent; 
   border: none;
-  border-radius: 10px;
   padding: 5px 10px;
   cursor: pointer;
   transition: background-color 0.5s;
-  color: white;
+  color: #D90594;
 }
 
 .profile-button:hover {
@@ -61,7 +67,7 @@ const hoverButton = ref(false);
 }
 
 .icon {
-  color: white;
+  color: #D90594;
 }
 
 .register {
