@@ -3,10 +3,10 @@
   <div class="container">
     <div class="row">
       <div v-for="(city, index) in cities" :key="index" class="col-md-6 mb-3 position-relative text-center" style="overflow:hidden">
-        <div class="text-container w-100" style="margin-top: -200px;" v-if="!city.hovered">
-          <p class="m-0" style="color: black;">{{ city.name }}</p>
+        <div class="text-container w-100" style="z-index: 2; transition: opacity 0.3s;" :style="{ opacity: city.hovered ? '0' : '1', top: city.hovered ? '50%' : '70%' }">
+          <p class="m-0" style="color: black; font-size: 35px;">{{ city.name }}</p>
         </div>
-        <img :src="city.image" class="img-fluid" :alt="city.alt" @mouseover="hoverCity(index, true)" @mouseout="hoverCity(index, false)">
+        <img :src="city.image" class="img-fluid" :alt="city.alt" @mouseover="hoverCity(index, true)" @mouseout="hoverCity(index, false)" style="z-index: 1;">
         <div class="overlay">
           <p style="font-size: 20px;margin-left: 20px; margin-right: 20px;">{{ city.overlayText }}</p>
         </div>
@@ -30,6 +30,7 @@ const hoverCity = (index: number, hovered: boolean) => {
   cities[index].hovered = hovered;
 };
 </script>
+
 
 <style>
 .image-container {
@@ -57,7 +58,7 @@ const hoverCity = (index: number, hovered: boolean) => {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  margin-top: -80px;
 }
 
 img {
@@ -70,7 +71,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Cambiamos el degradado por un color sólido con transparencia */
+  background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
@@ -80,7 +81,7 @@ img {
 
 .overlay p {
   color: white;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .col-md-6:hover .overlay {
