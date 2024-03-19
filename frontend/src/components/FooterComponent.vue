@@ -2,7 +2,7 @@
       <footer style="background-color: #000000; opacity: 0.62; color: white;">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4"  style="display: flex; flex-direction: column; align-items: center;">
           <p>CONTACTO</p>
           <div style="display: flex; flex-direction: column; align-items: center;">
             <p style="font-size: 20px; display: flex; align-items: center;">
@@ -17,7 +17,7 @@
             </p>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4"  style="display: flex; flex-direction: column; align-items: center;">
           <p>REDES SOCIALES</p>
           <div class="social-icons">
             <font-awesome-icon icon="fa-brands fa-facebook"
@@ -29,7 +29,7 @@
           </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4"  style="display: flex; flex-direction: column; align-items: center;">
           <p>NEWSLETTER</p>
           <div class="text-center">
             <input type="text" style="margin-bottom: 5px;"><br>
