@@ -1,5 +1,7 @@
 import { ref, type Ref } from "vue";
 import axios, { type AxiosRequestConfig, AxiosError, type AxiosResponse } from "axios";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
 interface FetchOptions {
     method?: string;
@@ -19,6 +21,7 @@ interface FetchReturn<T> {
 export const useFetch = <T>(): FetchReturn<T> => {
     const isLoading: Ref<boolean> = ref(false);
     const fetchError: Ref<string | null> = ref(null);
+    const {logout} = useAuthStore();
 
     const fetchData = async <T>(
         url: string,
@@ -51,6 +54,16 @@ export const useFetch = <T>(): FetchReturn<T> => {
         if (error.response) {
             console.error("Error de respuesta de Axios:", error.response.data);
             fetchError.value = (error.response && error.response.data) ? error.response.data.toString() : "Error de respuesta del servidor";
+            if (error.response?.status === 422) {
+                fetchError.value = "La validación de datos en el servidor ha fallado."
+            }
+            else if (error.response?.status === 500) {
+                fetchError.value = "El servidor ha detectado un error. Inténtalo de nuevo más tarde."
+            }
+            else if (error.response.status === 403 || error.response.status === 401) {
+                useRouter().push("/");
+                logout();
+            }
         } else if (error.request) {
             console.error("Error de solicitud de Axios:", error.request);
             fetchError.value = "No se recibió respuesta del servidor";

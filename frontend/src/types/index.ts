@@ -28,11 +28,11 @@ export interface RegisterPayLoad {
     type: "admin" | "client"
     password: string
     passwordConfirm: string
-    num_people_min?: number
-    num_people_max?: number
-    duration_min?: number
-    duration_max?: number
-    experience_type?: "gastronomic" | "cultural" | "festive" | ""
+    num_people_min?: number | null
+    num_people_max?: number | null
+    duration_min?: number | null
+    duration_max?: number | null
+    experience_type?: "gastronomic" | "cultural" | "festive" | "" | null
     checkbox : Boolean
 }
 

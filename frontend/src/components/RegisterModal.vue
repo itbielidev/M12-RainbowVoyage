@@ -9,7 +9,7 @@ const emit = defineEmits<{
   (e: 'cancel'): void
 }>()
 
-const {formData, error, errorMessages, validateEmail, validateSecondForm} = useRegister();
+const {formData, error, errorMessages, validateEmail, validateSecondForm, validateCheckBox, manageRegister} = useRegister();
 
 const currentIndex = ref<number>(0);
 
@@ -17,11 +17,19 @@ function modifyIndex(num: number) {
     
     if (num === 1) validateEmail();
     else if (num === 2) validateSecondForm();
-    // else if (num === 4) validateCheckbox(); 
+    else if (num === 4) validateCheckBox(); 
 
     if (!error.value) {
       currentIndex.value = num;
     }
+}
+
+function goBack(num:number) {
+
+  error.value = false;
+  errorMessages.value = [];
+
+  currentIndex.value = num;
 }
 
 watch(formData.value, ()=> {
@@ -41,7 +49,7 @@ watch(formData.value, ()=> {
             {{ num + 1}}
           </div>
         </section>
-        <form @submit.prevent="" novalidate>
+        <form @submit.prevent="manageRegister" novalidate>
             <template v-if="currentIndex === 0">
                 <h1 class="display-5 mb-5">¡EMPECEMOS!</h1>
                 <section class="d-flex flex-column">
@@ -61,7 +69,7 @@ watch(formData.value, ()=> {
                 <input v-model.trim="formData.lastName" type="text" name="lastName" id="lastName" placeholder="Apellidos">
                 </section>
                 <section class="d-flex flex-column">
-                <label class="mb-2" for="phone">Teléfono *</label> 
+                <label class="mb-2" for="phone">Teléfono móvil *</label> 
                 <input v-model.trim="formData.phone" type="text" name="phone" id="phone" placeholder="123 456 789">
                 </section>
                 <section class="d-flex flex-column">
@@ -73,7 +81,7 @@ watch(formData.value, ()=> {
                 <input v-model.trim="formData.passwordConfirm" type="passwordConfirm" name="passwordConfirm" id="passwordConfirm" placeholder="*********">
                 </section>
                 <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
-                  <button class="button fw-bold mt-2 px-1 py-2" @click="modifyIndex(0)" type="button">ATRÁS</button>
+                  <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(0)" type="button">ATRÁS</button>
                   <button class="button fw-bold mt-2 px-1 py-2" @click="modifyIndex(2)" type="button">SIGUIENTE</button>
                 </section>
                 <ErrorMessages :messages="errorMessages"></ErrorMessages>
@@ -174,7 +182,7 @@ watch(formData.value, ()=> {
                   </section>
                 </section>
                 <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5 mt-4">
-                  <button class="button fw-bold mt-2 px-1 py-2" @click="modifyIndex(1)" type="button">ATRÁS</button>
+                  <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(1)" type="button">ATRÁS</button>
                   <button class="button fw-bold mt-2 px-1 py-2" @click="modifyIndex(3)" type="button">SIGUIENTE</button>
                 </section>
                 <ErrorMessages :messages="errorMessages"></ErrorMessages>
@@ -187,30 +195,14 @@ watch(formData.value, ()=> {
                 Ver +info sobre protección de datos</label>
               </div>
                 <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5 mt-4">
-                  <button class="button fw-bold mt-2 px-1 py-2" @click="modifyIndex(2)" type="button">ATRÁS</button>
-                  <button class="button fw-bold mt-2 px-1 py-2" @click="modifyIndex(3)" type="submit">ENVIAR</button>
+                  <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(2)" type="button">ATRÁS</button>
+                  <button class="button fw-bold mt-2 px-1 py-2" type="submit">ENVIAR</button>
                 </section>
                 <ErrorMessages :messages="errorMessages"></ErrorMessages>
 
-            </template>
-           
-            <!-- <input v-model.trim="formData.username" type="name" name="name" id="name" placeholder="Nombre" maxlength="20">
-            <input v-model.trim="formData.password" type="password" name="password" id="password" placeholder="Contraseña"
-                maxlength="20">
-            <input v-model.trim="formData.password2" type="password" name="password2" id="password2"
-                placeholder="Repite contraseña" maxlength="20">
-            <div class="terms">
-                <input v-model="formData.checkbox" type="checkbox" name="conditions" id="conditions-text">
-                <label for="conditions" id="conditions">He leído y acepto las <u>Condiciones de uso</u> y la <u>Política de
-                    privacidad de GameSwap</u>.
-                Ver +info sobre protección de datos</label>
-            </div> -->
-           
+            </template>    
     </form>
-
-    </section>
-    
-
+  </section>
   </VueFinalModal>
 </template>
 
