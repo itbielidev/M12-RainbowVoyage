@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import { ref, watch, type Ref } from 'vue';
+import { ref, watch} from 'vue';
 import { VueFinalModal } from 'vue-final-modal';
 import { useRegister } from '@/composables/useRegister';
 import ErrorMessages from './ErrorMessages.vue';
 
+
 const emit = defineEmits<{
-  (e: 'confirm'): void
-  (e: 'cancel'): void
-}>()
+    (e: 'confirm'): void
+    (e: 'cancel'): void
+  }>()
 
 const {formData, error, errorMessages, validateEmail, validateSecondForm, validateCheckBox, manageRegister} = useRegister();
 
 const currentIndex = ref<number>(0);
+
+function handleRegister() {
+  manageRegister();
+  emit('confirm');
+}
 
 function modifyIndex(num: number) {
     
@@ -49,7 +55,7 @@ watch(formData.value, ()=> {
             {{ num + 1}}
           </div>
         </section>
-        <form @submit.prevent="manageRegister" novalidate>
+        <form @submit.prevent="handleRegister()" novalidate>
             <template v-if="currentIndex === 0">
                 <h1 class="display-5 mb-5">¡EMPECEMOS!</h1>
                 <section class="d-flex flex-column">

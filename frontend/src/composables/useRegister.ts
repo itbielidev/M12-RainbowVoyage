@@ -5,11 +5,6 @@ import { useAuthStore } from "@/stores/auth";
 import type { TokenType } from "@/types";
 import { storeToRefs } from "pinia";
 
-const emit = defineEmits<{
-    (e: 'confirm'): void
-    (e: 'cancel'): void
-  }>()
-
 export const useRegister = () => {
 
     const {token} = storeToRefs(useAuthStore());
@@ -118,7 +113,6 @@ export const useRegister = () => {
         }
         else {
             token.value = tokenData?.token as string;
-            emit('confirm');
         }
     }
 

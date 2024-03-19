@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Menu from '@/components/Menu.vue'
+import NavBar from '@/components/NavBar.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 import { RouterLink } from 'vue-router'
 </script>
 
 <template>
   <header>
-    <Menu></Menu>
+    <NavBar></NavBar>
     <section class="cover-city">
       <img class="cover" src="/bcn-cover.jpeg" />
       <div class="title-box">
