@@ -1,6 +1,6 @@
 <template>
   <div style="background-color: #ABB8C3;">
-    <Menu></Menu>
+    <NavBar></NavBar>
     <div class="image-container">
       <div class="header-filter"></div>
       <img src="../../public/metro.png" class="img-fluid" alt="Metro Image">
@@ -11,7 +11,7 @@
     <div class="info-container">
       <p>El colectivo LGTBIQ reúne a personas con orientaciones sexuales o identidades de género no convencionales. Han luchado por igualdad y visibilidad, enfrentando discriminación. Su historia está marcada por el activismo y avances legales. Siguen abogando por inclusión y respeto.</p>
     </div>
-    <Ciudad></Ciudad>
+    <CitiesList></CitiesList>
   </div>
   <footer style="background-color: #000000; opacity: 0.62; color: white;">
     <div class="container">
@@ -56,8 +56,8 @@
   </footer>
 </template>
 <script setup lang="ts">
-import Menu from "@/components/Menu.vue";
-import Ciudad from "@/components/Ciudades.vue"
+import NavBar from "@/components/NavBar.vue";
+import CitiesList from "@/components/CitiesList.vue"
 </script>
 
 <style scoped>

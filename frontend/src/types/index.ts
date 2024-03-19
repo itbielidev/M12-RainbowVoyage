@@ -1,15 +1,15 @@
-enum UserTypes {
+export enum UserTypes {
     client,
     admin
 }
 
-enum ExperienceTypes {
+export enum ExperienceTypes {
     gastronomic,
     cultural,
     festive
 }
 
-enum ReservationStates {
+export enum ReservationStates {
     completed,
     cancelled,
     pending
@@ -23,16 +23,22 @@ export interface LoginPayLoad {
 export interface RegisterPayLoad {
     name : string
     email : string
-    last_name : string
-    surnames: string
+    lastName : string
     phone: string
-    type: UserTypes
+    type: "admin" | "client"
     password: string
-    num_people_min?: number
-    num_people_max?: number
-    duration_min?: number
-    duration_max?: number
-    experience_type?: ExperienceTypes
+    passwordConfirm: string
+    num_people_min?: number | null
+    num_people_max?: number | null
+    duration_min?: number | null
+    duration_max?: number | null
+    experience_type?: "gastronomic" | "cultural" | "festive" | "" | null
+    checkbox : Boolean
+}
+
+
+export interface TokenType {
+    token: string
 }
 
 export interface UpdatePayload {

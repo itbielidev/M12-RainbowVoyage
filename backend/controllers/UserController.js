@@ -6,10 +6,6 @@ export class UserController {
     this.userModel = userModel;
   }
 
-  // getAll = async (req, res) => {
-  //   res.json("All users");
-  // };
-
   // getByType = async (req, res) => {
   //   try {
   //     const results = await this.userModel.findByType(req.params.type);
@@ -21,27 +17,27 @@ export class UserController {
 
   // };
 
-  // register = async (req, res) => {
+  register = async (req, res) => {
 
-  //   //Apply validation schema to the data received
-  //   const userValidated = validateUser(req.body);
+    //Apply validation schema to the data received
+    const userValidated = validateRegister(req.body);
 
-  //   if (!userValidated.success) {
-  //     return res.status(422).json({ error: JSON.parse(userValidated.error.message) })
-  //   }
+    if (!userValidated.success) {
+      return res.status(422).json({ error: JSON.parse(userValidated.error.message) })
+    }
 
-  //   const [returnState, token] = await this.userModel.register(req.body);
+    console.log(req.body);
 
-  //   //Pass validated data to model to create user
-  //   if (returnState === 1) {
-  //     console.log("User registered successfully");
-  //     console.log("TOKEN: " + token);
-  //     return res.json({ message: "user registered successfully", token: token });
-  //   }
+    const [returnState, token] = await this.userModel.register(req.body);
 
-  //   return res.status(500).json({ error: "User could not be registered!" })
+    //Pass validated data to model to create user
+    if (returnState === 1) {
+      return res.json({ token: token });
+    }
 
-  // };
+    return res.status(500).json({ error: "User could not be registered!" })
+
+  };
 
   // login = async (req, res) => {
   //   //Apply validation schema to the data received

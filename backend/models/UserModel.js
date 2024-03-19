@@ -10,101 +10,112 @@ const prismadb = new PrismaClient();
 
 export class UserModel {
 
-    // static async register(user_data) {
+    static async register(user_data) {
 
-    //     try {
+        try {
 
-    //         let returnState = 1;
+            let returnState = 1;
 
-    //         //Check if the user email is already registered in the database.
-    //         const user = await prismadb.user.findFirst({
-    //             where: {
-    //                 user_email: user_data.email
-    //             }
-    //         });
+            //Check if the user email is already registered in the database.
+            const user = await prismadb.user.findFirst({
+                where: {
+                    email: user_data.email
+                }
+            });
 
-    //         if (user !== null) {
-    //             console.log("User email already exists!");
-    //             returnState = -1;
-    //             return [returnState, null];
-    //         };
+            if (user !== null) {
+                console.log("User email already exists!");
+                returnState = -1;
+                return [returnState, null];
+            };
 
-    //         //Check if the username is already registered in the database
-    //         const username = await prismadb.user.findFirst({
-    //             where: {
-    //                 user_name: user_data.username,
-    //             }
-    //         });
+            //If the user does not exist in the database we proceed to insert the request data
 
-    //         if (username !== null) {
-    //             console.log("Username already exists!");
-    //             returnState = -1;
-    //             return [returnState, null];
-    //         };
+            //Password encryption with salt
+            const salt = await bcrypt.genSalt(2);
 
-    //         //If the user does not exist in the database we proceed to insert the request data
+            const hashedPassword = await bcrypt.hash(user_data.password, salt);
 
-    //         //Password encryption with salt
-    //         const salt = await bcrypt.genSalt(2);
+            //Inserting the user
+            const newUser = await prismadb.user.create({
+                data: {
+                    email: user_data.email,
+                    password_hash: hashedPassword,
+                    salt_hash: salt,
+                    name: user_data.name,
+                    last_name: user_data.lastName,
+                    phone: user_data.phone,
+                    type: "client",
+                }
+            });
 
-    //         const hashedPassword = await bcrypt.hash(user_data.password, salt);
+            //If the user has specified a preference value we need to create a new preference object
+            if ([user_data.num_people_min, user_data.num_people_max, user_data.duration_min, user_data.duration_max, user_data.experience_type].some(value => value !== null)) {
+                const newUserPreferences = await prismadb.userPreference.create({
+                    data : {
+                        price_min: null,
+                        price_max: null,
+                        type:user_data.experience_type,
+                        num_people_max: user_data.num_people_max,
+                        num_people_min: user_data.num_people_min,
+                        duration_min: user_data.duration_min,
+                        duration_max: user_data.duration_max
+                    }
+                });
 
-    //         //Inserting the user
-    //         const newUser = await prismadb.user.create({
-    //             data: {
-    //                 user_email: user_data.email,
-    //                 user_password: hashedPassword,
-    //                 user_salt: salt,
-    //                 user_name: user_data.username
-    //             }
-    //         });
+                //Attach the new preferences settings to the user
+                await prismadb.user.update({
+                    where: {
+                        id: newUser.id
+                    },
+                    data: {
+                        preference_id: newUserPreferences.id
+                    }
+                })
+            }
 
-    //         console.log(newUser);
+            //Inserting in admin table
+            // if (user_data.email === "admin@gmail.com") {
+            //     const newAdmin = await prismadb.user_Admin.create({
+            //         data: {
+            //             user_id: newUser.user_id
+            //         }
+            //     });
 
-    //         //Inserting in admin table
-    //         if (user_data.email === "admin@gmail.com") {
-    //             const newAdmin = await prismadb.user_Admin.create({
-    //                 data: {
-    //                     user_id: newUser.user_id
-    //                 }
-    //             });
+            //     //We sign the JWT token to send it to the client.
+            //     let token_generated = jwt.sign({ user_id: newUser.user_id, user_email: newUser.user_email, user_role: "admin" },
+            //         process.env.TOKEN_SECRET, { expiresIn: '1h' });
+            //     console.log(newAdmin);
 
-    //             //We sign the JWT token to send it to the client.
-    //             let token_generated = jwt.sign({ user_id: newUser.user_id, user_email: newUser.user_email, user_role: "admin" },
-    //                 process.env.TOKEN_SECRET, { expiresIn: '1h' });
-    //             console.log(newAdmin);
+            //     return [returnState, token_generated];
+            // } else { //Inserting in client table
+            //     const newClient = await prismadb.user_Client.create({
+            //         data: {
+            //             user_id: newUser.user_id,
+            //             user_name: user_data.username,
+            //             user_photo: "/imgs/avatar-profile.svg",
+            //             user_phone: ""
+            //         }
+            //     })
+            //     console.log(newClient);
 
-    //             return [returnState, token_generated];
-    //         } else { //Inserting in client table
-    //             const newClient = await prismadb.user_Client.create({
-    //                 data: {
-    //                     user_id: newUser.user_id,
-    //                     user_name: user_data.username,
-    //                     user_photo: "/imgs/avatar-profile.svg",
-    //                     user_phone: ""
-    //                 }
-    //             })
-    //             console.log(newClient);
+            //     //We sign the JWT token to send it to the client.
+            //     let token_generated = jwt.sign({ user_id: newClient.user_id, user_email: newClient.user_email, user_role: "client" },
+            //         process.env.TOKEN_SECRET, { expiresIn: '1h' });
 
-    //             //We sign the JWT token to send it to the client.
-    //             let token_generated = jwt.sign({ user_id: newClient.user_id, user_email: newClient.user_email, user_role: "client" },
-    //                 process.env.TOKEN_SECRET, { expiresIn: '1h' });
+            //     return [returnState, token_generated];
+            // }
 
-    //             return [returnState, token_generated];
-    //         }
+            //We sign the JWT token to send it to the client.
+            let token_generated = jwt.sign({ user_id: newUser.id, user_email: newUser.email, user_role: "client" },
+                process.env.TOKEN_SECRET, { expiresIn: '1h' });
 
-    //         //We sign the JWT token to send it to the client.
-    //         // let token_generated = jwt.sign({ user_id: newClient.user_id, user_email: newClient.user_email, user_role: "client" },
-    //         //     process.env.TOKEN_SECRET, { expiresIn: '1h' });
+            return [returnState, token_generated];
 
-
-    //         return [returnState, token_generated];
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-
-    // }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // static async login(user_data) {
     //     try {

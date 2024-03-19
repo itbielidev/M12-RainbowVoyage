@@ -11,8 +11,8 @@
       <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ 'show': isMenuOpen }">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <button class="nav-link profile-button register" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
-              <font-awesome-icon icon="fa-solid fa-file" class="icon" style="color: #d90594;"></font-awesome-icon> REGISTRO
+            <button class="nav-link profile-button register" @click="open()" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+              <font-awesome-icon icon="fa-solid fa-file"  class="icon" style="color: #d90594;"></font-awesome-icon> REGISTRO
             </button>
           </li>
           <li class="nav-item">
@@ -28,8 +28,23 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import LoginModal from '@/components/LoginModal.vue';
+import RegisterModal from '@/components/RegisterModal.vue';
 const hoverButton = ref(false);
 const isMenuOpen = ref(false);
+import { useModal } from 'vue-final-modal';
+
+const { open, close } = useModal({
+  component: RegisterModal,
+  attrs: {
+    onConfirm() {
+      close()
+    },
+    onCancel() {
+      close()
+    },
+  }
+});
 
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;

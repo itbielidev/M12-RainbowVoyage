@@ -1,5 +1,5 @@
 <template>
-  <Menu></Menu>
+  <NavBar></NavBar>
   <div class="container">
     <div class="row">
       <div v-for="(city, index) in cities" :key="index" class="col-md-6 mb-3 position-relative text-center" style="overflow:hidden">
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import Menu from "@/components/Menu.vue";
+import NavBar from "@/components/NavBar.vue";
 
 const cities = [
   { name: "BARCELONA", image: "../../public/Barcelona.png", alt: "Barcelona", overlayText: "Barcelona es conocida por su vibrante comunidad LGTBIQ, con eventos como el Barcelona Pride y una escena nocturna inclusiva que refleja su apoyo a la diversidad.", hovered: false },
