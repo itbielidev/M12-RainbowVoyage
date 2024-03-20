@@ -72,6 +72,19 @@ export class UserController {
 
   };
 
+  getUser = async (req, res) => {
+
+    const userId = req.user_id;
+
+    const [returnState, user] = await this.userModel.getUser(userId);
+
+    if (returnState === 1) {
+      return res.status(200).json(user);
+    }
+
+    return res.status(500).json({ error: "Server error!" })
+  };
+
   // delete = async (req, res) => {
   //   //Apply validation schema to the data received
   //   //const userValidated = validateLogin(req.body);

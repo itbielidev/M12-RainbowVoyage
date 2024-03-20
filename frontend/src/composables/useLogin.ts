@@ -53,13 +53,14 @@ export const useLogin = () => {
                 ...formData.value,
             });
 
+        token.value = await tokenData?.token as string;
+
         if (fetchError.value) {
             error.value = true;
             errorMessages.value.push(fetchError.value);
             return false;
         }
         else {
-            token.value = tokenData?.token as string;
             return true;
         }
     }

@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { VueFinalModal } from 'vue-final-modal'
-import { useRegister } from '@/composables/useRegister'
 import ErrorMessages from './ErrorMessages.vue'
 import { useLogin } from '@/composables/useLogin'
+import { useAuthStore } from '@/stores/auth'
 
 const emit = defineEmits<{
   (e: 'confirm'): void
   (e: 'cancel'): void
 }>()
 
-const { formData, error, errorMessages, manageLogin } = useLogin()
+const { formData, errorMessages, manageLogin } = useLogin()
+
+const { getUser } = useAuthStore()
 
 const passwordRevealed = ref<boolean>(true)
 
@@ -20,7 +22,8 @@ function revealPassword() {
 
 async function handleLogin() {
   if ((await manageLogin()) === false) return
-  emit('confirm')
+  await emit('confirm')
+  await getUser()
 }
 
 watch(formData.value, () => {
