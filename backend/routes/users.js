@@ -9,7 +9,7 @@ export const createUserRouter = (userModel) => {
   const userController = new UserController(userModel);
 
   userRouter.post("/register", userController.register);
-  // userRouter.post("/login", userController.login);
+  userRouter.post("/login", userController.login);
   // userRouter.delete("/delete", userController.delete);
   // userRouter.delete("/deactivate", authenticateToken, userController.deactivate);
   // userRouter.post("/activate", userController.activate);
@@ -25,7 +25,7 @@ export const createUserRouter = (userModel) => {
   // userRouter.post("/sendPhoto", authenticateToken, upload.single('userPhoto'), userController.sendPhoto);
   // userRouter.post("/userPhoto", authenticateToken, upload.single('userPhoto'), userController.getUserImage);
 
- 
+
 
   return userRouter;
 };

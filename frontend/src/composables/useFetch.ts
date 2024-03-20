@@ -21,7 +21,7 @@ interface FetchReturn<T> {
 export const useFetch = <T>(): FetchReturn<T> => {
     const isLoading: Ref<boolean> = ref(false);
     const fetchError: Ref<string | null> = ref(null);
-    const {logout} = useAuthStore();
+    const { logout } = useAuthStore();
 
     const fetchData = async <T>(
         url: string,
@@ -42,7 +42,7 @@ export const useFetch = <T>(): FetchReturn<T> => {
         try {
             const response: AxiosResponse<T> = await axios(axiosConfig);
             return response.data;
-        } catch (axiosErr : any) {
+        } catch (axiosErr: any) {
             handleAxiosError(axiosErr);
             return null;
         } finally {
@@ -58,15 +58,22 @@ export const useFetch = <T>(): FetchReturn<T> => {
                 fetchError.value = "La validación de datos en el servidor ha fallado."
             }
             else if (error.response?.status === 500) {
-                fetchError.value = "El servidor ha detectado un error. Inténtalo de nuevo más tarde."
+                fetchError.value = "El servidor ha experimentado un error. pPor favor, inténtalo de nuevo más tarde."
             }
-            else if (error.response.status === 403 || error.response.status === 401) {
+            else if (error.response?.status === 403 || error.response?.status === 401) {
+                fetchError.value = "La contraseña es incorrecta o el usuario no está autorizado en el sistema."
                 useRouter().push("/");
                 logout();
             }
+            else if (error.response?.status === 409) {
+                fetchError.value = "El correo especificado ya existe en nuestro sistema. Por favor, escoge otro correo."
+            }
+            else if (error.response?.status === 404) {
+                fetchError.value = "El correo especificado no existe en el sistema. Revísalo por favor."
+            }
         } else if (error.request) {
             console.error("Error de solicitud de Axios:", error.request);
-            fetchError.value = "No se recibió respuesta del servidor";
+            fetchError.value = "Nuestro servidor no está disponible en estos momentos, por favor, inténtalo más tarde.";
         } else {
             console.error("Error de Axios:", error.message);
             fetchError.value = "Error al realizar la solicitud";

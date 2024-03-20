@@ -34,31 +34,43 @@ export class UserController {
     if (returnState === 1) {
       return res.json({ token: token });
     }
+    else if (returnState === -2) {
+      return res.status(409).json({ error: "Email already exists" })
+    }
 
-    return res.status(500).json({ error: "User could not be registered!" })
+    return res.status(500).json({ error: "User could not log in!" })
 
   };
 
-  // login = async (req, res) => {
-  //   //Apply validation schema to the data received
-  //   const userValidated = validateLogin(req.body);
+  login = async (req, res) => {
+    //Apply validation schema to the data received
+    const userValidated = validateLogin(req.body);
 
-  //   if (!userValidated.success) {
-  //     return res.status(422).json({ error: JSON.parse(userValidated.error.message) })
-  //   }
+    if (!userValidated.success) {
+      return res.status(422).json({ error: JSON.parse(userValidated.error.message) })
+    }
 
-  //   //Pass validated data to authenticate user.
-  //   const [logInStatus, token] = await this.userModel.login(req.body);
-  //   // console.log(logInStatus);
-  //   // console.log(userId);
 
-  //   if (logInStatus === 1) {
-  //     return res.status(200).json({ message: "User logged in successfully!", token: token });
-  //   }
 
-  //   return res.status(500).json({ error: "User could not log in!" })
+    //Pass validated data to authenticate user.
+    const [logInStatus, token] = await this.userModel.login(req.body);
+    // console.log(logInStatus);
+    // console.log(userId);
 
-  // };
+    if (logInStatus === 1) {
+      return res.status(200).json({ message: "User logged in successfully!", token: token });
+    }
+    else if (logInStatus === -2) {
+      return res.status(404).json({ error: "Email does not exists!" })
+    }
+    else if (logInStatus === -3) {
+      return res.status(401).json({ error: "Wrong password." })
+    }
+
+
+    return res.status(500).json({ error: "User could not log in!" })
+
+  };
 
   // delete = async (req, res) => {
   //   //Apply validation schema to the data received
