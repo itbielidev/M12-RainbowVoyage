@@ -15,11 +15,12 @@ const router = createRouter({
       path: '/todos',
       name: 'todos',
       component: TodosView
-    },  
+    },
     {
-      path: '/experiences',
+      path: '/experiences/:cityName',
       name: 'experiences',
-      component: ExperiencesView
+      component: ExperiencesView,
+      props: route => ({ ...route.params, cityName: route.params.cityName })
     },
   ]
 })

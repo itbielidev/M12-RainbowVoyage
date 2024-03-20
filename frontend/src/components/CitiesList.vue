@@ -1,6 +1,6 @@
 <template>
   <NavBar></NavBar>
-  <div class="container">
+  <div v-if="!error" class="container">
     <div class="row">
       <div
         v-for="(city, index) in hoveredCities"
@@ -8,23 +8,28 @@
         class="col-md-6 mb-3 position-relative text-center"
         style="overflow: hidden"
       >
-        <div class="text-container w-100" style="margin-top: -200px" v-if="!city.hovered">
-          <p class="m-0" style="color: black">{{ city.name }}</p>
-        </div>
-        <img
-          :src="`/${city.images[0]}`"
-          class="img-fluid"
-          alt="City photo"
-          @mouseover="hoverCity(index, true)"
-          @mouseout="hoverCity(index, false)"
-        />
-        <div class="overlay">
-          <p style="font-size: 20px; margin-left: 20px; margin-right: 20px">
-            {{ city.description }}
-          </p>
-        </div>
+        <RouterLink :to="{ name: 'experiences', params: { cityName: city.name } }">
+          <div class="text-container w-100" style="margin-top: -200px" v-if="!city.hovered">
+            <p class="m-0" style="color: black">{{ city.name }}</p>
+          </div>
+          <img
+            :src="`/${city.images[0]}`"
+            class="img-fluid"
+            alt="City photo"
+            @mouseover="hoverCity(index, true)"
+            @mouseout="hoverCity(index, false)"
+          />
+          <div class="overlay">
+            <p style="font-size: 20px; margin-left: 20px; margin-right: 20px">
+              {{ city.description }}
+            </p>
+          </div>
+        </RouterLink>
       </div>
     </div>
+  </div>
+  <div v-else-if="error">
+    <ErrorMessages :messages="errorMessages"></ErrorMessages>
   </div>
 </template>
 
@@ -32,8 +37,9 @@
 import NavBar from '@/components/NavBar.vue'
 import { useCitiesStore } from '@/stores/cities'
 import { storeToRefs } from 'pinia'
+import ErrorMessages from './ErrorMessages.vue'
 
-const { hoveredCities } = storeToRefs(useCitiesStore())
+const { hoveredCities, error, errorMessages } = storeToRefs(useCitiesStore())
 
 // const cities = [
 //   { name: "BARCELONA", image: "../../public/Barcelona.png", alt: "Barcelona", overlayText: "Barcelona es conocida por su vibrante comunidad LGTBIQ, con eventos como el Barcelona Pride y una escena nocturna inclusiva que refleja su apoyo a la diversidad.", hovered: false },

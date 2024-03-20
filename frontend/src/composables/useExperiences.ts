@@ -4,13 +4,13 @@ import { useFetch } from "@/composables/useFetch";
 
 export const useExperiences = () => {
 
-    const {get} = useFetch<Experience[]>();
-    
-    const experiences : Ref<Experience[]|null> = ref([]);
+    const { get } = useFetch<Experience[]>();
 
-    async function getByCityId(cityId : string|number) {
-        experiences.value = await get(`/experiences/${cityId}`);
+    const experiences: Ref<Experience[] | null> = ref([]);
+
+    async function getExperiences(cityId: string | number, qs: string) {
+        experiences.value = await get(`/experiences/${cityId}?${qs}`);
     }
 
-    return { experiences, getByCityId };
+    return { experiences, getExperiences };
 };

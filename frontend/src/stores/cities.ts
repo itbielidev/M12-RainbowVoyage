@@ -1,12 +1,15 @@
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
-import { computed, type Ref } from "vue";
+import { computed, ref, type Ref } from "vue";
 import type { City } from "@/types/index";
 import { useFetch } from "@/composables/useFetch";
 
 export const useCitiesStore = defineStore('cities', () => {
 
-    const { get } = useFetch<{ cities: City[] }>();
+    const { get, fetchError, } = useFetch<{ cities: City[] }>();
+
+    const error: Ref<boolean> = ref(false);
+    const errorMessages: Ref<string[]> = ref([]);
 
     const cities: Ref<City[] | null | undefined> = useStorage("cities", [], sessionStorage);
 
@@ -17,8 +20,20 @@ export const useCitiesStore = defineStore('cities', () => {
 
     async function getAll() {
         const citiesData = await get("/cities");
-        cities.value = citiesData?.cities;
+
+        if (fetchError.value) {
+            error.value = true;
+            errorMessages.value.push(fetchError.value);
+            return false;
+        }
+        else {
+            cities.value = citiesData?.cities;
+        }
     }
 
-    return { cities, getAll, hoveredCities }
+    function getCityByName(name: string): number | undefined {
+        return cities.value?.find(city => city.name === name)?.id
+    }
+
+    return { cities, getAll, getCityByName, hoveredCities, error, errorMessages }
 })
