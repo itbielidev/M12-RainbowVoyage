@@ -66,6 +66,8 @@ model City {
   id          Int          @id @default(autoincrement())
   name        String
   images      String[]
+  description String
+  description_detail String
   experiences Experience[]
 }
 

@@ -1,9 +1,50 @@
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
-import { RouterLink } from 'vue-router'
-</script>
+import { RouterLink, useRoute, useRouter } from 'vue-router'
+import { onMounted, ref, watch } from 'vue'
+import { useExperiences } from '@/composables/useExperiences'
+import { useCitiesStore } from '@/stores/cities'
 
+const props = defineProps<{ cityName: string }>()
+
+const { getExperiences, experiences } = useExperiences()
+
+const { getCityByName } = useCitiesStore()
+
+const route = useRoute()
+const router = useRouter()
+
+const queries = ref({
+  price_min: undefined,
+  price_max: undefined,
+  num_people_min: undefined,
+  num_people_max: undefined,
+  experience_type: undefined,
+  duration_min: undefined,
+  duration_max: undefined,
+  ...route.query
+})
+
+watch(
+  queries,
+  async () => {
+    await getExps()
+    router.push({ query: queries.value })
+  },
+  { deep: true }
+)
+
+async function getExps() {
+  //@ts-expect-error
+  const qs = new URLSearchParams(queries.value).toString()
+  await getExperiences(getCityByName(props.cityName) as number, qs)
+}
+
+onMounted(async () => {
+  await getExps()
+})
+</script>
 <template>
   <header>
     <NavBar></NavBar>

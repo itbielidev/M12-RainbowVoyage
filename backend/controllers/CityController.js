@@ -6,6 +6,7 @@ export class CityController {
   }
 
   getAll = async (req, res) => {
-    
+    const cities = await this.cityModel.getAll();
+    return res.status(200).json({ cities });
   };
 }

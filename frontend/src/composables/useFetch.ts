@@ -2,6 +2,7 @@ import { ref, type Ref } from "vue";
 import axios, { type AxiosRequestConfig, AxiosError, type AxiosResponse } from "axios";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
 
 interface FetchOptions {
     method?: string;
@@ -16,12 +17,20 @@ interface FetchReturn<T> {
     put: (url: string, payload: any) => Promise<T | null>;
     patch: (url: string, payload: any) => Promise<T | null>;
     del: (url: string) => Promise<T | null>;
+    getAuth: (url: string) => Promise<T | null>;
+    postAuth: (url: string, payload: any) => Promise<T | null>;
+    putAuth: (url: string, payload: any) => Promise<T | null>;
+    patchAuth: (url: string, payload: any) => Promise<T | null>;
+    delAuth: (url: string) => Promise<T | null>;
 }
 
 export const useFetch = <T>(): FetchReturn<T> => {
     const isLoading: Ref<boolean> = ref(false);
     const fetchError: Ref<string | null> = ref(null);
-    const {logout} = useAuthStore();
+    const { logout } = useAuthStore();
+    const { token } = useAuthStore();
+
+    const router = useRouter();
 
     const fetchData = async <T>(
         url: string,
@@ -42,7 +51,37 @@ export const useFetch = <T>(): FetchReturn<T> => {
         try {
             const response: AxiosResponse<T> = await axios(axiosConfig);
             return response.data;
-        } catch (axiosErr : any) {
+        } catch (axiosErr: any) {
+            handleAxiosError(axiosErr);
+            return null;
+        } finally {
+            isLoading.value = false;
+        }
+    };
+
+    const fetchDataAuth = async <T>(
+        url: string,
+        { method = 'GET', payload }: FetchOptions = {}
+    ): Promise<T | null> => {
+        isLoading.value = true;
+        fetchError.value = null;
+
+        const apiPrefix: string = import.meta.env.VITE_API_ENDPOINT;
+        const apiEndpoint: string = `${apiPrefix}${url}`;
+
+        const axiosConfig: AxiosRequestConfig = {
+            method,
+            url: apiEndpoint, //Cambiar esto por apiEndpoint !!!!!!!
+            data: payload,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        };
+
+        try {
+            const response: AxiosResponse<T> = await axios(axiosConfig);
+            return response.data;
+        } catch (axiosErr: any) {
             handleAxiosError(axiosErr);
             return null;
         } finally {
@@ -58,15 +97,22 @@ export const useFetch = <T>(): FetchReturn<T> => {
                 fetchError.value = "La validación de datos en el servidor ha fallado."
             }
             else if (error.response?.status === 500) {
-                fetchError.value = "El servidor ha detectado un error. Inténtalo de nuevo más tarde."
+                fetchError.value = "El servidor ha experimentado un error. pPor favor, inténtalo de nuevo más tarde."
             }
-            else if (error.response.status === 403 || error.response.status === 401) {
-                useRouter().push("/");
+            else if (error.response?.status === 403 || error.response?.status === 401) {
+                fetchError.value = "La contraseña es incorrecta o el usuario no está autorizado en el sistema."
+                router.push("/");
                 logout();
+            }
+            else if (error.response?.status === 409) {
+                fetchError.value = "El correo especificado ya existe en nuestro sistema. Por favor, escoge otro correo."
+            }
+            else if (error.response?.status === 404) {
+                fetchError.value = "El correo especificado no existe en el sistema. Revísalo por favor."
             }
         } else if (error.request) {
             console.error("Error de solicitud de Axios:", error.request);
-            fetchError.value = "No se recibió respuesta del servidor";
+            fetchError.value = "Nuestro servidor no está disponible en estos momentos, por favor, inténtalo más tarde.";
         } else {
             console.error("Error de Axios:", error.message);
             fetchError.value = "Error al realizar la solicitud";
@@ -79,5 +125,11 @@ export const useFetch = <T>(): FetchReturn<T> => {
     const patch = async (url: string, payload: any): Promise<T | null> => fetchData<T>(url, { method: 'PATCH', payload });
     const del = async (url: string): Promise<T | null> => fetchData<T>(url, { method: 'DELETE' });
 
-    return { isLoading, fetchError, get, post, put, patch, del };
+    const getAuth = async (url: string): Promise<T | null> => fetchDataAuth<T>(url);
+    const postAuth = async (url: string, payload: any): Promise<T | null> => fetchDataAuth<T>(url, { method: 'POST', payload });
+    const putAuth = async (url: string, payload: any): Promise<T | null> => fetchDataAuth<T>(url, { method: 'PUT', payload });
+    const patchAuth = async (url: string, payload: any): Promise<T | null> => fetchDataAuth<T>(url, { method: 'PATCH', payload });
+    const delAuth = async (url: string): Promise<T | null> => fetchDataAuth<T>(url, { method: 'DELETE' });
+
+    return { isLoading, fetchError, get, post, put, patch, del, getAuth, postAuth, putAuth, patchAuth, delAuth };
 };

@@ -6,7 +6,7 @@ import fsa from 'fs/promises';
 import sharp from 'sharp';
 import "dotenv/config";
 
-const prismadb = new PrismaClient(); 
+const prismadb = new PrismaClient();
 
 export class UserModel {
 
@@ -25,7 +25,7 @@ export class UserModel {
 
             if (user !== null) {
                 console.log("User email already exists!");
-                returnState = -1;
+                returnState = -2;
                 return [returnState, null];
             };
 
@@ -52,10 +52,10 @@ export class UserModel {
             //If the user has specified a preference value we need to create a new preference object
             if ([user_data.num_people_min, user_data.num_people_max, user_data.duration_min, user_data.duration_max, user_data.experience_type].some(value => value !== null)) {
                 const newUserPreferences = await prismadb.userPreference.create({
-                    data : {
+                    data: {
                         price_min: null,
                         price_max: null,
-                        type:user_data.experience_type,
+                        type: user_data.experience_type,
                         num_people_max: user_data.num_people_max,
                         num_people_min: user_data.num_people_min,
                         duration_min: user_data.duration_min,
@@ -117,54 +117,73 @@ export class UserModel {
         }
     }
 
-    // static async login(user_data) {
-    //     try {
+    static async login(user_data) {
+        try {
 
-    //         let returnState = 1;
+            let returnState = 1;
 
-    //         //Check if the user email exists in the database.
-    //         const user = await prismadb.user.findFirst({
-    //             where: {
-    //                 user_email: user_data.email
-    //             }
-    //         })
+            //Check if the user email exists in the database.
+            const user = await prismadb.user.findFirst({
+                where: {
+                    email: user_data.email
+                }
+            })
 
-    //         //If the user does not exist in the database we return an error.
-    //         if (user === null) {
-    //             console.log("User does not exist!");
-    //             returnState = -1;
-    //             return [returnState, null];
-    //         }
+            //If the user does not exist in the database we return an error.
+            if (user === null) {
+                console.log("User does not exist!");
+                returnState = -2;
+                return [returnState, null];
+            }
 
-    //         //If the user is not active we return an error.
-    //         if (!user.user_active) {
-    //             console.log("User is not activated in the system!");
-    //             returnState = -1;
-    //             return [returnState, null];
-    //         }
-
-
-    //         //Check if the received password is equal to the one stored in the database for this user
-    //         const passwordValidation = await bcrypt.compare(user_data.password, user.user_password);
-
-    //         if (!passwordValidation) {
-    //             console.log("passwords do not match!");
-    //             returnState = -1;
-    //             return [returnState, null];
-    //         }
+            //If the user is not active we return an error.
+            if (!user.status) {
+                console.log("User is not activated in the system!");
+                returnState = -1;
+                return [returnState, null];
+            }
 
 
-    //         //We sign the JWT token to send it to the client.
-    //         let token_generated = jwt.sign({ user_id: user.user_id, user_email: user.user_email, user_role: "client" },
-    //             process.env.TOKEN_SECRET, { expiresIn: '1h' });
+            //Check if the received password is equal to the one stored in the database for this user
+            const passwordValidation = await bcrypt.compare(user_data.password, user.password_hash);
 
-    //         return [returnState, token_generated];
+            if (!passwordValidation) {
+                console.log("passwords do not match!");
+                returnState = -3;
+                return [returnState, null];
+            }
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
 
-    // }
+            //We sign the JWT token to send it to the client.
+            let token_generated = jwt.sign({ user_id: user.id, user_email: user.email, user_role: "client" },
+                process.env.TOKEN_SECRET, { expiresIn: '1h' });
+
+            return [returnState, token_generated];
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    static async getUser(userId) {
+        try {
+
+            const user = await prismadb.user.findFirst({
+                where: {
+                    id: userId
+                },
+                include: {
+                    preference: true
+                }
+            })
+
+            return [1, user];
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // static async delete(user_data) {
     //     try {
