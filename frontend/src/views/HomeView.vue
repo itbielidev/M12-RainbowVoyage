@@ -9,12 +9,9 @@
       </div>
     </div>
     <div class="info-container">
-      <p>
-        El colectivo LGTBIQ reúne a personas con orientaciones sexuales o identidades de género no
-        convencionales. Han luchado por igualdad y visibilidad, enfrentando discriminación. Su
-        historia está marcada por el activismo y avances legales. Siguen abogando por inclusión y
-        respeto.
-      </p>
+      <p>El colectivo LGTBIQ reúne a personas con orientaciones sexuales o identidades de género no convencionales. Han
+        luchado por igualdad y visibilidad, enfrentando discriminación. Su historia está marcada por el activismo y
+        avances legales. Siguen abogando por inclusión y respeto.</p>
     </div>
     <CitiesList></CitiesList>
   </div>
@@ -22,13 +19,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 mb-4">
-          <p>CONTACTO</p>
-          <div style="display: flex; flex-direction: column; align-items: center">
-            <p style="font-size: 20px; display: flex; align-items: center">
-              <font-awesome-icon
-                icon="fa-solid fa-phone"
-                style="color: #ffffff; font-size: 40px; margin-right: 20px"
-              ></font-awesome-icon>
+          <p class="text-center">CONTACTO</p>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <p style="font-size: 20px; display: flex; align-items: center;">
+              <font-awesome-icon icon="fa-solid fa-phone"
+                style="color: #ffffff; font-size: 40px; margin-right: 20px;"></font-awesome-icon>
               <span>765 972 423</span>
             </p>
             <p style="font-size: 20px; display: flex; align-items: center">
@@ -41,25 +36,19 @@
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <p>REDES SOCIALES</p>
-          <div class="social-icons">
-            <font-awesome-icon
-              icon="fa-brands fa-facebook"
-              style="color: #ffffff; font-size: 60px; margin-right: 20px"
-            ></font-awesome-icon>
-            <font-awesome-icon
-              icon="fa-brands fa-twitter"
-              style="color: #ffffff; font-size: 60px; margin-right: 20px"
-            ></font-awesome-icon>
-            <font-awesome-icon
-              icon="fa-brands fa-instagram"
-              style="color: #ffffff; font-size: 60px"
-            ></font-awesome-icon>
+          <p class="text-center">REDES SOCIALES</p>
+          <div class="social-icons text-center">
+            <font-awesome-icon icon="fa-brands fa-facebook"
+              style="color: #ffffff; font-size: 60px; margin-right: 20px;"></font-awesome-icon>
+            <font-awesome-icon icon="fa-brands fa-twitter"
+              style="color: #ffffff; font-size: 60px; margin-right: 20px;"></font-awesome-icon>
+            <font-awesome-icon icon="fa-brands fa-instagram"
+              style="color: #ffffff; font-size: 60px;"></font-awesome-icon>
           </div>
         </div>
 
         <div class="col-md-4 mb-4">
-          <p>NEWSLETTER</p>
+          <p class="text-center">NEWSLETTER</p>
           <div class="text-center">
             <input type="text" style="margin-bottom: 5px" /><br />
             <button
@@ -79,6 +68,8 @@
       </div>
     </div>
   </footer>
+
+
 </template>
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
@@ -98,6 +89,12 @@ body {
   overflow-x: hidden;
 }
 
+.info-container p {
+    margin-left: 20px;
+    margin-right: 20px;
+    /* Ajusta los valores de margin-left y margin-right según tus necesidades */
+  }
+  
 .image-container {
   position: relative;
   text-align: center;
@@ -115,8 +112,10 @@ img {
   color: white;
   text-align: center;
   padding: 30px;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
-  backdrop-filter: blur(10px); /* Efecto de desenfoque en el fondo */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fondo negro semitransparente */
+  backdrop-filter: blur(10px);
+  /* Efecto de desenfoque en el fondo */
 }
 
 h3 {
@@ -125,7 +124,7 @@ h3 {
 
 p {
   text-align: center;
-  font-size: 24px;
+  font-size: 35px;
 }
 
 /* Media queries para ajustar estilos en dispositivos móviles y tabletas */
@@ -137,5 +136,20 @@ p {
   h3 {
     font-size: 30px;
   }
+
 }
+
+@media (max-width: 768px) {
+  .info-container p {
+  font-size: 25px; /* Tamaño de fuente predeterminado */
+}
+}
+
+/* Media query para pantallas extra pequeñas (tamaño xs) */
+@media screen and (max-width: 575.98px) {
+  .info-container p {
+    font-size: 18px; /* Reducir el tamaño de fuente para pantallas xs */
+  }
+}
+
 </style>
