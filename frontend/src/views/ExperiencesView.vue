@@ -10,7 +10,7 @@ const props = defineProps<{ cityName: string }>()
 
 const { getExperiences, experiences } = useExperiences()
 
-const { getCityByName } = useCitiesStore()
+const { getCityByName, getDescriptionDetailByName } = useCitiesStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -65,13 +65,29 @@ onMounted(async () => {
     </section>
     <main>
       <section class="experience-quote">
-        <p>
-          ❝ Barcelona es una ciudad cosmopolita, abierta, donde la cohesión social es una realidad.
-          ❞
-        </p>
+        <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
       </section>
       <section class="our-experiences">
         <h2 class="title-our-experineces">Nuestras Experiencias</h2>
+
+        <article class="art-exprience" v-for="experience in experiences" :key="experience.id">
+          <div class="img-article">
+            <img src="/pedrera-cover.jpg" />
+          </div>
+          <div class="experience-description">
+            <h3 class="route-title">{{ experience.name }}</h3>
+            <span class="experience-length">{{ experience.duration }}</span>
+            <p><strong>Visitando: </strong>{{ experience.descriptions[0] }}</p>
+            <RouterLink
+              :to="{ name: 'experienceDetail', params: { experienceId: experience.id } }"
+              style="text-decoration: none; display: flex; align-self: flex-end"
+              ><button class="price">
+                <span>Desde<br /><strong>799€</strong></span>
+              </button></RouterLink
+            >
+          </div>
+        </article>
+
         <article class="art-exprience">
           <div class="img-article">
             <img src="/pedrera-cover.jpg" />

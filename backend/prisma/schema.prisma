@@ -82,6 +82,7 @@ model Experience {
   days_descriptions String[]        @db.Text
   images            String[]
   plans             Plan[]
+  name              String
 }
 
 model Plan {
