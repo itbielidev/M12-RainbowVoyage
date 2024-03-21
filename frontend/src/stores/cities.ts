@@ -35,5 +35,9 @@ export const useCitiesStore = defineStore('cities', () => {
         return cities.value?.find(city => city.name === name)?.id
     }
 
-    return { cities, getAll, getCityByName, hoveredCities, error, errorMessages }
+    function getDescriptionDetailByName(name: string): string | undefined {
+        return cities.value?.find(city => city.name === name)?.description_detail
+    }
+
+    return { cities, getAll, getCityByName, hoveredCities, error, errorMessages, getDescriptionDetailByName }
 })

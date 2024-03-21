@@ -117,6 +117,7 @@ export interface Experience {
     days_descriptions: string[]
     images: string[]
     plans?: Plan[]
+    name: string
 }
 
 export interface City {
