@@ -24,10 +24,10 @@ const router = createRouter({
       props: route => ({ ...route.params, cityName: route.params.cityName })
     },
     {
-      path: '/experienceDetail/:experienceId',
+      path: '/experiences/:cityName/experienceDetail/:experienceId',
       name: 'experienceDetail',
       component: ExperienceDetail,
-      props: route => ({ ...route.params, experienceId: route.params.experienceId })
+      props: route => ({ ...route.params, experienceId: route.params.experienceId, cityName: route.params.cityName })
     },
   ]
 })

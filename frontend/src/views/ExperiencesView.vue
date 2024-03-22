@@ -78,7 +78,12 @@ onMounted(async () => {
             <h3 class="route-title">{{ experience.name }}</h3>
             <span class="experience-length">{{ experience.duration }} dias</span>
             <p><strong>Visitando: </strong>{{ experience.descriptions[0] }}</p>
-               <RouterLink to="/" style="text-decoration: none; display: flex; align-self: flex-end"
+            <RouterLink
+              :to="{
+                name: 'experienceDetail',
+                params: { experienceId: experience.id, cityName: props.cityName }
+              }"
+              style="text-decoration: none; display: flex; align-self: flex-end"
               ><button class="price">
                 <span>Desde<br /><strong>799€</strong></span>
               </button></RouterLink
@@ -293,14 +298,13 @@ button.price {
 
 /* Mobile */
 @media (max-width: 576px) {
-  article.art-experience{
+  article.art-experience {
     flex-direction: column;
     height: auto;
   }
 
-  div.experience-description{
-    width:auto;
+  div.experience-description {
+    width: auto;
   }
-
 }
 </style>

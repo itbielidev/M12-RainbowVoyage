@@ -40,6 +40,7 @@ export const useFetch = <T>(): FetchReturn<T> => {
         fetchError.value = null;
 
         const apiPrefix: string = import.meta.env.VITE_API_ENDPOINT;
+
         const apiEndpoint: string = `${apiPrefix}${url}`;
 
         const axiosConfig: AxiosRequestConfig = {

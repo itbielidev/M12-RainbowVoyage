@@ -15,7 +15,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ show: isMenuOpen }">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
+          <li v-if="!userIsLoggedIn" class="nav-item">
             <button
               class="nav-link profile-button register"
               @click="open()"
@@ -30,7 +30,7 @@
               REGISTRO
             </button>
           </li>
-          <li class="nav-item">
+          <li v-if="!userIsLoggedIn" class="nav-item">
             <button
               class="nav-link profile-button"
               @mouseover="hoverButton = true"
@@ -43,6 +43,24 @@
                 style="color: #d90594"
               ></font-awesome-icon>
               PERFIL
+            </button>
+          </li>
+          <li v-if="userIsLoggedIn" class="nav-item">
+            <button
+              class="nav-link profile-button"
+              @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false"
+            >
+              <span class="fw-bold">RESERVAS</span>
+            </button>
+          </li>
+          <li v-if="userIsLoggedIn" class="nav-item">
+            <button
+              class="nav-link profile-button"
+              @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false"
+            >
+              <span class="fw-bold">PERFIL</span>
             </button>
           </li>
         </ul>
@@ -58,6 +76,10 @@ import RegisterModal from '@/components/RegisterModal.vue'
 const hoverButton = ref(false)
 const isMenuOpen = ref(false)
 import { useModal } from 'vue-final-modal'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
+
+const { userIsLoggedIn } = storeToRefs(useAuthStore())
 
 const { open, close } = useModal({
   component: RegisterModal,
@@ -132,8 +154,7 @@ nav {
 
 /* Tablet */
 @media (max-width: 768px) {
-
-  div.container-fluid{
+  div.container-fluid {
     display: flex;
   }
 
@@ -147,12 +168,10 @@ nav {
     justify-content: center;
   }
 
-  img.logo{
+  img.logo {
     padding-top: 0px;
     height: 70px;
     width: auto;
   }
-
 }
-
 </style>
