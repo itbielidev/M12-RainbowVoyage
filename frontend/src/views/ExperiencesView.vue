@@ -68,19 +68,17 @@ onMounted(async () => {
         <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
       </section>
       <section class="our-experiences">
-        <h2 class="title-our-experineces">Nuestras Experiencias</h2>
+        <h2 class="title-our-experiences">Nuestras Experiencias</h2>
 
-        <article class="art-exprience" v-for="experience in experiences" :key="experience.id">
+        <article class="art-experience" v-for="experience in experiences" :key="experience.id">
           <div class="img-article">
             <img src="/pedrera-cover.jpg" />
           </div>
           <div class="experience-description">
             <h3 class="route-title">{{ experience.name }}</h3>
-            <span class="experience-length">{{ experience.duration }}</span>
+            <span class="experience-length">{{ experience.duration }} dias</span>
             <p><strong>Visitando: </strong>{{ experience.descriptions[0] }}</p>
-            <RouterLink
-              :to="{ name: 'experienceDetail', params: { experienceId: experience.id } }"
-              style="text-decoration: none; display: flex; align-self: flex-end"
+               <RouterLink to="/" style="text-decoration: none; display: flex; align-self: flex-end"
               ><button class="price">
                 <span>Desde<br /><strong>799€</strong></span>
               </button></RouterLink
@@ -88,22 +86,7 @@ onMounted(async () => {
           </div>
         </article>
 
-        <article class="art-exprience">
-          <div class="img-article">
-            <img src="/pedrera-cover.jpg" />
-          </div>
-          <div class="experience-description">
-            <h3 class="route-title">Orgullo patrimonial</h3>
-            <span class="experience-length">5 dias</span>
-            <p><strong>Visitando: </strong>Sagrada Familia, Casa Batlló, La Pedrera</p>
-            <RouterLink to="/" style="text-decoration: none; display: flex; align-self: flex-end"
-              ><button class="price">
-                <span>Desde<br /><strong>799€</strong></span>
-              </button></RouterLink
-            >
-          </div>
-        </article>
-        <article class="art-exprience">
+        <article class="art-experience">
           <div class="img-article">
             <img src="/crema-catalana.jpg" />
           </div>
@@ -118,7 +101,7 @@ onMounted(async () => {
             >
           </div>
         </article>
-        <article class="art-exprience">
+        <article class="art-experience">
           <div class="img-article">
             <img src="/molino.jpg" />
           </div>
@@ -144,6 +127,7 @@ onMounted(async () => {
   font-family: Roboto;
 }
 .cover-city {
+  margin-top: 4rem;
   position: relative;
 }
 
@@ -165,7 +149,7 @@ onMounted(async () => {
 
 section.filters {
   background-color: black;
-  height: 4rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -174,8 +158,6 @@ section.filters {
 .btn-light {
   display: flex;
   align-items: center;
-  height: 2rem;
-  width: 15%;
   justify-content: center;
   font-weight: bold;
 }
@@ -203,29 +185,36 @@ section.our-experiences {
   gap: 2em;
 }
 
-h2.title-our-experineces {
+h2.title-our-experiences {
   padding-left: 5rem;
   font-weight: 400;
 }
 
-article.art-exprience {
+article.art-experience {
   display: flex;
   align-self: center;
   margin-bottom: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  height: 15rem;
 }
 
-article.art-exprience img {
-  height: 15rem;
-  width: 15rem;
+div.img-article {
+  display: flex;
+  flex: 1;
+}
+
+article.art-experience img {
+  height: 100%;
+  width: 100%;
 }
 
 .experience-description {
   display: flex;
   flex-direction: column;
   background-color: white;
-  width: 800px;
   padding: 2rem 2rem;
+  flex: 2;
 }
 
 h3.route-title {
@@ -235,7 +224,7 @@ h3.route-title {
 
 .experience-description span,
 .experience-description p {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 button.price {
@@ -251,5 +240,67 @@ button.price {
   width: 5rem;
   flex-direction: column;
   font-size: rem;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  section.cover-city {
+    display: flex;
+    align-items: center;
+    margin-top: 5rem;
+  }
+
+  section.cover-city img.cover {
+    height: 500px;
+  }
+
+  section.cover-city div.title-box {
+    width: 80%;
+    justify-items: center;
+  }
+
+  section.cover-city div.title-box img.title {
+    width: 90%;
+  }
+
+  section.filters {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 2fr 2fr;
+    justify-content: center;
+    padding: 1rem;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .experience-quote p {
+    width: 800px;
+    font-size: 1.7rem;
+  }
+
+  section.our-experiences {
+    padding: 2rem;
+  }
+
+  h2.title-our-experiences {
+    font-size: 1.8rem;
+  }
+
+  div.experience-description {
+    width: 200px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  article.art-experience{
+    flex-direction: column;
+    height: auto;
+  }
+
+  div.experience-description{
+    width:auto;
+  }
+
 }
 </style>
