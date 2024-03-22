@@ -1,18 +1,43 @@
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
-import { type Ref } from "vue";
-import type {City} from "@/types/index";
+import { computed, ref, type Ref } from "vue";
+import type { City } from "@/types/index";
 import { useFetch } from "@/composables/useFetch";
 
-export const useAuthStore = defineStore('cities', () => {
+export const useCitiesStore = defineStore('cities', () => {
 
-    const {get} = useFetch<City[]>();
+    const { get, fetchError, } = useFetch<{ cities: City[] }>();
 
-    const cities : Ref<City[]|null> = useStorage("cities", [], sessionStorage);
+    const error: Ref<boolean> = ref(false);
+    const errorMessages: Ref<string[]> = ref([]);
+
+    const cities: Ref<City[] | null | undefined> = useStorage("cities", [], sessionStorage);
+
+    //To apply hover effect in main page.
+    const hoveredCities = computed(() => {
+        return cities.value?.map(city => ({ ...city, hovered: false }))
+    })
 
     async function getAll() {
-        cities.value = await get("/cities");
+        const citiesData = await get("/cities");
+
+        if (fetchError.value) {
+            error.value = true;
+            errorMessages.value.push(fetchError.value);
+            return false;
+        }
+        else {
+            cities.value = citiesData?.cities;
+        }
     }
 
-    return { cities, getAll }
+    function getCityByName(name: string): number | undefined {
+        return cities.value?.find(city => city.name === name)?.id
+    }
+
+    function getDescriptionDetailByName(name: string): string | undefined {
+        return cities.value?.find(city => city.name === name)?.description_detail
+    }
+
+    return { cities, getAll, getCityByName, hoveredCities, error, errorMessages, getDescriptionDetailByName }
 })

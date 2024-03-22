@@ -51,10 +51,10 @@ model User {
 }
 
 model UserPreference {
-  id             Int               @id @default(autoincrement())
+  id             Int              @id @default(autoincrement())
   price_min      Int?
   price_max      Int?
-  types          ExperienceTypes[]
+  type           ExperienceTypes?
   num_people_min Int?
   num_people_max Int?
   duration_min   Int?
@@ -66,6 +66,8 @@ model City {
   id          Int          @id @default(autoincrement())
   name        String
   images      String[]
+  description String
+  description_detail String
   experiences Experience[]
 }
 
@@ -80,6 +82,7 @@ model Experience {
   days_descriptions String[]        @db.Text
   images            String[]
   plans             Plan[]
+  name              String
 }
 
 model Plan {

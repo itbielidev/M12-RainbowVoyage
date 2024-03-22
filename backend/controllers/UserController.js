@@ -6,10 +6,6 @@ export class UserController {
     this.userModel = userModel;
   }
 
-  // getAll = async (req, res) => {
-  //   res.json("All users");
-  // };
-
   // getByType = async (req, res) => {
   //   try {
   //     const results = await this.userModel.findByType(req.params.type);
@@ -21,48 +17,73 @@ export class UserController {
 
   // };
 
-  // register = async (req, res) => {
+  register = async (req, res) => {
 
-  //   //Apply validation schema to the data received
-  //   const userValidated = validateUser(req.body);
+    //Apply validation schema to the data received
+    const userValidated = validateRegister(req.body);
 
-  //   if (!userValidated.success) {
-  //     return res.status(422).json({ error: JSON.parse(userValidated.error.message) })
-  //   }
+    if (!userValidated.success) {
+      return res.status(422).json({ error: JSON.parse(userValidated.error.message) })
+    }
 
-  //   const [returnState, token] = await this.userModel.register(req.body);
+    console.log(req.body);
 
-  //   //Pass validated data to model to create user
-  //   if (returnState === 1) {
-  //     console.log("User registered successfully");
-  //     console.log("TOKEN: " + token);
-  //     return res.json({ message: "user registered successfully", token: token });
-  //   }
+    const [returnState, token] = await this.userModel.register(req.body);
 
-  //   return res.status(500).json({ error: "User could not be registered!" })
+    //Pass validated data to model to create user
+    if (returnState === 1) {
+      return res.json({ token: token });
+    }
+    else if (returnState === -2) {
+      return res.status(409).json({ error: "Email already exists" })
+    }
 
-  // };
+    return res.status(500).json({ error: "User could not log in!" })
 
-  // login = async (req, res) => {
-  //   //Apply validation schema to the data received
-  //   const userValidated = validateLogin(req.body);
+  };
 
-  //   if (!userValidated.success) {
-  //     return res.status(422).json({ error: JSON.parse(userValidated.error.message) })
-  //   }
+  login = async (req, res) => {
+    //Apply validation schema to the data received
+    const userValidated = validateLogin(req.body);
 
-  //   //Pass validated data to authenticate user.
-  //   const [logInStatus, token] = await this.userModel.login(req.body);
-  //   // console.log(logInStatus);
-  //   // console.log(userId);
+    if (!userValidated.success) {
+      return res.status(422).json({ error: JSON.parse(userValidated.error.message) })
+    }
 
-  //   if (logInStatus === 1) {
-  //     return res.status(200).json({ message: "User logged in successfully!", token: token });
-  //   }
 
-  //   return res.status(500).json({ error: "User could not log in!" })
 
-  // };
+    //Pass validated data to authenticate user.
+    const [logInStatus, token] = await this.userModel.login(req.body);
+    // console.log(logInStatus);
+    // console.log(userId);
+
+    if (logInStatus === 1) {
+      return res.status(200).json({ message: "User logged in successfully!", token: token });
+    }
+    else if (logInStatus === -2) {
+      return res.status(404).json({ error: "Email does not exists!" })
+    }
+    else if (logInStatus === -3) {
+      return res.status(401).json({ error: "Wrong password." })
+    }
+
+
+    return res.status(500).json({ error: "User could not log in!" })
+
+  };
+
+  getUser = async (req, res) => {
+
+    const userId = req.user_id;
+
+    const [returnState, user] = await this.userModel.getUser(userId);
+
+    if (returnState === 1) {
+      return res.status(200).json(user);
+    }
+
+    return res.status(500).json({ error: "Server error!" })
+  };
 
   // delete = async (req, res) => {
   //   //Apply validation schema to the data received

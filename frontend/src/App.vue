@@ -4,9 +4,6 @@ import { ModalsContainer } from 'vue-final-modal';
 </script>
 
 <template>
-  <header>
-  
-  </header>
   <ModalsContainer />
   <RouterView />
 </template>

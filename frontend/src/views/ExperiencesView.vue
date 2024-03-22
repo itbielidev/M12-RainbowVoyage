@@ -1,12 +1,53 @@
 <script setup lang="ts">
-import Menu from '@/components/Menu.vue'
+import NavBar from '@/components/NavBar.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
-import { RouterLink } from 'vue-router'
-</script>
+import { RouterLink, useRoute, useRouter } from 'vue-router'
+import { onMounted, ref, watch } from 'vue'
+import { useExperiences } from '@/composables/useExperiences'
+import { useCitiesStore } from '@/stores/cities'
 
+const props = defineProps<{ cityName: string }>()
+
+const { getExperiences, experiences } = useExperiences()
+
+const { getCityByName, getDescriptionDetailByName } = useCitiesStore()
+
+const route = useRoute()
+const router = useRouter()
+
+const queries = ref({
+  price_min: undefined,
+  price_max: undefined,
+  num_people_min: undefined,
+  num_people_max: undefined,
+  experience_type: undefined,
+  duration_min: undefined,
+  duration_max: undefined,
+  ...route.query
+})
+
+watch(
+  queries,
+  async () => {
+    await getExps()
+    router.push({ query: queries.value })
+  },
+  { deep: true }
+)
+
+async function getExps() {
+  //@ts-expect-error
+  const qs = new URLSearchParams(queries.value).toString()
+  await getExperiences(getCityByName(props.cityName) as number, qs)
+}
+
+onMounted(async () => {
+  await getExps()
+})
+</script>
 <template>
   <header>
-    <Menu></Menu>
+    <NavBar></NavBar>
     <section class="cover-city">
       <img class="cover" src="/bcn-cover.jpeg" />
       <div class="title-box">
@@ -24,13 +65,29 @@ import { RouterLink } from 'vue-router'
     </section>
     <main>
       <section class="experience-quote">
-        <p>
-          ❝ Barcelona es una ciudad cosmopolita, abierta, donde la cohesión social es una realidad.
-          ❞
-        </p>
+        <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
       </section>
       <section class="our-experiences">
         <h2 class="title-our-experineces">Nuestras Experiencias</h2>
+
+        <article class="art-exprience" v-for="experience in experiences" :key="experience.id">
+          <div class="img-article">
+            <img src="/pedrera-cover.jpg" />
+          </div>
+          <div class="experience-description">
+            <h3 class="route-title">{{ experience.name }}</h3>
+            <span class="experience-length">{{ experience.duration }}</span>
+            <p><strong>Visitando: </strong>{{ experience.descriptions[0] }}</p>
+            <RouterLink
+              :to="{ name: 'experienceDetail', params: { experienceId: experience.id } }"
+              style="text-decoration: none; display: flex; align-self: flex-end"
+              ><button class="price">
+                <span>Desde<br /><strong>799€</strong></span>
+              </button></RouterLink
+            >
+          </div>
+        </article>
+
         <article class="art-exprience">
           <div class="img-article">
             <img src="/pedrera-cover.jpg" />
