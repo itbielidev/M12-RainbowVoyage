@@ -130,13 +130,29 @@ nav {
   margin-right: 15px;
 }
 
+/* Tablet */
 @media (max-width: 768px) {
-  .navbar-brand {
+
+  div.container-fluid{
+    display: flex;
+  }
+
+  a.navbar-brand {
     margin-right: auto;
+    display: flex;
+    align-items: center;
   }
 
   .collapse.navbar-collapse {
     justify-content: center;
   }
+
+  img.logo{
+    padding-top: 0px;
+    height: 70px;
+    width: auto;
+  }
+
 }
+
 </style>
