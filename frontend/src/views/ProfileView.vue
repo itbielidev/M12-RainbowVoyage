@@ -5,27 +5,27 @@ import TripIcon from '@/components/icons/TripIcon.vue'
 </script>
 <template>
   <NavBar></NavBar>
-  <div
+  <main
     class="gap-2 d-flex flex-column justify-content-center text-center pt-3 container"
     style="margin-top: 6rem"
   >
     <h2>Mi perfil</h2>
-    <!-- INFORMACIÓN PERSONAL -->
-    <div class="card border p-2 my-4 mx-5 d-flex text-start">
+    <!-- PERSONAL INFORMATION -->
+    <section class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Información Personal</h4>
       </div>
       <div class="card-body">
         <form class="row g-3">
-          <!-- nombre -->
+          <!-- name -->
           <div class="col-md-6">
             <label class="form-label">
               Nombre
               <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" placeholder="Intrduce tu nombre " />
+            <input type="text" class="form-control" placeholder="Introduce tu nombre " />
           </div>
-          <!-- apellidos -->
+          <!-- surnames -->
           <div class="col-md-6">
             <label class="form-label"
               >Apellidos
@@ -33,7 +33,7 @@ import TripIcon from '@/components/icons/TripIcon.vue'
             </label>
             <input type="text" class="form-control" placeholder="Introduce tus apellidos" />
           </div>
-          <!-- teléfono -->
+          <!-- phone -->
           <div class="col-md-6">
             <label class="form-label">
               Teléfono
@@ -49,7 +49,7 @@ import TripIcon from '@/components/icons/TripIcon.vue'
             </label>
             <input type="email" class="form-control" placeholder="Introduce tu email" />
           </div>
-          <!-- dirección -->
+          <!-- address -->
           <div class="col-md-12">
             <label class="form-label">
               Dirección
@@ -62,9 +62,9 @@ import TripIcon from '@/components/icons/TripIcon.vue'
           </div>
         </form>
       </div>
-    </div>
-    <!-- ACTUALIZAR EMAIL -->
-    <div class="card border p-2 my-4 mx-5 d-flex text-start">
+    </section>
+    <!-- UPDATE EMAIL -->
+    <section class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Actualizar Email</h4>
       </div>
@@ -77,9 +77,9 @@ import TripIcon from '@/components/icons/TripIcon.vue'
           </div>
         </form>
       </div>
-    </div>
-    <!-- ACTUALIZAR CONTRASEÑA  -->
-    <div class="card border p-2 my-4 mx-5 d-flex text-start">
+    </section>
+    <!-- UPDATE PASSWORD  -->
+    <section class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Actualizar Contraseña</h4>
       </div>
@@ -92,13 +92,13 @@ import TripIcon from '@/components/icons/TripIcon.vue'
           </div>
         </form>
       </div>
-    </div>
-    <!-- RESERVAS -->
-    <div class="card border p-2 my-4 mx-5 d-flex text-start">
+    </section>
+    <!-- BOOKINGS -->
+    <section class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Mis Reservas</h4>
       </div>
-      <!-- RESERVA -->
+      <!-- BOOKING -->
       <div class="card-body">
         <div class="card border mb-4">
           <div
@@ -110,9 +110,9 @@ import TripIcon from '@/components/icons/TripIcon.vue'
               </div>
               <div class="ms-2">
                 <h6 class="ms-0">Barcelona - Málaga</h6>
-                <ul class="nav nav-divider small d-flex flex-column">
-                  <li class="nav-item">Nº reserva: 54681</li>
-                  <li class="nav-item">Experiencia: Orgullo Patrimonial</li>
+                <ul class="small d-flex flex-column">
+                  <li>Nº reserva: 54681</li>
+                  <li>Experiencia: Orgullo Patrimonial</li>
                 </ul>
               </div>
             </div>
@@ -135,8 +135,9 @@ import TripIcon from '@/components/icons/TripIcon.vue'
           </div>
         </div>
       </div>
-    </div>
-  </div>
+      <!-- end booking -->
+    </section>
+  </main>
 
   <FooterComponent></FooterComponent>
 </template>
@@ -150,6 +151,10 @@ import TripIcon from '@/components/icons/TripIcon.vue'
   padding: 0.6rem 1rem;
   border-radius: 12px;
   color: white;
+}
+
+.pink-button:hover {
+  background-color: #f2a0d7;
 }
 
 .pink-button a {
