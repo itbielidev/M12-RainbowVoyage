@@ -18,4 +18,17 @@ export class ExperienceModel {
         }
     }
 
+    static async find(experienceId) {
+        try {
+            const experience = await prismadb.experience.findFirst({
+                where: {
+                    id: experienceId
+                }
+            })
+            return experience;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 }

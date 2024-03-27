@@ -10,7 +10,7 @@ const props = defineProps<{ cityName: string }>()
 
 const { getExperiences, experiences } = useExperiences()
 
-const { getCityByName, getDescriptionDetailByName } = useCitiesStore()
+const { getCityByName, getDescriptionDetailByName, getCityCoverImgByName } = useCitiesStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -49,7 +49,7 @@ onMounted(async () => {
   <header>
     <NavBar></NavBar>
     <section class="cover-city">
-      <img class="cover" src="/bcn-cover.jpeg" />
+      <img class="cover" :src="`/${getCityCoverImgByName(props.cityName)}`" />
       <div class="title-box">
         <img class="title" src="/nextStop.png" />
         <img class="title" src="/barcelonaTitle.png" />
@@ -72,7 +72,7 @@ onMounted(async () => {
 
         <article class="art-experience" v-for="experience in experiences" :key="experience.id">
           <div class="img-article">
-            <img src="/pedrera-cover.jpg" />
+            <img :src="`/${experience.images[0]}`" />
           </div>
           <div class="experience-description">
             <h3 class="route-title">{{ experience.name }}</h3>
@@ -91,7 +91,7 @@ onMounted(async () => {
           </div>
         </article>
 
-        <article class="art-experience">
+        <!-- <article class="art-experience">
           <div class="img-article">
             <img src="/crema-catalana.jpg" />
           </div>
@@ -120,7 +120,7 @@ onMounted(async () => {
               </button></RouterLink
             >
           </div>
-        </article>
+        </article> -->
       </section>
     </main>
     <FooterComponent></FooterComponent>

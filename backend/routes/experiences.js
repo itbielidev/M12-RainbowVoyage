@@ -8,6 +8,7 @@ export const createExperienceRouter = (experienceModel) => {
   const experienceController = new ExperienceController(experienceModel);
 
   experienceRouter.get("/:cityId", experienceController.get);
+  experienceRouter.get("/detail/:experienceId", experienceController.find);
 
   return experienceRouter;
 };
