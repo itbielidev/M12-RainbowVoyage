@@ -1,7 +1,27 @@
 -- Experiencias Barcelona
 
-INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Orgullo Patrimonial' , ARRAY['Visitando: Sagrada Familia, Casa Batlló, La Pedrera','','','',''], ARRAY['Visitando: Sagrada Familia, Casa Batlló, La Pedrera',''], 5, 10, ARRAY['pedrera-cover.jpg','',''], 'cultural' 
+INSERT INTO "Experience" (city_id, name, days_descriptions, descriptions, duration, num_people, images, "type") 
+SELECT id, 'Orgullo Patrimonial' , 
+ARRAY[
+    'Visitando: Sagrada Familia, Casa Batlló, La Pedrera',
+    'Casa Batlló visita guiada de 16:30-18:00',
+    'Sagrada Familia visita guiada de 9:30-11:00',
+    'Excursión a Montserrat de 9:00-18:00',
+    'Parc Güell visita guida de 12:30-14:00', 
+    'La Pedrera vista guida de 15:00-17:00. Paseo por la Ciutadella'
+], 
+ARRAY[
+    'Visitando: Sagrada Familia, Casa Batlló, La Pedrera',
+    '¡Axel Hotel Barcelona, tu oasis de estilo, confort y diversión en el corazón de Barcelona!
+    Nuestro hotel, ubicado en el emblemático barrio del Eixample, es mucho más que un lugar para alojarse; ¡es un destino en sí mismo! Con un enfoque único en la comunidad LGBTQ+, cada detalle refleja nuestra calidez y modernidad.
+
+    Disfruta de lujosas habitaciones y suites, sumérgete en nuestra piscina en la azotea con vistas impresionantes, y explora la rica cultura y vida nocturna de Barcelona.
+
+    ¡Estamos aquí para hacer que tu estancia sea inolvidable, ya sea por negocios o por placer! ¡Únete a nosotros y descubre por qué somos un destino vibrante para todos!', ''],
+     5, 
+     10, 
+     ARRAY['pedrera-cover.jpg','',''], 
+     'cultural' 
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
