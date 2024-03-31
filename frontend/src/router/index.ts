@@ -25,6 +25,11 @@ const router = createRouter({
       component: () => import("@/views/ExperienceDetail.vue"),
       props: route => ({ ...route.params, experienceId: route.params.experienceId, cityName: route.params.cityName })
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import("@/views/AdminView.vue")
+    }
   ]
 })
 

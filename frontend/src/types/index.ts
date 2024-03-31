@@ -34,6 +34,7 @@ export interface RegisterPayLoad {
     duration_max?: number | null
     experience_type?: "gastronomic" | "cultural" | "festive" | "" | null
     checkbox: Boolean
+    adult: Boolean
 }
 
 

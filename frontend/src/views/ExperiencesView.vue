@@ -5,6 +5,7 @@ import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { onMounted, ref, watch } from 'vue'
 import { useExperiences } from '@/composables/useExperiences'
 import { useCitiesStore } from '@/stores/cities'
+import { useSeoMeta } from '@unhead/vue'
 
 const props = defineProps<{ cityName: string }>()
 
@@ -43,6 +44,17 @@ async function getExps() {
 
 onMounted(async () => {
   await getExps()
+})
+
+useSeoMeta({
+  title: `Rainbow Voyage | Experiencias de ${props.cityName}`,
+  description: `Experiencias de ${props.cityName}. ${getDescriptionDetailByName(props.cityName)} `,
+  ogDescription: `Experiencias de ${props.cityName}. ${getDescriptionDetailByName(
+    props.cityName
+  )} `,
+  ogTitle: `Rainbow Voyage | Experiencias de ${props.cityName}`,
+  ogImage: '/logo.png',
+  twitterCard: 'summary_large_image'
 })
 </script>
 <template>
@@ -244,7 +256,7 @@ button.price {
   height: 3rem;
   width: 5rem;
   flex-direction: column;
-  font-size: rem;
+  cursor: pointer;
 }
 
 /* Tablet */

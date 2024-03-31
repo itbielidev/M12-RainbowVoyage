@@ -3,7 +3,7 @@
     <NavBar></NavBar>
     <div class="image-container">
       <div class="header-filter"></div>
-      <img src="../../public/metro.png" class="img-fluid" alt="Metro Image" />
+      <img src="/metro.png" class="img-fluid" alt="Metro Image" />
       <div class="text-container">
         <h3>"Descubre destinos inclusivos con nuestra web para el colectivo LGTBIQ"</h3>
       </div>
@@ -85,11 +85,23 @@ import NavBar from '@/components/NavBar.vue'
 import CitiesList from '@/components/CitiesList.vue'
 import { onMounted } from 'vue'
 import { useCitiesStore } from '@/stores/cities'
+import { useSeoMeta } from '@unhead/vue'
 
 const { getAll: getCities } = useCitiesStore()
 
 onMounted(async () => {
   await getCities()
+})
+
+useSeoMeta({
+  title: 'Rainbow Voyage | Inicio',
+  description:
+    'Página principal de Rainbow Voyage donde se muestran los princiaples destinos a los que se pueden viajar',
+  ogDescription:
+    'Página principal de Rainbow Voyage donde se muestran los princiaples destinos a los que se pueden viajar',
+  ogTitle: 'Rainbow Voyage | Inicio ',
+  ogImage: '/logo.png',
+  twitterCard: 'summary_large_image'
 })
 </script>
 

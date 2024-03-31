@@ -1,10 +1,10 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top navbar-pink">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="../../public/logo.png" alt="Logo" class="logo" />
+      <RouterLink to="/" class="navbar-brand">
+        <img src="/logo.png" alt="Logo" class="logo" />
         <span class="inicio">INICIO</span>
-      </a>
+      </RouterLink>
       <button
         class="navbar-toggler"
         type="button"

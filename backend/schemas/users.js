@@ -13,7 +13,8 @@ const registrationSchema = z.object({
     duration_min: z.number().optional().nullable(),
     duration_max: z.number().optional().nullable(),
     experience_type: z.enum(["gastronomic", "cultural", "festive"]).optional().nullable(),
-    checkbox : z.boolean()
+    checkbox: z.boolean(),
+    adult: z.boolean()
 });
 
 const loginSchema = z.object({
@@ -35,7 +36,7 @@ const updateSchema = z.object({
     duration_min: z.number().optional().nullable(),
     duration_max: z.number().optional().nullable(),
     experience_type: z.enum(["gastronomic", "cultural", "festive"]).optional().nullable(),
-    price_min : z.number().optional().nullable(),
+    price_min: z.number().optional().nullable(),
     price_max: z.number().optional().nullable()
 })
 

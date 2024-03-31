@@ -26,7 +26,8 @@ export const useRegister = () => {
         duration_min: null,
         duration_max: null,
         experience_type: null,
-        checkbox: false
+        checkbox: false,
+        adult: false
     })
 
 
@@ -89,6 +90,11 @@ export const useRegister = () => {
     const validateCheckBox = () => {
         if (!formData.value.checkbox) {
             errorMessages.value.push("Debes aceptar las condiciones de uso y la Política de Privacidad.");
+            error.value = true;
+        }
+
+        if (!formData.value.adult) {
+            errorMessages.value.push("Debes ser mayor de 18 años para poder reservar viajes en Rainbow Voyage.");
             error.value = true;
         }
     }
