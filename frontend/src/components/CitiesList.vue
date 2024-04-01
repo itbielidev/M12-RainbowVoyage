@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div v-else-if="error">
+  <div class="d-flex justify-content-center" v-else-if="error">
     <ErrorMessages :messages="errorMessages"></ErrorMessages>
   </div>
 </template>

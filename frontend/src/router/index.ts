@@ -9,6 +9,10 @@ const router = createRouter({
       component: () => import("@/views/HomeView.vue")
     },
     {
+      path: '/:pathMatch(.*)*',
+      component: () => import("@/views/ErrorView.vue")
+    },
+    {
       path: '/todos',
       name: 'todos',
       component: () => import("@/views/TodosView.vue")
@@ -24,6 +28,13 @@ const router = createRouter({
       name: 'experienceDetail',
       component: () => import("@/views/ExperienceDetail.vue"),
       props: route => ({ ...route.params, experienceId: route.params.experienceId, cityName: route.params.cityName })
+    },
+    {
+      path: '/reservation',
+      name: 'reservation',
+      component: () => import("@/views/ReservationFormView.vue"),
+      props: route => ({ ...route.params, ...route.query })
+
     },
     {
       path: '/admin',
