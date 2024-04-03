@@ -35,8 +35,8 @@ export const useCitiesStore = defineStore('cities', () => {
         return cities.value?.find(city => city.name === name)?.id
     }
 
-    function getCityCoverImgByName(name: string): string | undefined {
-        return cities.value?.find(city => city.name === name)?.images[1]
+    function getCityCoverImgByName(name: string, index: number): string | undefined {
+        return cities.value?.find(city => city.name === name)?.images[index]
     }
 
     function getDescriptionDetailByName(name: string): string | undefined {

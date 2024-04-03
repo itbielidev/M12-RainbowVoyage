@@ -3,7 +3,7 @@
     <NavBar></NavBar>
     <div class="image-container">
       <div class="header-filter"></div>
-      <img src="/metro.png" class="img-fluid" alt="Metro Image" />
+      <img src="/images/metro.png" class="img-fluid" alt="Metro Image" />
       <div class="text-container">
         <h3>"Descubre destinos inclusivos con nuestra web para el colectivo LGTBIQ"</h3>
       </div>

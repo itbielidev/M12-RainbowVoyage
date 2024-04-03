@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top navbar-pink">
     <div class="container-fluid">
       <RouterLink to="/" class="navbar-brand">
-        <img src="/logo.png" alt="Logo" class="logo" />
+        <img src="/images/logo.png" alt="Logo" class="logo" />
         <span class="inicio">INICIO</span>
       </RouterLink>
       <button
