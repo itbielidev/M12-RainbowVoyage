@@ -39,52 +39,52 @@ WHERE name LIKE '%Barcelona%';
 
 -- Experiencias Madrid
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Orgullo Patrimonial' , ARRAY['Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod' ,'','','',''], ARRAY['Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod',''], 5, 10, ARRAY['','',''], 'cultural' 
+SELECT id, 'Orgullo Patrimonial' , ARRAY['Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod' ,'','','',''], ARRAY['Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod',''], 5, 10, ARRAY['almudena.jpg','',''], 'cultural' 
 FROM "City" 
 WHERE name LIKE '%Madrid%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel','','','',''], ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel',''], 5, 10, ARRAY['','',''], 'gastronomic' 
+SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel','','','',''], ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel',''], 5, 10, ARRAY['gastroMadrid.jpg','',''], 'gastronomic' 
 FROM "City" 
 WHERE name LIKE '%Madrid%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Party & Wellness' , ARRAY['El orgullo, carrera de tacones, Six Harmonies','','','',''], ARRAY['El orgullo, carrera de tacones, Six Harmonies',''], 5, 10, ARRAY['','',''], 'festive' 
+SELECT id, 'Party & Wellness' , ARRAY['El orgullo, carrera de tacones, Six Harmonies','','','',''], ARRAY['El orgullo, carrera de tacones, Six Harmonies',''], 5, 10, ARRAY['chueca.jpg','',''], 'festive' 
 FROM "City" 
 WHERE name LIKE '%Madrid%';
 
 -- Experiencias Ibiza
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Orgullo Patrimonial' , ARRAY['Recorrer a pie Dalt Vila, el centro histórico de Ibiza, los Baluartes de Sant Pere y Sant Jaume','','','',''], ARRAY['Recorrer a pie Dalt Vila, el centro histórico de Ibiza, los Baluartes de Sant Pere y Sant Jaume',''], 5, 10, ARRAY['','',''], 'cultural' 
+SELECT id, 'Orgullo Patrimonial' , ARRAY['Recorrer a pie Dalt Vila, el centro histórico de Ibiza, los Baluartes de Sant Pere y Sant Jaume','','','',''], ARRAY['Recorrer a pie Dalt Vila, el centro histórico de Ibiza, los Baluartes de Sant Pere y Sant Jaume',''], 5, 10, ARRAY['esCavallet.jpg','',''], 'cultural' 
 FROM "City" 
 WHERE name LIKE '%Ibiza%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gourmet Experience de Dia completo','','','',''], ARRAY['Visitando: Gourmet Experience de Dia completo',''], 5, 10, ARRAY['','',''], 'gastronomic' 
+SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gourmet Experience de Dia completo','','','',''], ARRAY['Visitando: Gourmet Experience de Dia completo',''], 5, 10, ARRAY['brunchit.jpg','',''], 'gastronomic' 
 FROM "City" 
 WHERE name LIKE '%Ibiza%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Party & Wellness' , ARRAY['Visitando: La Posidonia','','','',''], ARRAY['Visitando: La Posidonia',''], 5, 10, ARRAY['','',''], 'festive' 
+SELECT id, 'Party & Wellness' , ARRAY['Visitando: La Posidonia','','','',''], ARRAY['Visitando: La Posidonia',''], 5, 10, ARRAY['pacha.webp','',''], 'festive' 
 FROM "City" 
 WHERE name LIKE '%Ibiza%';
 
 -- Experiencias Gran Canaria
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Orgullo Patrimonial' , ARRAY['Visitando: Carnavales, Dunas De Maspalomas','','','',''], ARRAY['Visitando: Carnavales, Dunas De Maspalomas',''], 5, 10, ARRAY['','',''], 'cultural' 
+SELECT id, 'Orgullo Patrimonial' , ARRAY['Visitando: Carnavales, Dunas De Maspalomas','','','',''], ARRAY['Visitando: Carnavales, Dunas De Maspalomas',''], 5, 10, ARRAY['http://localhost:8080/public/static/images/carnaval-canarias.webp','',''], 'cultural' 
 FROM "City" 
-WHERE name LIKE '%Gran Ganaria%';
+WHERE name LIKE '%Gran Canaria%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
 SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Ruta de los quesos ','','','',''], ARRAY['Visitando: Ruta de los quesos ',''], 5, 10, ARRAY['','',''], 'gastronomic' 
 FROM "City" 
-WHERE name LIKE '%Gran Ganaria%';
+WHERE name LIKE '%Gran Canaria%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
 SELECT id, 'Party & Wellness' , ARRAY['Visitando: Gala drag, Thalasso Gloria Amadores','','','',''], ARRAY['Visitando: Gala drag, Thalasso Gloria Amadores',''], 5, 10, ARRAY['','',''], 'festive' 
 FROM "City" 
-WHERE name LIKE '%Gran Ganaria%';
+WHERE name LIKE '%Gran Canaria%';
 
 -- Experiencias Málaga
 

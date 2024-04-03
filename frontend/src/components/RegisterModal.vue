@@ -69,7 +69,7 @@ watch(formData.value, () => {
     <section class="content-box register-box p-5">
       <font-awesome-icon @click="emit('cancel')" icon="fa-solid fa-xmark" />
       <section class="text-center d-none d-md-block">
-        <img src="/logo.png" alt="Logo" class="img-fluid logo-img" />
+        <img src="/images/logo.png" alt="Logo" class="img-fluid logo-img" />
       </section>
       <section
         class="d-flex flex-column flex-md-row align-items-center gap-2 justify-content-around mb-5 w-100"

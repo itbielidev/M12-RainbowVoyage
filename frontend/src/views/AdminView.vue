@@ -13,7 +13,7 @@ const { getReservations, reservations, errorMessages, error } = useReservations(
 const name = ref<string>('')
 
 const query = ref({
-  name: undefined,
+  name: '',
   ...route.query
 })
 
@@ -27,8 +27,7 @@ watch(
 )
 
 async function getData() {
-  //@ts-expect-error
-  const qs = new URLSearchParams(queries.value).toString()
+  const qs = new URLSearchParams(query.value).toString()
   await getReservations(qs)
 }
 
@@ -39,14 +38,14 @@ onMounted(async () => await getData())
     class="w-100 d-flex flex-column gap-3 flex-xs-column flex-lg-row align-items-center justify-content-start mb-5"
   >
     <div class="text-center w-25">
-      <img src="/logo.png" alt="Logo" class="logo" />
+      <img src="/images/logo.png" alt="Logo" class="logo" />
     </div>
     <div
       class="text-center w-50 d-flex justify-content-center justify-content-xs-center justify-content-lg-start"
     >
       <InputText
         type="text"
-        v-model.trim="name"
+        v-model.trim="query.name"
         placeholder="Buscar por nombre de titular"
         @change="getData()"
       ></InputText>

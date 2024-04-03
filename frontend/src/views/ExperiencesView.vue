@@ -61,10 +61,10 @@ useSeoMeta({
   <header>
     <NavBar></NavBar>
     <section class="cover-city">
-      <img class="cover" :src="`/${getCityCoverImgByName(props.cityName)}`" />
+      <img class="cover" :src="`/images/${getCityCoverImgByName(props.cityName, 1)}`" />
       <div class="title-box">
-        <img class="title" src="/nextStop.png" />
-        <img class="title" src="/barcelonaTitle.png" />
+        <img class="title" src="/images/nextStop.png" />
+        <img class="title" :src="`/images/${getCityCoverImgByName(props.cityName, 2)}`" />
       </div>
     </section>
   </header>
@@ -84,7 +84,7 @@ useSeoMeta({
 
         <article class="art-experience" v-for="experience in experiences" :key="experience.id">
           <div class="img-article">
-            <img :src="`/${experience.images[0]}`" />
+            <img :src="`/images/${experience.images[0]}`" />
           </div>
           <div class="experience-description">
             <h3 class="route-title">{{ experience.name }}</h3>

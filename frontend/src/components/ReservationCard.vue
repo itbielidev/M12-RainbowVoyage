@@ -2,7 +2,7 @@
   <article class="w-100">
     <main class="content d-flex flex-column flex-md-row gap-3 w-100 p-3">
       <div class="w-25 img-box">
-        <img src="/logo.png" alt="Reservation Photo" class="img-fluid" />
+        <img src="/images/logo.png" alt="Reservation Photo" class="img-fluid" />
       </div>
       <div class="w-75 info-box">
         <h3 class="fw-bold">Orgullo patromonial</h3>
