@@ -42,7 +42,7 @@
                 class="icon"
                 style="color: #d90594"
               ></font-awesome-icon>
-              PERFIL
+              INICIAR SESIÓN
             </button>
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
@@ -55,13 +55,15 @@
             </button>
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
-            <button
-              class="nav-link profile-button"
-              @mouseover="hoverButton = true"
-              @mouseleave="hoverButton = false"
-            >
-              <span class="fw-bold">PERFIL</span>
-            </button>
+            <RouterLink :to="{ name: isAdmin ? 'admin' : 'profile' }">
+              <button
+                class="nav-link profile-button"
+                @mouseover="hoverButton = true"
+                @mouseleave="hoverButton = false"
+              >
+                <span class="fw-bold">PERFIL</span>
+              </button>
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -79,7 +81,7 @@ import { useModal } from 'vue-final-modal'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 
-const { userIsLoggedIn } = storeToRefs(useAuthStore())
+const { userIsLoggedIn, isAdmin } = storeToRefs(useAuthStore())
 
 const { open, close } = useModal({
   component: RegisterModal,

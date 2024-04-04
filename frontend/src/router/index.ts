@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -6,7 +7,15 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import("@/views/HomeView.vue")
+      component: () => import("@/views/HomeView.vue"),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (!authStore.userIsLoggedIn || !authStore.isAdmin) {
+          next();
+        } else {
+          next('/admin');
+        }
+      }
     },
     {
       path: '/:pathMatch(.*)*',
@@ -39,12 +48,30 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
-      component: () => import("@/views/AdminView.vue")
+      component: () => import("@/views/AdminView.vue"),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore()
+
+        if (authStore.userIsLoggedIn && authStore.isAdmin) {
+          next();
+        }
+        else {
+          next("/");
+        }
+
+      }
     },
     {
       path: '/profile',
       name: 'profile',
-      component: () => import("@/views/ProfileView.vue")
+      component: () => import("@/views/ProfileView.vue"),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore()
+        if (authStore.userIsLoggedIn && !authStore.isAdmin) { next() }
+        else {
+          next("/")
+        }
+      }
     }
   ]
 })

@@ -11,6 +11,8 @@ export const useAuthStore = defineStore('auth', () => {
     const token: Ref<string> = useStorage("token", "", sessionStorage);
     const userIsLoggedIn = computed(() => token.value !== "" ? true : false);
 
+    const isAdmin: Ref<boolean> = useStorage('admin', false, sessionStorage);
+
     const user: Ref<User | null> = useStorage("user", null, sessionStorage);
 
     // const username: Ref<string | null> = useStorage("username", "");
@@ -67,5 +69,5 @@ export const useAuthStore = defineStore('auth', () => {
     //     }
     // }
 
-    return { token, userIsLoggedIn, user, logout, getUser }
+    return { token, userIsLoggedIn, user, isAdmin, logout, getUser }
 })
