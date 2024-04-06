@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node --watch app.js",
-    "build": "npm install && npx prisma migrate deploy"
+    "build": "npm install && npx prisma migrate deploy && prisma generate"
   },
   "keywords": [],
   "author": "",
