@@ -81,38 +81,39 @@ model Experience {
   descriptions      String[]        @db.Text
   days_descriptions String[]        @db.Text
   images            String[]
-  plans             Plan[]
+  DateAvailabilty   DateAvailabilty[]
+  Reservation       Reservation[]
   name              String
 }
 
-model Plan {
-  id              Int               @id @default(autoincrement())
-  price           Int
-  content         String            @db.Text
-  name            String
-  images          String[]
-  experience      Experience?       @relation(fields: [experience_id], references: [id])
-  experience_id   Int?
-  DateAvailabilty DateAvailabilty[]
-  Reservation     Reservation[]
-}
+// model Plan {
+//   id              Int               @id @default(autoincrement())
+//   price           Int
+//   content         String            @db.Text
+//   name            String
+//   images          String[]
+//   experience      Experience?       @relation(fields: [experience_id], references: [id])
+//   experience_id   Int?
+//   DateAvailabilty DateAvailabilty[]
+//   Reservation     Reservation[]
+// }
 
 model DateAvailabilty {
-  id             Int      @id @default(autoincrement())
+  id             Int            @id @default(autoincrement())
   start_date     DateTime
   end_date       DateTime
   max_people     Int
-  current_people Int      @default(0)
+  current_people Int            @default(0)
   month          String
   year           String
-  plan           Plan?    @relation(fields: [plan_id], references: [id])
-  plan_id        Int?
+  experience     Experience?    @relation(fields: [experience_id], references: [id])
+  experience_id  Int?
 }
 
 model Reservation {
   id            Int              @id @default(autoincrement())
-  plan_id       Int
-  plan          Plan?            @relation(fields: [plan_id], references: [id])
+  experience_id Int
+  experience    Experience?      @relation(fields: [experience_id], references: [id])
   user          User?            @relation(fields: [user_id], references: [id])
   user_id       Int
   date_creation DateTime
