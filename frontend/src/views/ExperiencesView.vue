@@ -96,15 +96,14 @@ onMounted(async () => {
           <option value="5">5</option>
         </select>
       </button>
-      <button type="button" class="btn">
+      <button type="button" class="btn btn-light">Experiencias:
         <select class="form-select" aria-label="Default select example">
-          <option selected>Experiencias</option>
           <option value="1">Gastronómica</option>
           <option value="2">Cultural</option>
-          <option value="2">Festiva</option>
+          <option value="3">Festiva</option>
         </select>
       </button>
-      <button type="button" class="btn btn-light"> Duración:
+      <button type="button" class="btn btn-light">Duración:
         <select class="form-select" aria-label="Default select example">
           <option selected>Mínimo</option>
           <option value="1">1</option>
@@ -363,5 +362,19 @@ button.price {
     width:auto;
   }
 
+
+  section.filters {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    padding: 1rem;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  section.filters button {
+    
+  }
 }
 </style>
