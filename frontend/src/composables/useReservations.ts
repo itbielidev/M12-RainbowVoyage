@@ -16,7 +16,9 @@ export const useReservations = () => {
         location: "",
         type: "client",
         checkbox: false,
-        numPeople: ""
+        numPeople: "",
+        dates: "",
+        dateId: ""
     });
 
 
@@ -116,7 +118,7 @@ export const useReservations = () => {
 
     const validateCheckBox = () => {
         if (!formData.value.checkbox) {
-            errorMessages.value.push("Debes aceptar las condiciones de uso y la Política de Privacidad.");
+            errorMessages.value.push("Debes aceptar las condiciones de reserva.");
             error.value = true;
         }
 
@@ -142,7 +144,6 @@ export const useReservations = () => {
             return false;
         }
         else {
-            // token.value = tokenData?.token as string;
             return true;
         }
     }

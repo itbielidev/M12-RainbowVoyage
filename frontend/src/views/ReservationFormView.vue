@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useReservations } from '@/composables/useReservations'
 import ErrorMessages from '@/components/ErrorMessages.vue'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
 
 const { formData, error, errorMessages, validateForm, manageReservation, validateCheckBox } =
   useReservations()
 
 const currentIndex = ref<number>(0)
 
+const { user } = storeToRefs(useAuthStore())
+
 async function handleReservation() {
   if ((await manageReservation()) === false) return
+
+  //Go to final confirmation view and then redirect - TO DO
 }
 
 function modifyIndex(num: number) {
@@ -29,6 +35,27 @@ function goBack(num: number) {
 
 watch(formData.value, () => {
   formData.value.email = formData.value.email.toLowerCase()
+})
+
+const props = defineProps<{
+  experienceId: string
+  experienceName: string
+  dateId: string
+  date: string
+  image: string
+  people: string
+}>()
+
+onMounted(() => {
+  console.log(user.value)
+  formData.value.name = user?.value?.name as string
+  formData.value.lastName = user?.value?.last_name as string
+  formData.value.email = user?.value?.email as string
+  formData.value.emailConfirmation = user?.value?.email as string
+  formData.value.phone = user?.value?.phone as string
+  formData.value.numPeople = props.people
+  formData.value.dates = props.date
+  formData.value.dateId = props.dateId as string
 })
 </script>
 
@@ -141,7 +168,7 @@ watch(formData.value, () => {
               type="text"
               name="numPeople"
               id="numPeople"
-              placeholder="5"
+              :placeholder="(Number(props.people) - 1).toString()"
               disabled
             />
           </div>
@@ -158,69 +185,55 @@ watch(formData.value, () => {
         <ErrorMessages :messages="errorMessages"></ErrorMessages>
       </template>
       <template v-if="currentIndex === 1">
-        <section class="d-flex flex-column">
-          <label class="mb-2" for="name">Nombre :</label>
-          <input
-            v-model.trim="formData.name"
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Nombre"
-            disabled
+        <h1 class="mb-3">Resumen de la reserva</h1>
+        <section class="d-flex flex-row gap-3 mb-3">
+          <p class="display-4">{{ props.experienceName }}</p>
+          <img
+            :src="`./images/${props.image}`"
+            alt="Experience photo"
+            class="w-25 rounded exp_photo"
           />
         </section>
-        <section class="d-flex flex-column">
-          <label class="mb-2" for="lastName">Apellidos :</label>
-          <input
-            v-model.trim="formData.lastName"
-            type="text"
-            name="lastName"
-            id="lastName"
-            placeholder="Apellidos"
-            disabled
-          />
+        <section class="w-100 row">
+          <div class="col-12 col-md-6">
+            <section class="d-flex">
+              <p>
+                <b>Nombre Titular de la reserva: </b>{{ formData.name }} {{ formData.lastName }}
+              </p>
+            </section>
+            <section class="d-flex">
+              <p><b>DNI del titular: </b>{{ formData.dni }}</p>
+            </section>
+            <section class="d-flex flex-column">
+              <p><b>Teléfono móvil: </b>{{ formData.phone }}</p>
+            </section>
+            <section class="d-flex flex-column">
+              <p><b>Correo electrónico: </b>{{ formData.email }}</p>
+            </section>
+            <section class="d-flex flex-column">
+              <p><b>Acompañantes: </b>{{ formData.numPeople }}</p>
+            </section>
+            <section class="d-flex flex-column">
+              <p><b>Fechas reservadas: </b>{{ props.date }}</p>
+            </section>
+          </div>
+          <div class="col-12 col-md-6">
+            <section class="d-flex flex-column">
+              <p><b>Localidad: </b>{{ formData.location }}</p>
+            </section>
+            <section class="d-flex flex-column">
+              <p><b>Dirección: </b>{{ formData.address }}</p>
+            </section>
+          </div>
         </section>
-        <section class="d-flex flex-column">
-          <label class="mb-2" for="phone">Teléfono móvil :</label>
-          <input
-            v-model.trim="formData.phone"
-            type="text"
-            name="phone"
-            id="phone"
-            placeholder="123 456 789"
-            disabled
-          />
+        <section class="mt-5">
+          <div class="d-flex gap-2 align-items-baseline">
+            <input v-model="formData.checkbox" type="checkbox" name="confirm" id="confirm" />
+            <label for="confirm" id="confirm">
+              Acepto las condiciones de reserva de rainbow Voyage.</label
+            >
+          </div>
         </section>
-        <label class="mb-1" for="email">Correo electrónico :</label>
-        <input
-          v-model.trim="formData.email"
-          type="email"
-          name="email"
-          id="email"
-          placeholder="usuario@gmail.com"
-          disabled
-        />
-        <label class="mb-1" for="email">DNI: </label>
-        <input v-model.trim="formData.dni" type="dni" name="dni" id="dni" disabled />
-        <label class="mb-1" for="email">Dirección: </label>
-        <input
-          v-model.trim="formData.location"
-          type="location"
-          name="location"
-          id="location"
-          disabled
-        />
-        <div class="d-flex gap-2">
-          <input
-            v-model="formData.checkbox"
-            type="checkbox"
-            name="conditions"
-            id="conditions-text"
-          />
-          <label for="conditions" id="conditions"
-            >Acepto los Términos y Condiciones de Rainbow Voyage</label
-          >
-        </div>
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
           <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(0)" type="button">
             ATRÁS
@@ -229,9 +242,6 @@ watch(formData.value, () => {
             FINALIZAR RESERVA
           </button>
         </section>
-        <button class="button fw-bold mt-5 px-1 py-2" @click="$router.back()" type="button">
-          VOLVER AL DETALLE
-        </button>
         <ErrorMessages :messages="errorMessages"></ErrorMessages>
       </template>
     </form>
@@ -361,5 +371,9 @@ button:hover {
 
 .fa-xmark:hover {
   color: #d90594;
+}
+
+.exp_photo {
+  min-width: 30%;
 }
 </style>

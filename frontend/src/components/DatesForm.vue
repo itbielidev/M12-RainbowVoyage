@@ -14,6 +14,7 @@ const {
   checkAvailableDates,
   datesAvailable,
   dateSelected,
+  selectedDateId,
   isLoading,
   error,
   errorMessages
@@ -33,6 +34,9 @@ const { open: openLogin, close: closeLogin } = useModal({
 
 const { userIsLoggedIn } = storeToRefs(useAuthStore())
 const props = defineProps<{ experienceId: string }>()
+const emit = defineEmits<{
+  reserve: [selectedDateId: number, selectedDate: string, numPeople: string]
+}>()
 </script>
 <template>
   <section class="d-flex flex-column justify-content-center align-items-center">
@@ -72,8 +76,9 @@ const props = defineProps<{ experienceId: string }>()
         <optgroup>
           <option
             v-for="date in datesAvailable"
-            :value="`${formatDate(date.start_date)}} - {{ formatDate(date.end_date) }}}`"
+            :value="`${formatDate(date.start_date)} - ${formatDate(date.end_date)}`"
             :key="date.id"
+            @click="selectedDateId = date.id"
           >
             {{ formatDate(date.start_date) }} - {{ formatDate(date.end_date) }} ( plazas disponibles
             : {{ date.max_people - date.current_people }})
@@ -81,7 +86,12 @@ const props = defineProps<{ experienceId: string }>()
         </optgroup>
       </select>
       <section v-if="dateSelected && dateSelected.length > 0">
-        <button v-if="userIsLoggedIn" class="button fw-bold mt-5 px-1 py-2" type="button">
+        <button
+          v-if="userIsLoggedIn"
+          @click="emit('reserve', selectedDateId, dateSelected, formData.numPeople)"
+          class="button fw-bold mt-5 px-1 py-2"
+          type="button"
+        >
           REALIZAR RESERVA
         </button>
         <div v-else class="d-flex flex-column align-items-center gap-1">

@@ -16,6 +16,7 @@ export const useDates = () => {
     })
 
     const dateSelected = ref<string>("");
+    const selectedDateId = ref<number>(-1)
 
     const datesAvailable = ref<DateAvailability[] | null>([]);
 
@@ -48,5 +49,5 @@ export const useDates = () => {
         return formattedDate;
     }
 
-    return { monthsSelect, formData, formatDate, checkAvailableDates, datesAvailable, isLoading, error, errorMessages, dateSelected };
+    return { monthsSelect, formData, formatDate, checkAvailableDates, selectedDateId, datesAvailable, isLoading, error, errorMessages, dateSelected };
 };

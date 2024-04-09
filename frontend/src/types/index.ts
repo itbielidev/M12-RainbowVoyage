@@ -83,6 +83,8 @@ export interface ReservationPayload {
     location: string
     checkbox: Boolean
     numPeople: string
+    dates: string
+    dateId: string
 }
 export interface User {
     id: number
@@ -123,6 +125,7 @@ export interface UserPreference {
 export interface Experience {
     id: number
     city_id: number
+    name: string
     city: City
     duration: number
     type: ExperienceTypes
