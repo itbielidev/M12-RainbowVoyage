@@ -7,11 +7,13 @@ import { createUserRouter } from "./routes/users.js";
 import { createExperienceRouter } from "./routes/experiences.js";
 import { createCityRouter } from "./routes/cities.js";
 import { createReservationRouter } from "./routes/reservations.js";
+import { createDateRouter } from "./routes/dates.js";
 
 import { UserModel } from './models/UserModel.js';
 import { ExperienceModel } from './models/ExperienceModel.js';
 import { CityModel } from './models/CityModel.js';
 import { ReservationModel } from './models/ReservationModel.js';
+import { DateModel } from './models/DateModel.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -32,6 +34,7 @@ app.use("/users", createUserRouter(UserModel));
 app.use("/cities", createCityRouter(CityModel));
 app.use("/experiences", createExperienceRouter(ExperienceModel));
 app.use("/reservations", createReservationRouter(ReservationModel));
+app.use("/dates", createDateRouter(DateModel));
 
 
 const PORT = process.env.PORT ?? 1234;

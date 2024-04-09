@@ -4,7 +4,7 @@
     <div class="content">
       <h1 style="color: white">¡Bienvenido a Axel Hotel Barcelona, Tu Destino en Barcelona!</h1>
     </div>
-    <DatesForm></DatesForm>
+    <DatesForm :experienceId="props.experienceId"></DatesForm>
     <FooterComponent></FooterComponent>
   </div>
 </template>

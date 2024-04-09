@@ -62,8 +62,8 @@ export interface UpdatePayload {
 
 export interface Reservation {
     id: number
-    plan_id: Number
-    plan?: Plan
+    experience_id: number
+    experience?: Experience
     user?: User
     user_id: number
     date_creation: Date
@@ -109,16 +109,16 @@ export interface UserPreference {
     user?: User
 }
 
-export interface Plan {
-    id: number
-    price: number
-    content: string
-    name: string
-    images: string[]
-    experience?: Experience
-    experience_id?: number
-    reservation?: Reservation
-}
+// export interface Plan {
+//     id: number
+//     price: number
+//     content: string
+//     name: string
+//     images: string[]
+//     experience?: Experience
+//     experience_id?: number
+//     reservation?: Reservation
+// }
 
 export interface Experience {
     id: number
@@ -130,8 +130,8 @@ export interface Experience {
     descriptions: string[]
     days_descriptions: string[]
     images: string[]
-    plans?: Plan[]
-    name: string
+    dates?: DateAvailability[]
+    reservations?: Reservation[]
 }
 
 export interface City {
@@ -152,8 +152,13 @@ export interface DateAvailability {
     current_people: number
     month: string
     year: string
-    plan?: Plan
-    plan_id?: number
+    experience?: Experience
+    experience_id?: number
 }
 
+export interface DatePayload {
+    people: number
+    month: string
+    year: string
+}
 
