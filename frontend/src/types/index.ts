@@ -34,6 +34,7 @@ export interface RegisterPayLoad {
     duration_max?: number | null
     experience_type?: "gastronomic" | "cultural" | "festive" | "" | null
     checkbox: Boolean
+    adult: Boolean
 }
 
 
@@ -70,6 +71,19 @@ export interface Reservation {
     num_people: number
 }
 
+export interface ReservationPayload {
+    name: string
+    lastName: string
+    email: string
+    emailConfirmation: string
+    phone: string
+    dni: string
+    address: string
+    postalCode: string
+    location: string
+    checkbox: Boolean
+    numPeople: string
+}
 export interface User {
     id: number
     name: string

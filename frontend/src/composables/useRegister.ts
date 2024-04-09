@@ -4,14 +4,17 @@ import { type RegisterPayLoad } from '@/types';
 import { useAuthStore } from "@/stores/auth";
 import type { TokenType } from "@/types";
 import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 
 export const useRegister = () => {
 
-    const { token } = storeToRefs(useAuthStore());
+    const { token, isAdmin } = storeToRefs(useAuthStore());
     const { post, fetchError } = useFetch<TokenType>();
 
     const error: Ref<boolean> = ref(false);
     const errorMessages: Ref<string[]> = ref([]);
+
+    const router = useRouter();
 
     const formData: Ref<RegisterPayLoad> = ref({
         name: "",
@@ -26,7 +29,8 @@ export const useRegister = () => {
         duration_min: null,
         duration_max: null,
         experience_type: null,
-        checkbox: false
+        checkbox: false,
+        adult: false
     })
 
 
@@ -91,6 +95,11 @@ export const useRegister = () => {
             errorMessages.value.push("Debes aceptar las condiciones de uso y la Política de Privacidad.");
             error.value = true;
         }
+
+        if (!formData.value.adult) {
+            errorMessages.value.push("Debes ser mayor de 18 años para poder reservar viajes en Rainbow Voyage.");
+            error.value = true;
+        }
     }
 
     const manageRegister = async () => {
@@ -117,6 +126,12 @@ export const useRegister = () => {
         }
         else {
             token.value = tokenData?.token as string;
+
+            if (formData.value.email === "admin@gmail.com") {
+                isAdmin.value = true;
+                router.push("/admin");
+            }
+
             return true;
         }
     }

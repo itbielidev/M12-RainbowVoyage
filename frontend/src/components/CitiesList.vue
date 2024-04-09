@@ -13,7 +13,7 @@
             <p class="m-0" style="color: black">{{ city.name }}</p>
           </div>
           <img
-            :src="`/${city.images[0]}`"
+            :src="`/images/${city.images[0]}`"
             class="img-fluid"
             alt="City photo"
             @mouseover="hoverCity(index, true)"
@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div v-else-if="error">
+  <div class="d-flex justify-content-center" v-else-if="error">
     <ErrorMessages :messages="errorMessages"></ErrorMessages>
   </div>
 </template>

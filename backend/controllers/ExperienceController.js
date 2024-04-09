@@ -12,4 +12,10 @@ export class ExperienceController {
     const experiences = await this.experienceModel.get(Number(cityId));
     return res.status(200).json(experiences);
   };
+
+  find = async (req, res) => {
+    const experienceId = req.params.experienceId;
+    const experience = await this.experienceModel.find(Number(experienceId));
+    return res.status(200).json(experience);
+  };
 }

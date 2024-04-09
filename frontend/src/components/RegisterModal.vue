@@ -69,10 +69,10 @@ watch(formData.value, () => {
     <section class="content-box register-box p-5">
       <font-awesome-icon @click="emit('cancel')" icon="fa-solid fa-xmark" />
       <section class="text-center d-none d-md-block">
-        <img src="/logo.png" alt="Logo" class="img-fluid logo-img" />
+        <img src="/images/logo.png" alt="Logo" class="img-fluid logo-img" />
       </section>
       <section
-        class="d-flex flex-column flex-sm-row align-items-center gap-2 justify-content-around mb-5 w-100"
+        class="d-flex flex-column flex-md-row align-items-center gap-2 justify-content-around mb-5 w-100"
       >
         <div
           :class="currentIndex === num ? 'border-pink' : ''"
@@ -190,7 +190,7 @@ watch(formData.value, () => {
         </template>
         <template v-if="currentIndex === 2">
           <h2 class="h4 mb-5">
-            Puedes indicar las preferencias de búsqueda las experiencias si lo deseas
+            Puedes indicar las preferencias de búsqueda de las experiencias si lo deseas
           </h2>
           <section class="d-flex flex-column">
             <label class="mb-2 fw-bold mb-4 h5" for="peopleSelect">Número de personas</label>
@@ -296,18 +296,24 @@ watch(formData.value, () => {
           <ErrorMessages :messages="errorMessages"></ErrorMessages>
         </template>
         <template v-if="currentIndex === 3">
-          <div class="terms d-flex align-items-center">
-            <input
-              v-model="formData.checkbox"
-              type="checkbox"
-              name="conditions"
-              id="conditions-text"
-            />
-            <label for="conditions" id="conditions"
-              >He leído y acepto las <u>Condiciones de uso</u> y la
-              <u>Política de privacidad de Rainbow Voyage</u>. Ver +info sobre protección de
-              datos</label
-            >
+          <div class="terms d-flex flex-column flex-md-row align-items-center">
+            <div class="d-flex gap-2">
+              <input
+                v-model="formData.checkbox"
+                type="checkbox"
+                name="conditions"
+                id="conditions-text"
+              />
+              <label for="conditions" id="conditions"
+                >He leído y acepto las <u>Condiciones de uso</u> y la
+                <u>Política de privacidad de Rainbow Voyage</u>. Ver +info sobre protección de
+                datos</label
+              >
+            </div>
+            <div class="d-flex gap-2">
+              <input v-model="formData.adult" type="checkbox" name="adult" id="adult" />
+              <label for="adult" id="adult"> Confirmo que soy mayor de 18 años</label>
+            </div>
           </div>
           <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5 mt-4">
             <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(2)" type="button">

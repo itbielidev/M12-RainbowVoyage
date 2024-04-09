@@ -4,12 +4,14 @@ import morgan from "morgan";
 import "dotenv/config";
 
 import { createUserRouter } from "./routes/users.js";
-import {createExperienceRouter} from "./routes/experiences.js";
-import {createCityRouter} from "./routes/cities.js";
+import { createExperienceRouter } from "./routes/experiences.js";
+import { createCityRouter } from "./routes/cities.js";
+import { createReservationRouter } from "./routes/reservations.js";
 
 import { UserModel } from './models/UserModel.js';
-import {ExperienceModel} from './models/ExperienceModel.js';
-import {CityModel} from './models/CityModel.js';
+import { ExperienceModel } from './models/ExperienceModel.js';
+import { CityModel } from './models/CityModel.js';
+import { ReservationModel } from './models/ReservationModel.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -29,6 +31,7 @@ app.disable("x-powered-by");
 app.use("/users", createUserRouter(UserModel));
 app.use("/cities", createCityRouter(CityModel));
 app.use("/experiences", createExperienceRouter(ExperienceModel));
+app.use("/reservations", createReservationRouter(ReservationModel));
 
 
 const PORT = process.env.PORT ?? 1234;
@@ -41,4 +44,5 @@ app.listen(PORT, () => {
     console.log(`Server listening on port http://localhost:${PORT}`);
 });
 
+/* NO TOCAR - SINO FALLA EL VERCEL  */
 export default app

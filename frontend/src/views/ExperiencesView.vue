@@ -5,12 +5,13 @@ import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { onMounted, ref, watch } from 'vue'
 import { useExperiences } from '@/composables/useExperiences'
 import { useCitiesStore } from '@/stores/cities'
+import { useSeoMeta } from '@unhead/vue'
 
 const props = defineProps<{ cityName: string }>()
 
 const { getExperiences, experiences } = useExperiences()
 
-const { getCityByName, getDescriptionDetailByName } = useCitiesStore()
+const { getCityByName, getDescriptionDetailByName, getCityCoverImgByName } = useCitiesStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -44,15 +45,26 @@ async function getExps() {
 onMounted(async () => {
   await getExps()
 })
+
+useSeoMeta({
+  title: `Rainbow Voyage | Experiencias de ${props.cityName}`,
+  description: `Experiencias de ${props.cityName}. ${getDescriptionDetailByName(props.cityName)} `,
+  ogDescription: `Experiencias de ${props.cityName}. ${getDescriptionDetailByName(
+    props.cityName
+  )} `,
+  ogTitle: `Rainbow Voyage | Experiencias de ${props.cityName}`,
+  ogImage: '/logo.png',
+  twitterCard: 'summary_large_image'
+})
 </script>
 <template>
   <header>
     <NavBar></NavBar>
     <section class="cover-city">
-      <img class="cover" src="/bcn-cover.jpeg" />
+      <img class="cover" :src="`/images/${getCityCoverImgByName(props.cityName, 1)}`" />
       <div class="title-box">
-        <img class="title" src="/nextStop.png" />
-        <img class="title" src="/barcelonaTitle.png" />
+        <img class="title" src="/images/nextStop.png" />
+        <img class="title" :src="`/images/${getCityCoverImgByName(props.cityName, 2)}`" />
       </div>
     </section>
   </header>
@@ -132,13 +144,18 @@ onMounted(async () => {
 
         <article class="art-experience" v-for="experience in experiences" :key="experience.id">
           <div class="img-article">
-            <img src="/pedrera-cover.jpg" />
+            <img :src="`/images/${experience.images[0]}`" />
           </div>
           <div class="experience-description">
             <h3 class="route-title">{{ experience.name }}</h3>
             <span class="experience-length">{{ experience.duration }} dias</span>
             <p><strong>Visitando: </strong>{{ experience.descriptions[0] }}</p>
-               <RouterLink to="/" style="text-decoration: none; display: flex; align-self: flex-end"
+            <RouterLink
+              :to="{
+                name: 'experienceDetail',
+                params: { experienceId: experience.id, cityName: props.cityName }
+              }"
+              style="text-decoration: none; display: flex; align-self: flex-end"
               ><button class="price">
                 <span>Desde<br /><strong>799€</strong></span>
               </button></RouterLink
@@ -146,7 +163,7 @@ onMounted(async () => {
           </div>
         </article>
 
-        <article class="art-experience">
+        <!-- <article class="art-experience">
           <div class="img-article">
             <img src="/crema-catalana.jpg" />
           </div>
@@ -175,7 +192,7 @@ onMounted(async () => {
               </button></RouterLink
             >
           </div>
-        </article>
+        </article> -->
       </section>
     </main>
     <FooterComponent></FooterComponent>
@@ -299,7 +316,7 @@ button.price {
   height: 3rem;
   width: 5rem;
   flex-direction: column;
-  font-size: rem;
+  cursor: pointer;
 }
 
 /* Tablet */
@@ -353,13 +370,13 @@ button.price {
 
 /* Mobile */
 @media (max-width: 576px) {
-  article.art-experience{
+  article.art-experience {
     flex-direction: column;
     height: auto;
   }
 
-  div.experience-description{
-    width:auto;
+  div.experience-description {
+    width: auto;
   }
 
 
@@ -373,8 +390,5 @@ button.price {
     gap: 2rem;
   }
 
-  section.filters button {
-    
-  }
 }
 </style>
