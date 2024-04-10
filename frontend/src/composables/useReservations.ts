@@ -125,7 +125,7 @@ export const useReservations = () => {
 
     }
 
-    const manageReservation = async () => {
+    const manageReservation = async (experienceId: string | number) => {
 
         error.value = false;
         errorMessages.value = [];
@@ -133,7 +133,7 @@ export const useReservations = () => {
         validateCheckBox();
         if (error.value) return false;
 
-        const data = await postReservation("/reservations",
+        const data = await postReservation(`/reservations/${experienceId}`,
             {
                 ...formData.value,
             });

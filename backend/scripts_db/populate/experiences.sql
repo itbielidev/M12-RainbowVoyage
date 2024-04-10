@@ -25,8 +25,8 @@ ARRAY[
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
-INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet','','','',''], ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet',''], 5, 10, ARRAY['crema-catalana.jpg','',''], 'gastronomic' 
+INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type", price) 
+SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet','','','',''], ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet',''], 5, 10, ARRAY['crema-catalana.jpg','',''], 'gastronomic', '1200' 
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
@@ -43,8 +43,8 @@ SELECT id, 'Orgullo Patrimonial' , ARRAY['Un paseo por el Madrid de Almodovar, L
 FROM "City" 
 WHERE name LIKE '%Madrid%';
 
-INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel','','','',''], ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel',''], 5, 10, ARRAY['gastroMadrid.jpg','',''], 'gastronomic' 
+INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type",price) 
+SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel','','','',''], ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel',''], 5, 10, ARRAY['gastroMadrid.jpg','',''], 'gastronomic', '1500'
 FROM "City" 
 WHERE name LIKE '%Madrid%';
 
@@ -59,8 +59,8 @@ SELECT id, 'Orgullo Patrimonial' , ARRAY['Recorrer a pie Dalt Vila, el centro hi
 FROM "City" 
 WHERE name LIKE '%Ibiza%';
 
-INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gourmet Experience de Dia completo','','','',''], ARRAY['Visitando: Gourmet Experience de Dia completo',''], 5, 10, ARRAY['brunchit.jpg','',''], 'gastronomic' 
+INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type", price) 
+SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gourmet Experience de Dia completo','','','',''], ARRAY['Visitando: Gourmet Experience de Dia completo',''], 5, 10, ARRAY['brunchit.jpg','',''], 'gastronomic', '1200'
 FROM "City" 
 WHERE name LIKE '%Ibiza%';
 

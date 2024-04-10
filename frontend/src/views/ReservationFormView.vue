@@ -5,6 +5,15 @@ import ErrorMessages from '@/components/ErrorMessages.vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 
+const props = defineProps<{
+  experienceId: string
+  experienceName: string
+  dateId: string
+  date: string
+  image: string
+  people: string
+}>()
+
 const { formData, error, errorMessages, validateForm, manageReservation, validateCheckBox } =
   useReservations()
 
@@ -13,7 +22,7 @@ const currentIndex = ref<number>(0)
 const { user } = storeToRefs(useAuthStore())
 
 async function handleReservation() {
-  if ((await manageReservation()) === false) return
+  if ((await manageReservation(props.experienceId)) === false) return
 
   //Go to final confirmation view and then redirect - TO DO
 }
@@ -36,15 +45,6 @@ function goBack(num: number) {
 watch(formData.value, () => {
   formData.value.email = formData.value.email.toLowerCase()
 })
-
-const props = defineProps<{
-  experienceId: string
-  experienceName: string
-  dateId: string
-  date: string
-  image: string
-  people: string
-}>()
 
 onMounted(() => {
   console.log(user.value)

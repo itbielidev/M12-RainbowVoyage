@@ -54,6 +54,7 @@ onMounted(async () => await getData())
       <input type="button" class="button" value="Cerrar sesión" />
     </div>
   </nav>
+  {{ reservations }}
 
   <!-- Mobile Menu-->
   <section class="d-flex d-xs-flex d-md-none w-100 fixed-bottom p-1 mobile-menu">

@@ -35,7 +35,6 @@ model User {
   name          String
   last_name     String
   email         String          @unique @db.VarChar(255)
-  dni           String?         @unique @db.VarChar(9)
   address       String?
   city          String?
   phone         String?         @db.VarChar(9)
@@ -84,6 +83,7 @@ model Experience {
   DateAvailabilty   DateAvailabilty[]
   Reservation       Reservation[]
   name              String
+  price             Int
 }
 
 // model Plan {
@@ -119,4 +119,13 @@ model Reservation {
   date_creation DateTime
   state         ReservationState
   num_people    Int
+  dates         String
+  name          String
+  last_name     String
+  reservation_email         String          @db.VarChar(255)
+  dni           String           @db.VarChar(9)
+  address       String
+  city          String
+  phone         String          @db.VarChar(9)
+  postal_code   String          
 }
