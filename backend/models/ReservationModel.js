@@ -5,7 +5,7 @@ const prismadb = new PrismaClient();
 
 export class ReservationModel {
 
-    static async getAll(userName) {
+    static async getAll(userName, reservationState) {
         try {
 
             let reservations = [];
@@ -13,7 +13,11 @@ export class ReservationModel {
             if (userName.length === 0) {
                 reservations = await prismadb.reservation.findMany({
                     where: {
-                        state: ReservationState.pending
+                        state: reservationState
+                    },
+                    include: {
+                        experience: true,
+                        user: true
                     }
                 });
 
@@ -21,10 +25,15 @@ export class ReservationModel {
             else {
                 reservations = await prismadb.reservation.findMany({
                     where: {
-                        state: ReservationState.pending,
+                        state: reservationState,
                         name: {
-                            contains: userName
+                            startsWith: userName,
+                            mode: "insensitive"
                         }
+                    },
+                    include: {
+                        experience: true,
+                        user: true
                     }
                 });
             }
@@ -35,10 +44,28 @@ export class ReservationModel {
         }
     }
 
+    static async getByUser(userId) {
+        const reservations = await prismadb.reservation.findMany({
+            where: {
+                user_id: userId
+            },
+            include: {
+                user: true,
+                experience: true
+            }
+        })
+
+        return [1, reservations]
+    }
+
     static async create(userId, bodyData, experienceId) {
         try {
 
-            const { numPeople, dates, dni, phone, email, postalCode, location, address, name, lastName, dateId } = bodyData;
+            const { numPeople, dates, dni, phone, email, postalCode, location, address, name, lastName } = bodyData;
+
+            let { dateId } = bodyData
+            dateId = Number(dateId);
+
             const dateCreation = new Date();
             //Store new pending reservation in database.
             const newReservation = await prismadb.reservation.create({
@@ -62,6 +89,21 @@ export class ReservationModel {
 
             //Update date availability for 
 
+            const d = await prismadb.dateAvailabilty.findFirst({
+                where: {
+                    id: dateId
+                }
+            })
+
+
+            const update = await prismadb.dateAvailabilty.updateMany({
+                where: {
+                    id: dateId
+                },
+                data: {
+                    current_people: d.current_people + Number(numPeople) + 1
+                }
+            })
 
             return 1;
 

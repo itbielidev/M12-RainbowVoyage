@@ -7,19 +7,29 @@ export class ReservationController {
     }
 
     getAll = async (req, res) => {
-
-        console.log(req.query.name);
-        //console.log(user);
-
         const userName = req.query.name.toLowerCase() || '';
+        const reservationState = req.query.state;
 
-        const [returnState, reservations] = await this.reservationModel.getAll(userName);
+        const [returnState, reservations] = await this.reservationModel.getAll(userName, reservationState);
+
         if (returnState === 1) {
             return res.status(200).json(reservations);
         }
 
         return res.status(500).json({ error: "Reservations could not be retrieved" })
     };
+
+    getByUser = async (req, res) => {
+        const userId = req.user_id;
+        const [returnState, reservations] = await this.reservationModel.getByUser(userId);
+
+        if (returnState === 1) {
+            return res.status(200).json(reservations);
+        }
+
+        return res.status(500).json({ error: "Reservations could not be retrieved" })
+
+    }
 
     create = async (req, res) => {
 
@@ -31,8 +41,6 @@ export class ReservationController {
 
         const experienceId = req.params.experienceId;
         const userId = req.user_id;
-
-        console.log(req.body);
 
         const returnState = await this.reservationModel.create(userId, req.body, experienceId);
 

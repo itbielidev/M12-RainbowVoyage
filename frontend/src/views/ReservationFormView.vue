@@ -4,6 +4,7 @@ import { useReservations } from '@/composables/useReservations'
 import ErrorMessages from '@/components/ErrorMessages.vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import ProgressSpinner from 'primevue/progressspinner'
 
 const props = defineProps<{
   experienceId: string
@@ -11,7 +12,7 @@ const props = defineProps<{
   dateId: string
   date: string
   image: string
-  people: string
+  people: number
 }>()
 
 const { formData, error, errorMessages, validateForm, manageReservation, validateCheckBox } =
@@ -19,12 +20,13 @@ const { formData, error, errorMessages, validateForm, manageReservation, validat
 
 const currentIndex = ref<number>(0)
 
-const { user } = storeToRefs(useAuthStore())
+const { name, lastName, email, phone } = storeToRefs(useAuthStore())
+
+const loading = ref<boolean>(false)
 
 async function handleReservation() {
-  if ((await manageReservation(props.experienceId)) === false) return
-
-  //Go to final confirmation view and then redirect - TO DO
+  await manageReservation(props.experienceId)
+  await modifyIndex(2)
 }
 
 function modifyIndex(num: number) {
@@ -42,18 +44,19 @@ function goBack(num: number) {
   currentIndex.value = num
 }
 
+const numVisitors = props.people - 1
+
 watch(formData.value, () => {
   formData.value.email = formData.value.email.toLowerCase()
 })
 
 onMounted(() => {
-  console.log(user.value)
-  formData.value.name = user?.value?.name as string
-  formData.value.lastName = user?.value?.last_name as string
-  formData.value.email = user?.value?.email as string
-  formData.value.emailConfirmation = user?.value?.email as string
-  formData.value.phone = user?.value?.phone as string
-  formData.value.numPeople = props.people
+  formData.value.name = name.value as string
+  formData.value.lastName = lastName.value as string
+  formData.value.email = email.value as string
+  formData.value.emailConfirmation = ''
+  formData.value.phone = phone.value as string
+  formData.value.numPeople = numVisitors.toString()
   formData.value.dates = props.date
   formData.value.dateId = props.dateId as string
 })
@@ -72,7 +75,7 @@ onMounted(() => {
       <div
         :class="currentIndex === num ? 'border-pink' : ''"
         class="rounded-circle number-box fs-2 d-flex align-items-center justify-content-center"
-        v-for="num in [0, 1]"
+        v-for="num in [0, 1, 2]"
         :key="num"
       >
         {{ num + 1 }}
@@ -130,11 +133,11 @@ onMounted(() => {
             />
             <label class="mb-1" for="emailConfirmation">Confirma correo electrónico *</label>
             <input
-              v-model.trim="formData.email"
+              v-model.trim="formData.emailConfirmation"
               type="email"
               name="emailConfirmation"
               id="emailConfirmation"
-              placeholder="usuario@gmail.com"
+              placeholder=""
             />
           </div>
           <div class="d-flex flex-column gap-2 text-start">
@@ -168,7 +171,7 @@ onMounted(() => {
               type="text"
               name="numPeople"
               id="numPeople"
-              :placeholder="(Number(props.people) - 1).toString()"
+              :placeholder="numVisitors.toString()"
               disabled
             />
           </div>
@@ -230,7 +233,7 @@ onMounted(() => {
           <div class="d-flex gap-2 align-items-baseline">
             <input v-model="formData.checkbox" type="checkbox" name="confirm" id="confirm" />
             <label for="confirm" id="confirm">
-              Acepto las condiciones de reserva de rainbow Voyage.</label
+              Acepto las condiciones de reserva de Rainbow Voyage.</label
             >
           </div>
         </section>
@@ -238,11 +241,24 @@ onMounted(() => {
           <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(0)" type="button">
             ATRÁS
           </button>
-          <button class="button fw-bold mt-2 px-1 py-2" @click="modifyIndex(2)" type="submit">
-            FINALIZAR RESERVA
-          </button>
+          <button class="button fw-bold mt-2 px-1 py-2" type="submit">FINALIZAR RESERVA</button>
         </section>
         <ErrorMessages :messages="errorMessages"></ErrorMessages>
+      </template>
+      <template v-else-if="currentIndex === 2">
+        <section
+          v-if="!loading"
+          class="d-flex flex-column justify-content-center align-items-center"
+        >
+          <p>¡Reserva realizada con éxito!</p>
+          <p>Ya puedes consultar tu reserva en tu perfil.</p>
+          <RouterLink to="/profile">
+            <button class="button fw-bold mt-2 px-1 py-2" type="button">IR AL PERFIL</button>
+          </RouterLink>
+        </section>
+        <section v-else-if="loading" class="d-flex justify-content-center">
+          <ProgressSpinner></ProgressSpinner>
+        </section>
       </template>
     </form>
   </main>

@@ -7,7 +7,8 @@ export const createReservationRouter = (reservationModel) => {
 
     const reservationController = new ReservationController(reservationModel);
 
-    reservationRouter.get("/", reservationController.getAll);
+    reservationRouter.get("/", authenticateToken, reservationController.getAll);
+    reservationRouter.get("/user", authenticateToken, reservationController.getByUser);
     reservationRouter.post("/:experienceId", authenticateToken, reservationController.create);
 
     return reservationRouter;

@@ -21,8 +21,7 @@ export const useReservations = () => {
         dateId: ""
     });
 
-
-    const { get, fetchError } = useFetch<Reservation[]>();
+    const { get, fetchError, getAuth } = useFetch<Reservation[]>();
     const { postAuth: postReservation, fetchError: fetchErrorPost } = useFetch<any>();
 
     const reservations: Ref<Reservation[] | null> = ref([]);
@@ -32,7 +31,21 @@ export const useReservations = () => {
 
     async function getReservations(qs: string) {
 
-        const reservationsData = await get(`/reservations?${qs}`);
+        const reservationsData = await getAuth(`/reservations?${qs}`);
+
+        if (fetchError.value) {
+            reservations.value = null;
+            error.value = true;
+            errorMessages.value.push(fetchError.value);
+            return false;
+        }
+        else {
+            reservations.value = reservationsData;
+        }
+    }
+
+    async function getUserReservations() {
+        const reservationsData = await getAuth(`/reservations/user`);
 
         if (fetchError.value) {
             reservations.value = null;
@@ -60,7 +73,16 @@ export const useReservations = () => {
         }
 
         if (
-            formData.value.emailConfirmation !== formData.value.emailConfirmation
+            formData.value.emailConfirmation.length === 0 ||
+            !formData.value.emailConfirmation.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ||
+            formData.value.emailConfirmation.length > 255
+        ) {
+            errorMessages.value.push("La confirmación de email introducida no es válida.");
+            error.value = true;
+        }
+
+        if (
+            formData.value.email !== formData.value.emailConfirmation
         ) {
             errorMessages.value.push("Los correos no coinciden");
             error.value = true;
@@ -139,16 +161,17 @@ export const useReservations = () => {
             });
 
         if (fetchErrorPost.value) {
+            data.null;
             error.value = true;
             errorMessages.value.push(fetchErrorPost.value);
-            return false;
+
         }
         else {
-            return true;
+            return;
         }
     }
 
 
 
-    return { formData, reservations, error, errorMessages, getReservations, validateForm, manageReservation, validateCheckBox };
+    return { formData, reservations, error, errorMessages, getReservations, validateForm, manageReservation, validateCheckBox, getUserReservations };
 };

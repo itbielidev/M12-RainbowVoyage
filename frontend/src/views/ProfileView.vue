@@ -2,6 +2,31 @@
 import NavBar from '../components/NavBar.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 import TripIcon from '@/components/icons/TripIcon.vue'
+import { useReservations } from '@/composables/useReservations'
+import { onMounted, ref } from 'vue'
+import Chip from 'primevue/chip'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
+
+const { reservations, getUserReservations } = useReservations()
+const { name, email, phone, lastName } = storeToRefs(useAuthStore())
+
+const translateStates = {
+  pending: 'Pendiente de confirmar',
+  completed: 'Confirmada',
+  cancelled: 'Cancelada'
+}
+
+const formData = ref({
+  name: name,
+  email: email,
+  phone: phone,
+  lastName: lastName
+})
+
+onMounted(async () => {
+  await getUserReservations()
+})
 </script>
 <template>
   <NavBar></NavBar>
@@ -23,7 +48,12 @@ import TripIcon from '@/components/icons/TripIcon.vue'
               Nombre
               <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" placeholder="Introduce tu nombre " />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Introduce tu nombre"
+              v-model="formData.name"
+            />
           </div>
           <!-- surnames -->
           <div class="col-md-6">
@@ -31,7 +61,12 @@ import TripIcon from '@/components/icons/TripIcon.vue'
               >Apellidos
               <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" placeholder="Introduce tus apellidos" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Introduce tus apellidos"
+              v-model="lastName"
+            />
           </div>
           <!-- phone -->
           <div class="col-md-6">
@@ -39,7 +74,12 @@ import TripIcon from '@/components/icons/TripIcon.vue'
               Teléfono
               <span class="text-danger">*</span>
             </label>
-            <input type="phone" class="form-control" placeholder="Introduce tu nº teléfono" />
+            <input
+              type="phone"
+              class="form-control"
+              placeholder="Introduce tu nº teléfono"
+              v-model="phone"
+            />
           </div>
           <!-- mail -->
           <div class="col-md-6">
@@ -47,16 +87,21 @@ import TripIcon from '@/components/icons/TripIcon.vue'
               Email
               <span class="text-danger">*</span>
             </label>
-            <input type="email" class="form-control" placeholder="Introduce tu email" />
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Introduce tu email"
+              v-model="email"
+            />
           </div>
           <!-- address -->
-          <div class="col-md-12">
+          <!-- <div class="col-md-12">
             <label class="form-label">
               Dirección
               <span class="text-danger">*</span>
             </label>
             <input type="text" class="form-control" placeholder="calle número población" />
-          </div>
+          </div> -->
           <div class="col-12 text-end">
             <a href="#" class="btn pink-button">Guardar</a>
           </div>
@@ -98,43 +143,48 @@ import TripIcon from '@/components/icons/TripIcon.vue'
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Mis Reservas</h4>
       </div>
-      <!-- BOOKING -->
-      <div class="card-body">
-        <div class="card border mb-4">
-          <div
-            class="card-header border-bottom d-md-flex justify-content-md-between align-items-center"
-          >
-            <div class="d-flex align-items-center">
-              <div class="bg-light rounded-circle flex-shrink-0">
-                <TripIcon></TripIcon>
-              </div>
-              <div class="ms-2">
-                <h6 class="ms-0">Barcelona - Málaga</h6>
-                <ul class="small d-flex flex-column">
-                  <li>Nº reserva: 54681</li>
-                  <li>Experiencia: Orgullo Patrimonial</li>
-                </ul>
+      <template v-if="reservations && reservations.length > 0">
+        <article v-for="reservation in reservations" :key="reservation.id" class="card-body">
+          <div class="card border mb-4">
+            <div
+              class="card-header border-bottom d-md-flex justify-content-md-between align-items-center"
+            >
+              <div class="d-flex align-items-center">
+                <div class="bg-light rounded-circle flex-shrink-0">
+                  <TripIcon></TripIcon>
+                </div>
+                <div class="ms-2">
+                  <h6 class="ms-0">Barcelona - Málaga</h6>
+                  <ul class="small d-flex flex-column">
+                    <li>Nº reserva: {{ reservation.id }}</li>
+                    <li>Experiencia: {{ reservation.experience?.name }}</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="row g-3">
-            <div class="col-sm-6 col-md-4">
-              <span>Ida</span>
-              <h6 class="mb-0">Martes 30 abril 9:00h</h6>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-sm-6 col-md-4">
+                <span>Ida</span>
+                <h6 class="mb-0">Martes 30 abril 9:00h</h6>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <span>Vuelta</span>
+                <h6 class="mb-0">Domingo 5 mayo 10:45h</h6>
+              </div>
+              <div class="col-md-4">
+                <span>Reserva a nombre de: </span>
+                <h6 class="mb-0">{{ reservation.name }} {{ reservation.last_name }}</h6>
+              </div>
             </div>
-            <div class="col-sm-6 col-md-4">
-              <span>Vuelta</span>
-              <h6 class="mb-0">Domingo 5 mayo 10:45h</h6>
-            </div>
-            <div class="col-md-4">
-              <span>Reserva a nombre de: </span>
-              <h6 class="mb-0">Pedro Torres</h6>
-            </div>
+            <Chip :label="translateStates[reservation.state]" class="mt-4" />
           </div>
-        </div>
-      </div>
+        </article>
+      </template>
+      <template v-else-if="reservations && reservations.length === 0">
+        <h3>Todavía no has hecho ninguna reserva</h3>
+      </template>
       <!-- end booking -->
     </section>
   </main>

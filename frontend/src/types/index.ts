@@ -9,11 +9,7 @@ export enum ExperienceTypes {
     festive
 }
 
-export enum ReservationStates {
-    completed,
-    cancelled,
-    pending
-}
+export type ReservationStates = 'completed' | 'cancelled' | 'pending';
 
 export interface LoginPayLoad {
     email: string
@@ -68,7 +64,16 @@ export interface Reservation {
     user_id: number
     date_creation: Date
     state: ReservationStates
-    num_people: number
+    numPeople: number
+    name: string
+    last_name: string
+    reservation_email: string
+    phone: string
+    dni: string
+    address: string
+    postalCode: string
+    location: string
+    dates: string
 }
 
 export interface ReservationPayload {
@@ -91,9 +96,6 @@ export interface User {
     name: string
     last_name: string
     email: string
-    dni?: string
-    address?: string
-    city?: string
     phone?: string
     preference?: UserPreference
     reservations?: Reservation[]
@@ -135,6 +137,7 @@ export interface Experience {
     images: string[]
     dates?: DateAvailability[]
     reservations?: Reservation[]
+    price: number
 }
 
 export interface City {

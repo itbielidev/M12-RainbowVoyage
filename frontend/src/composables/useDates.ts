@@ -49,5 +49,15 @@ export const useDates = () => {
         return formattedDate;
     }
 
-    return { monthsSelect, formData, formatDate, checkAvailableDates, selectedDateId, datesAvailable, isLoading, error, errorMessages, dateSelected };
+    function formatDateYear(dateReceived: Date) {
+        const date = new Date(dateReceived);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = (date.getFullYear()).toString().padStart(4, '0');
+
+        const formattedDate = `${day}/${month}/${year}`;
+        return formattedDate;
+    }
+
+    return { monthsSelect, formData, formatDate, formatDateYear, checkAvailableDates, selectedDateId, datesAvailable, isLoading, error, errorMessages, dateSelected };
 };

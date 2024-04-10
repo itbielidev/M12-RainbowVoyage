@@ -1,16 +1,31 @@
+<script setup lang="ts">
+import { useDates } from '@/composables/useDates'
+import type { Reservation } from '@/types'
+
+const props = defineProps<{
+  reservation: Reservation
+}>()
+
+const { formatDateYear } = useDates()
+</script>
 <template>
   <article class="w-100">
     <main class="content d-flex flex-column flex-md-row gap-3 w-100 p-3">
       <div class="w-25 img-box">
-        <img src="/images/logo.png" alt="Reservation Photo" class="img-fluid" />
+        <img
+          :src="`/images/${reservation.experience?.images[0]}`"
+          alt="Reservation Photo"
+          class="img-fluid rounded"
+        />
       </div>
       <div class="w-75 info-box">
-        <h3 class="fw-bold">Orgullo patromonial</h3>
-        <p>Titular: Nombre Apellidos</p>
-        <p>Email: user@gmail.com</p>
+        <h3 class="fw-bold">{{ reservation.experience?.name }}</h3>
+        <p><b>Titular:</b> {{ reservation.name }} {{ reservation.last_name }}</p>
+        <p><b>Email:</b> {{ reservation.reservation_email }}</p>
+        <p><b>Realizada el:</b> {{ formatDateYear(reservation.date_creation) }}</p>
         <div class="d-flex flex-column gap-5 flex-lg-row dates-price-box fw-bold">
-          <p>12/06 - 18/06</p>
-          <p>1200€</p>
+          <p>{{ reservation.dates }}</p>
+          <p>{{ reservation.experience?.price }}€</p>
         </div>
       </div>
     </main>

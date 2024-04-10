@@ -37,6 +37,13 @@ const props = defineProps<{ experienceId: string }>()
 const emit = defineEmits<{
   reserve: [selectedDateId: number, selectedDate: string, numPeople: string]
 }>()
+
+function setSelectedDateId(event: any) {
+  selectedDateId.value = Number(
+    (event.target as HTMLSelectElement).options[(event.target as HTMLSelectElement).selectedIndex]
+      .id
+  )
+}
 </script>
 <template>
   <section class="d-flex flex-column justify-content-center align-items-center">
@@ -72,13 +79,14 @@ const emit = defineEmits<{
     <section v-if="datesAvailable && datesAvailable.length > 0">
       <label for="dates">Fechas disponibles para {{ formData.selectedMonth }}</label
       ><br />
-      <select name="dates" id="dates" v-model="dateSelected">
+      <select name="dates" id="dates" v-model="dateSelected" @change="setSelectedDateId($event)">
         <optgroup>
           <option
             v-for="date in datesAvailable"
             :value="`${formatDate(date.start_date)} - ${formatDate(date.end_date)}`"
             :key="date.id"
-            @click="selectedDateId = date.id"
+            :disabled="date.max_people - date.current_people < formData.numPeople"
+            :id="date.id.toString()"
           >
             {{ formatDate(date.start_date) }} - {{ formatDate(date.end_date) }} ( plazas disponibles
             : {{ date.max_people - date.current_people }})
