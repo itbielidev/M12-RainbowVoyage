@@ -69,11 +69,71 @@ useSeoMeta({
     </section>
   </header>
   <body>
-    <section class="filters">
-      <button type="button" class="btn btn-light">Precio</button>
-      <button type="button" class="btn btn-light">Participantes</button>
-      <button type="button" class="btn btn-light">Experiencias</button>
-      <button type="button" class="btn btn-light">Duración</button>
+    <section class="filters cotainer">
+      <button type="button" class="btn btn-light"> Participantes: 
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Mínimo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        -
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Maxímo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </button>
+      <button type="button" class="btn btn-light"> Precio:
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Mínimo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        -
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Maxímo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </button>
+      <button type="button" class="btn btn-light">Experiencias:
+        <select class="form-select" aria-label="Default select example">
+          <option value="1">Gastronómica</option>
+          <option value="2">Cultural</option>
+          <option value="3">Festiva</option>
+        </select>
+      </button>
+      <button type="button" class="btn btn-light">Duración:
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Mínimo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        -
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Maxímo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </button>
     </section>
     <main>
       <section class="experience-quote">
@@ -318,5 +378,17 @@ button.price {
   div.experience-description {
     width: auto;
   }
+
+
+  section.filters {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    padding: 1rem;
+    align-items: center;
+    gap: 2rem;
+  }
+
 }
 </style>
