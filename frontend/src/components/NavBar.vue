@@ -6,9 +6,11 @@
         <span class="navegador">INICIO</span>
       </RouterLink>
 
-      <button class="navbar-toggler" type="button" @click="toggleMenu" style="background: none; border: none">
-        <font-awesome-icon icon="fa-solid fa-bars" class="barraNav"></font-awesome-icon>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="color: #d90594;"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ show: isMenuOpen }">
         <ul class="navbar-nav ms-auto">
           <li v-if="!userIsLoggedIn" class="nav-item">
@@ -79,16 +81,12 @@ const { open: openLogin, close: closeLogin } = useModal({
     }
   }
 })
-
-function toggleMenu() {
-  isMenuOpen.value = !isMenuOpen.value
-}
 </script>
 
 <style>
 /* Agregar estilo para el contenedor de los enlaces */
 nav {
-  height: 100px;
+  height: 200px;
 }
 
 .nav-link-container {
@@ -115,12 +113,11 @@ nav {
   width: auto;
 }
 
-
 .nav-link {
   background-color: transparent;
   border: none;
   padding: 5px 10px;
-  outline: none; 
+  outline: none;
 }
 
 .nav-link:hover {
@@ -137,16 +134,22 @@ nav {
 }
 
 .iconos,
-.barraNav {
+.barraNav,
+{
+color: #d90594;
+}
+
+.navbar-toggler {
   color: #d90594;
 }
+
 
 @media (max-width: 991.98px) {
   .navbar-nav .nav-item {
     display: block;
   }
 
-  .navegador{
+  .navegador {
     font-size: 15px;
   }
 
