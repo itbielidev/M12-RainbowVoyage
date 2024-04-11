@@ -1,5 +1,4 @@
 <template>
-  <NavBar></NavBar>
   <div v-if="!error" class="container">
     <div class="row">
       <div
