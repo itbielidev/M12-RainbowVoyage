@@ -53,28 +53,66 @@
             </button>
           </div>
         </div>
-        <div class="border rounded-5 d-flex justify-content-center align-items-center pack">
-          <div>
-            <h4 class="text-center fw-bold">Tu pack incluye</h4>
-            <ul class="text-center" style="list-style-type: none;">
-              <li style="font-size: 24px;">Asistencia a la llegada</li>
-              <li style="font-size: 24px;">4 noches</li>
-              <li style="font-size: 24px;">Todo incluido</li>
-              <li style="font-size: 24px;">Teléfono de emergencias 24h/365días.</li>
-              <li style="font-size: 24px;">REGALO:
-                <ul style="list-style-type: none;">
-                  <li style="font-size: 32px;">1 día de SPA</li>
-                </ul>
-              </li>
-              <li style="font-size: 24px;">Rutas</li>
-            </ul>
+        <div class="container d-flex justify-content-center align-items-center">
+          <div class="border rounded-5 pack">
+            <div>
+              <h4 class="text-center fw-bold">Tu pack incluye</h4>
+              <ul class="text-center" style="list-style-type: none;">
+                <li>Asistencia a la llegada</li>
+                <li>4 noches</li>
+                <li>Todo incluido</li>
+                <li>Teléfono de emergencias 24h/365días.</li>
+                <li>REGALO:
+                  <ul style="list-style-type: none;">
+                    <li>1 día de SPA</li>
+                  </ul>
+                </li>
+                <li>Rutas</li>
+              </ul>
+            </div>
           </div>
         </div>
-
+        <!--Rutas-->
+        <div class="d-flex justify-content-center">
+          <div class="circle">
+            <div class="contenidoRutas">
+              <p class="dia">DIA 1</p>
+              <p class="info">Casa Batlló visita guida de 16:30-18:00</p>
+            </div>
+          </div>
+          <div class="circle">
+            <div class="contenidoRutas">
+              <p class="dia">DIA 2</p>
+              <p class="info">Sagrada Familia visita guiada de 9:30-11:00</p>
+            </div>
+          </div>
+          <div class="circle">
+            <div class="contenidoRutas">
+              <p class="dia">DIA 3</p>
+              <p class="info">Excursión a Montserrat de 9:00-18:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="circle">
+            <div class="contenidoRutas">
+              <p class="dia">DIA 4</p>
+              <p class="info">Parc Güell viista guiada de 12:30-14:00</p>
+            </div>
+          </div>
+          <div class="circle">
+            <div class="contenidoRutas">
+              <p class="dia">DIA 5</p>
+              <p class="info">La Pedrera visita guiada de 15:00-17:00</p>
+              <p class="info">Paseo por la Ciutadella</p>
+            </div>
+          </div>
+        </div>
+        <button class="reserva" type="submit">RESERVA</button>
       </div>
+      <DatesForm></DatesForm>
+      <FooterComponent></FooterComponent>
     </div>
-    <DatesForm></DatesForm>
-    <FooterComponent></FooterComponent>
   </div>
 </template>
 
@@ -139,5 +177,53 @@ li::before {
 .pack {
   background-color: white;
   width: 35%;
+}
+
+h4 {
+  margin-top: 10px;
+}
+
+.circle {
+  width: 200px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.dia {
+  color: #d90594;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 14px;
+}
+
+.reserva {
+  background-color: #d90594;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  width: 225px;
+  border: none;
+  margin-top: 15px;
+}
+
+.info {
+  margin-top: -15px;
+}
+
+.contenidoRutas {
+  margin-top: -25px;
+}
+
+.container{
+  margin-top: 15px;
 }
 </style>
