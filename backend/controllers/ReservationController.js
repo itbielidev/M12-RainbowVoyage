@@ -54,5 +54,13 @@ export class ReservationController {
 
     sendEmail = async (req, res) => {
         const userId = req.user_id;
+        const reservationId = Number(req.params.reservationId);
+        await this.reservationModel.sendEmail(reservationId);
+
+        // if (returnState === 1) {
+        //     return res.status(200).json();
+        // }
+
+        // return res.status(500).json({ error: "There was a problem sending the email." })
     }
 }

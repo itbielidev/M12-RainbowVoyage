@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { useDates } from '@/composables/useDates'
 import type { Reservation } from '@/types'
+import { useReservations } from '@/composables/useReservations'
 
 const props = defineProps<{
   reservation: Reservation
 }>()
 
 const { formatDateYear } = useDates()
+
+const { sendEmail } = useReservations()
 </script>
 <template>
   <article class="w-100">
@@ -30,7 +33,9 @@ const { formatDateYear } = useDates()
       </div>
     </main>
     <footer class="text-start text-lg-end px-3 py-2">
-      <button class="button">Confirmar <font-awesome-icon icon="fa-solid fa-envelope" /></button>
+      <button class="button" @click="sendEmail(props.reservation.id)">
+        Confirmar <font-awesome-icon icon="fa-solid fa-envelope" />
+      </button>
     </footer>
   </article>
 </template>

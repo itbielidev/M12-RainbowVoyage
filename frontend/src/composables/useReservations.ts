@@ -22,6 +22,7 @@ export const useReservations = () => {
     });
 
     const { get, fetchError, getAuth } = useFetch<Reservation[]>();
+    const { getAuth: sendEmailFetch } = useFetch<any>();
     const { postAuth: postReservation, fetchError: fetchErrorPost } = useFetch<any>();
 
     const reservations: Ref<Reservation[] | null> = ref([]);
@@ -177,7 +178,20 @@ export const useReservations = () => {
         }
     }
 
+    const sendEmail = async (reservationId: number) => {
+        let reservationsData = await sendEmailFetch(`/reservations/sendEmail/${reservationId}`);
+
+        if (fetchError.value) {
+            error.value = true;
+            errorMessages.value.push(fetchError.value);
+        }
+        else {
+            reservationsData = null;
+        }
+
+    }
 
 
-    return { formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, manageReservation, validateCheckBox, getUserReservations };
+
+    return { formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, sendEmail, manageReservation, validateCheckBox, getUserReservations };
 };
