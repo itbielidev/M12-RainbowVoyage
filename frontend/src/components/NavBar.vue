@@ -1,67 +1,42 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top navbar-pink">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
       <RouterLink to="/" class="navbar-brand">
         <img src="/images/logo.png" alt="Logo" class="logo" />
-        <span class="inicio">INICIO</span>
+        <span class="navegador">INICIO</span>
       </RouterLink>
-      <button
-        class="navbar-toggler"
-        type="button"
-        @click="toggleMenu"
-        style="background: none; border: none"
-      >
-        <font-awesome-icon icon="fa-solid fa-bars" style="color: #d90594"></font-awesome-icon>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="color: #d90594;"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ show: isMenuOpen }">
         <ul class="navbar-nav ms-auto">
           <li v-if="!userIsLoggedIn" class="nav-item">
-            <button
-              class="nav-link profile-button register"
-              @click="open()"
-              @mouseover="hoverButton = true"
-              @mouseleave="hoverButton = false"
-            >
-              <font-awesome-icon
-                icon="fa-solid fa-file"
-                class="icon"
-                style="color: #d90594"
-              ></font-awesome-icon>
+            <button class="nav-link profile-button navegador" @click="open()" @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false">
+              <font-awesome-icon icon="fa-solid fa-file" class="iconos"></font-awesome-icon>
               REGISTRO
             </button>
+
           </li>
           <li v-if="!userIsLoggedIn" class="nav-item">
-            <button
-              class="nav-link profile-button"
-              @mouseover="hoverButton = true"
-              @mouseleave="hoverButton = false"
-              @click="openLogin()"
-            >
-              <font-awesome-icon
-                icon="fa-solid fa-user"
-                class="icon"
-                style="color: #d90594"
-              ></font-awesome-icon>
+            <button class="nav-link navegador" @mouseover="hoverButton = true" @mouseleave="hoverButton = false"
+              @click="openLogin()">
+              <font-awesome-icon icon="fa-solid fa-user" class="iconos"></font-awesome-icon>
               INICIAR SESIÓN
             </button>
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
-            <button
-              class="nav-link profile-button"
-              @mouseover="hoverButton = true"
-              @mouseleave="hoverButton = false"
-            >
-              <span class="fw-bold">RESERVAS</span>
+            <button class="nav-link" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+              <span class="fw-bold navegador">RESERVAS</span>
             </button>
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
             <RouterLink :to="{ name: isAdmin ? 'admin' : 'profile' }">
-              <button
-                class="nav-link profile-button"
-                @mouseover="hoverButton = true"
-                @mouseleave="hoverButton = false"
-              >
-                <span class="fw-bold">PERFIL</span>
+              <button class="nav-link" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+                <span class="fw-bold navegador">PERFIL</span>
               </button>
             </RouterLink>
           </li>
@@ -106,74 +81,84 @@ const { open: openLogin, close: closeLogin } = useModal({
     }
   }
 })
-
-function toggleMenu() {
-  isMenuOpen.value = !isMenuOpen.value
-}
 </script>
 
-<style scoped>
+<style>
+/* Agregar estilo para el contenedor de los enlaces */
 nav {
-  height: 5rem;
+  height: 200px;
 }
 
-.navbar-brand {
+.nav-link-container {
   display: flex;
   align-items: center;
-  font-size: 18px;
 }
 
-.logo {
-  width: 150px;
-  height: 100px;
+.nav-link {
+  background-color: transparent;
+  border: none;
+}
+
+.navbar-nav .nav-item:not(:last-child) {
   margin-right: 10px;
 }
 
-.inicio {
-  color: #d90594;
+.navbar-nav .nav-link.text-danger {
+  padding: 0.5rem 0;
 }
 
-.profile-button {
+.logo {
+  padding-top: 0px;
+  height: 100px;
+  width: auto;
+}
+
+.nav-link {
   background-color: transparent;
   border: none;
   padding: 5px 10px;
-  cursor: pointer;
-  transition: background-color 0.5s;
-  color: #d90594;
+  outline: none;
 }
 
-.profile-button:hover {
+.nav-link:hover {
   background-color: #ffb6c1;
+  border: none;
+  color: #d90594;
+  border-radius: 5px;
 }
 
-.icon {
+.navegador {
+  color: #d90594;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.iconos,
+.barraNav,
+{
+color: #d90594;
+}
+
+.navbar-toggler {
   color: #d90594;
 }
 
-.register {
-  margin-right: 15px;
-}
 
-/* Tablet */
-@media (max-width: 768px) {
-  div.container-fluid {
-    display: flex;
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-item {
+    display: block;
   }
 
-  a.navbar-brand {
-    margin-right: auto;
-    display: flex;
-    align-items: center;
+  .navegador {
+    font-size: 15px;
   }
 
-  .collapse.navbar-collapse {
-    justify-content: center;
+  .navbar-brand {
+    margin-right: 0;
   }
 
-  img.logo {
-    padding-top: 0px;
-    height: 70px;
-    width: auto;
+  .iconos {
+    margin-right: 10px;
   }
 }
 </style>
