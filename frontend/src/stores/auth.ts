@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import { computed, type Ref } from "vue";
 import type { LoginPayLoad, RegisterPayLoad, User } from "@/types/index";
 import { useFetch } from "@/composables/useFetch";
+import router from "@/router";
 
 export const useAuthStore = defineStore('auth', () => {
 
@@ -15,37 +16,35 @@ export const useAuthStore = defineStore('auth', () => {
 
     const user: Ref<User | null> = useStorage("user", null, sessionStorage);
 
-    // const username: Ref<string | null> = useStorage("username", "");
-    // const email: Ref<string | null> = useStorage("email", "");
-    // const type: Ref<string| null> = useStorage('type', "");
-    // const userphoto: Ref<string | null> = useStorage("userPhoto", "");
+
+
+    const name: Ref<string | null> = useStorage("username", "", sessionStorage);
+    const email: Ref<string | null> = useStorage("email", "", sessionStorage);
+    const phone: Ref<string | null> = useStorage('phone', "", sessionStorage);
+    const lastName: Ref<string | null> = useStorage('lastName', "", sessionStorage);
+
 
     async function logout() {
         token.value = "";
+        isAdmin.value = false;
         user.value = null;
+
+        name.value = "";
+        lastName.value = "";
+        phone.value = "";
+        email.value = "";
+
+        router.push("/");
     }
 
     async function getUser() {
         user.value = await getAuth("/users");
+
+        name.value = user.value?.name as string;
+        email.value = user.value?.email as string;
+        phone.value = user.value?.phone as string;
+        lastName.value = user.value?.last_name as string;
     }
-
-    // function setToken(tokenValue: string) {
-    //     token.value = tokenValue;
-    //     localStorage.setItem("token", tokenValue);
-    // }
-
-    // function getToken() {
-    //     return token.value;
-    // }
-
-    // function deleteToken() {
-    //     token.value = '';
-    //     username.value = null;
-    //     userEmail.value = null;
-    //     userPhoto.value = null;
-    //     localStorage.removeItem('token');
-    // }
-    // const apiEndpoint = import.meta.env.VITE_API_ENDPOINT;
 
     // async function fetchUserData() {
     //     try {
@@ -69,5 +68,5 @@ export const useAuthStore = defineStore('auth', () => {
     //     }
     // }
 
-    return { token, userIsLoggedIn, user, isAdmin, logout, getUser }
+    return { token, userIsLoggedIn, user, isAdmin, logout, getUser, name, email, phone, lastName }
 })

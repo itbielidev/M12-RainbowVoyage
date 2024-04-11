@@ -157,42 +157,13 @@ useSeoMeta({
               }"
               style="text-decoration: none; display: flex; align-self: flex-end"
               ><button class="price">
-                <span>Desde<br /><strong>799€</strong></span>
+                <span
+                  >Desde<br /><strong>{{ experience.price }}€</strong></span
+                >
               </button></RouterLink
             >
           </div>
         </article>
-
-        <!-- <article class="art-experience">
-          <div class="img-article">
-            <img src="/crema-catalana.jpg" />
-          </div>
-          <div class="experience-description">
-            <h3 class="route-title">Sabores y Sonrisas</h3>
-            <span class="experience-length">5 dias</span>
-            <p><strong>Visitando: </strong>La Boqueria, Barri Gótic, tapas...</p>
-            <RouterLink to="/" style="text-decoration: none; display: flex; align-self: flex-end"
-              ><button class="price">
-                <span>Desde<br /><strong>799€</strong></span>
-              </button></RouterLink
-            >
-          </div>
-        </article>
-        <article class="art-experience">
-          <div class="img-article">
-            <img src="/molino.jpg" />
-          </div>
-          <div class="experience-description">
-            <h3 class="route-title">La noche es para mí</h3>
-            <span class="experience-length">5 dias</span>
-            <p><strong>Visitando: </strong>El Molino, Circuit, Candy Darling</p>
-            <RouterLink to="/" style="text-decoration: none; display: flex; align-self: flex-end"
-              ><button class="price">
-                <span>Desde<br /><strong>799€</strong></span>
-              </button></RouterLink
-            >
-          </div>
-        </article> -->
       </section>
     </main>
     <FooterComponent></FooterComponent>

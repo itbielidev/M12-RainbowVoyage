@@ -29,16 +29,19 @@
             </button>
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
-            <button class="nav-link" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
-              <span class="fw-bold navegador">RESERVAS</span>
-            </button>
-          </li>
-          <li v-if="userIsLoggedIn" class="nav-item">
             <RouterLink :to="{ name: isAdmin ? 'admin' : 'profile' }">
               <button class="nav-link" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
                 <span class="fw-bold navegador">PERFIL</span>
               </button>
             </RouterLink>
+          </li>
+          <li
+            v-if="userIsLoggedIn"
+            class="nav-item d-flex align-items-center gap-1 logout"
+            @click="logout()"
+          >
+            <span class="fw-bold">CERRAR SESIÓN</span>
+            <font-awesome-icon icon="fa-solid fa-power-off" />
           </li>
         </ul>
       </div>
@@ -57,7 +60,7 @@ import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 
 const { userIsLoggedIn, isAdmin } = storeToRefs(useAuthStore())
-
+const { logout } = useAuthStore()
 const { open, close } = useModal({
   component: RegisterModal,
   attrs: {
@@ -139,10 +142,18 @@ nav {
 color: #d90594;
 }
 
+.logout {
+  cursor: pointer;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  div.container-fluid {
+    display: flex;
+
 .navbar-toggler {
   color: #d90594;
 }
-
 
 @media (max-width: 991.98px) {
   .navbar-nav .nav-item {

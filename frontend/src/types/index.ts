@@ -9,11 +9,7 @@ export enum ExperienceTypes {
     festive
 }
 
-export enum ReservationStates {
-    completed,
-    cancelled,
-    pending
-}
+export type ReservationStates = 'completed' | 'cancelled' | 'pending';
 
 export interface LoginPayLoad {
     email: string
@@ -62,13 +58,22 @@ export interface UpdatePayload {
 
 export interface Reservation {
     id: number
-    plan_id: Number
-    plan?: Plan
+    experience_id: number
+    experience?: Experience
     user?: User
     user_id: number
     date_creation: Date
     state: ReservationStates
-    num_people: number
+    numPeople: number
+    name: string
+    last_name: string
+    reservation_email: string
+    phone: string
+    dni: string
+    address: string
+    postalCode: string
+    location: string
+    dates: string
 }
 
 export interface ReservationPayload {
@@ -83,15 +88,14 @@ export interface ReservationPayload {
     location: string
     checkbox: Boolean
     numPeople: string
+    dates: string
+    dateId: string
 }
 export interface User {
     id: number
     name: string
     last_name: string
     email: string
-    dni?: string
-    address?: string
-    city?: string
     phone?: string
     preference?: UserPreference
     reservations?: Reservation[]
@@ -109,20 +113,21 @@ export interface UserPreference {
     user?: User
 }
 
-export interface Plan {
-    id: number
-    price: number
-    content: string
-    name: string
-    images: string[]
-    experience?: Experience
-    experience_id?: number
-    reservation?: Reservation
-}
+// export interface Plan {
+//     id: number
+//     price: number
+//     content: string
+//     name: string
+//     images: string[]
+//     experience?: Experience
+//     experience_id?: number
+//     reservation?: Reservation
+// }
 
 export interface Experience {
     id: number
     city_id: number
+    name: string
     city: City
     duration: number
     type: ExperienceTypes
@@ -130,8 +135,9 @@ export interface Experience {
     descriptions: string[]
     days_descriptions: string[]
     images: string[]
-    plans?: Plan[]
-    name: string
+    dates?: DateAvailability[]
+    reservations?: Reservation[]
+    price: number
 }
 
 export interface City {
@@ -152,8 +158,13 @@ export interface DateAvailability {
     current_people: number
     month: string
     year: string
-    plan?: Plan
-    plan_id?: number
+    experience?: Experience
+    experience_id?: number
 }
 
+export interface DatePayload {
+    people: number
+    month: string
+    year: string
+}
 
