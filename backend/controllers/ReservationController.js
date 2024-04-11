@@ -51,4 +51,8 @@ export class ReservationController {
         return res.status(500).json({ error: "There was a problem storing the new reservation" })
 
     };
+
+    sendEmail = async (req, res) => {
+        const userId = req.user_id;
+    }
 }

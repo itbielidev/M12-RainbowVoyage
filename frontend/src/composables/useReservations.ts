@@ -126,6 +126,14 @@ export const useReservations = () => {
             error.value = true;
         }
 
+
+    }
+
+    function validateSecondForm() {
+
+        error.value = false;
+        errorMessages.value = [];
+
         if (! /^(?:0[1-9]\d{3}|[1-4]\d{4}|5[0-2]\d{3})$/.test(formData.value.postalCode)) {
             errorMessages.value.push("El código postal introducido no es válido.");
             error.value = true;
@@ -143,8 +151,6 @@ export const useReservations = () => {
             errorMessages.value.push("Debes aceptar las condiciones de reserva.");
             error.value = true;
         }
-
-
     }
 
     const manageReservation = async (experienceId: string | number) => {
@@ -173,5 +179,5 @@ export const useReservations = () => {
 
 
 
-    return { formData, reservations, error, errorMessages, getReservations, validateForm, manageReservation, validateCheckBox, getUserReservations };
+    return { formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, manageReservation, validateCheckBox, getUserReservations };
 };

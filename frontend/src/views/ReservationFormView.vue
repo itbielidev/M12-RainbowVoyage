@@ -15,8 +15,15 @@ const props = defineProps<{
   people: number
 }>()
 
-const { formData, error, errorMessages, validateForm, manageReservation, validateCheckBox } =
-  useReservations()
+const {
+  formData,
+  error,
+  errorMessages,
+  validateForm,
+  validateSecondForm,
+  manageReservation,
+  validateCheckBox
+} = useReservations()
 
 const currentIndex = ref<number>(0)
 
@@ -26,12 +33,16 @@ const loading = ref<boolean>(false)
 
 async function handleReservation() {
   await manageReservation(props.experienceId)
-  await modifyIndex(2)
+  await modifyIndex(3)
+  loading.value = true
+
+  setTimeout(() => (loading.value = false), 2000)
 }
 
 function modifyIndex(num: number) {
   if (num === 1) validateForm()
-  else if (num === 2) validateCheckBox()
+  else if (num === 2) validateSecondForm()
+  else if (num === 3) validateCheckBox()
   if (!error.value) {
     currentIndex.value = num
   }
@@ -75,7 +86,7 @@ onMounted(() => {
       <div
         :class="currentIndex === num ? 'border-pink' : ''"
         class="rounded-circle number-box fs-2 d-flex align-items-center justify-content-center"
-        v-for="num in [0, 1, 2]"
+        v-for="num in [0, 1, 2, 3]"
         :key="num"
       >
         {{ num + 1 }}
@@ -140,7 +151,21 @@ onMounted(() => {
               placeholder=""
             />
           </div>
-          <div class="d-flex flex-column gap-2 text-start">
+        </section>
+
+        <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
+          <button class="button fw-bold mt-5 px-1 py-2" @click="$router.back()" type="button">
+            VOLVER ATRÁS
+          </button>
+          <button class="button fw-bold mt-5 px-1 py-2" @click="modifyIndex(1)" type="button">
+            SIGUIENTE
+          </button>
+        </section>
+        <ErrorMessages :messages="errorMessages"></ErrorMessages>
+      </template>
+      <template v-if="currentIndex === 1">
+        <section class="d-flex flex-column">
+          <div class="d-flex flex-column gap-2 text-start mt-5">
             <label class="mb-2" for="address">Dirección *</label>
             <input
               v-model.trim="formData.address"
@@ -176,26 +201,21 @@ onMounted(() => {
             />
           </div>
         </section>
-
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
-          <button class="button fw-bold mt-5 px-1 py-2" @click="$router.back()" type="button">
+          <button class="button fw-bold mt-5 px-1 py-2" @click="goBack(0)" type="button">
             VOLVER ATRÁS
           </button>
-          <button class="button fw-bold mt-5 px-1 py-2" @click="modifyIndex(1)" type="button">
+          <button class="button fw-bold mt-5 px-1 py-2" @click="modifyIndex(2)" type="button">
             SIGUIENTE
           </button>
         </section>
         <ErrorMessages :messages="errorMessages"></ErrorMessages>
       </template>
-      <template v-if="currentIndex === 1">
+      <template v-if="currentIndex === 2">
         <h1 class="mb-3">Resumen de la reserva</h1>
-        <section class="d-flex flex-row gap-3 mb-3">
+        <section class="d-flex flex-row gap-3 mb-3 w-100 flex-wrap">
           <p class="display-4">{{ props.experienceName }}</p>
-          <img
-            :src="`./images/${props.image}`"
-            alt="Experience photo"
-            class="w-25 rounded exp_photo"
-          />
+          <img :src="`./images/${props.image}`" alt="Experience photo" class="rounded exp_photo" />
         </section>
         <section class="w-100 row">
           <div class="col-12 col-md-6">
@@ -238,14 +258,14 @@ onMounted(() => {
           </div>
         </section>
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
-          <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(0)" type="button">
+          <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(1)" type="button">
             ATRÁS
           </button>
           <button class="button fw-bold mt-2 px-1 py-2" type="submit">FINALIZAR RESERVA</button>
         </section>
         <ErrorMessages :messages="errorMessages"></ErrorMessages>
       </template>
-      <template v-else-if="currentIndex === 2">
+      <template v-else-if="currentIndex === 3">
         <section
           v-if="!loading"
           class="d-flex flex-column justify-content-center align-items-center"
@@ -391,5 +411,13 @@ button:hover {
 
 .exp_photo {
   min-width: 30%;
+  width: 40%;
+}
+
+@media screen and (max-width: 569px) {
+  .exp_photo {
+    min-width: 30%;
+    width: 100%;
+  }
 }
 </style>
