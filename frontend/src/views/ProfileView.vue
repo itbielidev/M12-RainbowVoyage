@@ -195,7 +195,9 @@ onMounted(async () => {
 * {
   font-family: 'Roboto';
 }
-
+main{
+  background-color: rgba(171, 184, 195, 0.19);
+}
 .pink-button {
   background-color: #d90594;
   padding: 0.6rem 1rem;

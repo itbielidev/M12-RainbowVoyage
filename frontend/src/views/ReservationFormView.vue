@@ -299,6 +299,10 @@ onMounted(() => {
 }
 </style>
 <style scoped>
+main{
+  background-color: rgba(171, 184, 195, 0.19);
+}
+
 form {
   display: flex;
   flex-direction: column;
