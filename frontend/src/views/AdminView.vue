@@ -46,7 +46,7 @@ onMounted(async () => await getData())
     class="w-100 d-flex flex-column gap-3 flex-xs-column flex-lg-row align-items-center justify-content-start mb-5"
   >
     <div class="text-center w-25">
-      <img src="/images/logo.png" alt="Logo" class="logo" />
+      <img src="/images/logo.webp" alt="Logo" class="logo" />
     </div>
     <div
       class="text-center w-50 d-flex justify-content-center justify-content-xs-center justify-content-lg-start"
@@ -152,7 +152,7 @@ onMounted(async () => await getData())
 .mobile-menu {
   background-color: #f4f8fb;
 }
-main{
+main {
   background-color: rgba(171, 184, 195, 0.19);
 }
 .reservations-section,
