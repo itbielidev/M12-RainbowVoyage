@@ -41,7 +41,7 @@ watch(formData.value, () => {
     <section class="content-box register-box p-5">
       <font-awesome-icon @click="emit('cancel')" icon="fa-solid fa-xmark" />
       <section class="text-center d-none d-md-block">
-        <img src="/images/logo.png" alt="Logo" class="img-fluid logo-img" />
+        <img src="/images/logo.webp" alt="Logo" class="img-fluid logo-img" />
       </section>
       <form @submit.prevent="handleLogin()" novalidate>
         <h1 class="display-5 mb-5">¡BIENVENIDO!</h1>
