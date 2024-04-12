@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { validateReservation } from '../schemas/reservations.js'
-
+import nodemailer from 'nodemailer';
 export class ReservationController {
     constructor(reservationModel) {
         this.reservationModel = reservationModel;
@@ -53,14 +53,33 @@ export class ReservationController {
     };
 
     sendEmail = async (req, res) => {
-        const userId = req.user_id;
+        // const userId = req.user_id;
         const reservationId = Number(req.params.reservationId);
-        await this.reservationModel.sendEmail(reservationId);
+        const [returnState, mailOptions] = await this.reservationModel.sendEmail(reservationId);
 
-        // if (returnState === 1) {
-        //     return res.status(200).json();
-        // }
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.mailtrap.io',
+            port: 2525,
+            auth: {
+                user: process.env.USER_EMAIL,
+                pass: process.env.PASSWORD_EMAIL,
+            }
+        });
 
-        // return res.status(500).json({ error: "There was a problem sending the email." })
+
+        if (returnState === 1) {
+            transporter.sendMail(mailOptions).then((info) => {
+                return res.status(201).json(
+                    {
+                        msg: "Email sent",
+                    }
+                )
+            }).catch((err) => {
+                return res.status(500).json({ msg: err });
+            }
+            );
+        }
+
+        //return res.status(500).json({ error: "There was a problem sending the email." })
     }
 }

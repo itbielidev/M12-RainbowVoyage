@@ -20,18 +20,18 @@ ARRAY[
     ¡Estamos aquí para hacer que tu estancia sea inolvidable, ya sea por negocios o por placer! ¡Únete a nosotros y descubre por qué somos un destino vibrante para todos!', ''],
      5, 
      10, 
-     ARRAY['pedrera-cover.jpg','',''], 
+     ARRAY['pedrera-cover.webp','',''], 
      'cultural' 
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type", price) 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet','','','',''], ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet',''], 5, 10, ARRAY['crema-catalana.jpg','',''], 'gastronomic', '1200' 
+SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet','','','',''], ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet',''], 5, 10, ARRAY['crema-catalana.webp','',''], 'gastronomic', '1200' 
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Party & Wellness' , ARRAY['Visitando: La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona','','','',''], ARRAY['Visitando: La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona',''], 5, 10, ARRAY['molino.jpg','',''], 'festive' 
+SELECT id, 'Party & Wellness' , ARRAY['Visitando: La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona','','','',''], ARRAY['Visitando: La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona',''], 5, 10, ARRAY['molino.webp','',''], 'festive' 
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
@@ -39,28 +39,28 @@ WHERE name LIKE '%Barcelona%';
 
 -- Experiencias Madrid
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Orgullo Patrimonial' , ARRAY['Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod' ,'','','',''], ARRAY['Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod',''], 5, 10, ARRAY['almudena.jpg','',''], 'cultural' 
+SELECT id, 'Orgullo Patrimonial' , ARRAY['Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod' ,'','','',''], ARRAY['Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod',''], 5, 10, ARRAY['almudena.webp','',''], 'cultural' 
 FROM "City" 
 WHERE name LIKE '%Madrid%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type",price) 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel','','','',''], ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel',''], 5, 10, ARRAY['gastroMadrid.jpg','',''], 'gastronomic', '1500'
+SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel','','','',''], ARRAY['Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel',''], 5, 10, ARRAY['gastroMadrid.webp','',''], 'gastronomic', '1500'
 FROM "City" 
 WHERE name LIKE '%Madrid%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Party & Wellness' , ARRAY['El orgullo, carrera de tacones, Six Harmonies','','','',''], ARRAY['El orgullo, carrera de tacones, Six Harmonies',''], 5, 10, ARRAY['chueca.jpg','',''], 'festive' 
+SELECT id, 'Party & Wellness' , ARRAY['El orgullo, carrera de tacones, Six Harmonies','','','',''], ARRAY['El orgullo, carrera de tacones, Six Harmonies',''], 5, 10, ARRAY['chueca.webp','',''], 'festive' 
 FROM "City" 
 WHERE name LIKE '%Madrid%';
 
 -- Experiencias Ibiza
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Orgullo Patrimonial' , ARRAY['Recorrer a pie Dalt Vila, el centro histórico de Ibiza, los Baluartes de Sant Pere y Sant Jaume','','','',''], ARRAY['Recorrer a pie Dalt Vila, el centro histórico de Ibiza, los Baluartes de Sant Pere y Sant Jaume',''], 5, 10, ARRAY['esCavallet.jpg','',''], 'cultural' 
+SELECT id, 'Orgullo Patrimonial' , ARRAY['Recorrer a pie Dalt Vila, el centro histórico de Ibiza, los Baluartes de Sant Pere y Sant Jaume','','','',''], ARRAY['Recorrer a pie Dalt Vila, el centro histórico de Ibiza, los Baluartes de Sant Pere y Sant Jaume',''], 5, 10, ARRAY['esCavallet.webp','',''], 'cultural' 
 FROM "City" 
 WHERE name LIKE '%Ibiza%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type", price) 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gourmet Experience de Dia completo','','','',''], ARRAY['Visitando: Gourmet Experience de Dia completo',''], 5, 10, ARRAY['brunchit.jpg','',''], 'gastronomic', '1200'
+SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: Gourmet Experience de Dia completo','','','',''], ARRAY['Visitando: Gourmet Experience de Dia completo',''], 5, 10, ARRAY['brunchit.webp','',''], 'gastronomic', '1200'
 FROM "City" 
 WHERE name LIKE '%Ibiza%';
 
@@ -72,7 +72,7 @@ WHERE name LIKE '%Ibiza%';
 -- Experiencias Gran Canaria
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Orgullo Patrimonial' , ARRAY['Visitando: Carnavales, Dunas De Maspalomas','','','',''], ARRAY['Visitando: Carnavales, Dunas De Maspalomas',''], 5, 10, ARRAY['http://localhost:8080/public/static/images/carnaval-canarias.webp','',''], 'cultural' 
+SELECT id, 'Orgullo Patrimonial' , ARRAY['Visitando: Carnavales, Dunas De Maspalomas','','','',''], ARRAY['Visitando: Carnavales, Dunas De Maspalomas',''], 5, 10, ARRAY['carnaval-canarias.webp','',''], 'cultural' 
 FROM "City" 
 WHERE name LIKE '%Gran Canaria%';
 
