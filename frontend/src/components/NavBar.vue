@@ -1,8 +1,11 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
       <RouterLink to="/" class="navbar-brand">
         <img src="/images/logo.png" alt="Logo" class="logo" />
+        <span class="navegador">INICIO</span>
         <span class="navegador">INICIO</span>
       </RouterLink>
 
@@ -10,6 +13,7 @@
         aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" style="color: #d90594;"></span>
       </button>
+
 
       <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ show: isMenuOpen }">
         <ul class="navbar-nav ms-auto">
@@ -40,6 +44,14 @@
               </button>
             </RouterLink>
           </li>
+          <li
+            v-if="userIsLoggedIn"
+            class="nav-item d-flex align-items-center gap-1 logout"
+            @click="logout()"
+          >
+            <span class="fw-bold">CERRAR SESIÓN</span>
+            <font-awesome-icon icon="fa-solid fa-power-off" />
+          </li>
         </ul>
       </div>
     </div>
@@ -57,7 +69,7 @@ import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 
 const { userIsLoggedIn, isAdmin } = storeToRefs(useAuthStore())
-
+const { logout } = useAuthStore()
 const { open, close } = useModal({
   component: RegisterModal,
   attrs: {
@@ -87,8 +99,10 @@ const { open: openLogin, close: closeLogin } = useModal({
 /* Agregar estilo para el contenedor de los enlaces */
 nav {
   height: 200px;
+  height: 200px;
 }
 
+.nav-link-container {
 .nav-link-container {
   display: flex;
   align-items: center;
@@ -107,21 +121,48 @@ nav {
   padding: 0.5rem 0;
 }
 
+.nav-link {
+  background-color: transparent;
+  border: none;
+}
+
+.navbar-nav .nav-item:not(:last-child) {
+  margin-right: 10px;
+}
+
+.navbar-nav .nav-link.text-danger {
+  padding: 0.5rem 0;
+}
+
 .logo {
+  padding-top: 0px;
   padding-top: 0px;
   height: 100px;
   width: auto;
+  width: auto;
 }
 
+.nav-link {
 .nav-link {
   background-color: transparent;
   border: none;
   padding: 5px 10px;
   outline: none;
+  outline: none;
 }
 
 .nav-link:hover {
+.nav-link:hover {
   background-color: #ffb6c1;
+  border: none;
+  color: #d90594;
+  border-radius: 5px;
+}
+
+.navegador {
+  color: #d90594;
+  font-weight: bolder;
+  font-size: 20px;
   border: none;
   color: #d90594;
   border-radius: 5px;
@@ -144,6 +185,14 @@ color: #d90594;
 }
 
 
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-item {
+    display: block;
+  }
+  .navbar-toggler {
+    color: #d90594;
+  }
+}
 @media (max-width: 991.98px) {
   .navbar-nav .nav-item {
     display: block;

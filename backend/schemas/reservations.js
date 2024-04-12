@@ -14,8 +14,25 @@ const reservationSchema = z.object({
     user_phone: z.string().max(9)
 });
 
+const reservationPayLoadSchema = z.object({
+    name: z.string().min(1).max(100),
+    lastName: z.string().min(1).max(100),
+    email: z.string().email().max(255),
+    emailConfirmation: z.string().email().max(255),
+    numPeople: z.string(),
+    phone: z.string().max(9),
+    dni: z.string().max(9),
+    address: z.string().min(1).max(200),
+    postalCode: z.string().max(5),
+    location: z.string().min(1).max(200),
+    numPeople: z.string(),
+    checkbox: z.boolean(),
+    dates: z.string(),
+    dateId: z.string()
+});
+
 
 export function validateReservation(input) {
-    return reservationSchema.safeParse(input);
+    return reservationPayLoadSchema.safeParse(input);
 }
 

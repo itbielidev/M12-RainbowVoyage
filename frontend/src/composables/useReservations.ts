@@ -16,11 +16,13 @@ export const useReservations = () => {
         location: "",
         type: "client",
         checkbox: false,
-        numPeople: ""
+        numPeople: "",
+        dates: "",
+        dateId: ""
     });
 
-
-    const { get, fetchError } = useFetch<Reservation[]>();
+    const { get, fetchError, getAuth } = useFetch<Reservation[]>();
+    const { getAuth: sendEmailFetch } = useFetch<any>();
     const { postAuth: postReservation, fetchError: fetchErrorPost } = useFetch<any>();
 
     const reservations: Ref<Reservation[] | null> = ref([]);
@@ -30,7 +32,21 @@ export const useReservations = () => {
 
     async function getReservations(qs: string) {
 
-        const reservationsData = await get(`/reservations?${qs}`);
+        const reservationsData = await getAuth(`/reservations?${qs}`);
+
+        if (fetchError.value) {
+            reservations.value = null;
+            error.value = true;
+            errorMessages.value.push(fetchError.value);
+            return false;
+        }
+        else {
+            reservations.value = reservationsData;
+        }
+    }
+
+    async function getUserReservations() {
+        const reservationsData = await getAuth(`/reservations/user`);
 
         if (fetchError.value) {
             reservations.value = null;
@@ -58,7 +74,16 @@ export const useReservations = () => {
         }
 
         if (
-            formData.value.emailConfirmation !== formData.value.emailConfirmation
+            formData.value.emailConfirmation.length === 0 ||
+            !formData.value.emailConfirmation.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ||
+            formData.value.emailConfirmation.length > 255
+        ) {
+            errorMessages.value.push("La confirmación de email introducida no es válida.");
+            error.value = true;
+        }
+
+        if (
+            formData.value.email !== formData.value.emailConfirmation
         ) {
             errorMessages.value.push("Los correos no coinciden");
             error.value = true;
@@ -102,6 +127,14 @@ export const useReservations = () => {
             error.value = true;
         }
 
+
+    }
+
+    function validateSecondForm() {
+
+        error.value = false;
+        errorMessages.value = [];
+
         if (! /^(?:0[1-9]\d{3}|[1-4]\d{4}|5[0-2]\d{3})$/.test(formData.value.postalCode)) {
             errorMessages.value.push("El código postal introducido no es válido.");
             error.value = true;
@@ -116,14 +149,12 @@ export const useReservations = () => {
 
     const validateCheckBox = () => {
         if (!formData.value.checkbox) {
-            errorMessages.value.push("Debes aceptar las condiciones de uso y la Política de Privacidad.");
+            errorMessages.value.push("Debes aceptar las condiciones de reserva.");
             error.value = true;
         }
-
-
     }
 
-    const manageReservation = async () => {
+    const manageReservation = async (experienceId: string | number) => {
 
         error.value = false;
         errorMessages.value = [];
@@ -131,23 +162,36 @@ export const useReservations = () => {
         validateCheckBox();
         if (error.value) return false;
 
-        const data = await postReservation("/reservations",
+        const data = await postReservation(`/reservations/${experienceId}`,
             {
                 ...formData.value,
             });
 
         if (fetchErrorPost.value) {
+            data.null;
             error.value = true;
             errorMessages.value.push(fetchErrorPost.value);
-            return false;
+
         }
         else {
-            // token.value = tokenData?.token as string;
-            return true;
+            return;
         }
+    }
+
+    const sendEmail = async (reservationId: number) => {
+        let reservationsData = await sendEmailFetch(`/reservations/sendEmail/${reservationId}`);
+
+        if (fetchError.value) {
+            error.value = true;
+            errorMessages.value.push(fetchError.value);
+        }
+        else {
+            reservationsData = null;
+        }
+
     }
 
 
 
-    return { formData, reservations, error, errorMessages, getReservations, validateForm, manageReservation, validateCheckBox };
+    return { formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, sendEmail, manageReservation, validateCheckBox, getUserReservations };
 };

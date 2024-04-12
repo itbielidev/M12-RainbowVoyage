@@ -42,7 +42,15 @@ const router = createRouter({
       path: '/reservation',
       name: 'reservation',
       component: () => import("@/views/ReservationFormView.vue"),
-      props: route => ({ ...route.params, ...route.query })
+      props: route => ({ ...route.params, ...route.query, people: Number(route.query.people) }),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (!authStore.userIsLoggedIn || !authStore.isAdmin) {
+          next();
+        } else {
+          next('/');
+        }
+      }
 
     },
     {
