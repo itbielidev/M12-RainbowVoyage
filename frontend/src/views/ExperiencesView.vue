@@ -70,7 +70,8 @@ useSeoMeta({
   </header>
   <body>
     <section class="filters cotainer">
-      <button type="button" class="btn btn-light"> Participantes: 
+      <button type="button" class="btn btn-light">
+        Participantes:
         <select class="form-select" aria-label="Default select example">
           <option selected>Mínimo</option>
           <option value="1">1</option>
@@ -89,7 +90,8 @@ useSeoMeta({
           <option value="5">5</option>
         </select>
       </button>
-      <button type="button" class="btn btn-light"> Precio:
+      <button type="button" class="btn btn-light">
+        Precio:
         <select class="form-select" aria-label="Default select example">
           <option selected>Mínimo</option>
           <option value="1">1</option>
@@ -108,14 +110,16 @@ useSeoMeta({
           <option value="5">5</option>
         </select>
       </button>
-      <button type="button" class="btn btn-light">Experiencias:
+      <button type="button" class="btn btn-light">
+        Experiencias:
         <select class="form-select" aria-label="Default select example">
           <option value="1">Gastronómica</option>
           <option value="2">Cultural</option>
           <option value="3">Festiva</option>
         </select>
       </button>
-      <button type="button" class="btn btn-light">Duración:
+      <button type="button" class="btn btn-light">
+        Duración:
         <select class="form-select" aria-label="Default select example">
           <option selected>Mínimo</option>
           <option value="1">1</option>
@@ -166,7 +170,7 @@ useSeoMeta({
         </article>
       </section>
     </main>
-    <FooterComponent></FooterComponent>
+    <!-- <FooterComponent></FooterComponent> -->
   </body>
 </template>
 
@@ -350,7 +354,6 @@ button.price {
     width: auto;
   }
 
-
   section.filters {
     display: grid;
     grid-template-columns: 1fr;
@@ -360,6 +363,5 @@ button.price {
     align-items: center;
     gap: 2rem;
   }
-
 }
 </style>

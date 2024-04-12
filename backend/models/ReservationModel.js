@@ -3,6 +3,10 @@ import "dotenv/config";
 import nodemailer from 'nodemailer';
 import Mailgen from 'mailgen';
 import * as fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+
 const prismadb = new PrismaClient();
 
 export class ReservationModel {
@@ -125,14 +129,14 @@ export class ReservationModel {
             }
         });
 
-        const transporter = nodemailer.createTransport({
-            host: 'smtp.mailtrap.io',
-            port: 2525,
-            auth: {
-                user: process.env.USER,
-                pass: process.env.PASSWORD,
-            }
-        });
+        // const transporter = nodemailer.createTransport({
+        //     host: 'smtp.mailtrap.io',
+        //     port: 2525,
+        //     auth: {
+        //         user: process.env.USER_EMAIL,
+        //         pass: process.env.PASSWORD_EMAIL,
+        //     }
+        // });
 
         const MailGenerator = new Mailgen({
             theme: "default",
@@ -142,9 +146,21 @@ export class ReservationModel {
             }
         })
 
+        const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+        const imagePath = path.join(__dirname.replace('/models', ''), 'public', 'static', 'images', 'logo.webp');
+
+        const imageData = fs.readFileSync(imagePath);
+        const imageBase64 = Buffer.from(imageData).toString('base64');
+
+        const imageUrl = `data:image/jpeg;base64,${imageBase64}`;
+
         const email = {
             body: {
-                title: `<span style='color:rgba(217, 5, 148, 1)'>Buenas ${reservation.name}</span>`,
+                title: `
+                    <img src="${imageUrl}" style='width:100px' alt="Imagen de ejemplo"><br/>
+                    <span style='color:rgba(217, 5, 148, 1)'>Buenas ${reservation.name}</span>
+                `,
                 intro:
                     `
                     Muchas gracias por confiar en Rainbow Voyage.<br/>
@@ -188,19 +204,14 @@ export class ReservationModel {
         };
 
 
+        //Mark reservation as completed 
+
         //To test email format.
         fs.writeFileSync('preview.html', emailBody, 'utf8');
 
-        transporter.sendMail(mailOptions).then((info) => {
-            return res.status(201).json(
-                {
-                    msg: "Email sent",
-                }
-            )
-        }).catch((err) => {
-            return res.status(500).json({ msg: err });
-        }
-        );
+
+        return [1, mailOptions];
+
 
 
     }

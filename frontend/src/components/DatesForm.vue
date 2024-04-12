@@ -46,9 +46,9 @@ function setSelectedDateId(event: any) {
 }
 </script>
 <template>
-  <section class="d-flex flex-column justify-content-center align-items-center">
+  <section class="d-flex flex-column gap-2 justify-content-center align-items-center">
     <div class="d-flex gap-1">
-      <label for="months">Escoge el mes</label>
+      <label class="me-1" for="months">Escoge el mes: </label>
       <select
         name="months"
         id="months"
@@ -61,7 +61,7 @@ function setSelectedDateId(event: any) {
       </select>
     </div>
     <section>
-      <label for="numPeople">Indica el número de personas </label>
+      <label class="me-1" for="numPeople">Indica el número de personas </label>
       <select
         name="numPeople"
         id="numPeople"
@@ -93,7 +93,10 @@ function setSelectedDateId(event: any) {
           </option>
         </optgroup>
       </select>
-      <section v-if="dateSelected && dateSelected.length > 0">
+      <section
+        class="d-flex flex-column justify-content-center align-items-center"
+        v-if="dateSelected && dateSelected.length > 0"
+      >
         <button
           v-if="userIsLoggedIn"
           @click="emit('reserve', selectedDateId, dateSelected, formData.numPeople)"
