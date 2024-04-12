@@ -88,7 +88,9 @@ onMounted(async () => await getData())
 .mobile-menu {
   background-color: #f4f8fb;
 }
-
+main{
+  background-color: rgba(171, 184, 195, 0.19);
+}
 .reservations-section,
 .tabs-menu {
   background-color: #f4f8fb;

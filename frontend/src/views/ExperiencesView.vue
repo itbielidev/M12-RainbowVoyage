@@ -143,6 +143,9 @@ useSeoMeta({
 * {
   font-family: Roboto;
 }
+body{
+  background-color: rgba(171, 184, 195, 0.19);
+}
 .cover-city {
   margin-top: 4rem;
   position: relative;

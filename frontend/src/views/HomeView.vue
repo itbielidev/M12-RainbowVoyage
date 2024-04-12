@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #abb8c3">
+  <div class="main">
     <NavBar></NavBar>
     <div class="image-container">
       <div class="header-filter"></div>
@@ -106,6 +106,9 @@ useSeoMeta({
 </script>
 
 <style scoped>
+main{
+  background-color: rgba(171, 184, 195, 0.19);
+}
 body {
   overflow-x: hidden;
 }
