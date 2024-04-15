@@ -2,12 +2,12 @@
   <div class="body">
     <NavBar></NavBar>
     <div class="content">
-      <h1>¡Bienvenido a Axel Hotel Barcelona, Tu Destino en Barcelona!</h1>
+      <h1>{{ experience?.city.name }}: {{ experience?.name }}</h1>
     </div>
     <div class="container mt-5 text-center">
       <div class="row">
         <div class="col-md-6">
-          <p>
+          <!-- <p>
             ¡Axel Hotel Barcelona, tu oasis de estilo, confort y diversión en el corazón de
             Barcelona!
           </p>
@@ -23,45 +23,23 @@
           <p>
             ¡Estamos aquí para hacer que tu estancia sea inolvidable, ya sea por negocios o por
             placer! ¡Únete a nosotros y descubre por qué somos un destino vibrante para todos!
-          </p>
+          </p> -->
+          <p class="exp-description">{{ experience?.descriptions[1] }}</p>
         </div>
         <div class="col-md-6">
           <!-- Carrusel de Fotos -->
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active">
+              <div
+                v-for="(image, index) in experience?.images.slice(1)"
+                :key="index"
+                class="carousel-item"
+                :class="{ active: index === 0 }"
+              >
                 <img
-                  src="../../public/images/detalleBarcelona/hotel.webp"
+                  :src="`/images/${experience?.city.name}/${image}`"
                   class="d-block w-100 img-carousel"
-                  alt="Slide 1"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="../../public/images/detalleBarcelona/habitación.webp"
-                  class="d-block w-100 img-carousel"
-                  alt="Slide 2"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="../../public/images/detalleBarcelona/copas.webp"
-                  class="d-block w-100 img-carousel"
-                  alt="Slide 3"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="../../public/images/detalleBarcelona/piscina.webp"
-                  class="d-block w-100 img-carousel"
-                  alt="Slide 3"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="../../public/images/detalleBarcelona/spa.webp"
-                  class="d-block w-100 img-carousel"
-                  alt="Slide 3"
+                  :alt="`Slide ${index + 1}`"
                 />
               </div>
             </div>
@@ -97,8 +75,8 @@
           <div class="border rounded-5 pack">
             <div>
               <h4 class="text-center fw-bold">Tu pack incluye</h4>
-              <ul class="text-center" style="list-style-type: none">
-                <li>Asistencia a la llegada</li>
+              <ul class="text-center includes" style="list-style-type: none">
+                <!-- <li>Asistencia a la llegada</li>
                 <li>4 noches</li>
                 <li>Todo incluido</li>
                 <li>Teléfono de emergencias 24h/365días.</li>
@@ -108,14 +86,32 @@
                     <li>1 día de SPA</li>
                   </ul>
                 </li>
-                <li>Rutas</li>
+                <li>Rutas</li> -->
+                <li
+                  v-for="(inc, index) in experience?.descriptions.slice(-1)[0].split('.')"
+                  :key="index"
+                >
+                  {{ inc }}
+                </li>
               </ul>
             </div>
           </div>
         </div>
         <!--Rutas-->
-        <div class="d-flex justify-content-center">
-          <div class="circle">
+        <div class="d-flex justify-content-evenly flex-wrap">
+          <div
+            v-for="(day, index) in experience?.days_descriptions"
+            :key="index"
+            class="d-flex justify-content-center"
+          >
+            <div class="circle">
+              <div class="contenidoRutas">
+                <p class="dia">DIA {{ index + 1 }}</p>
+                <p class="info">{{ day }}</p>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="circle">
             <div class="contenidoRutas">
               <p class="dia">DIA 1</p>
               <p class="info">Casa Batlló visita guida de 16:30-18:00</p>
@@ -132,9 +128,9 @@
               <p class="dia">DIA 3</p>
               <p class="info">Excursión a Montserrat de 9:00-18:00</p>
             </div>
-          </div>
+          </div> -->
         </div>
-        <div class="d-flex justify-content-center">
+        <!-- <div class="d-flex justify-content-center">
           <div class="circle">
             <div class="contenidoRutas">
               <p class="dia">DIA 4</p>
@@ -148,7 +144,7 @@
               <p class="info">Paseo por la Ciutadella</p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <button class="reserva d-none" type="submit">RESERVA</button>
     </div>
@@ -395,5 +391,13 @@ p {
 
 .container {
   margin-top: 15px;
+}
+
+.exp-description {
+  line-height: 30px;
+}
+
+ul.includes li:last-child {
+  display: none;
 }
 </style>

@@ -1,9 +1,8 @@
 -- Experiencias Barcelona
 
-INSERT INTO "Experience" (city_id, name, days_descriptions, descriptions, duration, num_people, images, "type") 
+INSERT INTO "Experience" (city_id, name, days_descriptions, descriptions, duration, num_people, images, "type", price) 
 SELECT id, 'Orgullo Patrimonial' , 
 ARRAY[
-    'Visitando: Sagrada Familia, Casa Batlló, La Pedrera',
     'Casa Batlló visita guiada de 16:30-18:00',
     'Sagrada Familia visita guiada de 9:30-11:00',
     'Excursión a Montserrat de 9:00-18:00',
@@ -13,25 +12,58 @@ ARRAY[
 ARRAY[
     'Visitando: Sagrada Familia, Casa Batlló, La Pedrera',
     '¡Axel Hotel Barcelona, tu oasis de estilo, confort y diversión en el corazón de Barcelona!
-    Nuestro hotel, ubicado en el emblemático barrio del Eixample, es mucho más que un lugar para alojarse; ¡es un destino en sí mismo! Con un enfoque único en la comunidad LGBTQ+, cada detalle refleja nuestra calidez y modernidad.
-
+    Nuestro hotel, ubicado en el emblemático barrio del Eixample, es mucho más que un lugar para alojarse ,¡es un destino en sí mismo! Con un enfoque único en la comunidad LGBTQ+, cada detalle refleja nuestra calidez y modernidad.
     Disfruta de lujosas habitaciones y suites, sumérgete en nuestra piscina en la azotea con vistas impresionantes, y explora la rica cultura y vida nocturna de Barcelona.
-
-    ¡Estamos aquí para hacer que tu estancia sea inolvidable, ya sea por negocios o por placer! ¡Únete a nosotros y descubre por qué somos un destino vibrante para todos!', ''],
+    ¡Estamos aquí para hacer que tu estancia sea inolvidable, ya sea por negocios o por placer! ¡Únete a nosotros y descubre por qué somos un destino vibrante para todos!', 
+    'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'],
      5, 
      10, 
-     ARRAY['pedrera-cover.webp','',''], 
-     'cultural' 
+     ARRAY['pedrera-cover.webp','casaBatllo.webp','sagradaFamilia.webp','ciutadella.webp','montserrat.webp','parkGuell.webp','pedrera.webp'], 
+     'cultural',
+     '1100' 
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type", price) 
-SELECT id, 'Sabores y sonrisas' , ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet','','','',''], ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet',''], 5, 10, ARRAY['crema-catalana.webp','',''], 'gastronomic', '1200' 
+SELECT id, 'Sabores y sonrisas' , 
+ARRAY[
+'El nacional comida 14:00 -16:00'
+,'Petit Comité comida 14:00-16:00'
+,'El Botafumeiro comida 14:00 -16:00'
+,'La Boqueria. Visita guiada 12:30-13:30. Comida 14:00 -16:00'
+,'Ca l\'Estevet. Comida 14:00-16:00'], 
+ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Ca l\' Estevet',
+'En el corazón de Barcelona, en pleno Paseo de Gracia, se encuentra uno  de los edificios más emblemáticos de la ciudad Condal: Majestic Hotel  & Spa Barcelona. Abierto en 1918, es hoy todo un referente de estilo  elegante y atemporal, propio de los más prestigiosos hoteles  internacionales.
+Durante sus más de cien años, el Majestic, propiedad de la familia  Soldevila-Casals, ha sido testigo de importantes eventos políticos,  culturales e históricos que lo han dotado de una impronta y personalidad propias que se refleja en cada pequeño detalle de lujo y confort.  
+',
+'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
+5, 
+10, 
+ARRAY['crema-catalana.webp','',''], 
+'gastronomic', 
+'1200' 
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
-INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type") 
-SELECT id, 'Party & Wellness' , ARRAY['Visitando: La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona','','','',''], ARRAY['Visitando: La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona',''], 5, 10, ARRAY['molino.webp','',''], 'festive' 
+INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type", price) 
+SELECT id, 'Party & Wellness' ,
+ARRAY[
+'La Chapelle desde las 23:00',
+'Candy Darling desde las 23:00',
+'El Molino desde las 22:00',
+'Circuit Barcelona desde las 12:00',
+'Aire Barcelona desde las 12:00.'], 
+ARRAY['Visitando: La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona',
+'
+    El hotel NH Barcelona Eixample, antes conocido como NH  Máster, se encuentra en una zona residencial del barrio del Eixample de  Barcelona. Es una ubicación muy tranquila a sólo 15 minutos andando del 
+    Paseo de Gracia, donde tiendas exclusivas se mezclan con algunos de los edificios más famosos de Gaudí.
+',
+'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
+5, 
+10, 
+ARRAY['molino.webp','spa.webp','piscina.webp','copas.webp'], 
+'festive',
+'850' 
 FROM "City" 
 WHERE name LIKE '%Barcelona%';
 
