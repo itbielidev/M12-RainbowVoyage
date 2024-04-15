@@ -3,7 +3,7 @@
     <NavBar></NavBar>
     <div class="image-container">
       <div class="header-filter"></div>
-      <img src="/images/metro.png" class="img-fluid" alt="Metro Image" />
+      <img src="/images/metro.webp" class="img-fluid" alt="Metro Image" />
       <div class="text-container">
         <h3>"Descubre destinos inclusivos con nuestra web para el colectivo LGTBIQ"</h3>
       </div>
@@ -100,12 +100,15 @@ useSeoMeta({
   ogDescription:
     'Página principal de Rainbow Voyage donde se muestran los princiaples destinos a los que se pueden viajar',
   ogTitle: 'Rainbow Voyage | Inicio ',
-  ogImage: '/logo.png',
+  ogImage: '/logo.webp',
   twitterCard: 'summary_large_image'
 })
 </script>
 
 <style scoped>
+main {
+  background-color: rgba(171, 184, 195, 0.19);
+}
 main{
   background-color: rgba(171, 184, 195, 0.19);
 }

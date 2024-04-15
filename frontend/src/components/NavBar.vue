@@ -1,10 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
       <RouterLink to="/" class="navbar-brand">
-        <img src="/images/logo.png" alt="Logo" class="logo" />
+        <img src="/images/logo.webp" alt="Logo" class="logo" />
         <span class="navegador">INICIO</span>
         <span class="navegador">INICIO</span>
       </RouterLink>
@@ -33,9 +31,11 @@
             </button>
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
-            <button class="nav-link" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
-              <span class="fw-bold navegador">RESERVAS</span>
-            </button>
+            <button
+              class="nav-link"
+              @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false"
+            ></button>
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
             <RouterLink :to="{ name: isAdmin ? 'admin' : 'profile' }">
@@ -99,10 +99,9 @@ const { open: openLogin, close: closeLogin } = useModal({
 /* Agregar estilo para el contenedor de los enlaces */
 nav {
   height: 200px;
-  height: 200px;
 }
 
-.nav-link-container {
+
 .nav-link-container {
   display: flex;
   align-items: center;
@@ -136,22 +135,20 @@ nav {
 
 .logo {
   padding-top: 0px;
-  padding-top: 0px;
   height: 100px;
   width: auto;
-  width: auto;
+
 }
 
-.nav-link {
+
 .nav-link {
   background-color: transparent;
   border: none;
   padding: 5px 10px;
   outline: none;
-  outline: none;
 }
 
-.nav-link:hover {
+
 .nav-link:hover {
   background-color: #ffb6c1;
   border: none;
@@ -168,14 +165,9 @@ nav {
   border-radius: 5px;
 }
 
-.navegador {
-  color: #d90594;
-  font-weight: bolder;
-  font-size: 20px;
-}
 
 .iconos,
-.barraNav,
+.barraNav
 {
 color: #d90594;
 }
@@ -184,15 +176,6 @@ color: #d90594;
   color: #d90594;
 }
 
-
-@media (max-width: 991.98px) {
-  .navbar-nav .nav-item {
-    display: block;
-  }
-  .navbar-toggler {
-    color: #d90594;
-  }
-}
 @media (max-width: 991.98px) {
   .navbar-nav .nav-item {
     display: block;

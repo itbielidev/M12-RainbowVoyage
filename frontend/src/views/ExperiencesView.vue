@@ -53,7 +53,7 @@ useSeoMeta({
     props.cityName
   )} `,
   ogTitle: `Rainbow Voyage | Experiencias de ${props.cityName}`,
-  ogImage: '/logo.png',
+  ogImage: '/logo.webp',
   twitterCard: 'summary_large_image'
 })
 </script>
@@ -63,7 +63,7 @@ useSeoMeta({
     <section class="cover-city">
       <img class="cover" :src="`/images/${getCityCoverImgByName(props.cityName, 1)}`" />
       <div class="title-box">
-        <img class="title" src="/images/nextStop.png" />
+        <img class="title" src="/images/nextStop.webp" />
         <img class="title" :src="`/images/${getCityCoverImgByName(props.cityName, 2)}`" />
       </div>
     </section>
@@ -177,6 +177,9 @@ useSeoMeta({
 <style scoped>
 * {
   font-family: Roboto;
+}
+body {
+  background-color: rgba(171, 184, 195, 0.19);
 }
 body{
   background-color: rgba(171, 184, 195, 0.19);

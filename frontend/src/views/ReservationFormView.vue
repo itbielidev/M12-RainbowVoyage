@@ -78,7 +78,7 @@ onMounted(() => {
     class="content-box register-box p-5 d-flex justify-content-center flex-column align-items-center"
   >
     <section class="text-center d-none d-md-block">
-      <img src="/images/logo.png" alt="Logo" class="img-fluid logo-img" />
+      <img src="/images/logo.webp" alt="Logo" class="img-fluid logo-img" />
     </section>
     <section
       class="d-flex flex-column flex-md-row align-items-center gap-2 justify-content-center mb-5 w-100"
@@ -299,6 +299,10 @@ onMounted(() => {
 }
 </style>
 <style scoped>
+main {
+  background-color: rgba(171, 184, 195, 0.19);
+}
+
 main{
   background-color: rgba(171, 184, 195, 0.19);
 }
