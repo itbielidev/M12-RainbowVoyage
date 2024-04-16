@@ -53,7 +53,7 @@ useSeoMeta({
     props.cityName
   )} `,
   ogTitle: `Rainbow Voyage | Experiencias de ${props.cityName}`,
-  ogImage: '/logo.png',
+  ogImage: '/logo.webp',
   twitterCard: 'summary_large_image'
 })
 </script>
@@ -63,17 +63,82 @@ useSeoMeta({
     <section class="cover-city">
       <img class="cover" :src="`/images/${getCityCoverImgByName(props.cityName, 1)}`" />
       <div class="title-box">
-        <img class="title" src="/images/nextStop.png" />
+        <img class="title" src="/images/nextStop.webp" />
         <img class="title" :src="`/images/${getCityCoverImgByName(props.cityName, 2)}`" />
+        
       </div>
     </section>
   </header>
   <body>
-    <section class="filters">
-      <button type="button" class="btn btn-light">Precio</button>
-      <button type="button" class="btn btn-light">Participantes</button>
-      <button type="button" class="btn btn-light">Experiencias</button>
-      <button type="button" class="btn btn-light">Duración</button>
+    <section class="filters cotainer">
+      <button type="button" class="btn btn-light">
+        Participantes:
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Mínimo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        -
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Maxímo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </button>
+      <button type="button" class="btn btn-light">
+        Precio:
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Mínimo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        -
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Maxímo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </button>
+      <button type="button" class="btn btn-light">
+        Experiencias:
+        <select class="form-select" aria-label="Default select example">
+          <option value="1">Gastronómica</option>
+          <option value="2">Cultural</option>
+          <option value="3">Festiva</option>
+        </select>
+      </button>
+      <button type="button" class="btn btn-light">
+        Duración:
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Mínimo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        -
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Maxímo</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </button>
     </section>
     <main>
       <section class="experience-quote">
@@ -97,45 +162,16 @@ useSeoMeta({
               }"
               style="text-decoration: none; display: flex; align-self: flex-end"
               ><button class="price">
-                <span>Desde<br /><strong>799€</strong></span>
+                <span
+                  >Desde<br /><strong>{{ experience.price }}€</strong></span
+                >
               </button></RouterLink
             >
           </div>
         </article>
-
-        <!-- <article class="art-experience">
-          <div class="img-article">
-            <img src="/crema-catalana.jpg" />
-          </div>
-          <div class="experience-description">
-            <h3 class="route-title">Sabores y Sonrisas</h3>
-            <span class="experience-length">5 dias</span>
-            <p><strong>Visitando: </strong>La Boqueria, Barri Gótic, tapas...</p>
-            <RouterLink to="/" style="text-decoration: none; display: flex; align-self: flex-end"
-              ><button class="price">
-                <span>Desde<br /><strong>799€</strong></span>
-              </button></RouterLink
-            >
-          </div>
-        </article>
-        <article class="art-experience">
-          <div class="img-article">
-            <img src="/molino.jpg" />
-          </div>
-          <div class="experience-description">
-            <h3 class="route-title">La noche es para mí</h3>
-            <span class="experience-length">5 dias</span>
-            <p><strong>Visitando: </strong>El Molino, Circuit, Candy Darling</p>
-            <RouterLink to="/" style="text-decoration: none; display: flex; align-self: flex-end"
-              ><button class="price">
-                <span>Desde<br /><strong>799€</strong></span>
-              </button></RouterLink
-            >
-          </div>
-        </article> -->
       </section>
     </main>
-    <FooterComponent></FooterComponent>
+    <!-- <FooterComponent></FooterComponent> -->
   </body>
 </template>
 
@@ -143,13 +179,20 @@ useSeoMeta({
 * {
   font-family: Roboto;
 }
+body {
+  background-color: rgba(171, 184, 195, 0.19);
+}
+body{
+  background-color: rgba(171, 184, 195, 0.19);
+}
 .cover-city {
-  margin-top: 4rem;
+
   position: relative;
 }
 
 .cover-city img.cover {
   height: 700px;
+  width: 100%;
   opacity: 0.5;
 }
 
@@ -317,6 +360,16 @@ button.price {
 
   div.experience-description {
     width: auto;
+  }
+
+  section.filters {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    padding: 1rem;
+    align-items: center;
+    gap: 2rem;
   }
 }
 </style>

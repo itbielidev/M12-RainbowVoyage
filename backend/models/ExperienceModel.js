@@ -23,6 +23,9 @@ export class ExperienceModel {
             const experience = await prismadb.experience.findFirst({
                 where: {
                     id: experienceId
+                },
+                include: {
+                    city: true
                 }
             })
             return experience;

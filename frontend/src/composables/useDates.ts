@@ -1,9 +1,10 @@
 import { ref, type Ref } from "vue";
 import { useFetch } from "@/composables/useFetch";
+import type { DateAvailability } from "@/types";
 
 export const useDates = () => {
 
-    const { get, fetchError, isLoading } = useFetch<any>();
+    const { post, fetchError, isLoading } = useFetch<DateAvailability[] | null>();
     const error: Ref<boolean> = ref(false);
     const errorMessages: Ref<string[]> = ref([]);
 
@@ -14,10 +15,20 @@ export const useDates = () => {
         numPeople: "2"
     })
 
-    const datesAvailable = ref<string[] | null>([]);
+    const dateSelected = ref<string>("");
+    const selectedDateId = ref<number>(-1)
 
-    const checkAvailableDates = async () => {
-        const datesData = await get("/dates")
+    const datesAvailable = ref<DateAvailability[] | null>([]);
+
+    const checkAvailableDates = async (experienceId: string) => {
+
+        const [monthSelected, yearSelected] = formData.value.selectedMonth.split(" ");
+
+        const datesData = await post(`/dates/${experienceId}`, {
+            month: monthSelected,
+            year: yearSelected,
+            people: formData.value.numPeople
+        });
 
         if (fetchError.value) {
             datesAvailable.value = null;
@@ -30,5 +41,23 @@ export const useDates = () => {
         }
     }
 
-    return { monthsSelect, formData, checkAvailableDates, datesAvailable, isLoading };
+    function formatDate(dateReceived: Date) {
+        const date = new Date(dateReceived);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const formattedDate = `${day}/${month}`;
+        return formattedDate;
+    }
+
+    function formatDateYear(dateReceived: Date) {
+        const date = new Date(dateReceived);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = (date.getFullYear()).toString().padStart(4, '0');
+
+        const formattedDate = `${day}/${month}/${year}`;
+        return formattedDate;
+    }
+
+    return { monthsSelect, formData, formatDate, formatDateYear, checkAvailableDates, selectedDateId, datesAvailable, isLoading, error, errorMessages, dateSelected };
 };

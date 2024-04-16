@@ -4,6 +4,7 @@ import ReservationCard from '@/components/ReservationCard.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useReservations } from '@/composables/useReservations'
+import { useAuthStore } from '@/stores/auth'
 
 const route = useRoute()
 const router = useRouter()
@@ -12,8 +13,15 @@ const { getReservations, reservations, errorMessages, error } = useReservations(
 
 const name = ref<string>('')
 
+function setReservationState(state: string) {
+  query.value.state = state
+}
+
+const { logout } = useAuthStore()
+
 const query = ref({
   name: '',
+  state: 'pending',
   ...route.query
 })
 
@@ -38,7 +46,7 @@ onMounted(async () => await getData())
     class="w-100 d-flex flex-column gap-3 flex-xs-column flex-lg-row align-items-center justify-content-start mb-5"
   >
     <div class="text-center w-25">
-      <img src="/images/logo.png" alt="Logo" class="logo" />
+      <img src="/images/logo.webp" alt="Logo" class="logo" />
     </div>
     <div
       class="text-center w-50 d-flex justify-content-center justify-content-xs-center justify-content-lg-start"
@@ -51,34 +59,90 @@ onMounted(async () => await getData())
       ></InputText>
     </div>
     <div class="text-center d-flex justify-content-center w-25 justify-self-end m-auto">
-      <input type="button" class="button" value="Cerrar sesión" />
+      <input type="button" class="button" value="Cerrar sesión" @click="logout" />
     </div>
   </nav>
-
   <!-- Mobile Menu-->
-  <section class="d-flex d-xs-flex d-md-none w-100 fixed-bottom p-1 mobile-menu">
-    <ul>
-      <input type="button" class="button" value="Reservas" />
+  <section
+    class="d-flex d-xs-flex d-md-none w-100 fixed-bottom p-1 justify-content-center align-items-center mobile-menu"
+  >
+    <ul class="d-flex flex-row gap-3 justify-content-center">
+      <li>
+        <input
+          type="button"
+          class="button w-100"
+          value="Por confirmar"
+          @click="setReservationState('pending')"
+        />
+      </li>
+      <li>
+        <input
+          type="button"
+          class="button w-100"
+          value="Confirmadas"
+          @click="setReservationState('completed')"
+        />
+      </li>
     </ul>
   </section>
   <main class="d-flex gap-3 flex-column flex-lg-row">
     <!-- Desktop Menu-->
-    <section class="d-none d-lg-flex tabs-menu w-25 p-5">
-      <ul>
-        <input type="button" class="button" value="Reservas" />
+    <section
+      class="d-none d-lg-flex flex-column justify-content-start align-items-center tabs-menu w-25 p-5"
+    >
+      <ul class="d-flex flex-column gap-3">
+        <li>
+          <input
+            type="button"
+            class="button w-100"
+            value="Por confirmar"
+            @click="setReservationState('pending')"
+          />
+        </li>
+        <li>
+          <input
+            type="button"
+            class="button w-100"
+            value="Confirmadas"
+            @click="setReservationState('completed')"
+          />
+        </li>
       </ul>
     </section>
     <!-- Tablet Menu-->
     <section class="w-100 d-none d-md-flex d-lg-none align-items-center tablet-menu">
-      <ul class="w-100 d-flex justify-space-around mt-auto align-items-center">
-        <input type="button" class="button" value="Reservas" />
+      <ul class="w-100 d-flex px-2 justify-content-around align-items-center gap-5">
+        <li>
+          <input
+            type="button"
+            class="button w-100"
+            value="Por confirmar"
+            @click="setReservationState('pending')"
+          />
+        </li>
+        <li>
+          <input
+            type="button"
+            class="button w-100"
+            value="Confirmadas"
+            @click="setReservationState('completed')"
+          />
+        </li>
       </ul>
     </section>
-    <section class="reservations-section px-4 d-flex flex-column py-3">
+    <section
+      v-if="reservations && reservations.length > 0"
+      class="reservations-section px-4 d-flex flex-column py-3 gap-2"
+    >
       <h2 class="fw-bold">Reservas recientes</h2>
-      <!-- TO-DO: For loop-->
-
-      <ReservationCard></ReservationCard>
+      <ReservationCard
+        v-for="reservation in reservations"
+        :key="reservation.id"
+        :reservation="reservation"
+      ></ReservationCard>
+    </section>
+    <section class="text-center" v-else-if="reservations && reservations.length === 0">
+      <h3>No hay reservas que mostrar.</h3>
     </section>
   </main>
 </template>
@@ -88,7 +152,11 @@ onMounted(async () => await getData())
 .mobile-menu {
   background-color: #f4f8fb;
 }
-
+main {
+  background-color: rgba(171, 184, 195, 0.19);
+}main{
+  background-color: rgba(171, 184, 195, 0.19);
+}
 .reservations-section,
 .tabs-menu {
   background-color: #f4f8fb;
@@ -96,7 +164,7 @@ onMounted(async () => await getData())
 }
 
 .tabs-menu {
-  height: 25vh;
+  height: 75vh;
 }
 
 .reservations-section {

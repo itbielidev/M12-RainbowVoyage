@@ -1,5 +1,4 @@
 <template>
-  <NavBar></NavBar>
   <div v-if="!error" class="container">
     <div class="row">
       <div
@@ -50,7 +49,7 @@ const { hoveredCities, error, errorMessages } = storeToRefs(useCitiesStore())
 // ];
 
 const hoverCity = (index: number, hovered: boolean) => {
-  // hoveredCities.value[index]?.hovered = hovered
+  //hoveredCities[index]?.hovered = hovered
 }
 </script>
 
