@@ -31,15 +31,15 @@ ARRAY[
 ,'Petit Comité comida 14:00-16:00'
 ,'El Botafumeiro comida 14:00 -16:00'
 ,'La Boqueria. Visita guiada 12:30-13:30. Comida 14:00 -16:00'
-,'Ca l\'Estevet. Comida 14:00-16:00'], 
-ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Ca l\' Estevet',
+,'Cal Estevet. Comida 14:00-16:00'], 
+ARRAY['Visitando: El Nacional, Petit Comite, El Botafumeiro, La Boqueria, Cal Estevet',
 'En el corazón de Barcelona, en pleno Paseo de Gracia, se encuentra uno  de los edificios más emblemáticos de la ciudad Condal: Majestic Hotel  & Spa Barcelona. Abierto en 1918, es hoy todo un referente de estilo  elegante y atemporal, propio de los más prestigiosos hoteles  internacionales.
 Durante sus más de cien años, el Majestic, propiedad de la familia  Soldevila-Casals, ha sido testigo de importantes eventos políticos,  culturales e históricos que lo han dotado de una impronta y personalidad propias que se refleja en cada pequeño detalle de lujo y confort.  
 ',
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 5, 
 10, 
-ARRAY['crema-catalana.webp','',''], 
+ARRAY['crema-catalana.webp','boqueria.webp','botafumeiro.webp','estevet.webp'], 
 'gastronomic', 
 '1200' 
 FROM "City" 
@@ -61,7 +61,7 @@ ARRAY['Visitando: La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelon
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 5, 
 10, 
-ARRAY['molino.webp','spa.webp','piscina.webp','copas.webp'], 
+ARRAY['arena.webp','spa.webp','piscina.webp','copas.webp'], 
 'festive',
 '850' 
 FROM "City" 
@@ -147,7 +147,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 3, 
 10, 
-ARRAY['esCavallet.webp','baluartesantjaume.webp','casamatasantpere.webp','centroHistorico.webp','esVedra.webp','vilaAlta.webp'], 
+ARRAY['esCavallet.webp','baluartesantjaume.webp','casamatasantepere.webp','centroHistorico.webp','esVedra.webp','vilaAlta.webp'], 
 'cultural',
 '1000'
 FROM "City" 
@@ -200,7 +200,7 @@ ARRAY[
 'Canteras',
 'Tour Vegueta',
 'Triana y Teror'], 
-ARRAY['Visitando: Carnavales, Dunas De Maspalomas',
+ARRAY['Visitando: Canteras, Dunas De Maspalomas, Triana y Teror',
 'Tu hotel en el centro de Las Palmas de Gran Canaria.
 Hotel Cristina by Tigotan resulta de la fusión entre lo urbano y lo vacacional. Esta mezcla ofrece el perfecto tándem entre los espacios modernos y diáfanos donde podemos desde deleitar una buena comida o una copa hasta llevar a cabo una jornada de teletrabajo, a pie de playa, en la primera línea más espectacular de toda Las Palmas de Gran Canaria.
 ',
@@ -219,7 +219,7 @@ ARRAY[
 'Tour Mercadillo de Tenor',
 'Tour Mercado Agrícola de Guía y Tour Mercado Artesano de Vega de San Mateo',
 'Mercado de Maspalomas',
-'Mercado Artesanal de Santa Brígida',
+'Mercado Artesanal de Santa Brígida'
 ], 
 ARRAY[
     'Visitando: Ruta de los quesos',
@@ -241,14 +241,14 @@ ARRAY[
     'Gala Drag',
     'Gran Cabalgata'], 
     ARRAY[
-        'Visitando: Gala drag, Thalasso Gloria Amadores',
+        'Visitando: Gala drag, Desfile de Carnaval, Thalasso Gloria Amadores',
         'Tu hotel en el centro de Las Palmas de Gran Canaria.
 Hotel Cristina by Tigotan resulta de la fusión entre lo urbano y lo vacacional. Esta mezcla ofrece el perfecto tándem entre los espacios modernos y diáfanos donde podemos desde deleitar una buena comida o una copa hasta llevar a cabo una jornada de teletrabajo, a pie de playa, en la primera línea más espectacular de toda Las Palmas de Gran Canaria.
 ',
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         4,
         10, 
-        ARRAY['carnaval-canarias.webp','gala-drag.webp','lesbian-beach.webp,'maspalomas-festival.webp','orgullo-maspalomas.webp'], 
+        ARRAY['carnaval-canarias.webp','gala-drag.webp','lesbian-beach.webp','maspalomas-festival.webp','orgullo-maspalomas.webp'], 
         'festive',
         '800'
 FROM "City" 
@@ -265,14 +265,14 @@ ARRAY[
     'Castillo del Gibralfaro',
     'Calle Marqués de Larios'], 
     ARRAY[
-        'Visitando: teatro romano, mercado central de atarazanas, alcazaba y castillo de gibralfaro, calle marqués de larios',
+        'Visitando: Teatro Romano, Mercado Central de Atarazanas, Alcazaba y Castillo de Gibralfaro, Calle Marqués De Larios',
         'Hotel en Málaga, situado en la decimonónica calle Larios, una de las zonas más emblemáticas de la ciudad, y una de las vías más elegantes y relevantes a nivel histórico, comercial y cultural. Ocupa el antiguo edificio que, tras construirse en 1821, acogió durante todo el siglo XX los populares Almacenes Gómez Raggio, convertidos en un punto de referencia para toda la ciudad y que hoy ven reflejada su esencia en sutiles detalles del proyecto de interiorismo del hotel, inspirados en los orígenes del inmueble.
         La situación estratégica del establecimiento, en el número 10 de esta céntrica vía malagueña, permite vivir el magnífico ambiente que respira la ciudad andaluza, y disfrutar de su arte, tradición, gastronomía, cultura y vanguardia. Se encuentra a escasos metros de la Catedral, el Teatro Romano, la Alcazaba, el Museo Carmen Thyssen Málaga y el Museo Picasso. Para disfrutar del sol, la playa de La Malagueta está a tan solo 15 minutos andando del hotel.
         ',
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         5, 
         10, 
-        ARRAY['','',''], 
+        ARRAY['Roman_Malaga.webp','alcazaba.webp','castilo-gibralzara.webp','teatroRomanoMalaga.webp','Roman_Malaga.webp','calleLariosMalaga.webp'], 
         'cultural',
         '1000'
 FROM "City" 
@@ -287,12 +287,12 @@ ARRAY[
     'Ruta de maridaje'
     ], 
     ARRAY[
-        'Visitando: Cena en el Restaurante Messina con 1 estrella Michelín',
+        'Visitando: Cena en el Restaurante Messina con 1 estrella Michelín, Mercado Central',
         'Su inmejorable ubicación entre la Catedral de Málaga y el Paseo del Parque, así como su espectacular vista al puerto, convierten a este hotel en uno de los más emblemáticos de la ciudad. Se encuentra cerca del Museo Picasso, la Alcazaba, el Castillo de Gibralfaro, la famosa calle Marqués de Larios y la playa de La Malagueta. El menú del restaurante del AC Hotel Málaga Palacio se basa en la cocina regional con gran variedad de platos de todo el mundo. En verano, visite el bar y el restaurante Ático del piso 15, la terraza del hotel, donde también puede encontrar nuestra impresionante piscina en la azotea, el lugar ideal para refrescarse durante los sofocantes meses mientras disfruta de las mágicas vistas. Disfrute de un cóctel en el AC Lounge, situado en el primer piso, que ofrece un espíritu urbano y un entorno informal, elegante y moderno en el centro de Málaga. ',
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         4, 
         10, 
-        ARRAY['','',''],
+        ARRAY['mercadoMalaga.webp','mercadoMalaga.webp','messina.webp','maridaje.webp'],
          'gastronomic',
          '800'
 FROM "City" 
@@ -301,17 +301,17 @@ WHERE name LIKE '%Málaga%';
 INSERT INTO "Experience" (city_id,name, days_descriptions, descriptions, duration, num_people, images, "type", price) 
 SELECT id, 'Party & Wellness' , 
 ARRAY[
-'Lola\'s Copas',
+'Lolas Copas',
 'Copeo en la calle Bruselas',
 'Hammam Al Ándalus',
 'Hammam Al Ándalus'], 
 ARRAY[
-'Visitando: Lola\'s Copas, Calle de Bruselas, Hammam Al Ándalus Málaga',
+'Visitando: Lolas Copas, Calle de Bruselas, Hammam Al Ándalus Málaga',
 'El hotel Molina Lario es un hotel de 4 estrellas que cuenta con una situación privilegiada en el corazón de Málaga justo enfrente de la Catedral, a escasos metros del Puerto, del Museo Picasso y de la zona peatonal de la ciudad. Es un hotel con encanto en el centro de la ciudad, formado por dos edificios rehabilitados con fachada original del s.XIX y un tercero completamente nuevo, que integran un conjunto hotelero único en el centro de la ciudad de Málaga. Sus 103 habitaciones muy luminosas y de diferentes estilos, están pensadas para hacerle sentir como en casa y para que no le falte de nada ya que cuentan con múltiples detalles.',
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'],
  4, 
  10, 
- ARRAY['','',''], 
+ ARRAY['lolaCopasMalaga.webp','hammamAlAndalus.webp','lolaCopasMalaga.webp','calleBruselasMalaga.webp'], 
  'festive',
  '1200' 
 FROM "City" 
