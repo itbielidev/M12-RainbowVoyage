@@ -49,7 +49,7 @@ const { hoveredCities, error, errorMessages } = storeToRefs(useCitiesStore())
 // ];
 
 const hoverCity = (index: number, hovered: boolean) => {
-  // hoveredCities.value[index]?.hovered = hovered
+  //hoveredCities[index]?.hovered = hovered
 }
 </script>
 
