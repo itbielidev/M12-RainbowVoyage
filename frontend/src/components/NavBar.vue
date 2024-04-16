@@ -1,9 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light menu">
     <div class="container">
       <RouterLink to="/" class="navbar-brand">
         <img src="/images/logo.webp" alt="Logo" class="logo" />
-        <span class="navegador">INICIO</span>
         <span class="navegador">INICIO</span>
       </RouterLink>
 
@@ -97,10 +96,9 @@ const { open: openLogin, close: closeLogin } = useModal({
 
 <style>
 /* Agregar estilo para el contenedor de los enlaces */
-nav {
-  height: 200px;
+.menu{
+  height: 100px;
 }
-
 
 .nav-link-container {
   display: flex;
@@ -159,7 +157,7 @@ nav {
 .navegador {
   color: #d90594;
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 15px;
   border: none;
   color: #d90594;
   border-radius: 5px;
@@ -177,20 +175,38 @@ color: #d90594;
 }
 
 @media (max-width: 991.98px) {
-  .navbar-nav .nav-item {
-    display: block;
-  }
-
-  .navegador {
-    font-size: 15px;
-  }
-
   .navbar-brand {
     margin-right: 0;
   }
 
+  .navbar-toggler {
+    padding: 0.25rem 0.5rem; /* Reducir el padding del botón del toggler */
+  }
+
+  .navbar-nav .nav-item {
+    display: block;
+    margin-bottom: 5px; /* Reducir el margen inferior entre elementos */
+  }
+
+  .navbar-nav .nav-link {
+    padding: 5px 8px; /* Reducir el padding de los enlaces */
+  }
+
+  .logo {
+    height: 70px; /* Reducir el tamaño del logo */
+  }
+
+  .navegador {
+    font-size: 13px; /* Reducir el tamaño de la tipografía del texto del menú */
+  }
+
   .iconos {
-    margin-right: 10px;
+    margin-right: 8px; /* Reducir el margen entre los iconos y el texto */
+  }
+
+  .menu{
+    height: 150px;
   }
 }
+
 </style>
