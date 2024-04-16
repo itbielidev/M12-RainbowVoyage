@@ -1,33 +1,3 @@
-<script setup lang="ts">
-import NavBar from '../components/NavBar.vue'
-import FooterComponent from '@/components/FooterComponent.vue'
-import TripIcon from '@/components/icons/TripIcon.vue'
-import { useReservations } from '@/composables/useReservations'
-import { onMounted, ref } from 'vue'
-import Chip from 'primevue/chip'
-import { useAuthStore } from '@/stores/auth'
-import { storeToRefs } from 'pinia'
-
-const { reservations, getUserReservations } = useReservations()
-const { name, email, phone, lastName } = storeToRefs(useAuthStore())
-
-const translateStates = {
-  pending: 'Pendiente de confirmar',
-  completed: 'Confirmada',
-  cancelled: 'Cancelada'
-}
-
-const formData = ref({
-  name: name,
-  email: email,
-  phone: phone,
-  lastName: lastName
-})
-
-onMounted(async () => {
-  await getUserReservations()
-})
-</script>
 <template>
   <NavBar></NavBar>
   <main
@@ -35,8 +5,14 @@ onMounted(async () => {
     style="margin-top: 6rem"
   >
     <h2>Mi perfil</h2>
+    <div class="text-end mt-3 me-5">
+      <a href="#" class="btn pink-button" @click="toggleReservationActivated">
+        Mis Reservas
+      </a>
+    </div>
+
     <!-- PERSONAL INFORMATION -->
-    <section class="card border p-2 my-4 mx-5 d-flex text-start">
+    <section v-if="reservationActivated" class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Información Personal</h4>
       </div>
@@ -108,8 +84,9 @@ onMounted(async () => {
         </form>
       </div>
     </section>
+
     <!-- UPDATE EMAIL -->
-    <section class="card border p-2 my-4 mx-5 d-flex text-start">
+    <section v-if="reservationActivated && !updatingEmail" class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Actualizar Email</h4>
       </div>
@@ -123,23 +100,25 @@ onMounted(async () => {
         </form>
       </div>
     </section>
+
     <!-- UPDATE PASSWORD  -->
-    <section class="card border p-2 my-4 mx-5 d-flex text-start">
+    <section v-if="reservationActivated && !updatingPassword" class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Actualizar Contraseña</h4>
       </div>
       <div class="card-body">
         <form>
           <label class="form-label"> Contraseña nueva </label>
-          <input type="email" class="form-control" placeholder="Introduce tu nueva contraseña" />
+          <input type="password" class="form-control" placeholder="Introduce tu nueva contraseña" />
           <div class="text-end mt-3">
             <a href="#" class="btn pink-button">Guardar</a>
           </div>
         </form>
       </div>
     </section>
+
     <!-- BOOKINGS -->
-    <section class="card border p-2 my-4 mx-5 d-flex text-start">
+    <section v-if="!reservationActivated" class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Mis Reservas</h4>
       </div>
@@ -178,26 +157,56 @@ onMounted(async () => {
                 <h6 class="mb-0">{{ reservation.name }} {{ reservation.last_name }}</h6>
               </div>
             </div>
-            <Chip :label="translateStates[reservation.state]" class="mt-4" />
           </div>
         </article>
       </template>
       <template v-else-if="reservations && reservations.length === 0">
         <h3>Todavía no has hecho ninguna reserva</h3>
       </template>
-      <!-- end booking -->
     </section>
   </main>
 
   <FooterComponent></FooterComponent>
 </template>
+
+<script setup lang="ts">
+import NavBar from '../components/NavBar.vue'
+import FooterComponent from '@/components/FooterComponent.vue'
+import TripIcon from '@/components/icons/TripIcon.vue'
+import { useReservations } from '@/composables/useReservations'
+import { onMounted, ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
+
+const { reservations, getUserReservations } = useReservations()
+const { name, email, phone, lastName } = storeToRefs(useAuthStore())
+
+const formData = ref({
+  name: name,
+  email: email,
+  phone: phone,
+  lastName: lastName
+})
+
+const reservationActivated = ref(true)
+const updatingEmail = ref(false)
+const updatingPassword = ref(false)
+
+onMounted(async () => {
+  await getUserReservations()
+})
+
+function toggleReservationActivated() {
+  reservationActivated.value = !reservationActivated.value
+}
+
+</script>
+
 <style scoped>
 * {
   font-family: 'Roboto';
 }
-main{
-  background-color: rgba(171, 184, 195, 0.19);
-}
+
 .pink-button {
   background-color: #d90594;
   padding: 0.6rem 1rem;
