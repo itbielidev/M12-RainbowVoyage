@@ -207,7 +207,7 @@ export class ReservationModel {
         //Mark reservation as completed 
 
         //To test email format.
-        fs.writeFileSync('preview.html', emailBody, 'utf8');
+        //fs.writeFileSync('preview.html', emailBody, 'utf8');
 
 
         return [1, mailOptions];
