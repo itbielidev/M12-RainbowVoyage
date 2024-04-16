@@ -73,13 +73,13 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: () => import("@/views/ProfileView.vue"),
-      // beforeEnter: (to, from, next) => {
-      //   const authStore = useAuthStore()
-      //   if (authStore.userIsLoggedIn && !authStore.isAdmin) { next() }
-      //   else {
-      //     next("/")
-      //   }
-      // }
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore()
+        if (authStore.userIsLoggedIn && !authStore.isAdmin) { next() }
+        else {
+          next("/")
+        }
+      }
     }
   ]
 })
