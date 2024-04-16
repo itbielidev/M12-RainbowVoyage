@@ -1,3 +1,5 @@
+import type { S } from "node_modules/@unhead/vue/dist/shared/vue.8de2bbfa";
+
 export enum UserTypes {
     client,
     admin
@@ -90,6 +92,10 @@ export interface ReservationPayload {
     numPeople: string
     dates: string
     dateId: string
+    dateOut?: string,
+    dateIn?: string,
+    airportIn?: string,
+    airportOut?: string
 }
 export interface User {
     id: number

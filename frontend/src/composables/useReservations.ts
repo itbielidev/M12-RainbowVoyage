@@ -18,8 +18,27 @@ export const useReservations = () => {
         checkbox: false,
         numPeople: "",
         dates: "",
-        dateId: ""
+        dateId: "",
+        dateIn: "",
+        dateOut: "",
+        airportIn: "",
+        airportOut: ""
     });
+
+    const availableAirportsOrigin = ref<string[]>([
+        "Madrid - Adolfo Suárez, Barajas",
+        "Barcelona - El Prat, Josep Tarradellas",
+        "Palma de Mallorca - Son Sant Joan"
+    ]
+    )
+
+    const availableAirportsDestination = ref<any>({
+        "Barcelona": ["Barcelona - El Prat, Josep Tarradellas"],
+        "Madrid": ["Madrid - Adolfo Suárez, Barajas",],
+        "Málaga": ["Málaga - Aeropuerto de Costa Del Sol"],
+        "Ibiza": ["Ibiza - Aeropuerto des Colodar"],
+        "Gran Canaria": ["Gran canaria - Aeropuerto de Gran Canaria"]
+    })
 
     const { get, fetchError, getAuth } = useFetch<Reservation[]>();
     const { getAuth: sendEmailFetch } = useFetch<any>();
@@ -193,5 +212,5 @@ export const useReservations = () => {
 
 
 
-    return { formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, sendEmail, manageReservation, validateCheckBox, getUserReservations };
+    return { formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, availableAirportsDestination, availableAirportsOrigin, sendEmail, manageReservation, validateCheckBox, getUserReservations };
 };

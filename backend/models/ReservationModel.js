@@ -64,6 +64,10 @@ export class ReservationModel {
         return [1, reservations]
     }
 
+    static async find(reservationId) {
+
+    }
+
     static async create(userId, bodyData, experienceId) {
         try {
 
@@ -204,7 +208,15 @@ export class ReservationModel {
         };
 
 
-        //Mark reservation as completed 
+        //Mark reservation as completed (update)
+        await prismadb.reservation.updateMany({
+            where: {
+                id: reservation.id
+            },
+            data: {
+                state: ReservationState.completed
+            }
+        })
 
         //To test email format.
         fs.writeFileSync('preview.html', emailBody, 'utf8');

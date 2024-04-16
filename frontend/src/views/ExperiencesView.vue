@@ -6,10 +6,12 @@ import { onMounted, ref, watch } from 'vue'
 import { useExperiences } from '@/composables/useExperiences'
 import { useCitiesStore } from '@/stores/cities'
 import { useSeoMeta } from '@unhead/vue'
+import ProgressSpinner from 'primevue/progressspinner'
+import ErrorMessages from '../components/ErrorMessages.vue'
 
 const props = defineProps<{ cityName: string }>()
 
-const { getExperiences, experiences } = useExperiences()
+const { getExperiences, experiences, isLoading, error, errorMessages } = useExperiences()
 
 const { getCityByName, getDescriptionDetailByName, getCityCoverImgByName } = useCitiesStore()
 
@@ -65,7 +67,6 @@ useSeoMeta({
       <div class="title-box">
         <img class="title" src="/images/nextStop.webp" />
         <img class="title" :src="`/images/${getCityCoverImgByName(props.cityName, 2)}`" />
-        
       </div>
     </section>
   </header>
@@ -120,7 +121,7 @@ useSeoMeta({
         </select>
       </button>
       <button type="button" class="btn btn-light">
-        Duración:
+        Duración:http://localhost:5173/
         <select class="form-select" aria-label="Default select example">
           <option selected>Mínimo</option>
           <option value="1">1</option>
@@ -144,7 +145,7 @@ useSeoMeta({
       <section class="experience-quote">
         <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
       </section>
-      <section class="our-experiences">
+      <section v-if="!isLoading && experiences" class="our-experiences">
         <h2 class="title-our-experiences">Nuestras Experiencias</h2>
 
         <article class="art-experience" v-for="experience in experiences" :key="experience.id">
@@ -170,8 +171,14 @@ useSeoMeta({
           </div>
         </article>
       </section>
+      <section v-else-if="!error && isLoading" class="d-flex justify-content-center">
+        <ProgressSpinner></ProgressSpinner>
+      </section>
+      <section v-else-if="error" class="d-flex justify-content-center">
+        <ErrorMessages :messages="errorMessages"></ErrorMessages>
+      </section>
     </main>
-    <!-- <FooterComponent></FooterComponent> -->
+    <FooterComponent></FooterComponent>
   </body>
 </template>
 
@@ -182,11 +189,10 @@ useSeoMeta({
 body {
   background-color: rgba(171, 184, 195, 0.19);
 }
-body{
+body {
   background-color: rgba(171, 184, 195, 0.19);
 }
 .cover-city {
-
   position: relative;
 }
 

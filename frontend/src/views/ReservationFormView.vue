@@ -13,6 +13,7 @@ const props = defineProps<{
   date: string
   image: string
   people: number
+  cityName: string
 }>()
 
 const {
@@ -22,7 +23,9 @@ const {
   validateForm,
   validateSecondForm,
   manageReservation,
-  validateCheckBox
+  validateCheckBox,
+  availableAirportsDestination,
+  availableAirportsOrigin
 } = useReservations()
 
 const currentIndex = ref<number>(0)
@@ -200,6 +203,38 @@ onMounted(() => {
               disabled
             />
           </div>
+          <label>Aeropuerto de origen :</label>
+          <select class="mb-4" v-model="formData.airportIn">
+            <optgroup>
+              <option
+                v-for="(airport, index) in availableAirportsOrigin"
+                :value="airport"
+                :key="index"
+              >
+                <template v-if="!airport.includes(props.cityName)">{{ airport }}</template>
+              </option>
+            </optgroup>
+          </select>
+          <label>Aeropuerto de destino :</label>
+          <select class="mb-4" v-model="formData.airportOut">
+            <optgroup>
+              <option
+                v-for="(airport, index) in availableAirportsDestination[props.cityName]"
+                :value="airport"
+                :key="index"
+              >
+                {{ airport }}
+              </option>
+            </optgroup>
+          </select>
+          <label>Hora de salida :</label>
+          <select class="mb-4" v-model="formData.dateOut">
+            <optgroup>
+              <option>
+                {{ '11:00h' }}
+              </option>
+            </optgroup>
+          </select>
         </section>
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
           <button class="button fw-bold mt-5 px-1 py-2" @click="goBack(0)" type="button">
@@ -303,7 +338,7 @@ main {
   background-color: rgba(171, 184, 195, 0.19);
 }
 
-main{
+main {
   background-color: rgba(171, 184, 195, 0.19);
 }
 

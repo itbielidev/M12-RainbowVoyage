@@ -6,9 +6,7 @@
   >
     <h2>Mi perfil</h2>
     <div class="text-end mt-3 me-5">
-      <a href="#" class="btn pink-button" @click="toggleReservationActivated">
-        Mis Reservas
-      </a>
+      <a href="#" class="btn pink-button" @click="toggleReservationActivated"> Mis Reservas </a>
     </div>
 
     <!-- PERSONAL INFORMATION -->
@@ -86,7 +84,10 @@
     </section>
 
     <!-- UPDATE EMAIL -->
-    <section v-if="reservationActivated && !updatingEmail" class="card border p-2 my-4 mx-5 d-flex text-start">
+    <section
+      v-if="reservationActivated && !updatingEmail"
+      class="card border p-2 my-4 mx-5 d-flex text-start"
+    >
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Actualizar Email</h4>
       </div>
@@ -102,7 +103,10 @@
     </section>
 
     <!-- UPDATE PASSWORD  -->
-    <section v-if="reservationActivated && !updatingPassword" class="card border p-2 my-4 mx-5 d-flex text-start">
+    <section
+      v-if="reservationActivated && !updatingPassword"
+      class="card border p-2 my-4 mx-5 d-flex text-start"
+    >
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Actualizar Contraseña</h4>
       </div>
@@ -157,6 +161,7 @@
                 <h6 class="mb-0">{{ reservation.name }} {{ reservation.last_name }}</h6>
               </div>
             </div>
+            <Chip :label="translateStates[reservation.state]" class="mt-4" />
           </div>
         </article>
       </template>
@@ -177,6 +182,17 @@ import { useReservations } from '@/composables/useReservations'
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import Chip from 'primevue/chip'
+
+const translateStates = {
+  pending: 'Pendiente de confirmar',
+  completed: 'Confirmada',
+  cancelled: 'Cancelada'
+}
+
+onMounted(async () => {
+  await getUserReservations()
+})
 
 const { reservations, getUserReservations } = useReservations()
 const { name, email, phone, lastName } = storeToRefs(useAuthStore())
@@ -199,7 +215,6 @@ onMounted(async () => {
 function toggleReservationActivated() {
   reservationActivated.value = !reservationActivated.value
 }
-
 </script>
 
 <style scoped>
