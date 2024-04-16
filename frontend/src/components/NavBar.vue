@@ -1,43 +1,30 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light menu">
     <div class="container">
       <RouterLink to="/" class="navbar-brand">
         <img src="/images/logo.webp" alt="Logo" class="logo" />
         <span class="navegador">INICIO</span>
       </RouterLink>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-        aria-controls="navbarsExample07"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon" style="color: #d90594"></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="color: #d90594;"></span>
       </button>
+
 
       <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ show: isMenuOpen }">
         <ul class="navbar-nav ms-auto">
           <li v-if="!userIsLoggedIn" class="nav-item">
-            <button
-              class="nav-link profile-button navegador"
-              @click="open()"
-              @mouseover="hoverButton = true"
-              @mouseleave="hoverButton = false"
-            >
+            <button class="nav-link profile-button navegador" @click="open()" @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false">
               <font-awesome-icon icon="fa-solid fa-file" class="iconos"></font-awesome-icon>
               REGISTRO
             </button>
+
           </li>
           <li v-if="!userIsLoggedIn" class="nav-item">
-            <button
-              class="nav-link navegador"
-              @mouseover="hoverButton = true"
-              @mouseleave="hoverButton = false"
-              @click="openLogin()"
-            >
+            <button class="nav-link navegador" @mouseover="hoverButton = true" @mouseleave="hoverButton = false"
+              @click="openLogin()">
               <font-awesome-icon icon="fa-solid fa-user" class="iconos"></font-awesome-icon>
               INICIAR SESIÓN
             </button>
@@ -51,11 +38,7 @@
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
             <RouterLink :to="{ name: isAdmin ? 'admin' : 'profile' }">
-              <button
-                class="nav-link"
-                @mouseover="hoverButton = true"
-                @mouseleave="hoverButton = false"
-              >
+              <button class="nav-link" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
                 <span class="fw-bold navegador">PERFIL</span>
               </button>
             </RouterLink>
@@ -113,9 +96,8 @@ const { open: openLogin, close: closeLogin } = useModal({
 
 <style>
 /* Agregar estilo para el contenedor de los enlaces */
-nav {
-  height: 200px;
-  height: 200px;
+.menu{
+  height: 100px;
 }
 
 .nav-link-container {
@@ -151,19 +133,19 @@ nav {
 
 .logo {
   padding-top: 0px;
-  padding-top: 0px;
   height: 100px;
   width: auto;
-  width: auto;
+
 }
+
 
 .nav-link {
   background-color: transparent;
   border: none;
   padding: 5px 10px;
   outline: none;
-  outline: none;
 }
+
 
 .nav-link:hover {
   background-color: #ffb6c1;
@@ -175,21 +157,17 @@ nav {
 .navegador {
   color: #d90594;
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 15px;
   border: none;
   color: #d90594;
   border-radius: 5px;
 }
 
-.navegador {
-  color: #d90594;
-  font-weight: bolder;
-  font-size: 20px;
-}
 
 .iconos,
-.barraNav {
-  color: #d90594;
+.barraNav
+{
+color: #d90594;
 }
 
 .navbar-toggler {
@@ -197,28 +175,38 @@ nav {
 }
 
 @media (max-width: 991.98px) {
-  .navbar-nav .nav-item {
-    display: block;
-  }
-  .navbar-toggler {
-    color: #d90594;
-  }
-}
-@media (max-width: 991.98px) {
-  .navbar-nav .nav-item {
-    display: block;
-  }
-
-  .navegador {
-    font-size: 15px;
-  }
-
   .navbar-brand {
     margin-right: 0;
   }
 
+  .navbar-toggler {
+    padding: 0.25rem 0.5rem; /* Reducir el padding del botón del toggler */
+  }
+
+  .navbar-nav .nav-item {
+    display: block;
+    margin-bottom: 5px; /* Reducir el margen inferior entre elementos */
+  }
+
+  .navbar-nav .nav-link {
+    padding: 5px 8px; /* Reducir el padding de los enlaces */
+  }
+
+  .logo {
+    height: 70px; /* Reducir el tamaño del logo */
+  }
+
+  .navegador {
+    font-size: 13px; /* Reducir el tamaño de la tipografía del texto del menú */
+  }
+
   .iconos {
-    margin-right: 10px;
+    margin-right: 8px; /* Reducir el margen entre los iconos y el texto */
+  }
+
+  .menu{
+    height: 150px;
   }
 }
+
 </style>
