@@ -123,21 +123,21 @@ import FooterComponent from '@/components/FooterComponent.vue'
             no emplearlos para:
             <li>
                 <ol>
-                    Realizar actividades ilícitas o constitutivas de delito, contrarias a la buena fe, la moral y el
+                    1. Realizar actividades ilícitas o constitutivas de delito, contrarias a la buena fe, la moral y el
                     orden público, a los usos, y/o que infrinja la regulación sobre propiedad intelectual e industrial,
                     o cualesquiera otra norma del Ordenamiento Jurídico aplicable.
                 </ol>
                 <ol>
-                    Difundir contenidos o propaganda de carácter racista, xenófobo, pornográfico, de apología del
+                    2. Difundir contenidos o propaganda de carácter racista, xenófobo, pornográfico, de apología del
                     terrorismo, o que atenten contra los derechos humanos.
                 </ol>
                 <ol>
-                    Introducir o difundir en la red programas de datos (virus y software nocivo) susceptibles de
+                    3. Introducir o difundir en la red programas de datos (virus y software nocivo) susceptibles de
                     provocar daños en los sistemas informáticos de Rainbow Voyage, sus proveedores o terceros usuarios
                     de la red internet.
                 </ol>
                 <ol>
-                    Transmitir a terceros no autorizados los nombres de usuario y las contraseñas, y si sus contraseñas
+                    4. Transmitir a terceros no autorizados los nombres de usuario y las contraseñas, y si sus contraseñas
                     llegan a conocimiento de un usuario no autorizado, se compromete a informar inmediatamente a Rainbow
                     Voyage, el cual se reserva el derecho a modificar para la protección del servicio.
                 </ol>
@@ -278,4 +278,10 @@ h2{
 h1, h3, h4{
    color:#d90594;
    font-weight: 400;
-}</style>
+}
+
+li{
+    list-style: none;
+}
+
+</style>
