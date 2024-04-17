@@ -17,7 +17,12 @@ const props = defineProps<{
 }>()
 
 const {
+  selectedAirportIn,
   formData,
+  horaLlegadaFirstDay,
+  horaPartidaFirstDay,
+  horaLlegadaLastDay,
+  horaPartidaLastDay,
   error,
   errorMessages,
   validateForm,
@@ -206,13 +211,11 @@ onMounted(() => {
           <label>Aeropuerto de origen :</label>
           <select class="mb-4" v-model="formData.airportIn">
             <optgroup>
-              <option
-                v-for="(airport, index) in availableAirportsOrigin"
-                :value="airport"
-                :key="index"
-              >
-                <template v-if="!airport.includes(props.cityName)">{{ airport }}</template>
-              </option>
+              <template v-for="(airport, index) in availableAirportsOrigin">
+                <option v-if="!airport.includes(props.cityName)" :value="airport" :key="index">
+                  {{ airport }}
+                </option>
+              </template>
             </optgroup>
           </select>
           <label>Aeropuerto de destino :</label>
@@ -224,14 +227,6 @@ onMounted(() => {
                 :key="index"
               >
                 {{ airport }}
-              </option>
-            </optgroup>
-          </select>
-          <label>Hora de salida :</label>
-          <select class="mb-4" v-model="formData.dateOut">
-            <optgroup>
-              <option>
-                {{ '11:00h' }}
               </option>
             </optgroup>
           </select>
@@ -281,6 +276,55 @@ onMounted(() => {
             </section>
             <section class="d-flex flex-column">
               <p><b>Dirección: </b>{{ formData.address }}</p>
+            </section>
+            <section>
+              <h3 class="text-start">
+                IDA: <font-awesome-icon class="ms-2" icon="fa-solid fa-plane" />
+              </h3>
+              <p>
+                <b>{{ selectedAirportIn }} - {{ props.cityName }}</b>
+              </p>
+              <p>
+                Hora salida:
+                {{
+                  horaPartidaFirstDay[formData.airportIn.split('-')[0].replace(/\s$/, '')][
+                    props.cityName
+                  ]
+                }}
+              </p>
+              <p>
+                Hora llegada:
+                {{
+                  horaLlegadaFirstDay[formData.airportIn.split('-')[0].replace(/\s$/, '')][
+                    props.cityName
+                  ]
+                }}
+              </p>
+            </section>
+            <!-- test: {{ formData.airportIn.split('-')[0].replace(' ', '') }} -->
+            <section>
+              <h3 class="text-start">
+                VUELTA: <font-awesome-icon class="ms-2" icon="fa-solid fa-plane" />
+              </h3>
+              <p>
+                <b>{{ props.cityName }} - {{ selectedAirportIn }}</b>
+              </p>
+              <p>
+                Hora salida:
+                {{
+                  horaPartidaLastDay[formData.airportIn.split('-')[0].replace(/\s$/, '')][
+                    props.cityName
+                  ]
+                }}
+              </p>
+              <p>
+                Hora llegada:
+                {{
+                  horaLlegadaLastDay[formData.airportIn.split('-')[0].replace(/\s$/, '')][
+                    props.cityName
+                  ]
+                }}
+              </p>
             </section>
           </div>
         </section>

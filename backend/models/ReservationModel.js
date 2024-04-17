@@ -219,7 +219,7 @@ export class ReservationModel {
         })
 
         //To test email format.
-        fs.writeFileSync('preview.html', emailBody, 'utf8');
+        //fs.writeFileSync('preview.html', emailBody, 'utf8');
 
 
         return [1, mailOptions];

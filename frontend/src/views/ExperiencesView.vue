@@ -121,7 +121,7 @@ useSeoMeta({
         </select>
       </button>
       <button type="button" class="btn btn-light">
-        Duración:http://localhost:5173/
+        Duración:
         <select class="form-select" aria-label="Default select example">
           <option selected>Mínimo</option>
           <option value="1">1</option>

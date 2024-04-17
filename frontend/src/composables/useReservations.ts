@@ -1,5 +1,5 @@
 import type { Reservation, ReservationPayload } from "@/types";
-import { ref, type Ref } from "vue";
+import { computed, ref, type Ref } from "vue";
 import { useFetch } from "@/composables/useFetch";
 
 export const useReservations = () => {
@@ -23,7 +23,10 @@ export const useReservations = () => {
         dateOut: "",
         airportIn: "",
         airportOut: ""
+        //añadir fechas
     });
+
+    const selectedAirportIn = computed<string>(() => formData.value.airportIn.split('-')[0].replace(/\s$/, ""))
 
     const availableAirportsOrigin = ref<string[]>([
         "Madrid - Adolfo Suárez, Barajas",
@@ -37,8 +40,102 @@ export const useReservations = () => {
         "Madrid": ["Madrid - Adolfo Suárez, Barajas",],
         "Málaga": ["Málaga - Aeropuerto de Costa Del Sol"],
         "Ibiza": ["Ibiza - Aeropuerto des Colodar"],
-        "Gran Canaria": ["Gran canaria - Aeropuerto de Gran Canaria"]
-    })
+        "Gran Canaria": ["Gran Canaria - Aeropuerto de Gran Canaria"]
+    });
+
+    type Horarios = {
+        [origen: string]: {
+            [destino: string]: string;
+        };
+    };
+
+    const horaPartidaFirstDay: Horarios = {
+        "Barcelona": {
+            "Madrid": '07:00h',
+            "Gran Canaria": "06:50h",
+            "Málaga": "06:50h",
+            "Ibiza": "07:10h"
+        },
+        "Madrid": {
+            "Barcelona": '06:45h',
+            "Gran Canaria": "06:55h",
+            "Málaga": "09:25h",
+            "Ibiza": "09:30h"
+        },
+        "Palma de Mallorca": {
+            "Barcelona": '06:45h',
+            "Madrid": "06:45h",
+            "Málaga": "09:25h",
+            "Gran Canaria": "07:20h"
+        }
+    }
+
+    const horaPartidaLastDay: Horarios = {
+        "Barcelona": {
+            "Madrid": '20:00h',
+            "Gran Canaria": "20:50h",
+            "Málaga": "20:00h",
+            "Ibiza": "22:30h"
+        },
+        "Madrid": {
+            "Barcelona": '21:05h',
+            "Gran Canaria": "21:10h",
+            "Málaga": "23:10h",
+            "Ibiza": "22:30h"
+        },
+        "Palma de Mallorca": {
+            "Barcelona": '22:40h',
+            "Madrid": "20:00h",
+            "Málaga": "23:10h",
+            "Gran Canaria": "22:00h",
+            "Ibiza": "22.50h"
+        }
+    }
+
+    const horaLlegadaFirstDay: Horarios = {
+        "Barcelona": {
+            "Madrid": '08:25h',
+            "Gran Canaria": "09:25h",
+            "Málaga": "08:30h",
+            "Ibiza": "08:15h"
+        },
+        "Madrid": {
+            "Barcelona": '08:00h',
+            "Gran Canaria": "08:50h",
+            "Málaga": "10:45h",
+            "Ibiza": "10:15h"
+        },
+        "Palma de Mallorca": {
+            "Barcelona": '07:25h',
+            "Madrid": "08:10h",
+            "Málaga": "08:20h",
+            "Gran Canaria": "10:40h",
+            "Ibiza": "8:10h"
+        }
+    }
+
+
+    const horaLlegadaLastDay: Horarios = {
+        "Barcelona": {
+            "Madrid": '21:20h',
+            "Gran Canaria": "01:05h",
+            "Málaga": "21:00h",
+            "Ibiza": "23:30h"
+        },
+        "Madrid": {
+            "Barcelona": '22:30h',
+            "Gran Canaria": "00:55h",
+            "Málaga": "00:30h",
+            "Ibiza": "23:50h"
+        },
+        "Palma de Mallorca": {
+            "Barcelona": '23:35h',
+            "Madrid": "00:00h",
+            "Málaga": "00:40h",
+            "Gran Canaria": "23:00h",
+            "Ibiza": "00:50h"
+        }
+    }
 
     const { get, fetchError, getAuth } = useFetch<Reservation[]>();
     const { getAuth: sendEmailFetch } = useFetch<any>();
@@ -212,5 +309,5 @@ export const useReservations = () => {
 
 
 
-    return { formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, availableAirportsDestination, availableAirportsOrigin, sendEmail, manageReservation, validateCheckBox, getUserReservations };
+    return { selectedAirportIn, horaPartidaFirstDay, horaPartidaLastDay, horaLlegadaLastDay, horaLlegadaFirstDay, formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, availableAirportsDestination, availableAirportsOrigin, sendEmail, manageReservation, validateCheckBox, getUserReservations };
 };
