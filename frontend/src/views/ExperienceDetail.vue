@@ -30,43 +30,20 @@
           <!-- Carrusel de Fotos -->
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div
-                v-for="(image, index) in experience?.images.slice(1)"
-                :key="index"
-                class="carousel-item"
-                :class="{ active: index === 0 }"
-              >
-                <img
-                  :src="`/images/${experience?.city.name}/${image}`"
-                  class="d-block w-100 img-carousel"
-                  :alt="`Slide ${index + 1}`"
-                />
+              <div v-for="(image, index) in experience?.images.slice(1)" :key="index" class="carousel-item"
+                :class="{ active: index === 0 }">
+                <img :src="`/images/${experience?.city.name}/${image}`" class="d-block w-100 img-carousel"
+                  :alt="`Slide ${index + 1}`" />
               </div>
             </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-                style="color: transparent"
-              ></span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true" style="color: transparent"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-                style="color: transparent"
-              ></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true" style="color: transparent"></span>
               <span class="visually-hidden">Next</span>
             </button>
           </div>
@@ -87,10 +64,7 @@
                   </ul>
                 </li>
                 <li>Rutas</li> -->
-                <li
-                  v-for="(inc, index) in experience?.descriptions.slice(-1)[0].split('.')"
-                  :key="index"
-                >
+                <li v-for="(inc, index) in experience?.descriptions.slice(-1)[0].split('.')" :key="index">
                   {{ inc }}
                 </li>
               </ul>
@@ -99,11 +73,7 @@
         </div>
         <!--Rutas-->
         <div class="d-flex justify-content-evenly flex-wrap">
-          <div
-            v-for="(day, index) in experience?.days_descriptions"
-            :key="index"
-            class="d-flex justify-content-center"
-          >
+          <div v-for="(day, index) in experience?.days_descriptions" :key="index" class="d-flex justify-content-center">
             <div class="circle">
               <div class="contenidoRutas">
                 <p class="dia">DIA {{ index + 1 }}</p>
@@ -149,6 +119,33 @@
       <button class="reserva d-none" type="submit">RESERVA</button>
     </div>
     <DatesForm class="my-5" :experienceId="props.experienceId" @reserve="openModal"></DatesForm>
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
+          <img src="../../public/images/Barcelona/casaBatllo.webp" class="img-fluid rounded imagenDetalle"
+            alt="Imagen 1">
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
+          <img src="../../public/images/Barcelona/sagradaFamilia.webp" class="img-fluid rounded imagenDetalle"
+            alt="Imagen 2">
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
+          <img src="../../public/images/Barcelona/montserrat.webp" class="img-fluid rounded imagenDetalle"
+            alt="Imagen 3">
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
+          <img src="../../public/images/Barcelona/parkGuell.webp" class="img-fluid rounded imagenDetalle"
+            alt="Imagen 4">
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
+          <img src="../../public/images/Barcelona/pedrera.webp" class="img-fluid rounded imagenDetalle" alt="Imagen 5">
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
+          <img src="../../public/images/Barcelona/ciutadella.webp" class="img-fluid rounded imagenDetalle"
+            alt="Imagen 6">
+        </div>
+      </div>
+    </div>
     <FooterComponent></FooterComponent>
   </div>
 </template>
@@ -213,6 +210,15 @@ const { open, close } = useModal({
 <style scoped>
 .body {
   background-color: rgba(171, 184, 195, 0.19);
+}
+
+.imagenDetalle {
+  width: 350px;
+  height: 200px
+}
+
+.fotos {
+  margin-bottom: 10px;
 }
 
 .content {
