@@ -30,9 +30,9 @@
           <!-- Carrusel de Fotos -->
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div v-for="(image, index) in experience?.images.slice(1)" :key="index" class="carousel-item"
+              <div v-for="(h, index) in hotel ":key="index" class="carousel-item"
                 :class="{ active: index === 0 }">
-                <img :src="`/images/${experience?.city.name}/${image}`" class="d-block w-100 img-carousel"
+                <img :src="`/images/${experience?.city.name}/${h}`" class="d-block w-100 img-carousel"
                   :alt="`Slide ${index + 1}`" />
               </div>
             </div>
@@ -121,28 +121,9 @@
     <DatesForm class="my-5" :experienceId="props.experienceId" @reserve="openModal"></DatesForm>
     <div class="container">
       <div class="row justify-content-center align-items-center">
-        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
-          <img src="../../public/images/Barcelona/casaBatllo.webp" class="img-fluid rounded imagenDetalle"
-            alt="Imagen 1">
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
-          <img src="../../public/images/Barcelona/sagradaFamilia.webp" class="img-fluid rounded imagenDetalle"
-            alt="Imagen 2">
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
-          <img src="../../public/images/Barcelona/montserrat.webp" class="img-fluid rounded imagenDetalle"
-            alt="Imagen 3">
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
-          <img src="../../public/images/Barcelona/parkGuell.webp" class="img-fluid rounded imagenDetalle"
-            alt="Imagen 4">
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
-          <img src="../../public/images/Barcelona/pedrera.webp" class="img-fluid rounded imagenDetalle" alt="Imagen 5">
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center">
-          <img src="../../public/images/Barcelona/ciutadella.webp" class="img-fluid rounded imagenDetalle"
-            alt="Imagen 6">
+        <div v-for="(image, index) in experience?.images.slice(1)" class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center" :key="index">
+          <img :src="`/images/${experience?.city.name}/${image}`" class="img-fluid rounded imagenDetalle"
+            :alt="`Experience photo ${index + 1}`">
         </div>
       </div>
     </div>
@@ -167,6 +148,8 @@ const props = defineProps<{ experienceId: string }>()
 const dateId = ref<number>(-1)
 const date = ref<string>('')
 const people = ref<string>('')
+
+var hotel = ["hotel.webp", "habitación.webp", "copas.webp", "piscina.webp", "spa.webp"]
 
 onMounted(async () => {
   await getExperience(props.experienceId)
