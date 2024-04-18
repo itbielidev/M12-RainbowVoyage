@@ -4,9 +4,11 @@
     class="gap-2 d-flex flex-column justify-content-center text-center pt-3 container"
     style="margin-top: 6rem"
   >
-    <h2>Mi perfil</h2>
-    <div class="text-end mt-3 me-5">
-      <a href="#" class="btn pink-button" @click="toggleReservationActivated"> Mis Reservas </a>
+    <h2 class="text-center">Mi perfil</h2>
+    <div class="mt-3 text-center text-lg-start d-flex justify-content-start">
+      <a href="#" class="btn pink-button" @click="toggleReservationActivated">
+        {{ !reservationActivated ? 'Mis datos' : 'Mis reservas' }}
+      </a>
     </div>
 
     <!-- PERSONAL INFORMATION -->
@@ -137,7 +139,7 @@
                   <TripIcon></TripIcon>
                 </div>
                 <div class="ms-2">
-                  <h6 class="ms-0">Barcelona - Málaga</h6>
+                  <h6 class="ms-0">{{ reservation.airportIn }} | {{ reservation.airportOut }}</h6>
                   <ul class="small d-flex flex-column">
                     <li>Nº reserva: {{ reservation.id }}</li>
                     <li>Experiencia: {{ reservation.experience?.name }}</li>
@@ -150,11 +152,17 @@
             <div class="row g-3">
               <div class="col-sm-6 col-md-4">
                 <span>Ida</span>
-                <h6 class="mb-0">Martes 30 abril 9:00h</h6>
+                <h6 class="mb-0">
+                  {{ reservation.dates.split('-')[0] }} | {{ reservation.partidaFirstDay }} -
+                  {{ reservation.llegadaFirstDay }}
+                </h6>
               </div>
               <div class="col-sm-6 col-md-4">
                 <span>Vuelta</span>
-                <h6 class="mb-0">Domingo 5 mayo 10:45h</h6>
+                <h6 class="mb-0">
+                  {{ reservation.dates.split('-')[1] }} | {{ reservation.partidaLastDay }} -
+                  {{ reservation.llegadaLastDay }}
+                </h6>
               </div>
               <div class="col-md-4">
                 <span>Reserva a nombre de: </span>

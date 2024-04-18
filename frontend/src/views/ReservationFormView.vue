@@ -67,7 +67,22 @@ const numVisitors = props.people - 1
 
 watch(formData.value, () => {
   formData.value.email = formData.value.email.toLowerCase()
+  formData.value.emailConfirmation = formData.value.emailConfirmation.toLowerCase()
 })
+
+function setHours() {
+  formData.value.partidaFirstDay =
+    horaPartidaFirstDay[formData.value.airportIn.split('-')[0].replace(/\s$/, '')][props.cityName]
+
+  formData.value.llegadaFirstDay =
+    horaLlegadaFirstDay[formData.value.airportIn.split('-')[0].replace(/\s$/, '')][props.cityName]
+
+  formData.value.partidaLastDay =
+    horaPartidaLastDay[formData.value.airportIn.split('-')[0].replace(/\s$/, '')][props.cityName]
+
+  formData.value.llegadaLastDay =
+    horaLlegadaLastDay[formData.value.airportIn.split('-')[0].replace(/\s$/, '')][props.cityName]
+}
 
 onMounted(() => {
   formData.value.name = name.value as string
@@ -208,8 +223,8 @@ onMounted(() => {
               disabled
             />
           </div>
-          <label>Aeropuerto de origen :</label>
-          <select class="mb-4" v-model="formData.airportIn">
+          <label class="mb-2">Aeropuerto de origen :</label>
+          <select class="mb-4" v-model="formData.airportIn" @change="setHours()">
             <optgroup>
               <template v-for="(airport, index) in availableAirportsOrigin">
                 <option v-if="!airport.includes(props.cityName)" :value="airport" :key="index">
@@ -219,7 +234,7 @@ onMounted(() => {
             </optgroup>
           </select>
           <label>Aeropuerto de destino :</label>
-          <select class="mb-4" v-model="formData.airportOut">
+          <select class="mb-4" v-model="formData.airportOut" @change="setHours()">
             <optgroup>
               <option
                 v-for="(airport, index) in availableAirportsDestination[props.cityName]"
@@ -286,22 +301,13 @@ onMounted(() => {
               </p>
               <p>
                 Hora salida:
-                {{
-                  horaPartidaFirstDay[formData.airportIn.split('-')[0].replace(/\s$/, '')][
-                    props.cityName
-                  ]
-                }}
+                {{ formData.partidaFirstDay }}
               </p>
               <p>
                 Hora llegada:
-                {{
-                  horaLlegadaFirstDay[formData.airportIn.split('-')[0].replace(/\s$/, '')][
-                    props.cityName
-                  ]
-                }}
+                {{ formData.llegadaFirstDay }}
               </p>
             </section>
-            <!-- test: {{ formData.airportIn.split('-')[0].replace(' ', '') }} -->
             <section>
               <h3 class="text-start">
                 VUELTA: <font-awesome-icon class="ms-2" icon="fa-solid fa-plane" />
@@ -311,19 +317,11 @@ onMounted(() => {
               </p>
               <p>
                 Hora salida:
-                {{
-                  horaPartidaLastDay[formData.airportIn.split('-')[0].replace(/\s$/, '')][
-                    props.cityName
-                  ]
-                }}
+                {{ formData.partidaLastDay }}
               </p>
               <p>
                 Hora llegada:
-                {{
-                  horaLlegadaLastDay[formData.airportIn.split('-')[0].replace(/\s$/, '')][
-                    props.cityName
-                  ]
-                }}
+                {{ formData.llegadaLastDay }}
               </p>
             </section>
           </div>
@@ -499,6 +497,12 @@ button:hover {
 .exp_photo {
   min-width: 30%;
   width: 40%;
+}
+
+select {
+  border-radius: 5px;
+  height: 60px;
+  padding: 5px;
 }
 
 @media screen and (max-width: 569px) {

@@ -2,6 +2,14 @@ import type { Reservation, ReservationPayload } from "@/types";
 import { computed, ref, type Ref } from "vue";
 import { useFetch } from "@/composables/useFetch";
 
+
+type Horarios = {
+    [origen: string]: {
+        [destino: string]: string;
+    };
+};
+
+
 export const useReservations = () => {
 
     const formData: Ref<ReservationPayload> = ref({
@@ -19,11 +27,12 @@ export const useReservations = () => {
         numPeople: "",
         dates: "",
         dateId: "",
-        dateIn: "",
-        dateOut: "",
         airportIn: "",
-        airportOut: ""
-        //añadir fechas
+        airportOut: "",
+        partidaFirstDay: "",
+        llegadaFirstDay: "",
+        partidaLastDay: "",
+        llegadaLastDay: ""
     });
 
     const selectedAirportIn = computed<string>(() => formData.value.airportIn.split('-')[0].replace(/\s$/, ""))
@@ -42,12 +51,6 @@ export const useReservations = () => {
         "Ibiza": ["Ibiza - Aeropuerto des Colodar"],
         "Gran Canaria": ["Gran Canaria - Aeropuerto de Gran Canaria"]
     });
-
-    type Horarios = {
-        [origen: string]: {
-            [destino: string]: string;
-        };
-    };
 
     const horaPartidaFirstDay: Horarios = {
         "Barcelona": {

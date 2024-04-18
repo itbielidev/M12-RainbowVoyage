@@ -71,7 +71,8 @@ export class ReservationModel {
     static async create(userId, bodyData, experienceId) {
         try {
 
-            const { numPeople, dates, dni, phone, email, postalCode, location, address, name, lastName } = bodyData;
+            const { numPeople, dates, dni, phone, email, postalCode, location, address, name, lastName,
+                airportIn, airportOut, partidaFirstDay, llegadaFirstDay, partidaLastDay, llegadaLastDay } = bodyData;
 
             let { dateId } = bodyData
             dateId = Number(dateId);
@@ -93,7 +94,13 @@ export class ReservationModel {
                     city: location,
                     address: address,
                     name: name,
-                    last_name: lastName
+                    last_name: lastName,
+                    airportIn: airportIn,
+                    airportOut: airportOut,
+                    partidaFirstDay: partidaFirstDay,
+                    partidaLastDay: partidaLastDay,
+                    llegadaFirstDay: llegadaFirstDay,
+                    llegadaLastDay: llegadaLastDay
                 }
             })
 

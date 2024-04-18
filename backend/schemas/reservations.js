@@ -28,7 +28,13 @@ const reservationPayLoadSchema = z.object({
     numPeople: z.string(),
     checkbox: z.boolean(),
     dates: z.string(),
-    dateId: z.string()
+    dateId: z.string(),
+    airportIn: z.string(),
+    airportOut: z.string(),
+    partidaFirstDay: z.string(),
+    llegadaFirstDay: z.string(),
+    partidaLastDay: z.string(),
+    llegadaLastDay: z.string()
 });
 
 

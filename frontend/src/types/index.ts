@@ -74,6 +74,12 @@ export interface Reservation {
     postalCode: string
     location: string
     dates: string
+    airportIn: string
+    airportOut: string
+    partidaFirstDay: string
+    llegadaFirstDay: string
+    partidaLastDay: string
+    llegadaLastDay: string
 }
 
 export interface ReservationPayload {
@@ -90,10 +96,12 @@ export interface ReservationPayload {
     numPeople: string
     dates: string
     dateId: string
-    dateOut?: string,
-    dateIn?: string,
-    airportIn: string,
+    airportIn: string
     airportOut: string
+    partidaFirstDay: string
+    llegadaFirstDay: string
+    partidaLastDay: string
+    llegadaLastDay: string
 }
 export interface User {
     id: number
