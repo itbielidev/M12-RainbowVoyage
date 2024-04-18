@@ -2,14 +2,33 @@
 import { useDates } from '@/composables/useDates'
 import type { Reservation } from '@/types'
 import { useReservations } from '@/composables/useReservations'
+import { ref } from 'vue'
+import ProgressSpinner from 'primevue/progressspinner'
 
 const props = defineProps<{
   reservation: Reservation
 }>()
+const emit = defineEmits<{
+  refresh: []
+}>()
+
+const loading = ref<boolean>(false)
 
 const { formatDateYear } = useDates()
 
 const { sendEmail } = useReservations()
+
+const manageEmailSending = async (reservationId: number) => {
+  loading.value = true
+  await sendEmail(reservationId)
+  //set fake loading spinner
+  setTimeout(() => {
+    loading.value = false
+  }, 2500)
+
+  //emit to refresh reservations view
+  emit('refresh')
+}
 </script>
 <template>
   <article class="w-100">
@@ -33,9 +52,12 @@ const { sendEmail } = useReservations()
       </div>
     </main>
     <footer class="text-start text-lg-end px-3 py-2">
-      <button class="button" @click="sendEmail(props.reservation.id)">
+      <button v-if="!loading" class="button" @click="manageEmailSending(props.reservation.id)">
         Confirmar <font-awesome-icon icon="fa-solid fa-envelope" />
       </button>
+      <section v-else class="d-flex justify-content-center">
+        <ProgressSpinner></ProgressSpinner>
+      </section>
     </footer>
   </article>
 </template>

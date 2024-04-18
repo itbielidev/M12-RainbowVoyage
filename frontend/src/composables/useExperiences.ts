@@ -4,7 +4,7 @@ import { useFetch } from "@/composables/useFetch";
 
 export const useExperiences = () => {
 
-    const { get, fetchError } = useFetch<Experience[]>();
+    const { get, fetchError, isLoading } = useFetch<Experience[]>();
 
     const { get: getExperienceFetch, fetchError: fetchErrorExperience } = useFetch<Experience>();
 
@@ -42,5 +42,5 @@ export const useExperiences = () => {
         }
     }
 
-    return { experiences, experience, getExperiences, getExperience, error, errorMessages };
+    return { experiences, experience, getExperiences, getExperience, error, errorMessages, isLoading };
 };

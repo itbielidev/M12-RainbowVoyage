@@ -25,6 +25,10 @@ const query = ref({
   ...route.query
 })
 
+const refreshReservations = async () => {
+  await getData()
+}
+
 watch(
   query,
   async () => {
@@ -139,6 +143,7 @@ onMounted(async () => await getData())
         v-for="reservation in reservations"
         :key="reservation.id"
         :reservation="reservation"
+        @refresh="refreshReservations()"
       ></ReservationCard>
     </section>
     <section class="text-center" v-else-if="reservations && reservations.length === 0">
@@ -154,7 +159,8 @@ onMounted(async () => await getData())
 }
 main {
   background-color: rgba(171, 184, 195, 0.19);
-}main{
+}
+main {
   background-color: rgba(171, 184, 195, 0.19);
 }
 .reservations-section,

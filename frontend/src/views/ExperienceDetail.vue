@@ -188,7 +188,8 @@ function goToReservationForm() {
       dateId: dateId.value,
       date: date.value,
       image: experience.value?.images[0],
-      people: people.value
+      people: people.value,
+      cityName: experience.value?.city.name
     }
   })
 }
