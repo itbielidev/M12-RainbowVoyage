@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!error" class="container">
+  <div v-if="!error && !isLoading" class="container">
     <div class="row">
       <div
         v-for="(city, index) in hoveredCities"
@@ -30,15 +30,18 @@
   <div class="d-flex justify-content-center" v-else-if="error">
     <ErrorMessages :messages="errorMessages"></ErrorMessages>
   </div>
+  <div v-else-if="isLoading" class="d-flex justify-content-center">
+    <ProgressSpinner></ProgressSpinner>
+  </div>
 </template>
 
 <script setup lang="ts">
-import NavBar from '@/components/NavBar.vue'
 import { useCitiesStore } from '@/stores/cities'
 import { storeToRefs } from 'pinia'
 import ErrorMessages from './ErrorMessages.vue'
+import ProgressSpinner from 'primevue/progressspinner'
 
-const { hoveredCities, error, errorMessages } = storeToRefs(useCitiesStore())
+const { hoveredCities, error, errorMessages, isLoading } = storeToRefs(useCitiesStore())
 
 // const cities = [
 //   { name: "BARCELONA", image: "../../public/Barcelona.png", alt: "Barcelona", overlayText: "Barcelona es conocida por su vibrante comunidad LGTBIQ, con eventos como el Barcelona Pride y una escena nocturna inclusiva que refleja su apoyo a la diversidad.", hovered: false },

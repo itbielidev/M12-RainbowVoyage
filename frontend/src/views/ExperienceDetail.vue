@@ -32,8 +32,7 @@
             <div class="carousel-inner">
               <div v-for="(h, index) in hotel ":key="index" class="carousel-item"
                 :class="{ active: index === 0 }">
-                <img :src="`/images/${experience?.city.name}/${h}`" class="d-block w-100 img-carousel"
-                  :alt="`Slide ${index + 1}`" />
+                <img :src="`/images/${experience?.city.name}/${h}`" class="d-block w-100 img-carousel"/>
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -123,7 +122,7 @@
       <div class="row justify-content-center align-items-center">
         <div v-for="(image, index) in experience?.images.slice(1)" class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center" :key="index">
           <img :src="`/images/${experience?.city.name}/${image}`" class="img-fluid rounded imagenDetalle"
-            :alt="`Experience photo ${index + 1}`">
+            :alt="`Experience photo ${index + 1}`"/>
         </div>
       </div>
     </div>
@@ -171,7 +170,8 @@ function goToReservationForm() {
       dateId: dateId.value,
       date: date.value,
       image: experience.value?.images[0],
-      people: people.value
+      people: people.value,
+      cityName: experience.value?.city.name
     }
   })
 }

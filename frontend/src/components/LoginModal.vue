@@ -44,7 +44,7 @@ watch(formData.value, () => {
         <img src="/images/logo.webp" alt="Logo" class="img-fluid logo-img" />
       </section>
       <form @submit.prevent="handleLogin()" novalidate>
-        <h1 class="display-5 mb-5">¡BIENVENIDO!</h1>
+        <h1 class="display-5 mb-5">¡BIENVENIDX!</h1>
         <section class="d-flex flex-column">
           <label class="mb-2" for="email">Correo electónico *</label>
           <input

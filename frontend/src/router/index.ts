@@ -80,7 +80,12 @@ const router = createRouter({
           next("/")
         }
       }
-    }
+    },
+    {
+      path: '/policy',
+      name: 'policy',
+      component: () => import("@/views/PolicyView.vue")
+    },
   ]
 })
 
