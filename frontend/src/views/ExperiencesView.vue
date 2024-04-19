@@ -189,9 +189,6 @@ useSeoMeta({
 body {
   background-color: rgba(171, 184, 195, 0.19);
 }
-body {
-  background-color: rgba(171, 184, 195, 0.19);
-}
 .cover-city {
   position: relative;
 }

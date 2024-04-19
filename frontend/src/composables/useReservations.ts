@@ -310,7 +310,5 @@ export const useReservations = () => {
 
     }
 
-
-
     return { selectedAirportIn, horaPartidaFirstDay, horaPartidaLastDay, horaLlegadaLastDay, horaLlegadaFirstDay, formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, availableAirportsDestination, availableAirportsOrigin, sendEmail, manageReservation, validateCheckBox, getUserReservations };
 };

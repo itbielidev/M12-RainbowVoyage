@@ -8,6 +8,7 @@ import ProgressSpinner from 'primevue/progressspinner'
 const props = defineProps<{
   reservation: Reservation
 }>()
+
 const emit = defineEmits<{
   refresh: []
 }>()
@@ -58,6 +59,10 @@ const manageEmailSending = async (reservationId: number) => {
       <section v-else class="d-flex justify-content-center">
         <ProgressSpinner></ProgressSpinner>
       </section>
+
+      <button class="button" @click="sendEmail(props.reservation.id)">
+        Confirmar <font-awesome-icon icon="fa-solid fa-envelope" />
+      </button>
     </footer>
   </article>
 </template>

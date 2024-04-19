@@ -108,9 +108,7 @@ useSeoMeta({
 main {
   background-color: rgba(171, 184, 195, 0.19);
 }
-main {
-  background-color: rgba(171, 184, 195, 0.19);
-}
+
 body {
   overflow-x: hidden;
 }
