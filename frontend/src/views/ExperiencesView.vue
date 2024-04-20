@@ -67,6 +67,7 @@ useSeoMeta({
       <div class="title-box">
         <img class="title" src="/images/nextStop.webp" />
         <img class="title" :src="`/images/${getCityCoverImgByName(props.cityName, 2)}`" />
+        
       </div>
     </section>
   </header>
