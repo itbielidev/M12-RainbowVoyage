@@ -79,7 +79,7 @@ ARRAY[
  'Catedral de la Almudena y templo de Debod']
  , 
 ARRAY[
-'Visitando:Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod',
+'Un paseo por el Madrid de Almodovar, La Puerta Del Sol, Chueca, Catedral de la Almudena, templo de debod',
 'Room Mate Alba tiene una localización magnífica en la calle de las Huertas, una de las vías peatonales más importantes del centro de Madrid que se caracteriza por los emblemáticos fragmentos literarios plasmados a lo largo de su recorrido. A su alrededor existe una amplia oferta gastronómica y cultural: al lado del famoso Triángulo del Arte. Y no te preocupes por tu obligada visita a la Puerta del Sol, calle Gran Vía y Plaza Mayor, están a solo 5 minutos andando.',
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
@@ -97,7 +97,7 @@ ARRAY[
     'Ruta de Restaurantes, Cafés y Bodegas Centenarias',
     'Visita nocturna por la historia del Madrid antigo con tapas'], 
     ARRAY[
-        'Visitando: Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel',
+        'Gastronomía centenaria en embajadores, sol y cortes, mercado de san miguel',
         '
             Vitium Urban Suites es un hostal boutique en Madrid, Gran vía de diseño vanguardista y carismático que ofrece un nuevo concepto de alojamiento,  consiguiendo mejorar la imagen de los hostales tradicionales. Es un hostal en el centro de Madrid, ubicado en una zona privilegiada, Gran vía y en un edificio emblemático.
             Vitium Urban Suites sorprende especialmente a aquellas personas que buscan un lugar vanguardista y cosmopolita. Si aprecian la gran cantidad de actividades culturales y de ocio que la ubicación de este hostal de lujo en la Gran Vía de Madrid propone, podrán disfrutar de ellas con un alojamiento de calidad a precios asequibles.
@@ -122,7 +122,7 @@ ARRAY
 'Día de Spa Six Harmonies'
 ], 
 ARRAY[
-    'Visitando: El orgullo, carrera de tacones, Six Harmonies',
+    'El orgullo, carrera de tacones, Six Harmonies',
     'Vive Madrid desde el Petit Palace Chueca y abre tu corazón a todo lo que esta ciudad única puede ofrecerte. Desde este hotel boutique en el barrio de Chueca, estarás a un paso de la Gran Vía, la Puerta de Sol y los mejores locales de moda de Madrid. Sumérgete en su agradable ambiente y descubre los secretos de un edificio lleno de historia que irradia vanguardia y modernidad. Su estructura y ascensor se conservan desde la construcción de la Gran Vía en el siglo XX. Presume de su cuidada decoración y del desayuno healthy que preparan cada día, así como de sus increíbles habitaciones superiores. Además, aquí tu mascota es siempre bienvenida.',
     'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
