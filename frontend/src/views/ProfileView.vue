@@ -4,10 +4,10 @@
     class="gap-2 d-flex flex-column justify-content-center text-center pt-3 container"
     style="margin-top: 6rem"
   >
-    <h2>Mi perfil</h2>
-    <div class="text-end mt-3 me-5">
+    <h2 class="text-center">Mi perfil</h2>
+    <div class="mt-3 text-center text-lg-start d-flex justify-content-start">
       <a href="#" class="btn pink-button" @click="toggleReservationActivated">
-        Mis Reservas
+        {{ !reservationActivated ? 'Mis datos' : 'Mis reservas' }}
       </a>
     </div>
 
@@ -86,7 +86,10 @@
     </section>
 
     <!-- UPDATE EMAIL -->
-    <section v-if="reservationActivated && !updatingEmail" class="card border p-2 my-4 mx-5 d-flex text-start">
+    <section
+      v-if="reservationActivated && !updatingEmail"
+      class="card border p-2 my-4 mx-5 d-flex text-start"
+    >
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Actualizar Email</h4>
       </div>
@@ -102,7 +105,10 @@
     </section>
 
     <!-- UPDATE PASSWORD  -->
-    <section v-if="reservationActivated && !updatingPassword" class="card border p-2 my-4 mx-5 d-flex text-start">
+    <section
+      v-if="reservationActivated && !updatingPassword"
+      class="card border p-2 my-4 mx-5 d-flex text-start"
+    >
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Actualizar Contraseña</h4>
       </div>
@@ -133,7 +139,7 @@
                   <TripIcon></TripIcon>
                 </div>
                 <div class="ms-2">
-                  <h6 class="ms-0">Barcelona - Málaga</h6>
+                  <h6 class="ms-0">{{ reservation.airportIn }} | {{ reservation.airportOut }}</h6>
                   <ul class="small d-flex flex-column">
                     <li>Nº reserva: {{ reservation.id }}</li>
                     <li>Experiencia: {{ reservation.experience?.name }}</li>
@@ -146,17 +152,24 @@
             <div class="row g-3">
               <div class="col-sm-6 col-md-4">
                 <span>Ida</span>
-                <h6 class="mb-0">Martes 30 abril 9:00h</h6>
+                <h6 class="mb-0">
+                  {{ reservation.dates.split('-')[0] }} | {{ reservation.partidaFirstDay }} -
+                  {{ reservation.llegadaFirstDay }}
+                </h6>
               </div>
               <div class="col-sm-6 col-md-4">
                 <span>Vuelta</span>
-                <h6 class="mb-0">Domingo 5 mayo 10:45h</h6>
+                <h6 class="mb-0">
+                  {{ reservation.dates.split('-')[1] }} | {{ reservation.partidaLastDay }} -
+                  {{ reservation.llegadaLastDay }}
+                </h6>
               </div>
               <div class="col-md-4">
                 <span>Reserva a nombre de: </span>
                 <h6 class="mb-0">{{ reservation.name }} {{ reservation.last_name }}</h6>
               </div>
             </div>
+            <Chip :label="translateStates[reservation.state]" class="mt-4" />
           </div>
         </article>
       </template>
@@ -177,6 +190,18 @@ import { useReservations } from '@/composables/useReservations'
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+
+import Chip from 'primevue/chip'
+
+const translateStates = {
+  pending: 'Pendiente de confirmar',
+  completed: 'Confirmada',
+  cancelled: 'Cancelada'
+}
+
+onMounted(async () => {
+  await getUserReservations()
+})
 
 const { reservations, getUserReservations } = useReservations()
 const { name, email, phone, lastName } = storeToRefs(useAuthStore())
@@ -199,7 +224,6 @@ onMounted(async () => {
 function toggleReservationActivated() {
   reservationActivated.value = !reservationActivated.value
 }
-
 </script>
 
 <style scoped>

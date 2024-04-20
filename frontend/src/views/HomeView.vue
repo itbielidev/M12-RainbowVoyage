@@ -11,9 +11,8 @@
     <div class="info-container">
       <p>
         El colectivo LGTBIQ reúne a personas con orientaciones sexuales o identidades de género no
-        convencionales. Han luchado por igualdad y visibilidad, enfrentando discriminación. Su
-        historia está marcada por el activismo y avances legales. Siguen abogando por inclusión y
-        respeto.
+        normativas. Han luchado por igualdad y visibilidad, enfrentando discriminación. Su historia
+        está marcada por el activismo y avances legales. Siguen abogando por inclusión y respeto.
       </p>
     </div>
     <CitiesList></CitiesList>
@@ -107,9 +106,6 @@ useSeoMeta({
 
 <style scoped>
 main {
-  background-color: rgba(171, 184, 195, 0.19);
-}
-main{
   background-color: rgba(171, 184, 195, 0.19);
 }
 body {

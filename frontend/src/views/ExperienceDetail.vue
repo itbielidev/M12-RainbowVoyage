@@ -31,15 +31,14 @@
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div
-                v-for="(image, index) in experience?.images.slice(1)"
+                v-for="(h, index) in hotel"
                 :key="index"
                 class="carousel-item"
                 :class="{ active: index === 0 }"
               >
                 <img
-                  :src="`/images/${experience?.city.name}/${image}`"
+                  :src="`/images/${experience?.city.name}/${h}`"
                   class="d-block w-100 img-carousel"
-                  :alt="`Slide ${index + 1}`"
                 />
               </div>
             </div>
@@ -149,6 +148,21 @@
       <button class="reserva d-none" type="submit">RESERVA</button>
     </div>
     <DatesForm class="my-5" :experienceId="props.experienceId" @reserve="openModal"></DatesForm>
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div
+          v-for="(image, index) in experience?.images.slice(1)"
+          class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center"
+          :key="index"
+        >
+          <img
+            :src="`/images/${experience?.city.name}/${image}`"
+            class="img-fluid rounded imagenDetalle"
+            :alt="`Experience photo ${index + 1}`"
+          />
+        </div>
+      </div>
+    </div>
     <FooterComponent></FooterComponent>
   </div>
 </template>
@@ -171,6 +185,8 @@ const dateId = ref<number>(-1)
 const date = ref<string>('')
 const people = ref<string>('')
 
+var hotel = ['hotel.webp', 'habitación.webp', 'copas.webp', 'piscina.webp', 'spa.webp']
+
 onMounted(async () => {
   await getExperience(props.experienceId)
 })
@@ -191,7 +207,8 @@ function goToReservationForm() {
       dateId: dateId.value,
       date: date.value,
       image: experience.value?.images[0],
-      people: people.value
+      people: people.value,
+      cityName: experience.value?.city.name
     }
   })
 }
@@ -215,7 +232,16 @@ const { open, close } = useModal({
   background-color: rgba(171, 184, 195, 0.19);
 }
 
-.content {
+.imagenDetalle {
+  width: 350px;
+  height: 200px;
+}
+
+.fotos {
+  margin-bottom: 10px;
+}
+
+main .content {
   background-color: black;
   padding: 20px;
 }

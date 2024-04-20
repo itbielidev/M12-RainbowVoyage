@@ -127,5 +127,11 @@ model Reservation {
   address       String
   city          String
   phone         String          @db.VarChar(9)
+  airportIn     String
+  airportOut    String
+  partidaFirstDay String
+  llegadaFirstDay String
+  partidaLastDay String
+  llegadaLastDay String        
   postal_code   String          
 }

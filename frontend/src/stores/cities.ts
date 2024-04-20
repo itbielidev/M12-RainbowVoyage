@@ -6,7 +6,7 @@ import { useFetch } from "@/composables/useFetch";
 
 export const useCitiesStore = defineStore('cities', () => {
 
-    const { get, fetchError, } = useFetch<{ cities: City[] }>();
+    const { get, fetchError, isLoading } = useFetch<{ cities: City[] }>();
 
     const error: Ref<boolean> = ref(false);
     const errorMessages: Ref<string[]> = ref([]);
@@ -43,5 +43,5 @@ export const useCitiesStore = defineStore('cities', () => {
         return cities.value?.find(city => city.name === name)?.description_detail
     }
 
-    return { cities, getAll, getCityByName, hoveredCities, error, errorMessages, getDescriptionDetailByName, getCityCoverImgByName }
+    return { cities, getAll, getCityByName, hoveredCities, error, errorMessages, isLoading, getDescriptionDetailByName, getCityCoverImgByName }
 })

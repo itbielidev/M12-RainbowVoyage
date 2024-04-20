@@ -13,16 +13,24 @@ const props = defineProps<{
   date: string
   image: string
   people: number
+  cityName: string
 }>()
 
 const {
+  selectedAirportIn,
   formData,
+  horaLlegadaFirstDay,
+  horaPartidaFirstDay,
+  horaLlegadaLastDay,
+  horaPartidaLastDay,
   error,
   errorMessages,
   validateForm,
   validateSecondForm,
   manageReservation,
-  validateCheckBox
+  validateCheckBox,
+  availableAirportsDestination,
+  availableAirportsOrigin
 } = useReservations()
 
 const currentIndex = ref<number>(0)
@@ -59,6 +67,54 @@ const numVisitors = props.people - 1
 
 watch(formData.value, () => {
   formData.value.email = formData.value.email.toLowerCase()
+  formData.value.emailConfirmation = formData.value.emailConfirmation.toLowerCase()
+})
+
+function setHours() {
+  formData.value.partidaFirstDay =
+    horaPartidaFirstDay[formData.value.airportIn.split('-')[0].replace(/\s$/, '')][props.cityName]
+
+  formData.value.llegadaFirstDay =
+    horaLlegadaFirstDay[formData.value.airportIn.split('-')[0].replace(/\s$/, '')][props.cityName]
+
+  formData.value.partidaLastDay =
+    horaPartidaLastDay[formData.value.airportIn.split('-')[0].replace(/\s$/, '')][props.cityName]
+
+  formData.value.llegadaLastDay =
+    horaLlegadaLastDay[formData.value.airportIn.split('-')[0].replace(/\s$/, '')][props.cityName]
+}
+
+onMounted(() => {
+  formData.value.name = name.value as string
+  formData.value.lastName = lastName.value as string
+  formData.value.email = email.value as string
+  formData.value.emailConfirmation = ''
+  formData.value.phone = phone.value as string
+  formData.value.numPeople = numVisitors.toString()
+  formData.value.dates = props.date
+  formData.value.dateId = props.dateId as string
+})
+
+onMounted(() => {
+  formData.value.name = name.value as string
+  formData.value.lastName = lastName.value as string
+  formData.value.email = email.value as string
+  formData.value.emailConfirmation = ''
+  formData.value.phone = phone.value as string
+  formData.value.numPeople = numVisitors.toString()
+  formData.value.dates = props.date
+  formData.value.dateId = props.dateId as string
+})
+
+onMounted(() => {
+  formData.value.name = name.value as string
+  formData.value.lastName = lastName.value as string
+  formData.value.email = email.value as string
+  formData.value.emailConfirmation = ''
+  formData.value.phone = phone.value as string
+  formData.value.numPeople = numVisitors.toString()
+  formData.value.dates = props.date
+  formData.value.dateId = props.dateId as string
 })
 
 onMounted(() => {
@@ -200,6 +256,28 @@ onMounted(() => {
               disabled
             />
           </div>
+          <label class="mb-2">Aeropuerto de origen :</label>
+          <select class="mb-4" v-model="formData.airportIn" @change="setHours()">
+            <optgroup>
+              <template v-for="(airport, index) in availableAirportsOrigin">
+                <option v-if="!airport.includes(props.cityName)" :value="airport" :key="index">
+                  {{ airport }}
+                </option>
+              </template>
+            </optgroup>
+          </select>
+          <label>Aeropuerto de destino :</label>
+          <select class="mb-4" v-model="formData.airportOut" @change="setHours()">
+            <optgroup>
+              <option
+                v-for="(airport, index) in availableAirportsDestination[props.cityName]"
+                :value="airport"
+                :key="index"
+              >
+                {{ airport }}
+              </option>
+            </optgroup>
+          </select>
         </section>
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
           <button class="button fw-bold mt-5 px-1 py-2" @click="goBack(0)" type="button">
@@ -246,6 +324,38 @@ onMounted(() => {
             </section>
             <section class="d-flex flex-column">
               <p><b>Dirección: </b>{{ formData.address }}</p>
+            </section>
+            <section>
+              <h3 class="text-start">
+                IDA: <font-awesome-icon class="ms-2" icon="fa-solid fa-plane" />
+              </h3>
+              <p>
+                <b>{{ selectedAirportIn }} - {{ props.cityName }}</b>
+              </p>
+              <p>
+                Hora salida:
+                {{ formData.partidaFirstDay }}
+              </p>
+              <p>
+                Hora llegada:
+                {{ formData.llegadaFirstDay }}
+              </p>
+            </section>
+            <section>
+              <h3 class="text-start">
+                VUELTA: <font-awesome-icon class="ms-2" icon="fa-solid fa-plane" />
+              </h3>
+              <p>
+                <b>{{ props.cityName }} - {{ selectedAirportIn }}</b>
+              </p>
+              <p>
+                Hora salida:
+                {{ formData.partidaLastDay }}
+              </p>
+              <p>
+                Hora llegada:
+                {{ formData.llegadaLastDay }}
+              </p>
             </section>
           </div>
         </section>
@@ -300,10 +410,6 @@ onMounted(() => {
 </style>
 <style scoped>
 main {
-  background-color: rgba(171, 184, 195, 0.19);
-}
-
-main{
   background-color: rgba(171, 184, 195, 0.19);
 }
 
@@ -420,6 +526,12 @@ button:hover {
 .exp_photo {
   min-width: 30%;
   width: 40%;
+}
+
+select {
+  border-radius: 5px;
+  height: 60px;
+  padding: 5px;
 }
 
 @media screen and (max-width: 569px) {

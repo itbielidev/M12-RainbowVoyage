@@ -64,10 +64,15 @@ export class ReservationModel {
         return [1, reservations]
     }
 
+    static async find(reservationId) {
+
+    }
+
     static async create(userId, bodyData, experienceId) {
         try {
 
-            const { numPeople, dates, dni, phone, email, postalCode, location, address, name, lastName } = bodyData;
+            const { numPeople, dates, dni, phone, email, postalCode, location, address, name, lastName,
+                airportIn, airportOut, partidaFirstDay, llegadaFirstDay, partidaLastDay, llegadaLastDay } = bodyData;
 
             let { dateId } = bodyData
             dateId = Number(dateId);
@@ -89,7 +94,13 @@ export class ReservationModel {
                     city: location,
                     address: address,
                     name: name,
-                    last_name: lastName
+                    last_name: lastName,
+                    airportIn: airportIn,
+                    airportOut: airportOut,
+                    partidaFirstDay: partidaFirstDay,
+                    partidaLastDay: partidaLastDay,
+                    llegadaFirstDay: llegadaFirstDay,
+                    llegadaLastDay: llegadaLastDay
                 }
             })
 
@@ -204,7 +215,15 @@ export class ReservationModel {
         };
 
 
-        //Mark reservation as completed 
+        //Mark reservation as completed (update)
+        await prismadb.reservation.updateMany({
+            where: {
+                id: reservation.id
+            },
+            data: {
+                state: ReservationState.completed
+            }
+        })
 
         //To test email format.
         //fs.writeFileSync('preview.html', emailBody, 'utf8');

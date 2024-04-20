@@ -71,7 +71,7 @@ export const useRegister = () => {
         if (formData.value.phone === "" || /[\p{L}]/u.test(formData.value.phone) || formData.value.phone.length !== 9) {
             errorMessages.value.push("El número de teléfono introducido no es correcto. El teléfono debe tener exactamente 9 dígitos.");
             error.value = true;
-        }
+        } 
 
         if (/\d/
             .test(formData.value.lastName) && formData.value.lastName.length > 0) {

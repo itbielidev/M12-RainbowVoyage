@@ -25,6 +25,10 @@ const query = ref({
   ...route.query
 })
 
+const refreshReservations = async () => {
+  await getData()
+}
+
 watch(
   query,
   async () => {
@@ -59,7 +63,7 @@ onMounted(async () => await getData())
       ></InputText>
     </div>
     <div class="text-center d-flex justify-content-center w-25 justify-self-end m-auto">
-      <input type="button" class="button" value="Cerrar sesión" @click="logout" />
+      <input type="button" class="btn" value="Cerrar sesión" @click="logout" />
     </div>
   </nav>
   <!-- Mobile Menu-->
@@ -94,7 +98,7 @@ onMounted(async () => await getData())
         <li>
           <input
             type="button"
-            class="button w-100"
+            class="btn w-100"
             value="Por confirmar"
             @click="setReservationState('pending')"
           />
@@ -102,7 +106,7 @@ onMounted(async () => await getData())
         <li>
           <input
             type="button"
-            class="button w-100"
+            class="btn w-100"
             value="Confirmadas"
             @click="setReservationState('completed')"
           />
@@ -115,7 +119,7 @@ onMounted(async () => await getData())
         <li>
           <input
             type="button"
-            class="button w-100"
+            class="btn w-100"
             value="Por confirmar"
             @click="setReservationState('pending')"
           />
@@ -123,7 +127,7 @@ onMounted(async () => await getData())
         <li>
           <input
             type="button"
-            class="button w-100"
+            class="btn w-100"
             value="Confirmadas"
             @click="setReservationState('completed')"
           />
@@ -139,6 +143,7 @@ onMounted(async () => await getData())
         v-for="reservation in reservations"
         :key="reservation.id"
         :reservation="reservation"
+        @refresh="refreshReservations()"
       ></ReservationCard>
     </section>
     <section class="text-center" v-else-if="reservations && reservations.length === 0">
@@ -154,9 +159,8 @@ onMounted(async () => await getData())
 }
 main {
   background-color: rgba(171, 184, 195, 0.19);
-}main{
-  background-color: rgba(171, 184, 195, 0.19);
 }
+
 .reservations-section,
 .tabs-menu {
   background-color: #f4f8fb;
@@ -181,13 +185,13 @@ ul {
   height: auto;
 }
 
-.button {
+.btn {
   background-color: rgba(217, 5, 148, 1);
   color: white;
   margin-bottom: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   width: max-content;
-  font-size: 24px;
+  padding: 0.6rem 1rem;
 }
 
 @media screen and (max-width: 991px) {
