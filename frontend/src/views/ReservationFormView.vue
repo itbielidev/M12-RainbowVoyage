@@ -105,6 +105,17 @@ onMounted(() => {
   formData.value.dates = props.date
   formData.value.dateId = props.dateId as string
 })
+
+onMounted(() => {
+  formData.value.name = name.value as string
+  formData.value.lastName = lastName.value as string
+  formData.value.email = email.value as string
+  formData.value.emailConfirmation = ''
+  formData.value.phone = phone.value as string
+  formData.value.numPeople = numVisitors.toString()
+  formData.value.dates = props.date
+  formData.value.dateId = props.dateId as string
+})
 </script>
 
 <template>
