@@ -60,7 +60,7 @@ useSeoMeta({
 })
 </script>
 <template>
-  <header>
+  <header class="container">
     <NavBar></NavBar>
     <section class="cover-city">
       <img class="cover" :src="`/images/${getCityCoverImgByName(props.cityName, 1)}`" />
@@ -71,8 +71,8 @@ useSeoMeta({
       </div>
     </section>
   </header>
-  <body>
-    <section class="filters cotainer">
+  <body class="container">
+    <section class="filters">
       <button type="button" class="btn btn-light">
         Participantes:
         <select class="form-select" aria-label="Default select example">
@@ -142,7 +142,7 @@ useSeoMeta({
         </select>
       </button>
     </section>
-    <main>
+    <main class="container">
       <section class="experience-quote">
         <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
       </section>
@@ -156,7 +156,7 @@ useSeoMeta({
           <div class="experience-description">
             <h3 class="route-title">{{ experience.name }}</h3>
             <span class="experience-length">{{ experience.duration }} dias</span>
-            <p><strong>Visitando: </strong>{{ experience.descriptions[0] }}</p>
+            <p class="experience-activities"><strong>Actividades: </strong>{{ experience.descriptions[0] }}</p>
             <RouterLink
               :to="{
                 name: 'experienceDetail',
@@ -187,11 +187,10 @@ useSeoMeta({
 * {
   font-family: Roboto;
 }
-body {
-  background-color: rgba(171, 184, 195, 0.19);
-}
+
 .cover-city {
   position: relative;
+  width: 100%;
 }
 
 .cover-city img.cover {
@@ -227,7 +226,7 @@ section.filters {
 }
 
 main {
-  background-color: rgb(203, 212, 219);
+  background-color:#CBD4DB;
 }
 
 .experience-quote {
@@ -307,11 +306,10 @@ button.price {
 }
 
 /* Tablet */
-@media (max-width: 768px) {
+@media (max-width: 994px) {
   section.cover-city {
     display: flex;
     align-items: center;
-    margin-top: 5rem;
   }
 
   section.cover-city img.cover {
@@ -350,13 +348,6 @@ button.price {
     font-size: 1.8rem;
   }
 
-  div.experience-description {
-    width: 200px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 576px) {
   article.art-experience {
     flex-direction: column;
     height: auto;
@@ -364,6 +355,27 @@ button.price {
 
   div.experience-description {
     width: auto;
+  }
+
+  div.experience-description p {
+    font-size: 1 rem;
+  }  
+
+}
+
+/* Mobile */
+@media (max-width: 607px) {
+  article.art-experience {
+    flex-direction: column;
+    height: auto;
+  }
+
+  div.experience-description {
+    width: auto;
+  }
+
+  div.experience-description p {
+    font-size: 0.8rem;
   }
 
   section.filters {
