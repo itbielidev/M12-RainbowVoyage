@@ -169,7 +169,18 @@
                 <h6 class="mb-0">{{ reservation.name }} {{ reservation.last_name }}</h6>
               </div>
             </div>
-            <Chip :label="translateStates[reservation.state]" class="mt-4" />
+            <div class="d-flex w-100 gap-3">
+              <Chip :label="translateStates[reservation.state]" class="mt-4 me-auto" />
+              <div class="mt-3 text-center text-lg-start d-flex justify-content-start">
+                <RouterLink
+                  :to="{ name: 'reservationDetail', params: { reservationId: reservation.id } }"
+                  class="btn pink-button"
+                  @click="toggleReservationActivated"
+                >
+                  Ver detalle
+                </RouterLink>
+              </div>
+            </div>
           </div>
         </article>
       </template>

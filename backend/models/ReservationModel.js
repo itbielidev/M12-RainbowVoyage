@@ -65,7 +65,22 @@ export class ReservationModel {
     }
 
     static async find(reservationId) {
+        try {
+            const reservation = await prismadb.reservation.findFirst({
+                where: {
+                    id: reservationId
+                },
+                include: {
+                    user: true,
+                    experience: true
+                }
+            })
 
+            return [1, reservation]
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     static async create(userId, bodyData, experienceId) {

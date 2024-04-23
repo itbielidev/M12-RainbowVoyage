@@ -86,6 +86,19 @@ const router = createRouter({
       name: 'policy',
       component: () => import("@/views/PolicyView.vue")
     },
+    {
+      path: '/reservationDetail/:reservationId',
+      name: 'reservationDetail',
+      component: () => import("@/views/ReservationDetail.vue"),
+      props: route => ({ ...route.params, reservationId: Number(route.params.reservationId) }),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore()
+        if (authStore.userIsLoggedIn && !authStore.isAdmin) { next() }
+        else {
+          next("/")
+        }
+      }
+    }
   ]
 })
 
