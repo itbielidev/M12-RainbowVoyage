@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light menu">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light menu fixed-top">
     <div class="container">
       <RouterLink to="/" class="navbar-brand">
         <img src="/images/logo.webp" alt="Logo" class="logo" />
