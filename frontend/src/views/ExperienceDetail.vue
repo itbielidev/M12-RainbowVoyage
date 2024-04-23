@@ -1,169 +1,72 @@
 <template>
   <div class="body">
     <NavBar></NavBar>
-    <div class="content">
-      <h1>{{ experience?.city.name }}: {{ experience?.name }}</h1>
-    </div>
-    <div class="container mt-5 text-center">
-      <div class="row">
-        <div class="col-md-6">
-          <!-- <p>
-            ¡Axel Hotel Barcelona, tu oasis de estilo, confort y diversión en el corazón de
-            Barcelona!
-          </p>
-          <p>
-            Nuestro hotel, ubicado en el emblemático barrio del Eixample, es mucho más que un lugar
-            para alojarse; ¡es un destino en sí mismo! Con un enfoque único en la comunidad LGBTQ+,
-            cada detalle refleja nuestra calidez y modernidad.
-          </p>
-          <p>
-            Disfruta de lujosas habitaciones y suites, sumérgete en nuestra piscina en la azotea con
-            vistas impresionantes, y explora la rica cultura y vida nocturna de Barcelona.
-          </p>
-          <p>
-            ¡Estamos aquí para hacer que tu estancia sea inolvidable, ya sea por negocios o por
-            placer! ¡Únete a nosotros y descubre por qué somos un destino vibrante para todos!
-          </p> -->
-          <p class="exp-description">{{ experience?.descriptions[1] }}</p>
-        </div>
-        <div class="col-md-6">
-          <!-- Carrusel de Fotos -->
-          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div
-                v-for="(h, index) in hotel"
-                :key="index"
-                class="carousel-item"
-                :class="{ active: index === 0 }"
-              >
-                <img
-                  :src="`/images/${experience?.city.name}/${h}`"
-                  class="d-block w-100 img-carousel"
-                />
+    <div class="contenido">
+      <div class="content">
+        <h1>{{ experience?.city.name }}: {{ experience?.name }}</h1>
+      </div>
+      <div class="container mt-5 text-center">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="exp-description">{{ experience?.descriptions[1] }}</p>
+          </div>
+          <div class="col-md-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div v-for="(h, index) in hotel" :key="index" class="carousel-item" :class="{ active: index === 0 }">
+                  <img :src="`/images/${experience?.city.name}/${h}`" class="d-block w-100 img-carousel" />
+                </div>
               </div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-                style="color: transparent"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-                style="color: transparent"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
-        <div class="container d-flex justify-content-center align-items-center">
-          <div class="border rounded-5 pack">
-            <div>
-              <h4 class="text-center fw-bold">Tu pack incluye</h4>
-              <ul class="text-center includes" style="list-style-type: none">
-                <!-- <li>Asistencia a la llegada</li>
-                <li>4 noches</li>
-                <li>Todo incluido</li>
-                <li>Teléfono de emergencias 24h/365días.</li>
-                <li>
-                  REGALO:
-                  <ul style="list-style-type: none">
-                    <li>1 día de SPA</li>
-                  </ul>
-                </li>
-                <li>Rutas</li> -->
-                <li
-                  v-for="(inc, index) in experience?.descriptions.slice(-1)[0].split('.')"
-                  :key="index"
-                >
-                  {{ inc }}
-                </li>
-              </ul>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="color: transparent"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" style="color: transparent"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
-        </div>
-        <!--Rutas-->
-        <div class="d-flex justify-content-evenly flex-wrap">
-          <div
-            v-for="(day, index) in experience?.days_descriptions"
-            :key="index"
-            class="d-flex justify-content-center"
-          >
-            <div class="circle">
-              <div class="contenidoRutas">
-                <p class="dia">DIA {{ index + 1 }}</p>
-                <p class="info">{{ day }}</p>
+          <div class="container d-flex justify-content-center align-items-center">
+            <div class="border rounded-5 pack">
+              <div>
+                <h4 class="text-center fw-bold">Tu pack incluye</h4>
+                <ul class="text-center includes" style="list-style-type: none">
+                  <li v-for="(inc, index) in experience?.descriptions.slice(-1)[0].split('.')" :key="index">
+                    {{ inc }}
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-          <!-- <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 1</p>
-              <p class="info">Casa Batlló visita guida de 16:30-18:00</p>
+          <div class="d-flex justify-content-evenly flex-wrap">
+            <div v-for="(day, index) in experience?.days_descriptions" :key="index"
+              class="d-flex justify-content-center">
+              <div class="circle">
+                <div class="contenidoRutas">
+                  <p class="dia">DIA {{ index + 1 }}</p>
+                  <p class="info">{{ day }}</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 2</p>
-              <p class="info">Sagrada Familia visita guiada de 9:30-11:00</p>
-            </div>
-          </div>
-          <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 3</p>
-              <p class="info">Excursión a Montserrat de 9:00-18:00</p>
-            </div>
-          </div> -->
         </div>
-        <!-- <div class="d-flex justify-content-center">
-          <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 4</p>
-              <p class="info">Parc Güell viista guiada de 12:30-14:00</p>
-            </div>
-          </div>
-          <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 5</p>
-              <p class="info">La Pedrera visita guiada de 15:00-17:00</p>
-              <p class="info">Paseo por la Ciutadella</p>
-            </div>
-          </div>
-        </div> -->
+        <button class="reserva d-none" type="submit">RESERVA</button>
       </div>
-      <button class="reserva d-none" type="submit">RESERVA</button>
-    </div>
-    <DatesForm class="my-5" :experienceId="props.experienceId" @reserve="openModal"></DatesForm>
-    <div class="container">
-      <div class="row justify-content-center align-items-center">
-        <div
-          v-for="(image, index) in experience?.images.slice(1)"
-          class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center"
-          :key="index"
-        >
-          <img
-            :src="`/images/${experience?.city.name}/${image}`"
-            class="img-fluid rounded imagenDetalle"
-            :alt="`Experience photo ${index + 1}`"
-          />
+      <DatesForm class="my-5" :experienceId="props.experienceId" @reserve="openModal"></DatesForm>
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div v-for="(image, index) in experience?.images.slice(1)"
+            class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center" :key="index">
+            <img :src="`/images/${experience?.city.name}/${image}`" class="img-fluid rounded imagenDetalle"
+              :alt="`Experience photo ${index + 1}`" />
+          </div>
         </div>
       </div>
+      <FooterComponent></FooterComponent>
     </div>
-    <FooterComponent></FooterComponent>
   </div>
 </template>
 
@@ -241,7 +144,7 @@ const { open, close } = useModal({
   margin-bottom: 10px;
 }
 
-main .content {
+.content {
   background-color: black;
   padding: 20px;
 }
@@ -425,5 +328,9 @@ p {
 
 ul.includes li:last-child {
   display: none;
+}
+
+.contenido{
+  margin-top: 150px;
 }
 </style>
