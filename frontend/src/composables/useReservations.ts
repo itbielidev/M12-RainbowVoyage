@@ -140,7 +140,7 @@ export const useReservations = () => {
         }
     }
 
-    const { fetchError, getAuth } = useFetch<Reservation[]>();
+    const { fetchError, getAuth, isLoading: isLoadingReservations } = useFetch<Reservation[]>();
     const { getAuth: getDetail, fetchError: fetchErrorDetail, isLoading: isLoadingDetail } = useFetch<Reservation>();
     const { getAuth: sendEmailFetch } = useFetch<any>();
     const { postAuth: postReservation, fetchError: fetchErrorPost } = useFetch<any>();
@@ -325,5 +325,5 @@ export const useReservations = () => {
 
     }
 
-    return { isLoadingDetail, getReservation, reservation, selectedAirportIn, horaPartidaFirstDay, horaPartidaLastDay, horaLlegadaLastDay, horaLlegadaFirstDay, formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, availableAirportsDestination, availableAirportsOrigin, sendEmail, manageReservation, validateCheckBox, getUserReservations };
+    return { isLoadingDetail, isLoadingReservations, getReservation, reservation, selectedAirportIn, horaPartidaFirstDay, horaPartidaLastDay, horaLlegadaLastDay, horaLlegadaFirstDay, formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, availableAirportsDestination, availableAirportsOrigin, sendEmail, manageReservation, validateCheckBox, getUserReservations };
 };
