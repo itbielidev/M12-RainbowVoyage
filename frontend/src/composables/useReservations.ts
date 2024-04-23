@@ -140,11 +140,13 @@ export const useReservations = () => {
         }
     }
 
-    const { get, fetchError, getAuth } = useFetch<Reservation[]>();
+    const { fetchError, getAuth } = useFetch<Reservation[]>();
+    const { getAuth: getDetail, fetchError: fetchErrorDetail, isLoading: isLoadingDetail } = useFetch<Reservation>();
     const { getAuth: sendEmailFetch } = useFetch<any>();
     const { postAuth: postReservation, fetchError: fetchErrorPost } = useFetch<any>();
 
     const reservations: Ref<Reservation[] | null> = ref([]);
+    const reservation: Ref<Reservation | null> = ref(null);
 
     const error: Ref<boolean> = ref(false);
     const errorMessages: Ref<string[]> = ref([]);
@@ -161,6 +163,19 @@ export const useReservations = () => {
         }
         else {
             reservations.value = reservationsData;
+        }
+    }
+
+    async function getReservation(reservationId: number) {
+        const reservationData = await getDetail(`/reservations/${reservationId}`);
+        if (fetchErrorDetail.value) {
+            reservation.value = null;
+            error.value = true;
+            errorMessages.value.push(fetchErrorDetail.value);
+            return;
+        }
+        else {
+            reservation.value = reservationData;
         }
     }
 
@@ -310,5 +325,5 @@ export const useReservations = () => {
 
     }
 
-    return { selectedAirportIn, horaPartidaFirstDay, horaPartidaLastDay, horaLlegadaLastDay, horaLlegadaFirstDay, formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, availableAirportsDestination, availableAirportsOrigin, sendEmail, manageReservation, validateCheckBox, getUserReservations };
+    return { isLoadingDetail, getReservation, reservation, selectedAirportIn, horaPartidaFirstDay, horaPartidaLastDay, horaLlegadaLastDay, horaLlegadaFirstDay, formData, reservations, error, errorMessages, getReservations, validateForm, validateSecondForm, availableAirportsDestination, availableAirportsOrigin, sendEmail, manageReservation, validateCheckBox, getUserReservations };
 };
