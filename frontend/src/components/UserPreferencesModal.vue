@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { VueFinalModal } from 'vue-final-modal'
+import { useModal } from 'vue-final-modal'
+import UserPreferencesModal from '@/components/UserPreferencesModal.vue'
 
-const emit = defineEmits<{
-  (e: 'confirm'): void
-  (e: 'cancel'): void
-}>()
-
-
+const { open, close } = useModal({
+  component: UserPreferencesModal,
+  attrs: {
+    onConfirm() {
+      close()
+    },
+    onCancel() {
+      close()
+    }
+  }
+})
 
 </script>
 <template>
@@ -128,7 +134,7 @@ const emit = defineEmits<{
             <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(1)" type="button">
               ATRÁS
             </button>
-            <button class="button fw-bold mt-2 px-1 py-2" @click="modifyIndex(3)" type="button">
+            <button class="button fw-bold mt-2 px-1 py-2" @click="open()" type="button">
               GUARDAR
             </button>
           </section>

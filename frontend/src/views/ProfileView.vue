@@ -127,6 +127,8 @@
     <section v-if="!reservationActivated" class="card border p-2 my-4 mx-5 d-flex text-start">
       <div class="card-header border-bottom" style="background-color: white">
         <h4 class="card-header-title">Mis Reservas</h4>
+        <h5>Preferencias de Búsqueda</h5>
+        <a href="#" class="btn pink-button">Guardar</a>
       </div>
       <template v-if="reservations && reservations.length > 0">
         <article v-for="reservation in reservations" :key="reservation.id" class="card-body">
@@ -175,7 +177,6 @@
                 <RouterLink
                   :to="{ name: 'reservationDetail', params: { reservationId: reservation.id } }"
                   class="btn pink-button"
-                  @click="toggleReservationActivated"
                 >
                   Ver detalle
                 </RouterLink>
