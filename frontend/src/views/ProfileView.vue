@@ -5,7 +5,7 @@
     style="margin-top: 6rem"
   >
     <h2 class="text-center">Mi perfil</h2>
-    <div class="mt-3 text-center text-lg-start d-flex justify-content-start">
+    <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end">
       <a href="#" class="btn pink-button" @click="toggleReservationActivated">
         {{ !reservationActivated ? 'Mis datos' : 'Mis reservas' }}
       </a>
@@ -70,14 +70,7 @@
               v-model="email"
             />
           </div>
-          <!-- address -->
-          <!-- <div class="col-md-12">
-            <label class="form-label">
-              Dirección
-              <span class="text-danger">*</span>
-            </label>
-            <input type="text" class="form-control" placeholder="calle número población" />
-          </div> -->
+ 
           <div class="col-12 text-end">
             <a href="#" class="btn pink-button">Guardar</a>
           </div>
