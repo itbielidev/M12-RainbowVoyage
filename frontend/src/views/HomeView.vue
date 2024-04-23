@@ -58,7 +58,7 @@ body {
   margin-left: 250px;
   margin-right: 250px;
   text-align: center;
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .image-container {
