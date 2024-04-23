@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
-import { useModal } from 'vue-final-modal'
-import UserPreferencesModal from '@/components/UserPreferencesModal.vue'
+import { ref } from 'vue';
+const formData = ref({
+        num_people_min: null,
+        num_people_max: null,
+        duration_min: null,
+        duration_max: null,
+        experience_type: null,
+        price_min: null,
+        price_max: null,
+        checkbox: false,
+        adult: false
+    })
 
-const { open, close } = useModal({
-  component: UserPreferencesModal,
-  attrs: {
-    onConfirm() {
-      close()
-    },
-    onCancel() {
-      close()
-    }
-  }
-})
+    const emit = defineEmits<{
+  (e: 'cancel'): void
+  (e: 'confirm', data: any): void
+}>()
 
 </script>
 <template>
@@ -24,7 +27,7 @@ const { open, close } = useModal({
     content-transition="vfm-fade"
   >
     <section class="content-box register-box p-5">
-        <template v-if="currentIndex === 2">
+     
           <h2 class="h4 mb-5">
           Mis preferencias
           </h2>
@@ -102,6 +105,7 @@ const { open, close } = useModal({
                     <option value="3">850</option>
                     <option value="4">950</option>
                     <option value="5">1150</option>
+                    </optgroup>
                 </select>
               </div>
               <div class="d-flex gap-1">
@@ -131,16 +135,122 @@ const { open, close } = useModal({
             </section>
           </section>
           <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5 mt-4">
-            <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(1)" type="button">
+            <button class="button fw-bold mt-2 px-1 py-2" @click='emit("cancel")' type="button">
               ATRÁS
             </button>
-            <button class="button fw-bold mt-2 px-1 py-2" @click="open()" type="button">
+            <button class="button fw-bold mt-2 px-1 py-2" @click='emit("confirm", formData)' type="button">
               GUARDAR
             </button>
           </section>
-        </template>
     </section>
   </VueFinalModal>
 </template>
 <style scoped>
+orm {
+  display: flex;
+  flex-direction: column;
+}
+
+form input {
+  border-radius: 5px;
+  border: 2px solid #d90594;
+  background: white;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+form input #placeholder {
+  color: #d3d3d3;
+}
+
+button {
+  color: white;
+  margin: 0 auto;
+  width: 70%;
+}
+
+.terms {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.register-box {
+  background-color: white;
+}
+h1 {
+  color: #d90594;
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.button {
+  border-radius: 5px;
+  background-color: #d90594;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.number-box {
+  border: 2px solid rgb(77, 77, 77);
+  width: 60px;
+  height: 60px;
+}
+
+.border-pink {
+  border: 2px solid #d90594;
+}
+
+h2,
+h3,
+h4 {
+  color: #d90594;
+  text-align: center;
+}
+select {
+  background-color: white;
+  border: none;
+  border: 2px solid #d90594;
+}
+
+button {
+  min-width: max-content;
+}
+
+button:hover {
+  color: #d90594;
+  background-color: white;
+  border: 1px solid #d90594;
+  transform: scale(1.05, 1.05);
+}
+
+.pass-box {
+  position: relative;
+}
+
+.eye-box {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  cursor: pointer;
+}
+
+.logo-img {
+  width: 30%;
+}
+
+.fa-xmark {
+  font-size: x-large;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.fa-xmark:hover {
+  color: #d90594;
+}
 </style>

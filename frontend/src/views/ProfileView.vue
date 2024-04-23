@@ -1,3 +1,63 @@
+<script setup lang="ts">
+import NavBar from '../components/NavBar.vue'
+import FooterComponent from '@/components/FooterComponent.vue'
+import TripIcon from '@/components/icons/TripIcon.vue'
+import { useReservations } from '@/composables/useReservations'
+import { onMounted, ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
+
+import Chip from 'primevue/chip'
+
+const translateStates = {
+  pending: 'Pendiente de confirmar',
+  completed: 'Confirmada',
+  cancelled: 'Cancelada'
+}
+
+onMounted(async () => {
+  await getUserReservations()
+})
+
+const { reservations, getUserReservations } = useReservations()
+const { name, email, phone, lastName } = storeToRefs(useAuthStore())
+
+const formData = ref({
+  name: name,
+  email: email,
+  phone: phone,
+  lastName: lastName
+})
+
+const reservationActivated = ref(true)
+const updatingEmail = ref(false)
+const updatingPassword = ref(false)
+
+onMounted(async () => {
+  await getUserReservations()
+})
+
+function toggleReservationActivated() {
+  reservationActivated.value = !reservationActivated.value
+}
+
+import UserPreferencesModal from '@/components/UserPreferencesModal.vue'
+import { useModal } from 'vue-final-modal'
+
+const { open, close } = useModal({
+  component: UserPreferencesModal,
+  attrs: {
+    onConfirm(data: any) {
+      // console.log(data) hay que guardar los datos en la base de datos
+      close()
+    },
+    onCancel() {
+      close()
+    }
+  }
+})
+</script>
+
 <template>
   <NavBar></NavBar>
   <main
@@ -118,10 +178,10 @@
 
     <!-- BOOKINGS -->
     <section v-if="!reservationActivated" class="card border p-2 my-4 mx-5 d-flex text-start">
-      <div class="card-header border-bottom" style="background-color: white">
+      <div class="card-header border-bottom d-flex justify-content-between align-items-center" style="background-color: white">
         <h4 class="card-header-title">Mis Reservas</h4>
-        <h5>Preferencias de Búsqueda</h5>
-        <a href="#" class="btn pink-button">Guardar</a>
+        <h5 class="d-flex align-items-center gap-3">Preferencias de Búsqueda<button @click="open" class="btn pink-button me-0">Cambiar</button></h5>
+        
       </div>
       <template v-if="reservations && reservations.length > 0">
         <article v-for="reservation in reservations" :key="reservation.id" class="card-body">
@@ -187,50 +247,6 @@
   <FooterComponent></FooterComponent>
 </template>
 
-<script setup lang="ts">
-import NavBar from '../components/NavBar.vue'
-import FooterComponent from '@/components/FooterComponent.vue'
-import TripIcon from '@/components/icons/TripIcon.vue'
-import { useReservations } from '@/composables/useReservations'
-import { onMounted, ref } from 'vue'
-import { useAuthStore } from '@/stores/auth'
-import { storeToRefs } from 'pinia'
-
-import Chip from 'primevue/chip'
-
-const translateStates = {
-  pending: 'Pendiente de confirmar',
-  completed: 'Confirmada',
-  cancelled: 'Cancelada'
-}
-
-onMounted(async () => {
-  await getUserReservations()
-})
-
-const { reservations, getUserReservations } = useReservations()
-const { name, email, phone, lastName } = storeToRefs(useAuthStore())
-
-const formData = ref({
-  name: name,
-  email: email,
-  phone: phone,
-  lastName: lastName
-})
-
-const reservationActivated = ref(true)
-const updatingEmail = ref(false)
-const updatingPassword = ref(false)
-
-onMounted(async () => {
-  await getUserReservations()
-})
-
-function toggleReservationActivated() {
-  reservationActivated.value = !reservationActivated.value
-}
-</script>
-
 <style scoped>
 * {
   font-family: 'Roboto';
@@ -239,7 +255,7 @@ function toggleReservationActivated() {
 .pink-button {
   background-color: #d90594;
   padding: 0.6rem 1rem;
-  border-radius: 12px;
+  border-radius: 4rem;
   color: white;
 }
 
@@ -249,5 +265,9 @@ function toggleReservationActivated() {
 
 .pink-button a {
   text-decoration: none;
+}
+
+h5{
+  font-size: 1rem
 }
 </style>
