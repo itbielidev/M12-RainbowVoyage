@@ -10,6 +10,7 @@ export const createReservationRouter = (reservationModel) => {
     reservationRouter.get("/", authenticateToken, reservationController.getAll);
     reservationRouter.get("/user", authenticateToken, reservationController.getByUser);
     reservationRouter.get("/sendEmail/:reservationId", authenticateToken, reservationController.sendEmail);
+    reservationRouter.get("/:reservationId", authenticateToken, reservationController.find);
     reservationRouter.post("/:experienceId", authenticateToken, reservationController.create);
 
 
