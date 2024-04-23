@@ -17,71 +17,12 @@
     </div>
     <CitiesList></CitiesList>
   </div>
-  <footer style="background-color: #000000; opacity: 0.62; color: white">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <p class="text-center">CONTACTO</p>
-          <div style="display: flex; flex-direction: column; align-items: center">
-            <p style="font-size: 20px; display: flex; align-items: center">
-              <font-awesome-icon
-                icon="fa-solid fa-phone"
-                style="color: #ffffff; font-size: 40px; margin-right: 20px"
-              ></font-awesome-icon>
-              <span>765 972 423</span>
-            </p>
-            <p style="font-size: 20px; display: flex; align-items: center">
-              <font-awesome-icon
-                icon="fa-solid fa-envelope"
-                style="color: #ffffff; font-size: 40px; margin-right: 20px"
-              ></font-awesome-icon>
-              <span>rainbow@gmail.com</span>
-            </p>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <p class="text-center">REDES SOCIALES</p>
-          <div class="social-icons text-center">
-            <font-awesome-icon
-              icon="fa-brands fa-facebook"
-              style="color: #ffffff; font-size: 60px; margin-right: 20px"
-            ></font-awesome-icon>
-            <font-awesome-icon
-              icon="fa-brands fa-twitter"
-              style="color: #ffffff; font-size: 60px; margin-right: 20px"
-            ></font-awesome-icon>
-            <font-awesome-icon
-              icon="fa-brands fa-instagram"
-              style="color: #ffffff; font-size: 60px"
-            ></font-awesome-icon>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-          <p class="text-center">NEWSLETTER</p>
-          <div class="text-center">
-            <input type="text" style="margin-bottom: 5px" /><br />
-            <button
-              style="
-                background-color: rgba(217, 5, 148, 1);
-                color: white;
-                margin-bottom: 10px;
-                border-radius: 15px;
-                width: 130px;
-                font-size: 24px;
-              "
-            >
-              Enviar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <FooterComponent></FooterComponent>
 </template>
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
 import CitiesList from '@/components/CitiesList.vue'
+import FooterComponent from "@/components/FooterComponent.vue";
 import { onMounted } from 'vue'
 import { useCitiesStore } from '@/stores/cities'
 import { useSeoMeta } from '@unhead/vue'
@@ -105,17 +46,19 @@ useSeoMeta({
 </script>
 
 <style scoped>
-main {
+.main {
   background-color: rgba(171, 184, 195, 0.19);
 }
+
 body {
   overflow-x: hidden;
 }
 
 .info-container p {
-  margin-left: 20px;
-  margin-right: 20px;
-  /* Ajusta los valores de margin-left y margin-right según tus necesidades */
+  margin-left: 250px;
+  margin-right: 250px;
+  text-align: center;
+  font-size: 22px;
 }
 
 .image-container {
@@ -124,7 +67,7 @@ body {
 }
 
 img {
-  width: 100%;
+  width: 74%;
 }
 
 .text-container {
@@ -136,34 +79,21 @@ img {
   text-align: center;
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Fondo negro semitransparente */
   backdrop-filter: blur(10px);
-  /* Efecto de desenfoque en el fondo */
 }
 
 h3 {
   font-size: 40px;
 }
 
-p {
-  text-align: center;
-  font-size: 35px;
-}
-
-/* Media queries para ajustar estilos en dispositivos móviles y tabletas */
-@media (max-width: 768px) {
-  .text-container {
-    padding: 20px;
-  }
-
-  h3 {
-    font-size: 30px;
-  }
-}
 
 @media (max-width: 768px) {
   .info-container p {
     font-size: 25px; /* Tamaño de fuente predeterminado */
+  }
+
+  h3{
+    font-size: 20px;
   }
 }
 
@@ -171,6 +101,10 @@ p {
 @media screen and (max-width: 575.98px) {
   .info-container p {
     font-size: 18px; /* Reducir el tamaño de fuente para pantallas xs */
+  }
+
+  h3{
+    font-size: 12px;
   }
 }
 </style>
