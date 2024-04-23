@@ -11,7 +11,7 @@
               <p>{{ city.description }}</p>
             </div>
             <div class="text-container">
-              <p class="m-0 fw-bolder">{{ city.name }}</p>
+              <p class="m-0 fw-bolder text">{{ city.name }}</p>
             </div>
           </div>
         </RouterLink>
@@ -43,6 +43,10 @@ const hoverCity = (index: number, hovered: boolean) => {
 .image-container {
   position: relative;
   width: 100%;
+}
+
+.text{
+  text-transform: uppercase;
 }
 
 .overlay {
@@ -97,7 +101,6 @@ const hoverCity = (index: number, hovered: boolean) => {
   transform: translate(-50%, -50%);
   font-size: 50px;
   color: black;
-  text-transform: uppercase
 }
 
 .imgCities {
