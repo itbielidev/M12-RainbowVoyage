@@ -157,6 +157,29 @@ export class UserModel {
         }
     }
 
+    static async updatePreferences(userId, data) {
+
+        try {
+            const user = await prismadb.user.findFirst({
+                where: {
+                    user: userId
+                },
+                include: {
+                    preference: true
+                }
+            })
+
+            const preference = user.preference;
+
+            console.log(preference);
+
+            return [1, preference];
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
     // static async delete(user_data) {
     //     try {
     //         const deletedUser = await prismadb.user.update({
