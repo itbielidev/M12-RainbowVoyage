@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light menu">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light menu fixed-top">
     <div class="container">
       <RouterLink to="/" class="navbar-brand">
         <img src="/images/logo.webp" alt="Logo" class="logo" />
@@ -95,9 +95,8 @@ const { open: openLogin, close: closeLogin } = useModal({
 </script>
 
 <style>
-/* Agregar estilo para el contenedor de los enlaces */
 .menu{
-  height: 100px;
+  height: 150px;
 }
 
 .nav-link-container {
@@ -133,9 +132,9 @@ const { open: openLogin, close: closeLogin } = useModal({
 
 .logo {
   padding-top: 0px;
-  height: 100px;
+  height: 175px;
   width: auto;
-
+  margin-top: 15px;
 }
 
 
@@ -157,7 +156,7 @@ const { open: openLogin, close: closeLogin } = useModal({
 .navegador {
   color: #d90594;
   font-weight: bolder;
-  font-size: 15px;
+  font-size: 20px;
   border: none;
   color: #d90594;
   border-radius: 5px;
@@ -205,7 +204,7 @@ color: #d90594;
   }
 
   .menu{
-    height: 150px;
+    height: 200px;
   }
 }
 

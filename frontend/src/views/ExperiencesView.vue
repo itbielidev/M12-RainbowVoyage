@@ -67,12 +67,12 @@ useSeoMeta({
       <div class="title-box">
         <img class="title" src="/images/nextStop.webp" />
         <img class="title" :src="`/images/${getCityCoverImgByName(props.cityName, 2)}`" />
-        
       </div>
     </section>
   </header>
-  <body class="container">
-    <section class="filters">
+  <body>
+   <div class="container"> <!-- el div engloba todo menos el footer, asi el footer ocupa todo el ancho de pantalla -->
+    <section class=" filters container">
       <button type="button" class="btn btn-light">
         Participantes:
         <select class="form-select" aria-label="Default select example">
@@ -148,29 +148,40 @@ useSeoMeta({
       </section>
       <section v-if="!isLoading && experiences" class="our-experiences">
         <h2 class="title-our-experiences">Nuestras Experiencias</h2>
-
-        <article class="art-experience" v-for="experience in experiences" :key="experience.id">
-          <div class="img-article">
-            <img :src="`/images/${experience.images[0]}`" />
-          </div>
-          <div class="experience-description">
-            <h3 class="route-title">{{ experience.name }}</h3>
-            <span class="experience-length">{{ experience.duration }} dias</span>
-            <p class="experience-activities"><strong>Actividades: </strong>{{ experience.descriptions[0] }}</p>
-            <RouterLink
-              :to="{
-                name: 'experienceDetail',
-                params: { experienceId: experience.id, cityName: props.cityName }
-              }"
-              style="text-decoration: none; display: flex; align-self: flex-end"
-              ><button class="price">
-                <span
-                  >Desde<br /><strong>{{ experience.price }}€</strong></span
+        <template v-for="experience in experiences" :key="experience.id">
+          <RouterLink
+            class="centered-link"
+            :to="{
+              name: 'experienceDetail',
+              params: { experienceId: experience.id, cityName: props.cityName }
+            }"
+          >
+            <article class="art-experience">
+              <div class="img-article">
+                <img :src="`/images/${experience.images[0]}`" />
+              </div>
+              <div class="experience-description">
+                <h3 class="route-title">{{ experience.name }}</h3>
+                <span class="experience-length">{{ experience.duration }} dias</span>
+                <p class="experience-activities">
+                  <strong>Actividades: </strong>{{ experience.descriptions[0] }}
+                </p>
+                <RouterLink
+                  :to="{
+                    name: 'experienceDetail',
+                    params: { experienceId: experience.id, cityName: props.cityName }
+                  }"
+                  style="text-decoration: none; display: flex; align-self: flex-end"
+                  ><button class="price">
+                    <span
+                      >Desde<br /><strong>{{ experience.price }}€</strong></span
+                    >
+                  </button></RouterLink
                 >
-              </button></RouterLink
-            >
-          </div>
-        </article>
+              </div>
+            </article>
+          </RouterLink>
+        </template>
       </section>
       <section v-else-if="!error && isLoading" class="d-flex justify-content-center">
         <ProgressSpinner></ProgressSpinner>
@@ -179,6 +190,7 @@ useSeoMeta({
         <ErrorMessages :messages="errorMessages"></ErrorMessages>
       </section>
     </main>
+   </div>
     <FooterComponent></FooterComponent>
   </body>
 </template>
@@ -216,6 +228,7 @@ section.filters {
   display: flex;
   justify-content: space-around;
   align-items: center;
+
 }
 
 .btn-light {
@@ -225,8 +238,9 @@ section.filters {
   font-weight: bold;
 }
 
-main {
-  background-color:#CBD4DB;
+main,
+body {
+  background-color: #eff2f4;
 }
 
 .experience-quote {
@@ -253,6 +267,14 @@ h2.title-our-experiences {
   font-weight: 400;
 }
 
+.centered-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+
 article.art-experience {
   display: flex;
   align-self: center;
@@ -260,6 +282,10 @@ article.art-experience {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 80%;
   height: 15rem;
+  border-top-right-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  border-top-left-radius: 3rem;
+  border-bottom-left-radius: 3rem;
 }
 
 div.img-article {
@@ -270,6 +296,8 @@ div.img-article {
 article.art-experience img {
   height: 100%;
   width: 100%;
+  border-top-left-radius: 3rem;
+  border-bottom-left-radius: 3rem;
 }
 
 .experience-description {
@@ -278,6 +306,8 @@ article.art-experience img {
   background-color: white;
   padding: 2rem 2rem;
   flex: 2;
+  border-top-right-radius: 3rem;
+  border-bottom-right-radius: 3rem;
 }
 
 h3.route-title {
@@ -296,13 +326,14 @@ button.price {
   background-color: #d90594;
   color: white;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 9rem;
   display: flex;
   padding: 0.4rem;
   height: 3rem;
   width: 5rem;
   flex-direction: column;
   cursor: pointer;
+  justify-content: center;
 }
 
 /* Tablet */
@@ -353,14 +384,24 @@ button.price {
     height: auto;
   }
 
+  article.art-experience img {
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    border-bottom-left-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+  }
+
   div.experience-description {
     width: auto;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
   }
 
   div.experience-description p {
     font-size: 1 rem;
-  }  
-
+  }
 }
 
 /* Mobile */
@@ -370,8 +411,19 @@ button.price {
     height: auto;
   }
 
+  article.art-experience img {
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    border-bottom-left-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+  }
+
   div.experience-description {
     width: auto;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
   }
 
   div.experience-description p {
@@ -386,6 +438,8 @@ button.price {
     padding: 1rem;
     align-items: center;
     gap: 2rem;
+
   }
+
 }
 </style>
