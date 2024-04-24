@@ -1,20 +1,33 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext'
 import ReservationCard from '@/components/ReservationCard.vue'
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useReservations } from '@/composables/useReservations'
 import { useAuthStore } from '@/stores/auth'
 import ErrorMessages from '@/components/ErrorMessages.vue'
 import ProgressSpinner from 'primevue/progressspinner'
+import { useSeoMeta, type UseSeoMetaInput } from '@unhead/vue'
 
 const route = useRoute()
 const router = useRouter()
 
+const seoMeta = computed<UseSeoMetaInput>(() => {
+  return {
+    title: `Rainbow Voyage | Panel del administrador`,
+    description: `Panel del administrador para gestionar las reservas de la web.`,
+    ogDescription: `Panel del administrador para gestionar las reservas de la web.`,
+    ogTitle: `Rainbow Voyage | Panel del administrador`,
+    ogImage: '/images/logo.webp'
+  }
+})
+
+useSeoMeta(seoMeta as UseSeoMetaInput)
+
 const { getReservations, reservations, errorMessages, error, isLoadingReservations } =
   useReservations()
 
-const name = ref<string>('')
+// const name = ref<string>('')
 
 function setReservationState(state: string) {
   query.value.state = state
@@ -52,7 +65,7 @@ onMounted(async () => await getData())
   <nav
     class="w-100 d-flex flex-column gap-3 flex-lg-row align-items-center justify-content-center justify-content-md-start mb-5"
   >
-    <div class="text-center w-25">
+    <div class="text-center w-25 d-flex justify-content-center">
       <img src="/images/logo.webp" alt="Logo" class="logo" />
     </div>
     <div
