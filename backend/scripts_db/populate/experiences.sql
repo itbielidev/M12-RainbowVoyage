@@ -18,7 +18,7 @@ ARRAY[
     'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'],
      5, 
      10, 
-     ARRAY['pedrera-cover.webp','casaBatllo.webp','sagradaFamilia.webp','ciutadella.webp','montserrat.webp','parkGuell.webp','pedrera.webp'], 
+     ARRAY['pedrera-cover.webp','casaBatllo.webp','sagradaFamilia.webp','ciutadella.webp','montserrat.webp','parkGuell.webp','pedrera.webp','copas.web','habitacion.webp','hotel.webp'], 
      'cultural',
      '1100' 
 FROM "City" 
@@ -39,7 +39,7 @@ Durante sus más de cien años, el Majestic, propiedad de la familia  Soldevila-
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 5, 
 10, 
-ARRAY['crema-catalana.webp','boqueria.webp','botafumeiro.webp','estevet.webp'], 
+ARRAY['crema-catalana.webp','boqueria.webp','botafumeiro.webp','estevet.webp','elnacional.webp','petitComite.webp','bufetHotelEixample.webp','desayunosHotelEixample.webp','entradaHotelEixample.webp','gimnasioHotelEixample.webp','habitacionHotelEixample.webp'], 
 'gastronomic', 
 '1200' 
 FROM "City" 
@@ -61,7 +61,7 @@ ARRAY['La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona',
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 5, 
 10, 
-ARRAY['arena.webp','spa.webp','piscina.webp','copas.webp'], 
+ARRAY['arena.webp','spa.webp','piscina.webp','copas.webp','balconMajestic.webp','fitnessMajestic.webp','habitacionMajestic.webp','restauranteMajestic.webp','spaMajestic.webp','terrazaMajestic.webp'], 
 'festive',
 '850' 
 FROM "City" 
