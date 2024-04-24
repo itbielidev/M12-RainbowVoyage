@@ -17,13 +17,13 @@ export const useAuthStore = defineStore('auth', () => {
         price_max: null | string | number
     }
     const formData = ref<Preferences>({
-        num_people_min: null,
-        num_people_max: null,
-        duration_min: null,
-        duration_max: null,
-        type: null,
-        price_min: null,
-        price_max: null
+        num_people_min: "1",
+        num_people_max: "1",
+        duration_min: "1",
+        duration_max: "1",
+        type: "festive",
+        price_min: "650",
+        price_max: "650"
     })
 
     const { getAuth } = useFetch<User>();

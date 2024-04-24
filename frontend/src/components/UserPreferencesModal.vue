@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 
@@ -27,15 +27,31 @@ const update = async () => {
   await emit('confirm', formData)
 }
 
+const checkConstraints = (min: string, max: string, tag: string) => {
+  if (Number(min) > Number(max) || Number(max) < Number(min)) {
+    switch (tag) {
+      case 'price':
+        formData.value.price_min = formData.value.price_max
+        break
+      case 'num_people':
+        formData.value.num_people_min = formData.value.num_people_max
+        break
+      case 'duration':
+        formData.value.duration_min = formData.value.duration_max
+        break
+    }
+  }
+}
+
 onMounted(() => {
   //Set user preferences
-  formData.value.duration_max = duration_max
-  formData.value.duration_min = duration_min
-  formData.value.num_people_max = num_people_max
-  formData.value.num_people_min = num_people_min
-  formData.value.type = type
-  formData.value.price_max = price_max
-  formData.value.price_min = price_min
+  formData.value.duration_max = duration_max || '1'
+  formData.value.duration_min = duration_min || '1'
+  formData.value.num_people_max = num_people_max || '1'
+  formData.value.num_people_min = num_people_min || '1'
+  formData.value.type = type || 'festive'
+  formData.value.price_max = price_max || '650'
+  formData.value.price_min = price_min || '650'
 })
 </script>
 <template>
@@ -52,9 +68,20 @@ onMounted(() => {
         <section class="d-flex justify-content-around gap-3">
           <div class="d-flex gap-1 justify-content-between">
             <label for="numPeopleMin">Mínimo</label>
-            <select name="numPeopleMin" id="numPeopleMin" v-model="formData.num_people_min">
+            <select
+              name="numPeopleMin"
+              id="numPeopleMin"
+              v-model="formData.num_people_min"
+              @change="
+                checkConstraints(
+                  formData.num_people_min as string,
+                  formData.num_people_max as string,
+                  'num_people'
+                )
+              "
+            >
               <optgroup>
-                <option value="1">1</option>
+                <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -68,9 +95,20 @@ onMounted(() => {
           </div>
           <div class="d-flex gap-1">
             <label for="numPeopleMax">Máximo</label>
-            <select name="numPeopleMax" id="numPeopleMax" v-model="formData.num_people_max">
+            <select
+              name="numPeopleMax"
+              id="numPeopleMax"
+              v-model="formData.num_people_max"
+              @change="
+                checkConstraints(
+                  formData.num_people_min as string,
+                  formData.num_people_max as string,
+                  'num_people'
+                )
+              "
+            >
               <optgroup>
-                <option value="1">1</option>
+                <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -87,9 +125,20 @@ onMounted(() => {
         <section class="d-flex justify-content-around gap-3">
           <div class="d-flex gap-1">
             <label for="daysMin">Mínimo</label>
-            <select name="daysMin" id="daysMin" v-model="formData.duration_min">
+            <select
+              name="daysMin"
+              id="daysMin"
+              v-model="formData.duration_min"
+              @change="
+                checkConstraints(
+                  formData.duration_min as string,
+                  formData.duration_max as string,
+                  'duration'
+                )
+              "
+            >
               <optgroup>
-                <option value="1">1</option>
+                <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -99,9 +148,20 @@ onMounted(() => {
           </div>
           <div class="d-flex gap-1">
             <label for="daysMax">Máximo</label>
-            <select name="daysMax" id="daysMax" v-model="formData.duration_max">
+            <select
+              name="daysMax"
+              id="daysMax"
+              v-model="formData.duration_max"
+              @change="
+                checkConstraints(
+                  formData.duration_min as string,
+                  formData.duration_max as string,
+                  'duration'
+                )
+              "
+            >
               <optgroup>
-                <option value="1">1</option>
+                <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -114,25 +174,51 @@ onMounted(() => {
         <section class="d-flex justify-content-around gap-3">
           <div class="d-flex gap-1">
             <label for="minPrice">Mínimo</label>
-            <select name="minPrice" id="minPrice" v-model="formData.price_min">
+            <select
+              name="minPrice"
+              id="minPrice"
+              v-model="formData.price_min"
+              @change="
+                checkConstraints(
+                  formData.price_min as string,
+                  formData.price_max as string,
+                  'price'
+                )
+              "
+            >
               <optgroup>
-                <option value="1">650</option>
-                <option value="2">750</option>
-                <option value="3">850</option>
-                <option value="4">950</option>
-                <option value="5">1150</option>
+                <option value="600" selected>600</option>
+                <option value="700">700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="1100">1100</option>
+                <option value="1300">1300</option>
+                <option value="1500">1500</option>
               </optgroup>
             </select>
           </div>
           <div class="d-flex gap-1">
             <label for="maxPrice">Máximo</label>
-            <select name="maxPrice" id="maxPrice" v-model="formData.price_max">
+            <select
+              name="maxPrice"
+              id="maxPrice"
+              v-model="formData.price_max"
+              @change="
+                checkConstraints(
+                  formData.price_min as string,
+                  formData.price_max as string,
+                  'price'
+                )
+              "
+            >
               <optgroup>
-                <option value="1">650</option>
-                <option value="2">750</option>
-                <option value="3">850</option>
-                <option value="4">950</option>
-                <option value="5">1150</option>
+                <option value="600" selected>600</option>
+                <option value="700">700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="1100">1100</option>
+                <option value="1300">1300</option>
+                <option value="1500">1500</option>
               </optgroup>
             </select>
           </div>
@@ -142,7 +228,7 @@ onMounted(() => {
           <div class="d-flex gap-1">
             <select name="typeExp" id="typeExp" v-model="formData.type">
               <optgroup>
-                <option value="festive">Festiva</option>
+                <option value="festive" selected>Festiva</option>
                 <option value="cultural">Cultural</option>
                 <option value="gastronomic">Gastrónomica</option>
               </optgroup>
