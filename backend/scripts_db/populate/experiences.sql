@@ -84,7 +84,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['almudena.webp','almodovar.webp','debod.webp','cibeles.webp','sol.webp'], 
+ARRAY['almudena.webp','almodovar.webp','debod.webp','cibeles.webp','sol.webp','ruta-madrid.webp','palace-hab.webp','petitPalace.webp','petitPalace.webp'], 
 'cultural',
 '800'
 FROM "City" 
@@ -106,7 +106,7 @@ ARRAY[
         ], 
     3, 
     10, 
-    ARRAY['gastroMadrid.webp','barrioCortes.webp','debod.webp','mercado-sanmiguel.webp','embajadores.webp'], 
+    ARRAY['gastroMadrid.webp','barrioCortes.webp','debod.webp','mercado-sanmiguel.webp','embajadores.webp','bufetMadrid.webp','habitacionMadrid.webp','relaxMadrid.webp','terrazaMadrid.webp'], 
     'gastronomic', 
     '1500'
 FROM "City" 
@@ -127,7 +127,7 @@ ARRAY[
     'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['chueca.webp','batucada.webp','carrera-tacones.webp','six-harmonies.webp'], 
+ARRAY['chueca.webp','batucada.webp','carrera-tacones.webp','six-harmonies.webp','chuecaUmbrella.webp','madpride.webp','sixharmoniesmad.webp','desayunosHotelmadrid.webp','Habitacionmadrid.webp','relaxHotelMadrid.webp'], 
 'festive',
 '800'
 FROM "City" 
@@ -147,7 +147,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 3, 
 10, 
-ARRAY['esCavallet.webp','baluartesantjaume.webp','casamatasantepere.webp','centroHistorico.webp','esVedra.webp','vilaAlta.webp'], 
+ARRAY['esCavallet.webp','baluartesantjaume.webp','casamatasantepere.webp','centroHistorico.webp','esVedra.webp','vilaAlta.webp','hotel.webp','habitacion.webp','chillOut.webp'], 
 'cultural',
 '1000'
 FROM "City" 
@@ -166,7 +166,7 @@ ARRAY[
 'Asistencia a la llegada. 3 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 Día de SPA. Rutas.'], 
 3, 
 10, 
-ARRAY['brunchit.webp','mitchBar.webp','sushimi.webp','tapasIbiza.webp','thePriceAlbert.webp','vanilleIbiza.webp'], 
+ARRAY['brunchit.webp','mitchBar.webp','sushimi.webp','tapasIbiza.webp','thePriceAlbert.webp','vanilleIbiza.webp','habitacionStandardIBiza.webp','terrazaStandardIbiza.webp'], 
 'gastronomic', 
 '1200'
 FROM "City" 
@@ -185,7 +185,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['pacha.webp','posidio.webp','ushuaia.webp','pacha.webp'], 
+ARRAY['pacha.webp','posidio.webp','ushuaia.webp','habitacionPalladiumIbiza.webp','recepcionIbizaPalladium.webp','hotelIbizaPalladium.webp'], 
 'festive',
 '700' 
 FROM "City" 
@@ -207,7 +207,7 @@ Hotel Cristina by Tigotan resulta de la fusión entre lo urbano y lo vacacional.
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['dunas-maspalomas.webp','canteras.webp','teror.webp','triana.webp','vegueta.webp'], 
+ARRAY['dunas-maspalomas.webp','canteras.webp','teror.webp','triana.webp','vegueta.webp','peregrina.webp','peregrina-terrace.webp','peregrina-hab.webp'], 
 'cultural',
 '1200'
 FROM "City" 
@@ -227,7 +227,7 @@ ARRAY[
     'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
     4, 
     10, 
-    ARRAY['cortijo-pavon.webp','cortijo-pavon.webp','queso-canario.webp','ruta-quesos.webp'], 
+    ARRAY['cortijo-pavon.webp','cortijo-pavon.webp','queso-canario.webp','ruta-quesos.webp','recepcion.webp','habitacionCanarias.webp','entrada.webp'], 
     'gastronomic',
     '600'
 FROM "City" 
@@ -248,7 +248,7 @@ Hotel Cristina by Tigotan resulta de la fusión entre lo urbano y lo vacacional.
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         4,
         10, 
-        ARRAY['carnaval-canarias.webp','gala-drag.webp','lesbian-beach.webp','maspalomas-festival.webp','orgullo-maspalomas.webp'], 
+        ARRAY['carnaval-canarias.webp','gala-drag.webp','lesbian-beach.webp','maspalomas-festival.webp','orgullo-maspalomas.webp','terrazaHotelCanarias.webp','recepcionHotelCanarias.webp','habitacionHotelCanarias.webp'], 
         'festive',
         '800'
 FROM "City" 
@@ -272,7 +272,7 @@ ARRAY[
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         5, 
         10, 
-        ARRAY['Roman_Malaga.webp','alcazaba.webp','castilo-gibralzara.webp','teatroRomanoMalaga.webp','Roman_Malaga.webp','calleLariosMalaga.webp'], 
+        ARRAY['Roman_Malaga.webp','alcazaba.webp','castilo-gibralzara.webp','teatroRomanoMalaga.webp','Roman_Malaga.webp','calleLariosMalaga.webp','spaMalaga.webp','hotelMalaga.webp','habitacionMalaga.webp'], 
         'cultural',
         '1000'
 FROM "City" 
@@ -292,7 +292,7 @@ ARRAY[
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         4, 
         10, 
-        ARRAY['mercadoMalaga.webp','mercadoMalaga.webp','messina.webp','maridaje.webp'],
+        ARRAY['mercadoMalaga.webp','mercadoMalaga.webp','messina.webp','maridaje.webp','piscinaMalaga.webp','comidaMalaga.webp','habitacionMalaga1.webp'],
          'gastronomic',
          '800'
 FROM "City" 
@@ -311,7 +311,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'],
  4, 
  10, 
- ARRAY['lolaCopasMalaga.webp','hammamAlAndalus.webp','lolaCopasMalaga.webp','calleBruselasMalaga.webp'], 
+ ARRAY['lolaCopasMalaga.webp','hammamAlAndalus.webp','lolaCopasMalaga.webp','calleBruselasMalaga.webp','terrazaHotel.webp','habitacionHotel.webp','entradaHotel.webp'], 
  'festive',
  '1200' 
 FROM "City" 
