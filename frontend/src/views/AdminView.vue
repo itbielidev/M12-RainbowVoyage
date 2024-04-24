@@ -1,17 +1,33 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext'
 import ReservationCard from '@/components/ReservationCard.vue'
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useReservations } from '@/composables/useReservations'
 import { useAuthStore } from '@/stores/auth'
+import ErrorMessages from '@/components/ErrorMessages.vue'
+import ProgressSpinner from 'primevue/progressspinner'
+import { useSeoMeta, type UseSeoMetaInput } from '@unhead/vue'
 
 const route = useRoute()
 const router = useRouter()
 
-const { getReservations, reservations, errorMessages, error } = useReservations()
+const seoMeta = computed<UseSeoMetaInput>(() => {
+  return {
+    title: `Rainbow Voyage | Panel del administrador`,
+    description: `Panel del administrador para gestionar las reservas de la web.`,
+    ogDescription: `Panel del administrador para gestionar las reservas de la web.`,
+    ogTitle: `Rainbow Voyage | Panel del administrador`,
+    ogImage: '/images/logo.webp'
+  }
+})
 
-const name = ref<string>('')
+useSeoMeta(seoMeta as UseSeoMetaInput)
+
+const { getReservations, reservations, errorMessages, error, isLoadingReservations } =
+  useReservations()
+
+// const name = ref<string>('')
 
 function setReservationState(state: string) {
   query.value.state = state
@@ -47,13 +63,13 @@ onMounted(async () => await getData())
 </script>
 <template>
   <nav
-    class="w-100 d-flex flex-column gap-3 flex-xs-column flex-lg-row align-items-center justify-content-start mb-5"
+    class="w-100 d-flex flex-column gap-3 flex-lg-row align-items-center justify-content-center justify-content-md-start mb-5"
   >
-    <div class="text-center w-25">
+    <div class="text-center w-25 d-flex justify-content-center">
       <img src="/images/logo.webp" alt="Logo" class="logo" />
     </div>
     <div
-      class="text-center w-50 d-flex justify-content-center justify-content-xs-center justify-content-lg-start"
+      class="text-center w-50 d-flex justify-content-center justify-content-xs-center align-items-lg-end"
     >
       <InputText
         type="text"
@@ -62,8 +78,11 @@ onMounted(async () => await getData())
         @change="getData()"
       ></InputText>
     </div>
-    <div class="text-center d-flex justify-content-center w-25 justify-self-end m-auto">
-      <input type="button" class="btn" value="Cerrar sesión" @click="logout" />
+    <div class="text-end d-flex justify-content-end w-25 justify-self-end me-4">
+      <button type="button" class="btn" value="Cerrar sesión" @click="logout">
+        Cerrar sesión
+        <font-awesome-icon icon="fa-solid fa-power-off" />
+      </button>
     </div>
   </nav>
   <!-- Mobile Menu-->
@@ -74,7 +93,7 @@ onMounted(async () => await getData())
       <li>
         <input
           type="button"
-          class="button w-100"
+          class="btn w-100"
           value="Por confirmar"
           @click="setReservationState('pending')"
         />
@@ -82,14 +101,14 @@ onMounted(async () => await getData())
       <li>
         <input
           type="button"
-          class="button w-100"
+          class="btn w-100"
           value="Confirmadas"
           @click="setReservationState('completed')"
         />
       </li>
     </ul>
   </section>
-  <main class="d-flex gap-3 flex-column flex-lg-row">
+  <main class="d-flex gap-3 flex-column flex-lg-row p-3">
     <!-- Desktop Menu-->
     <section
       class="d-none d-lg-flex flex-column justify-content-start align-items-center tabs-menu w-25 p-5"
@@ -135,7 +154,7 @@ onMounted(async () => await getData())
       </ul>
     </section>
     <section
-      v-if="reservations && reservations.length > 0"
+      v-if="reservations && reservations.length > 0 && !isLoadingReservations && !error"
       class="reservations-section px-4 d-flex flex-column py-3 gap-2"
     >
       <h2 class="fw-bold">Reservas recientes</h2>
@@ -146,8 +165,17 @@ onMounted(async () => await getData())
         @refresh="refreshReservations()"
       ></ReservationCard>
     </section>
-    <section class="text-center" v-else-if="reservations && reservations.length === 0">
+    <section
+      class="text-center"
+      v-else-if="reservations && reservations.length === 0 && !isLoadingReservations && !error"
+    >
       <h3>No hay reservas que mostrar.</h3>
+    </section>
+    <section class="d-flex justify-content-center" v-else-if="error">
+      <ErrorMessages :messages="errorMessages"></ErrorMessages>
+    </section>
+    <section class="d-flex justify-content-center" v-else-if="isLoadingReservations">
+      <ProgressSpinner></ProgressSpinner>
     </section>
   </main>
 </template>
@@ -168,7 +196,7 @@ main {
 }
 
 .tabs-menu {
-  height: 75vh;
+  height: auto;
 }
 
 .reservations-section {
