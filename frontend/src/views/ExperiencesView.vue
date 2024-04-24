@@ -235,7 +235,7 @@ useSeoMeta({
         <section class="experience-quote">
           <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
         </section>
-        <section v-if="!isLoading && experiences" class="our-experiences">
+        <section v-if="!isLoading && experiences && experiences.length > 0" class="our-experiences">
           <h2 class="title-our-experiences">Nuestras Experiencias</h2>
           <template v-for="experience in experiences" :key="experience.id">
             <RouterLink
