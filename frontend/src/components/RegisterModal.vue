@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { VueFinalModal } from 'vue-final-modal'
 import { useRegister } from '@/composables/useRegister'
 import ErrorMessages from './ErrorMessages.vue'
+import { useAuthStore } from '@/stores/auth'
 
 const emit = defineEmits<{
   (e: 'confirm'): void
@@ -19,6 +20,21 @@ const {
   manageRegister
 } = useRegister()
 
+const { getUser } = useAuthStore()
+
+const checkConstraints = (min: string, max: string, tag: string) => {
+  if (Number(min) > Number(max) || Number(max) < Number(min)) {
+    switch (tag) {
+      case 'num_people':
+        formData.value.num_people_min = formData.value.num_people_max
+        break
+      case 'duration':
+        formData.value.duration_min = formData.value.duration_max
+        break
+    }
+  }
+}
+
 const currentIndex = ref<number>(0)
 
 const passwordConfirmRevealed = ref<boolean>(true)
@@ -34,7 +50,8 @@ function revealConfirmPassword() {
 
 async function handleRegister() {
   if ((await manageRegister()) === false) return
-  emit('confirm')
+  await emit('confirm')
+  await getUser()
 }
 
 function modifyIndex(num: number) {
@@ -197,7 +214,18 @@ watch(formData.value, () => {
             <section class="d-flex justify-content-around gap-3">
               <div class="d-flex gap-1 justify-content-between">
                 <label for="numPeopleMin">Mínimo</label>
-                <select name="numPeopleMin" id="numPeopleMin" v-model="formData.num_people_min">
+                <select
+                  name="numPeopleMin"
+                  id="numPeopleMin"
+                  v-model="formData.num_people_min"
+                  @change="
+                    checkConstraints(
+                      formData.num_people_min?.toString() as string,
+                      formData.num_people_max?.toString() as string,
+                      'num_people'
+                    )
+                  "
+                >
                   <optgroup>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -215,7 +243,18 @@ watch(formData.value, () => {
               </div>
               <div class="d-flex gap-1">
                 <label for="numPeopleMax">Máximo</label>
-                <select name="numPeopleMax" id="numPeopleMax" v-model="formData.num_people_max">
+                <select
+                  name="numPeopleMax"
+                  id="numPeopleMax"
+                  v-model="formData.num_people_max"
+                  @change="
+                    checkConstraints(
+                      formData.num_people_min?.toString() as string,
+                      formData.num_people_max?.toString() as string,
+                      'num_people'
+                    )
+                  "
+                >
                   <optgroup>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -236,38 +275,47 @@ watch(formData.value, () => {
             <section class="d-flex justify-content-around gap-3">
               <div class="d-flex gap-1">
                 <label for="daysMin">Mínimo</label>
-                <select name="daysMin" id="daysMin" v-model="formData.duration_min">
+                <select
+                  name="daysMin"
+                  id="daysMin"
+                  v-model="formData.duration_min"
+                  @change="
+                    checkConstraints(
+                      formData.duration_min?.toString() as string,
+                      formData.duration_max?.toString() as string,
+                      'duration'
+                    )
+                  "
+                >
                   <optgroup>
-                    <option value="2">1</option>
+                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
                   </optgroup>
                 </select>
               </div>
               <div class="d-flex gap-1">
                 <label for="daysMax">Máximo</label>
-                <select name="daysMax" id="daysMax" v-model="formData.duration_max">
+                <select
+                  name="daysMax"
+                  id="daysMax"
+                  v-model="formData.duration_max"
+                  @change="
+                    checkConstraints(
+                      formData.duration_min?.toString() as string,
+                      formData.duration_max?.toString() as string,
+                      'duration'
+                    )
+                  "
+                >
                   <optgroup>
+                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
                   </optgroup>
                 </select>
               </div>
@@ -296,7 +344,7 @@ watch(formData.value, () => {
           <ErrorMessages :messages="errorMessages"></ErrorMessages>
         </template>
         <template v-if="currentIndex === 3">
-          <div class="terms d-flex flex-column flex-md-row align-items-center">
+          <div class="terms d-flex flex-column flex-md-row align-items-center flex-wrap">
             <div class="d-flex gap-2">
               <input
                 v-model="formData.checkbox"

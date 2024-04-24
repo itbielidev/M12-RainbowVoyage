@@ -57,7 +57,7 @@ export const useLogin = () => {
                 ...formData.value,
             });
 
-        token.value = await tokenData?.token as string;
+        token.value = tokenData?.token as string;
 
         if (fetchError.value) {
             error.value = true;
