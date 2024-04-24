@@ -9,7 +9,7 @@ const {
   num_people_min,
   duration_max,
   duration_min,
-  experience_type,
+  type,
   price_min,
   price_max,
   updatePreferences
@@ -33,7 +33,7 @@ onMounted(() => {
   formData.value.duration_min = duration_min
   formData.value.num_people_max = num_people_max
   formData.value.num_people_min = num_people_min
-  formData.value.experience_type = experience_type
+  formData.value.type = type
   formData.value.price_max = price_max
   formData.value.price_min = price_min
 })
@@ -140,7 +140,7 @@ onMounted(() => {
         <label class="mb-2 fw-bold mb-3 mt-5 h5" for="peopleSelect">Tipo de experiencia</label>
         <section class="d-flex justify-content-center">
           <div class="d-flex gap-1">
-            <select name="typeExp" id="typeExp" v-model="formData.experience_type">
+            <select name="typeExp" id="typeExp" v-model="formData.type">
               <optgroup>
                 <option value="festive">Festiva</option>
                 <option value="cultural">Cultural</option>

@@ -157,23 +157,56 @@ export class UserModel {
         }
     }
 
-    static async updatePreferences(userId, data) {
+    static async updatePreferences(userId, preferencesData) {
 
         try {
+
+            //Getting the preferences of the authnticated user
             const user = await prismadb.user.findFirst({
                 where: {
-                    user: userId
+                    id: userId
                 },
                 include: {
                     preference: true
                 }
             })
 
-            const preference = user.preference;
+            let preference = user.preference;
+
+            //We create a new preference object if it does not exist.
+            if (!preference) {
+                preference = await prismadb.userPreference.create({
+                    data: {
+                        ...preferencesData
+                    }
+                })
+
+                //We update the preference id of the aunthenticated user.
+                await prismadb.user.update({
+                    where: {
+                        id: userId
+                    },
+                    data: {
+                        preference_id: preference.id
+                    }
+
+                })
+            }
 
             console.log(preference);
 
-            return [1, preference];
+            const updatedPreference = { ...preference, ...preferencesData };
+
+            // Store updated preferences in database 
+            await prismadb.userPreference.update({
+                where: {
+                    id: preference.id
+                },
+                data: updatedPreference
+            });
+
+
+            return [1, updatedPreference];
         } catch (error) {
             console.log(error);
         }

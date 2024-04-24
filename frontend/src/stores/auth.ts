@@ -8,20 +8,20 @@ import router from "@/router";
 export const useAuthStore = defineStore('auth', () => {
 
     interface Preferences {
-        num_people_min: null | string
-        num_people_max: null | string
-        duration_min: null | string
-        duration_max: null | string
-        experience_type: null | string
-        price_min: null | string
-        price_max: null | string
+        num_people_min: null | string | number
+        num_people_max: null | string | number
+        duration_min: null | string | number
+        duration_max: null | string | number
+        type: null | string
+        price_min: null | string | number
+        price_max: null | string | number
     }
     const formData = ref<Preferences>({
         num_people_min: null,
         num_people_max: null,
         duration_min: null,
         duration_max: null,
-        experience_type: null,
+        type: null,
         price_min: null,
         price_max: null
     })
@@ -45,7 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
     const num_people_max: Ref<string | null> = useStorage("num_people_max", "", sessionStorage);
     const duration_min: Ref<string | null> = useStorage("duration_min", "", sessionStorage);
     const duration_max: Ref<string | null> = useStorage("duration_max", "", sessionStorage);
-    const experience_type: Ref<string | null> = useStorage("experience_type", "", sessionStorage);
+    const type: Ref<string | null> = useStorage("experience_type", "", sessionStorage);
     const price_min: Ref<string | null> = useStorage("price_min", "", sessionStorage);
     const price_max: Ref<string | null> = useStorage("price_max", "", sessionStorage);
 
@@ -63,7 +63,7 @@ export const useAuthStore = defineStore('auth', () => {
         num_people_min.value = ""
         duration_min.value = ""
         duration_max.value = ""
-        experience_type.value = ""
+        type.value = ""
         price_min.value = ""
         price_max.value = ""
 
@@ -82,12 +82,20 @@ export const useAuthStore = defineStore('auth', () => {
         num_people_min.value = user.value?.preference?.num_people_min?.toString() as string;
         duration_min.value = user.value?.preference?.duration_min?.toString() as string;
         duration_max.value = user.value?.preference?.duration_max?.toString() as string;
-        experience_type.value = user.value?.preference?.type?.toString() as string;
+        type.value = user.value?.preference?.type?.toString() as string;
         price_min.value = user.value?.preference?.price_min?.toString() as string;
         price_max.value = user.value?.preference?.price_max?.toString() as string;
     }
 
     async function updatePreferences() {
+
+        formData.value.duration_max = Number(formData.value.duration_max) || 0;
+        formData.value.duration_min = Number(formData.value.duration_min) || 0;
+        formData.value.num_people_max = Number(formData.value.num_people_max) || 0;
+        formData.value.num_people_min = Number(formData.value.num_people_min) || 0;
+        formData.value.price_min = Number(formData.value.price_min) || 0;
+        formData.value.price_max = Number(formData.value.price_max) || 0;
+        formData.value.type = formData.value.type || "";
 
         const preferences = await postAuth("/users/preferences", formData.value);
 
@@ -96,7 +104,7 @@ export const useAuthStore = defineStore('auth', () => {
             num_people_min.value = ""
             duration_min.value = ""
             duration_max.value = ""
-            experience_type.value = ""
+            type.value = ""
             price_min.value = ""
             price_max.value = ""
         }
@@ -105,7 +113,7 @@ export const useAuthStore = defineStore('auth', () => {
             num_people_min.value = preferences?.num_people_min?.toString() as string
             duration_min.value = preferences?.duration_min?.toString() as string
             duration_max.value = preferences?.duration_max?.toString() as string
-            experience_type.value = preferences?.type?.toString() as string
+            type.value = preferences?.type?.toString() as string
             price_min.value = preferences?.price_min?.toString() as string
             price_max.value = preferences?.price_max?.toString() as string
         }
@@ -134,5 +142,5 @@ export const useAuthStore = defineStore('auth', () => {
     //     }
     // }
 
-    return { token, updatePreferences, formData, price_min, price_max, userIsLoggedIn, user, isAdmin, logout, getUser, name, email, phone, lastName, num_people_max, num_people_min, duration_max, duration_min, experience_type }
+    return { token, updatePreferences, formData, price_min, price_max, userIsLoggedIn, user, isAdmin, logout, getUser, name, email, phone, lastName, num_people_max, num_people_min, duration_max, duration_min, type }
 })
