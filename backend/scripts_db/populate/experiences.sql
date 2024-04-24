@@ -84,7 +84,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['almudena.webp','almodovar.webp','debod.webp','cibeles.webp','sol.webp'], 
+ARRAY['almudena.webp','almodovar.webp','debod.webp','cibeles.webp','sol.webp','ruta-madrid.webp','palace-hab.webp','petitPalace.webp','petitPalace.webp'], 
 'cultural',
 '800'
 FROM "City" 
@@ -106,7 +106,7 @@ ARRAY[
         ], 
     3, 
     10, 
-    ARRAY['gastroMadrid.webp','barrioCortes.webp','debod.webp','mercado-sanmiguel.webp','embajadores.webp'], 
+    ARRAY['gastroMadrid.webp','barrioCortes.webp','debod.webp','mercado-sanmiguel.webp','embajadores.webp','bufetMadrid.webp','habitacionMadrid.webp','relaxMadrid.webp','terrazaMadrid.webp'], 
     'gastronomic', 
     '1500'
 FROM "City" 
@@ -127,7 +127,7 @@ ARRAY[
     'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['chueca.webp','batucada.webp','carrera-tacones.webp','six-harmonies.webp'], 
+ARRAY['chueca.webp','batucada.webp','carrera-tacones.webp','six-harmonies.webp','chuecaUmbrella.webp','madpride.webp','sixharmoniesmad.webp','desayunosHotelmadrid.webp','Habitacionmadrid.webp','relaxHotelMadrid.webp'], 
 'festive',
 '800'
 FROM "City" 
