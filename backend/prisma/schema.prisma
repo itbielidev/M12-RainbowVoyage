@@ -68,6 +68,8 @@ model City {
   description String
   description_detail String
   experiences Experience[]
+  latitude    Float @default(0)
+  longitude   Float @default(0)
 }
 
 model Experience {
