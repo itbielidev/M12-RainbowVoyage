@@ -160,6 +160,8 @@ export interface City {
     description_detail: string
     hovered?: boolean
     experiences?: Experience[]
+    latitude: number
+    longitude: number
 }
 
 export interface DateAvailability {
