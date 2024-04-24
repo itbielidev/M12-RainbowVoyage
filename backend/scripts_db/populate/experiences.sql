@@ -272,7 +272,7 @@ ARRAY[
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         5, 
         10, 
-        ARRAY['Roman_Malaga.webp','alcazaba.webp','castilo-gibralzara.webp','teatroRomanoMalaga.webp','Roman_Malaga.webp','calleLariosMalaga.webp'], 
+        ARRAY['Roman_Malaga.webp','alcazaba.webp','castilo-gibralzara.webp','teatroRomanoMalaga.webp','Roman_Malaga.webp','calleLariosMalaga.webp','spaMalaga.webp','hotelMalaga.webp','habitacionMalaga.webp'], 
         'cultural',
         '1000'
 FROM "City" 
@@ -292,7 +292,7 @@ ARRAY[
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         4, 
         10, 
-        ARRAY['mercadoMalaga.webp','mercadoMalaga.webp','messina.webp','maridaje.webp'],
+        ARRAY['mercadoMalaga.webp','mercadoMalaga.webp','messina.webp','maridaje.webp','piscinaMalaga.webp','comidaMalaga.webp','habitacionMalaga1.webp'],
          'gastronomic',
          '800'
 FROM "City" 
@@ -311,7 +311,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'],
  4, 
  10, 
- ARRAY['lolaCopasMalaga.webp','hammamAlAndalus.webp','lolaCopasMalaga.webp','calleBruselasMalaga.webp'], 
+ ARRAY['lolaCopasMalaga.webp','hammamAlAndalus.webp','lolaCopasMalaga.webp','calleBruselasMalaga.webp','terrazaHotel.webp','habitacionHotel.webp','entradaHotel.webp'], 
  'festive',
  '1200' 
 FROM "City" 
