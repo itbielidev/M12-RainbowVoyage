@@ -14,7 +14,7 @@ const props = defineProps<{
                 <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
                     <a :href="href" v-bind="props.action" @click="navigate">
                         <span :class="[item.icon, 'text-color']"></span>
-                        <span class="text-primary font-semibold">{{ item.label }}</span>
+                        <span class="text-color font-semibold">{{ item.label }}</span>
                     </a>
                 </router-link>
                 <a v-else :href="item.url" :target="item.target" v-bind="props.action">
@@ -27,8 +27,10 @@ const props = defineProps<{
 <style >
 .p-breadcrumb {
     width: fit-content !important;
-    padding: 5px !important;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
     border: none;
+    background: none;
 }
 
 .p-breadcrumb-home {
@@ -40,4 +42,14 @@ const props = defineProps<{
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
+.text-color{
+   color:#d90594; 
+   text-decoration: none !important;
+   font-size: 1.2rem;
+   
+}
 </style>

@@ -26,6 +26,9 @@
           </p> -->
           <p class="exp-description">{{ experience?.descriptions[1] }}</p>
         </div>
+        <section class="breadcrumbs-box">
+        <BreadCrumbs :items="items"></BreadCrumbs>
+        </section>
         <div class="col-md-6">
           <!-- Carrusel de Fotos -->
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -177,6 +180,8 @@ import DatesForm from '@/components/DatesForm.vue'
 import GoToReservationFormModal from '@/components/GoToReservationFormModal.vue'
 import { useModal } from 'vue-final-modal'
 import { useRouter } from 'vue-router'
+import BreadCrumbs from '@/components/BreadCrumbs.vue';
+
 
 const { getExperience, experience } = useExperiences()
 const router = useRouter()
@@ -185,6 +190,12 @@ const props = defineProps<{ experienceId: string }>()
 const dateId = ref<number>(-1)
 const date = ref<string>('')
 const people = ref<string>('')
+
+const items = ref([
+    { label: 'Home', route: '/' },
+    { label: `Experiencias de ${experience.value?.city.name}`, route: `/experiences/${experience.value?.city.name}` },
+    { label: 'Detalle de la experiencia' }
+]);
 
 //var hotel = ['hotel.webp', 'habitación.webp', 'copas.webp', 'piscina.webp', 'spa.webp']
 
@@ -231,6 +242,11 @@ const { open, close } = useModal({
 <style scoped>
 .body {
   background-color: rgba(171, 184, 195, 0.19);
+}
+
+.breadcrumbs-box{
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .imagenDetalle {

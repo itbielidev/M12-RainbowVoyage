@@ -14,7 +14,7 @@ import BreadCrumbs from '@/components/BreadCrumbs.vue';
 
 const props = defineProps<{ cityName: string }>()
 const items = ref([
-    { label: 'Home', route: '/policy' },
+    { label: 'Home', route: '/' },
     { label: 'Experiencias' }
 ]);
 
@@ -119,7 +119,7 @@ useSeoMeta({
   <body>
     <div class="container">
       <!-- el div engloba todo menos el footer, asi el footer ocupa todo el ancho de pantalla -->
-      <section class="filters container flex-wrap gap_2">
+      <section class="filters container flex-wrap gap-2">
         <button type="button" class="btn btn-light">
           Participantes:
           <select
@@ -237,7 +237,7 @@ useSeoMeta({
         </button>
       </section>
       <main class="container">
-        <section class="px-5">
+        <section class="breadcrumbs-box">
         <BreadCrumbs :items="items"></BreadCrumbs>
         </section>
         <section class="experience-quote">
@@ -352,6 +352,11 @@ section.filters {
 main,
 body {
   background-color: #eff2f4;
+}
+
+.breadcrumbs-box{
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .experience-quote {
