@@ -22,7 +22,9 @@ export class ReservationModel {
                         state: reservationState
                     },
                     include: {
-                        experience: true,
+                        experience: {
+                            city: true
+                        },
                         user: true
                     }
                 });
@@ -38,7 +40,9 @@ export class ReservationModel {
                         }
                     },
                     include: {
-                        experience: true,
+                        experience: {
+                            city: true
+                        },
                         user: true
                     }
                 });
@@ -57,7 +61,9 @@ export class ReservationModel {
             },
             include: {
                 user: true,
-                experience: true
+                experience: {
+                    city: true
+                }
             }
         })
 
@@ -72,7 +78,9 @@ export class ReservationModel {
                 },
                 include: {
                     user: true,
-                    experience: true
+                    experience: {
+                        city: true
+                    }
                 }
             })
 
