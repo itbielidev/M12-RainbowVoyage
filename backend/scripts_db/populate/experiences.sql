@@ -18,7 +18,7 @@ ARRAY[
     'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'],
      5, 
      10, 
-     ARRAY['pedrera-cover.webp','casaBatllo.webp','sagradaFamilia.webp','ciutadella.webp','montserrat.webp','parkGuell.webp','pedrera.webp','copas.web','habitacion.webp','hotel.webp'], 
+     ARRAY['pedrera-cover.webp','casaBatllo.webp','sagradaFamilia.webp','ciutadella.webp','montserrat.webp','parkGuell.webp','pedrera.webp','copas.webp','habitacion.webp','hotel.webp'], 
      'cultural',
      '1100' 
 FROM "City" 
@@ -39,7 +39,7 @@ Durante sus más de cien años, el Majestic, propiedad de la familia  Soldevila-
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 5, 
 10, 
-ARRAY['crema-catalana.webp','boqueria.webp','botafumeiro.webp','estevet.webp','elnacional.webp','petitComite.webp','bufetHotelEixample.webp','desayunosHotelEixample.webp','entradaHotelEixample.webp','gimnasioHotelEixample.webp','habitacionHotelEixample.webp'], 
+ARRAY['crema-catalana.webp','boqueria.webp','botafumeiro.webp','estevet.webp','elnacional.webp','petitComite.webp','','bufetHotelEixample.webp','desayunosHotelEixample.webp','entradaHotelEixample.webp','gimnasioHotelEixample.webp','habitacionHotelEixample.webp'], 
 'gastronomic', 
 '1200' 
 FROM "City" 
@@ -61,7 +61,7 @@ ARRAY['La Chapelle, Candy darling, El Molino, Circuit , Aire Barcelona',
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 5, 
 10, 
-ARRAY['arena.webp','spa.webp','piscina.webp','copas.webp','balconMajestic.webp','fitnessMajestic.webp','habitacionMajestic.webp','restauranteMajestic.webp','spaMajestic.webp','terrazaMajestic.webp'], 
+ARRAY['arena.webp','spa.webp','piscina.webp','copas.webp','','','','balconMajestic.webp','fitnessMajestic.webp','habitacionMajestic.webp','restauranteMajestic.webp','spaMajestic.webp','terrazaMajestic.webp'], 
 'festive',
 '850' 
 FROM "City" 
@@ -84,7 +84,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['almudena.webp','almodovar.webp','debod.webp','cibeles.webp','sol.webp','ruta-madrid.webp','palace-hab.webp','petitPalace.webp','petitPalace.webp'], 
+ARRAY['almudena.webp','almodovar.webp','debod.webp','cibeles.webp','sol.webp','ruta-madrid.webp','','palace-hab.webp','petitPalace.webp'], 
 'cultural',
 '800'
 FROM "City" 
@@ -106,7 +106,7 @@ ARRAY[
         ], 
     3, 
     10, 
-    ARRAY['gastroMadrid.webp','barrioCortes.webp','debod.webp','mercado-sanmiguel.webp','embajadores.webp','bufetMadrid.webp','habitacionMadrid.webp','relaxMadrid.webp','terrazaMadrid.webp'], 
+    ARRAY['gastroMadrid.webp','barrioCortes.webp','debod.webp','mercado-sanmiguel.webp','embajadores.webp','','','bufetMadrid.webp','habitacionMadrid.webp','relaxMadrid.webp','terrazaMadrid.webp'], 
     'gastronomic', 
     '1500'
 FROM "City" 
@@ -127,7 +127,7 @@ ARRAY[
     'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['chueca.webp','batucada.webp','carrera-tacones.webp','six-harmonies.webp','chuecaUmbrella.webp','madpride.webp','sixharmoniesmad.webp','desayunosHotelmadrid.webp','Habitacionmadrid.webp','relaxHotelMadrid.webp'], 
+ARRAY['chueca.webp','batucada.webp','carrera-tacones.webp','six-harmonies.webp','chuecaUmbrella.webp','madpride.webp','sixharmoniesmad.webp','desayunosHotelmadrid.webp','habitacionmadrid.webp','relaxHotelMadrid.webp'], 
 'festive',
 '800'
 FROM "City" 
@@ -147,7 +147,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 3, 
 10, 
-ARRAY['esCavallet.webp','baluartesantjaume.webp','casamatasantepere.webp','centroHistorico.webp','esVedra.webp','vilaAlta.webp','hotel.webp','habitacion.webp','chillOut.webp'], 
+ARRAY['esCavallet.webp','baluartesantjaume.webp','casamatasantepere.webp','centroHistorico.webp','esVedra.webp','vilaAlta.webp','','hotel.webp','habitacion.webp','chillOut.webp'], 
 'cultural',
 '1000'
 FROM "City" 
@@ -166,7 +166,7 @@ ARRAY[
 'Asistencia a la llegada. 3 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 Día de SPA. Rutas.'], 
 3, 
 10, 
-ARRAY['brunchit.webp','mitchBar.webp','sushimi.webp','tapasIbiza.webp','thePriceAlbert.webp','vanilleIbiza.webp','habitacionStandardIBiza.webp','terrazaStandardIbiza.webp'], 
+ARRAY['brunchit.webp','mitchBar.webp','sushimi.webp','tapasIbiza.webp','thePriceAlbert.webp','vanilleIbiza.webp','','habitacionStandardIBiza.webp','terrazaStandardIbiza.webp'], 
 'gastronomic', 
 '1200'
 FROM "City" 
@@ -185,7 +185,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['pacha.webp','posidio.webp','ushuaia.webp','habitacionPalladiumIbiza.webp','recepcionIbizaPalladium.webp','hotelIbizaPalladium.webp'], 
+ARRAY['pacha.webp','posidio.webp','ushuaia.webp','','','','','habitacionPalladiumIbiza.webp','recepcionIbizaPalladium.webp','hotelIbizaPalladium.webp'], 
 'festive',
 '700' 
 FROM "City" 
@@ -207,7 +207,7 @@ Hotel Cristina by Tigotan resulta de la fusión entre lo urbano y lo vacacional.
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
 4, 
 10, 
-ARRAY['dunas-maspalomas.webp','canteras.webp','teror.webp','triana.webp','vegueta.webp','peregrina.webp','peregrina-terrace.webp','peregrina-hab.webp'], 
+ARRAY['dunas-maspalomas.webp','canteras.webp','teror.webp','triana.webp','vegueta.webp','','','peregrina.webp','peregrina-terrace.webp','peregrina-hab.webp'], 
 'cultural',
 '1200'
 FROM "City" 
@@ -227,7 +227,7 @@ ARRAY[
     'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
     4, 
     10, 
-    ARRAY['cortijo-pavon.webp','cortijo-pavon.webp','queso-canario.webp','ruta-quesos.webp','recepcion.webp','habitacionCanarias.webp','entrada.webp'], 
+    ARRAY['cortijo-pavon.webp','cortijo-pavon.webp','queso-canario.webp','ruta-quesos.webp','','','','recepcion.webp','habitacionCanarias.webp','entrada.webp'], 
     'gastronomic',
     '600'
 FROM "City" 
@@ -248,7 +248,7 @@ Hotel Cristina by Tigotan resulta de la fusión entre lo urbano y lo vacacional.
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         4,
         10, 
-        ARRAY['carnaval-canarias.webp','gala-drag.webp','lesbian-beach.webp','maspalomas-festival.webp','orgullo-maspalomas.webp','terrazaHotelCanarias.webp','recepcionHotelCanarias.webp','habitacionHotelCanarias.webp'], 
+        ARRAY['carnaval-canarias.webp','gala-drag.webp','lesbian-beach.webp','maspalomas-festival.webp','orgullo-maspalomas.webp','','','terrazaHotelCanarias.webp','recepcionHotelCanarias.webp','habitacionHotelCanarias.webp'], 
         'festive',
         '800'
 FROM "City" 
@@ -292,7 +292,7 @@ ARRAY[
         'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'], 
         4, 
         10, 
-        ARRAY['mercadoMalaga.webp','mercadoMalaga.webp','messina.webp','maridaje.webp','piscinaMalaga.webp','comidaMalaga.webp','habitacionMalaga1.webp'],
+        ARRAY['mercadoMalaga.webp','mercadoMalaga.webp','messina.webp','maridaje.webp','','','','piscinaMalaga.webp','comidaMalaga.webp','habitacionMalaga1.webp'],
          'gastronomic',
          '800'
 FROM "City" 
@@ -311,7 +311,7 @@ ARRAY[
 'Asistencia a la llegada. 4 Noches. Todo incluido. Teléfono de emergencias 24/365 días. Regalo: 1 día de SPA. Rutas.'],
  4, 
  10, 
- ARRAY['lolaCopasMalaga.webp','hammamAlAndalus.webp','lolaCopasMalaga.webp','calleBruselasMalaga.webp','terrazaHotel.webp','habitacionHotel.webp','entradaHotel.webp'], 
+ ARRAY['lolaCopasMalaga.webp','hammamAlAndalus.webp','lolaCopasMalaga.webp','calleBruselasMalaga.webp','','','','terrazaHotel.webp','habitacionHotel.webp','entradaHotel.webp'], 
  'festive',
  '1200' 
 FROM "City" 

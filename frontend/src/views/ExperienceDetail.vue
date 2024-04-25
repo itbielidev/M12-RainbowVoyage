@@ -31,7 +31,7 @@
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div
-                v-for="(h, index) in hotel"
+                v-for="(h, index) in experience?.images.slice(7)"
                 :key="index"
                 class="carousel-item"
                 :class="{ active: index === 0 }"
@@ -149,13 +149,14 @@
     </div>
     <DatesForm class="my-5" :experienceId="props.experienceId" @reserve="openModal"></DatesForm>
     <div class="container">
-      <div class="row justify-content-center align-items-center">
+      <div class="row justify-content-center align-items-center flex-wrap">
         <div
-          v-for="(image, index) in experience?.images.slice(1)"
+          v-for="(image, index) in experience?.images.slice(1, 7)"
           class="col-lg-4 col-md-6 col-xs-12 mb-2 text-center"
           :key="index"
         >
           <img
+            v-if="image !== ''"
             :src="`/images/${experience?.city.name}/${image}`"
             class="img-fluid rounded imagenDetalle"
             :alt="`Experience photo ${index + 1}`"
@@ -185,7 +186,7 @@ const dateId = ref<number>(-1)
 const date = ref<string>('')
 const people = ref<string>('')
 
-var hotel = ['hotel.webp', 'habitación.webp', 'copas.webp', 'piscina.webp', 'spa.webp']
+//var hotel = ['hotel.webp', 'habitación.webp', 'copas.webp', 'piscina.webp', 'spa.webp']
 
 onMounted(async () => {
   await getExperience(props.experienceId)
