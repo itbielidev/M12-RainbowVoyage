@@ -1,7 +1,7 @@
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { computed, ref, type Ref } from "vue";
-import { type UserPreference, type LoginPayLoad, type RegisterPayLoad, type User } from "@/types/index";
+import { type UserPreference, type User } from "@/types/index";
 import { useFetch } from "@/composables/useFetch";
 import router from "@/router";
 
@@ -26,8 +26,15 @@ export const useAuthStore = defineStore('auth', () => {
         price_max: "1500"
     })
 
+    const error: Ref<boolean> = ref(false);
+    const errorMessages: Ref<string[]> = ref([]);
+
     const { getAuth } = useFetch<User>();
     const { postAuth, fetchError, isLoading } = useFetch<UserPreference>();
+    const { postAuth: updateUserData, fetchError: updateUserDataError } = useFetch<any>()
+    const { postAuth: updateEmail, fetchError: updateEmailError } = useFetch<any>()
+    const { postAuth: updatePassword, fetchError: updatePasswordError } = useFetch<any>()
+
     const token: Ref<string> = useStorage("token", "", sessionStorage);
     const userIsLoggedIn = computed(() => token.value !== "" ? true : false);
 
@@ -39,6 +46,67 @@ export const useAuthStore = defineStore('auth', () => {
     const email: Ref<string | null> = useStorage("email", "", sessionStorage);
     const phone: Ref<string | null> = useStorage('phone', "", sessionStorage);
     const lastName: Ref<string | null> = useStorage('lastName', "", sessionStorage);
+
+
+    /*First Data User Form*/
+    const userData = ref<{ name: string, last_name: string, phone: string }>({
+        name: name.value as string,
+        last_name: lastName.value as string,
+        phone: phone.value as string
+    })
+
+    function verifyUserData() {
+        error.value = false;
+        errorMessages.value = [];
+
+        if (userData.value?.name?.length === 0 || userData?.value?.name?.length < 1 || userData?.value?.name?.length > 100) {
+            errorMessages.value.push("El nombre de usuario debe tener entre 1 y 100 carácteres.");
+            error.value = true;
+        }
+        if (userData.value?.last_name?.length === 0 || userData.value.last_name.length < 1 || userData.value.last_name.length > 100) {
+            errorMessages.value.push("Los apellidos debe tener entre 1 y 100 carácteres.");
+            error.value = true;
+        }
+        if (/\d/
+            .test(userData?.value?.name) && userData?.value?.name?.length > 0) {
+            errorMessages.value.push("El nombre no debe contener carácteres numéricos");
+            error.value = true;
+        }
+
+        if (userData.value.phone === "" || /[\p{L}]/u.test(userData.value.phone as string) || userData?.value?.phone?.length !== 9) {
+            errorMessages.value.push("El número de teléfono introducido no es correcto. El teléfono debe tener exactamente 9 dígitos.");
+            error.value = true;
+        }
+
+        if (/\d/
+            .test(userData.value.last_name as string) && userData?.value?.last_name?.length > 0) {
+            errorMessages.value.push("Los apellidos no deben contener carácteres numéricos");
+            error.value = true;
+        }
+    }
+
+
+    async function modifyUserData() {
+        verifyUserData()
+
+        if (error.value) {
+            userData.value.name = name.value as string;
+            userData.value.last_name = lastName.value as string;
+            userData.value.phone as string
+            return;
+        }
+
+        await updateUserData("/users/updateData", userData.value);
+
+        if (updateUserDataError.value) {
+            errorMessages.value.push(updateUserDataError.value as string);
+            error.value = true;
+            userData.value.name = name.value as string;
+            userData.value.last_name = lastName.value as string;
+            userData.value.phone as string
+            return;
+        }
+    }
 
     /*USER FILTERS EXPERIENCES*/
     const num_people_min: Ref<string | null> = useStorage("num_people_min", "", sessionStorage);
@@ -142,5 +210,5 @@ export const useAuthStore = defineStore('auth', () => {
     //     }
     // }
 
-    return { token, updatePreferences, formData, price_min, price_max, userIsLoggedIn, user, isAdmin, logout, getUser, name, email, phone, lastName, num_people_max, num_people_min, duration_max, duration_min, type }
+    return { modifyUserData, error, errorMessages, userData, token, updatePreferences, formData, price_min, price_max, userIsLoggedIn, user, isAdmin, logout, getUser, name, email, phone, lastName, num_people_max, num_people_min, duration_max, duration_min, type }
 })

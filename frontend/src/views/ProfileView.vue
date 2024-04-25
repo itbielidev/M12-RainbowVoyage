@@ -6,6 +6,7 @@ import { useReservations } from '@/composables/useReservations'
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import ErrorMessages from '@/components/ErrorMessages.vue'
 
 import Chip from 'primevue/chip'
 
@@ -20,14 +21,8 @@ onMounted(async () => {
 })
 
 const { reservations, getUserReservations } = useReservations()
-const { name, email, phone, lastName } = storeToRefs(useAuthStore())
-
-const formData = ref({
-  name: name,
-  email: email,
-  phone: phone,
-  lastName: lastName
-})
+const { error, errorMessages, userData, email } = storeToRefs(useAuthStore())
+const { modifyUserData } = useAuthStore()
 
 const reservationActivated = ref(true)
 const updatingEmail = ref(false)
@@ -87,7 +82,7 @@ const { open, close } = useModal({
               type="text"
               class="form-control"
               placeholder="Introduce tu nombre"
-              v-model="formData.name"
+              v-model="userData.name"
             />
           </div>
           <!-- surnames -->
@@ -100,7 +95,7 @@ const { open, close } = useModal({
               type="text"
               class="form-control"
               placeholder="Introduce tus apellidos"
-              v-model="lastName"
+              v-model="userData.last_name"
             />
           </div>
           <!-- phone -->
@@ -113,28 +108,29 @@ const { open, close } = useModal({
               type="phone"
               class="form-control"
               placeholder="Introduce tu nº teléfono"
-              v-model="phone"
+              v-model="userData.phone"
             />
           </div>
           <!-- mail -->
           <div class="col-md-6">
-            <label class="form-label">
-              Email
-              <span class="text-danger">*</span>
-            </label>
+            <label class="form-label"> Email </label>
             <input
               type="email"
               class="form-control"
               placeholder="Introduce tu email"
               v-model="email"
+              disabled
             />
           </div>
 
           <div class="col-12 text-end">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <a href="#" class="btn pink-button" @click="modifyUserData">Guardar</a>
           </div>
         </form>
       </div>
+      <section v-if="error">
+        <ErrorMessages :messages="errorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- UPDATE EMAIL -->

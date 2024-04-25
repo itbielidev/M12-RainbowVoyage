@@ -97,6 +97,21 @@ export class UserController {
     return res.status(500).json({ error: "Server error!" })
   }
 
+  updateData = async (req, res) => {
+
+    //Validate
+
+    const userId = req.user_id;
+    const returnState = await this.userModel.updateData(req.body, userId);
+
+    if (returnState === 1) {
+      return res.status(200).json("Data updated!");
+    }
+
+    return res.status(500).json({ error: "Could not update" })
+
+  }
+
   // delete = async (req, res) => {
   //   //Apply validation schema to the data received
   //   //const userValidated = validateLogin(req.body);

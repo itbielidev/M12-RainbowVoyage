@@ -213,6 +213,28 @@ export class UserModel {
 
     }
 
+    static async updateData(data, userId) {
+
+        try {
+            await prismadb.user.update({
+                where: {
+                    id: userId
+                },
+                data: {
+                    name: data.name,
+                    last_name: data.last_name,
+                    phone: data.phone
+                }
+            });
+
+            return 1
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
     // static async delete(user_data) {
     //     try {
     //         const deletedUser = await prismadb.user.update({

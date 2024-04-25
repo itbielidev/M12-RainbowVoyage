@@ -12,21 +12,9 @@ export const createUserRouter = (userModel) => {
   userRouter.post("/login", userController.login);
   userRouter.post("/preferences", authenticateToken, userController.updatePreferences);
   userRouter.get("/", authenticateToken, userController.getUser);
-  // userRouter.delete("/deactivate", authenticateToken, userController.deactivate);
-  // userRouter.post("/activate", userController.activate);
-  // userRouter.get("/type/:type", userController.getByType);
-  // userRouter.get("/getData", authenticateToken, userController.getData);
-  // userRouter.get("/getStats/:userId", userController.getUserStats);
-  // userRouter.get("/getStatsAuth", authenticateToken, userController.getUserStatsAuth);
-  // userRouter.get("/favorites", authenticateToken, userController.getFavorites);
-  // userRouter.put("/favorites", authenticateToken, userController.toggleFavorite);
-  // userRouter.put("/favorites/add", authenticateToken, userController.addFavorite);
-  // userRouter.get("/ranking", userController.getRanking);
-  // userRouter.post("/sendData", authenticateToken, userController.sendData);
-  // userRouter.post("/sendPhoto", authenticateToken, upload.single('userPhoto'), userController.sendPhoto);
-  // userRouter.post("/userPhoto", authenticateToken, upload.single('userPhoto'), userController.getUserImage);
-
-
+  userRouter.post("/updateData", authenticateToken, userController.updateData);
+  // userRouter.post("/updateEmail", authenticateToken, userController.updateEmail);
+  // userRouter.post("/updatePassword", authenticateToken, userController.updatepassword);
 
   return userRouter;
 };
