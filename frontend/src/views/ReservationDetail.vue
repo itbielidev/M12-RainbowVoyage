@@ -1,6 +1,7 @@
 <template>
   <div class="background">
-    <section v-if="!isLoadingDetail && !error && reservation">
+    <button class="btn" @click="printPDF">Imprimir PDF</button>
+    <section v-if="!isLoadingDetail && !error && reservation" class="mt-3">
       <div class="billete">
         <div class="encabezado">
           <div class="mover">
@@ -14,28 +15,29 @@
         </div>
       </div>
       <div class="cuerpo">
-        <div class="detalle-info">
-          <div class="detalle-info-columna">
-            <div class="billeteIda">
-              <p class="fw-bolder">Aeropuerto de salida</p>
-              <p>{{ reservation.airportIn }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Día</p>
-              <p>{{ reservation.dates }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Hora</p>
-              <p>{{ reservation.llegadaFirstDay }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Puerta</p>
-              <p>{{ randomGate }}</p>
-            </div>
-          </div>
-          <div class="detalle-info-columna">
-            <div class="informacionPasajero">
+        <div class="left-side">
+          <!-- Información de los aeropuertos -->
+          <div class="detalle-info">
+            <div class="detalle-info-columna">
+              <div class="billeteIda">
+                <p class="fw-bolder">Aeropuerto de salida</p>
+                <p>{{ reservation.airportIn }}</p>
+              </div>
               <div class="informaciónVuelo">
+                <p class="fw-bolder">Día</p>
+                <p>{{ reservation.dates }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Hora</p>
+                <p>{{ reservation.llegadaFirstDay }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Puerta</p>
+                <p>{{ randomGate }}</p>
+              </div>
+            </div>
+            <div class="detalle-info-columna">
+              <div class="billeteIda">
                 <p class="fw-bolder">Nombre</p>
                 <p>{{ reservation.name }}</p>
               </div>
@@ -51,27 +53,31 @@
           </div>
         </div>
 
-        <div class="detalle-info">
-          <div class="detalle-info-columna">
-            <div class="billeteIda">
-              <p class="fw-bolder">Aeropuerto de llegada</p>
-              <p>{{ reservation.airportOut }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Día</p>
-              <p>{{ reservation.dates }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Hora</p>
-              <p>{{ reservation.llegadaFirstDay }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Puerta</p>
-              <p>{{ randomGate }}</p>
+        <div class="vertical-line"></div>
+
+        <div class="right-side">
+          <!-- Información del pasajero -->
+          <div class="detalle-info">
+            <div class="detalle-info-columna">
+              <div class="billeteIda">
+                <p class="fw-bolder">Aeropuerto de salida</p>
+                <p>{{ reservation.airportOut }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Día</p>
+                <p>{{ reservation.dates }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Hora</p>
+                <p>{{ reservation.llegadaLastDay }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Puerta</p>
+                <p>{{ randomGate }}</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="vertical-line"></div>
       </div>
       <div class="billete">
         <div class="footer">
@@ -87,7 +93,7 @@
       </div>
     </section>
 
-    <section v-if="!isLoadingDetail && !error && reservation" class="mt-4">
+    <section v-if="!isLoadingDetail && !error && reservation" class="mt-3">
       <div class="billete">
         <div class="encabezado">
           <div class="mover">
@@ -101,28 +107,29 @@
         </div>
       </div>
       <div class="cuerpo">
-        <div class="detalle-info">
-          <div class="detalle-info-columna">
-            <div class="billeteIda">
-              <p class="fw-bolder">Aeropuerto de salida</p>
-              <p>{{ reservation.airportOut }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Día</p>
-              <p>{{ reservation.dates }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Hora</p>
-              <p>{{ reservation.llegadaLastDay }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Puerta</p>
-              <p>{{ randomGate }}</p>
-            </div>
-          </div>
-          <div class="detalle-info-columna">
-            <div class="informacionPasajero">
+        <div class="left-side">
+          <!-- Información de los aeropuertos -->
+          <div class="detalle-info">
+            <div class="detalle-info-columna">
+              <div class="billeteIda">
+                <p class="fw-bolder">Aeropuerto de salida</p>
+                <p>{{ reservation.airportIn }}</p>
+              </div>
               <div class="informaciónVuelo">
+                <p class="fw-bolder">Día</p>
+                <p>{{ reservation.dates }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Hora</p>
+                <p>{{ reservation.llegadaFirstDay }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Puerta</p>
+                <p>{{ randomGate2 }}</p>
+              </div>
+            </div>
+            <div class="detalle-info-columna">
+              <div class="billeteIda">
                 <p class="fw-bolder">Nombre</p>
                 <p>{{ reservation.name }}</p>
               </div>
@@ -138,27 +145,31 @@
           </div>
         </div>
 
-        <div class="detalle-info">
-          <div class="detalle-info-columna">
-            <div class="billeteIda">
-              <p class="fw-bolder">Aeropuerto de llegada</p>
-              <p>{{ reservation.airportIn }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Día</p>
-              <p>{{ reservation.dates }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Hora</p>
-              <p>{{ reservation.llegadaLastDay }}</p>
-            </div>
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Puerta</p>
-              <p>{{ randomGate }}</p>
+        <div class="vertical-line"></div>
+
+        <div class="right-side">
+          <!-- Información del pasajero -->
+          <div class="detalle-info">
+            <div class="detalle-info-columna">
+              <div class="billeteIda">
+                <p class="fw-bolder">Aeropuerto de salida</p>
+                <p>{{ reservation.airportOut }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Día</p>
+                <p>{{ reservation.dates }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Hora</p>
+                <p>{{ reservation.llegadaLastDay }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Puerta</p>
+                <p>{{ randomGate2 }}</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="vertical-line"></div>
       </div>
       <div class="billete">
         <div class="footer">
@@ -172,10 +183,10 @@
           </div>
         </div>
       </div>
-      <div class="container mt-4">
+      <div class="container mt-3">
         <div class="parte">
           <font-awesome-icon icon="fa-solid fa-location-dot" class="city"/>
-          <!-- <img :src="`/images/${reservation.experience?.city.images[0]}/reservation.experience?.images[7]`" alt=""> -->
+          <img :src="`/images/${reservation.experience?.city.name}/${reservation.experience?.city.images[0]}`" alt="">
         </div>
         <div class="parte">
           <font-awesome-icon icon="fa-solid fa-route" class="routes"/>
@@ -203,6 +214,7 @@ import ErrorMessages from '@/components/ErrorMessages.vue'
 import ProgressSpinner from 'primevue/progressspinner'
 import { useSeoMeta, type UseSeoMetaInput } from '@unhead/vue'
 import jsPDF from 'jspdf'
+import html2pdf from 'html2pdf.js' // Asegúrate de incluir la biblioteca html2pdf.js en tu proyecto
 
 const props = defineProps<{ reservationId: number }>()
 const { getReservation, reservation, error, errorMessages, isLoadingDetail } = useReservations()
@@ -212,6 +224,12 @@ onMounted(async () => {
 })
 
 const randomGate = computed(() => {
+  const randomNumber = Math.floor(Math.random() * 5) + 1;
+  const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 5));
+  return randomNumber + randomLetter;
+});
+
+const randomGate2 = computed(() => {
   const randomNumber = Math.floor(Math.random() * 5) + 1;
   const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 5));
   return randomNumber + randomLetter;
@@ -228,8 +246,21 @@ const seoMeta = computed<UseSeoMetaInput>(() => {
 })
 
 useSeoMeta(seoMeta as UseSeoMetaInput)
-</script>
 
+const printPDF = () => {
+  const element = document.getElementById('pdf-content') // Reemplaza 'pdf-content' con el id del contenedor que deseas imprimir
+  if (element) {
+    const opt = {
+      margin:       1,
+      filename:     'documento.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    }
+    html2pdf().set(opt).from(element).save()
+  }
+}
+</script>
 <style scoped>
 .container{
   background-color: white;
@@ -351,9 +382,28 @@ useSeoMeta(seoMeta as UseSeoMetaInput)
 .container {
   display: flex;
   justify-content: space-around;
+  background-color: white;
+  border-radius: 50px;
+  border:3px solid #D90594;
+  padding: 20px;
+  margin-top: 20px;
 }
 
 .parte {
   text-align: center;
+}
+
+button{
+  border-radius: 50px;
+  background-color: #D90594;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  justify-content: center
+}
+button:hover{
+  background-color: white;
+  border: 2px solid #D90594;
+  color: black;
 }
 </style>
