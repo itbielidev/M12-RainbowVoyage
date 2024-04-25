@@ -328,6 +328,7 @@ watch(formData.value, () => {
                     <option value="festive">Festiva</option>
                     <option value="cultural">Cultural</option>
                     <option value="gastronomic">Gastrónomica</option>
+                    <option value="all">Todas</option>
                   </optgroup>
                 </select>
               </div>

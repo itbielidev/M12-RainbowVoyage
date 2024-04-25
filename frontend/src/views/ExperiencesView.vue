@@ -33,10 +33,10 @@ const router = useRouter()
 
 const queries = ref({
   price_min: '600',
-  price_max: '1300',
+  price_max: '1500',
   num_people_min: '3',
   num_people_max: '10',
-  type: 'festive',
+  type: 'all',
   duration_min: '3',
   duration_max: '5',
   ...route.query
@@ -191,6 +191,7 @@ useSeoMeta({
             <option value="gastronomic">Gastronómica</option>
             <option value="cultural">Cultural</option>
             <option value="festive" selected>Festiva</option>
+            <option value="all">Todas</option>
           </select>
         </button>
         <button type="button" class="btn btn-light">

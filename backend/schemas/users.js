@@ -12,7 +12,7 @@ const registrationSchema = z.object({
     num_people_max: z.number().optional().nullable(),
     duration_min: z.number().optional().nullable(),
     duration_max: z.number().optional().nullable(),
-    experience_type: z.enum(["gastronomic", "cultural", "festive"]).optional().nullable(),
+    experience_type: z.enum(["gastronomic", "cultural", "festive", "all"]).optional().nullable(),
     checkbox: z.boolean(),
     adult: z.boolean()
 });

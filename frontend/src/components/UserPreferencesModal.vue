@@ -49,9 +49,9 @@ onMounted(() => {
   formData.value.duration_min = duration_min || '1'
   formData.value.num_people_max = num_people_max || '1'
   formData.value.num_people_min = num_people_min || '1'
-  formData.value.type = type || 'festive'
-  formData.value.price_max = price_max || '650'
-  formData.value.price_min = price_min || '650'
+  formData.value.type = type || 'all'
+  formData.value.price_max = price_max || '600'
+  formData.value.price_min = price_min || '1500'
 })
 </script>
 <template>
@@ -212,13 +212,13 @@ onMounted(() => {
               "
             >
               <optgroup>
-                <option value="600" selected>600</option>
+                <option value="600">600</option>
                 <option value="700">700</option>
                 <option value="800">800</option>
                 <option value="900">900</option>
                 <option value="1100">1100</option>
                 <option value="1300">1300</option>
-                <option value="1500">1500</option>
+                <option value="1500" selected>1500</option>
               </optgroup>
             </select>
           </div>
@@ -231,6 +231,7 @@ onMounted(() => {
                 <option value="festive" selected>Festiva</option>
                 <option value="cultural">Cultural</option>
                 <option value="gastronomic">Gastrónomica</option>
+                <option value="all">Todas</option>
               </optgroup>
             </select>
           </div>
@@ -246,10 +247,10 @@ onMounted(() => {
   </VueFinalModal>
 </template>
 <style scoped>
-orm {
+/* form {
   display: flex;
   flex-direction: column;
-}
+} */
 
 form input {
   border-radius: 5px;
