@@ -48,7 +48,6 @@ const { open, close } = useModal({
   component: UserPreferencesModal,
   attrs: {
     onConfirm(data: any) {
-      // console.log(data) hay que guardar los datos en la base de datos
       close()
     },
     onCancel() {
@@ -130,7 +129,7 @@ const { open, close } = useModal({
               v-model="email"
             />
           </div>
- 
+
           <div class="col-12 text-end">
             <a href="#" class="btn pink-button">Guardar</a>
           </div>
@@ -178,10 +177,16 @@ const { open, close } = useModal({
 
     <!-- BOOKINGS -->
     <section v-if="!reservationActivated" class="card border p-2 my-4 mx-5 d-flex text-start">
-      <div class="card-header border-bottom d-flex justify-content-between align-items-center" style="background-color: white">
+      <div
+        class="card-header border-bottom d-flex justify-content-between align-items-center"
+        style="background-color: white"
+      >
         <h4 class="card-header-title">Mis Reservas</h4>
-        <h5 class="d-flex align-items-center gap-3">Preferencias de Búsqueda<button @click="open" class="btn pink-button me-0">Cambiar</button></h5>
-        
+        <h5 class="d-flex align-items-center gap-3">
+          Preferencias de Búsqueda<button @click="open" class="btn pink-button me-0">
+            Cambiar
+          </button>
+        </h5>
       </div>
       <template v-if="reservations && reservations.length > 0">
         <article v-for="reservation in reservations" :key="reservation.id" class="card-body">
@@ -267,7 +272,7 @@ const { open, close } = useModal({
   text-decoration: none;
 }
 
-h5{
-  font-size: 1rem
+h5 {
+  font-size: 1rem;
 }
 </style>

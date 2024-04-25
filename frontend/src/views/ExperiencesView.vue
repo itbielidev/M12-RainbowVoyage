@@ -2,14 +2,27 @@
 import NavBar from '@/components/NavBar.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, type Ref } from 'vue'
 import { useExperiences } from '@/composables/useExperiences'
 import { useCitiesStore } from '@/stores/cities'
 import { useSeoMeta } from '@unhead/vue'
 import ProgressSpinner from 'primevue/progressspinner'
 import ErrorMessages from '../components/ErrorMessages.vue'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps<{ cityName: string }>()
+
+const {
+  userIsLoggedIn,
+  price_max,
+  price_min,
+  duration_max,
+  duration_min,
+  type,
+  num_people_max,
+  num_people_min
+} = storeToRefs(useAuthStore())
 
 const { getExperiences, experiences, isLoading, error, errorMessages } = useExperiences()
 
@@ -19,15 +32,31 @@ const route = useRoute()
 const router = useRouter()
 
 const queries = ref({
-  price_min: undefined,
-  price_max: undefined,
-  num_people_min: undefined,
-  num_people_max: undefined,
-  experience_type: undefined,
-  duration_min: undefined,
-  duration_max: undefined,
+  price_min: '600',
+  price_max: '1500',
+  num_people_min: '3',
+  num_people_max: '10',
+  type: 'all',
+  duration_min: '3',
+  duration_max: '5',
   ...route.query
 })
+
+const checkConstraints = (min: string, max: string, tag: string) => {
+  if (Number(min) > Number(max) || Number(max) < Number(min)) {
+    switch (tag) {
+      case 'price':
+        queries.value.price_min = queries.value.price_max
+        break
+      case 'num_people':
+        queries.value.num_people_min = queries.value.num_people_max
+        break
+      case 'duration':
+        queries.value.duration_min = queries.value.duration_max
+        break
+    }
+  }
+}
 
 watch(
   queries,
@@ -39,9 +68,21 @@ watch(
 )
 
 async function getExps() {
-  //@ts-expect-error
   const qs = new URLSearchParams(queries.value).toString()
   await getExperiences(getCityByName(props.cityName) as number, qs)
+}
+
+async function setPreferences() {
+  //Setting the user stored preferences
+  queries.value.duration_max = duration_max.value as string
+  queries.value.duration_min = duration_min.value as string
+  queries.value.num_people_max = num_people_max.value as string
+  queries.value.num_people_min = num_people_min.value as string
+  queries.value.type = type.value as string
+  queries.value.price_min = price_min.value as string
+  queries.value.price_max = price_max.value as string
+
+  await getExps()
 }
 
 onMounted(async () => {
@@ -71,126 +112,181 @@ useSeoMeta({
     </section>
   </header>
   <body>
-   <div class="container"> <!-- el div engloba todo menos el footer, asi el footer ocupa todo el ancho de pantalla -->
-    <section class=" filters container">
-      <button type="button" class="btn btn-light">
-        Participantes:
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Mínimo</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        -
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Maxímo</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </button>
-      <button type="button" class="btn btn-light">
-        Precio:
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Mínimo</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        -
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Maxímo</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </button>
-      <button type="button" class="btn btn-light">
-        Experiencias:
-        <select class="form-select" aria-label="Default select example">
-          <option value="1">Gastronómica</option>
-          <option value="2">Cultural</option>
-          <option value="3">Festiva</option>
-        </select>
-      </button>
-      <button type="button" class="btn btn-light">
-        Duración:
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Mínimo</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        -
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Maxímo</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </button>
-    </section>
-    <main class="container">
-      <section class="experience-quote">
-        <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
-      </section>
-      <section v-if="!isLoading && experiences" class="our-experiences">
-        <h2 class="title-our-experiences">Nuestras Experiencias</h2>
-        <template v-for="experience in experiences" :key="experience.id">
-          <RouterLink
-            class="centered-link"
-            :to="{
-              name: 'experienceDetail',
-              params: { experienceId: experience.id, cityName: props.cityName }
-            }"
+    <div class="container">
+      <!-- el div engloba todo menos el footer, asi el footer ocupa todo el ancho de pantalla -->
+      <section class="filters container flex-wrap gap_2">
+        <button type="button" class="btn btn-light">
+          Participantes:
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="queries.num_people_min"
+            @change="checkConstraints(queries.num_people_min, queries.num_people_max, 'num_people')"
           >
-            <article class="art-experience">
-              <div class="img-article">
-                <img :src="`/images/${experience.images[0]}`" />
-              </div>
-              <div class="experience-description">
-                <h3 class="route-title">{{ experience.name }}</h3>
-                <span class="experience-length">{{ experience.duration }} dias</span>
-                <p class="experience-activities">
-                  <strong>Actividades: </strong>{{ experience.descriptions[0] }}
-                </p>
-                <RouterLink
-                  :to="{
-                    name: 'experienceDetail',
-                    params: { experienceId: experience.id, cityName: props.cityName }
-                  }"
-                  style="text-decoration: none; display: flex; align-self: flex-end"
-                  ><button class="price">
-                    <span
-                      >Desde<br /><strong>{{ experience.price }}€</strong></span
-                    >
-                  </button></RouterLink
-                >
-              </div>
-            </article>
-          </RouterLink>
-        </template>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+          -
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="queries.num_people_max"
+            @change="checkConstraints(queries.num_people_min, queries.num_people_max, 'num_people')"
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10" selected>10</option>
+          </select>
+        </button>
+        <button type="button" class="btn btn-light">
+          Precio:
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="queries.price_min"
+            @change="checkConstraints(queries.price_min, queries.price_max, 'price')"
+          >
+            <option value="600" selected>600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+            <option value="1100">1100</option>
+            <option value="1300">1300</option>
+            <option value="1500">1500</option>
+          </select>
+          -
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="queries.price_max"
+            @change="checkConstraints(queries.price_min, queries.price_max, 'price')"
+          >
+            <option value="600">600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+            <option value="1100">1100</option>
+            <option value="1300">1300</option>
+            <option value="1500" selected>1500</option>
+          </select>
+        </button>
+        <button type="button" class="btn btn-light">
+          Experiencias:
+          <select class="form-select" aria-label="Default select example" v-model="queries.type">
+            <option value="gastronomic">Gastronómica</option>
+            <option value="cultural">Cultural</option>
+            <option value="festive" selected>Festiva</option>
+            <option value="all">Todas</option>
+          </select>
+        </button>
+        <button type="button" class="btn btn-light">
+          Duración:
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="queries.duration_min"
+            @change="checkConstraints(queries.duration_min, queries.duration_max, 'duration')"
+          >
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          -
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="queries.duration_max"
+            @change="checkConstraints(queries.duration_min, queries.duration_max, 'duration')"
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5" selected>5</option>
+          </select>
+        </button>
+        <button
+          v-if="userIsLoggedIn"
+          type="button"
+          class="btn-preferences mt-3 align-self-center"
+          value="Activar preferencias"
+          @click="setPreferences"
+        >
+          Activar preferencias
+        </button>
       </section>
-      <section v-else-if="!error && isLoading" class="d-flex justify-content-center">
-        <ProgressSpinner></ProgressSpinner>
-      </section>
-      <section v-else-if="error" class="d-flex justify-content-center">
-        <ErrorMessages :messages="errorMessages"></ErrorMessages>
-      </section>
-    </main>
-   </div>
+      <main class="container">
+        <section class="experience-quote">
+          <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
+        </section>
+        <section v-if="!isLoading && experiences && experiences.length > 0" class="our-experiences">
+          <h2 class="title-our-experiences">Nuestras Experiencias</h2>
+          <template v-for="experience in experiences" :key="experience.id">
+            <RouterLink
+              class="centered-link"
+              :to="{
+                name: 'experienceDetail',
+                params: { experienceId: experience.id, cityName: props.cityName }
+              }"
+            >
+              <article class="art-experience">
+                <div class="img-article">
+                  <img :src="`/images/${experience.images[0]}`" />
+                </div>
+                <div class="experience-description">
+                  <h3 class="route-title">{{ experience.name }}</h3>
+                  <span class="experience-length">{{ experience.duration }} dias</span>
+                  <p class="experience-activities">
+                    <strong>Actividades: </strong>{{ experience.descriptions[0] }}
+                  </p>
+                  <RouterLink
+                    :to="{
+                      name: 'experienceDetail',
+                      params: { experienceId: experience.id, cityName: props.cityName }
+                    }"
+                    style="text-decoration: none; display: flex; align-self: flex-end"
+                    ><button class="price">
+                      <span
+                        >Desde<br /><strong>{{ experience.price }}€</strong></span
+                      >
+                    </button></RouterLink
+                  >
+                </div>
+              </article>
+            </RouterLink>
+          </template>
+        </section>
+        <section v-else-if="!error && isLoading" class="d-flex justify-content-center">
+          <ProgressSpinner></ProgressSpinner>
+        </section>
+        <section v-else-if="error" class="d-flex justify-content-center">
+          <ErrorMessages :messages="errorMessages"></ErrorMessages>
+        </section>
+        <section
+          v-else-if="!error && !isLoading && experiences?.length === 0"
+          class="d-flex justify-content-center"
+        >
+          <h3>No hay experiencias que coincidan con los filtros especificados.</h3>
+        </section>
+      </main>
+    </div>
     <FooterComponent></FooterComponent>
   </body>
 </template>
@@ -198,6 +294,15 @@ useSeoMeta({
 <style scoped>
 * {
   font-family: Roboto;
+}
+
+.btn-preferences {
+  background-color: rgba(217, 5, 148, 1);
+  color: white;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  width: max-content;
+  padding: 0.6rem 1rem;
 }
 
 .cover-city {
@@ -228,7 +333,6 @@ section.filters {
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
 
 .btn-light {
@@ -438,8 +542,6 @@ button.price {
     padding: 1rem;
     align-items: center;
     gap: 2rem;
-
   }
-
 }
 </style>
