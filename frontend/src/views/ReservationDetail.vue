@@ -15,58 +15,63 @@
       </div>
       <div class="cuerpo">
         <div class="detalle-info">
-          <div class="billeteIda">
-            <p class="fw-bolder">Aeropuerto de salida</p>
-            <p>{{ reservation.airportIn }}</p>
+          <div class="detalle-info-columna">
+            <div class="billeteIda">
+              <p class="fw-bolder">Aeropuerto de salida</p>
+              <p>{{ reservation.airportIn }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Día</p>
+              <p>{{ reservation.dates }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Hora</p>
+              <p>{{ reservation.llegadaFirstDay }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Puerta</p>
+              <p>{{ randomGate }}</p>
+            </div>
           </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Día</p>
-            <p>{{ reservation.dates }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Hora</p>
-            <p>{{ reservation.llegadaFirstDay }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Puerta</p>
-            <p>{{ randomGate }}</p>
+          <div class="detalle-info-columna">
+            <div class="informacionPasajero">
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Nombre</p>
+                <p>{{ reservation.name }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Apellidos</p>
+                <p>{{ reservation.last_name }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">DNI</p>
+                <p>{{ reservation.dni }}</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="detalle-info">
-          <div class="billeteIda">
-            <p class="fw-bolder">Aeropuerto de llegada</p>
-            <p>{{ reservation.airportOut }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Día</p>
-            <p>{{ reservation.dates }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Hora</p>
-            <p>{{ reservation.llegadaFirstDay }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Puerta</p>
-            <p>{{ randomGate }}</p>
+          <div class="detalle-info-columna">
+            <div class="billeteIda">
+              <p class="fw-bolder">Aeropuerto de llegada</p>
+              <p>{{ reservation.airportOut }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Día</p>
+              <p>{{ reservation.dates }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Hora</p>
+              <p>{{ reservation.llegadaFirstDay }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Puerta</p>
+              <p>{{ randomGate }}</p>
+            </div>
           </div>
         </div>
         <div class="vertical-line"></div>
-
-        <div class="informacionPasajero">
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Nombre</p>
-            <p>{{ reservation.name }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Apellidos</p>
-            <p>{{ reservation.last_name }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">DNI</p>
-            <p>{{ reservation.dni }}</p>
-          </div>
-        </div>
       </div>
       <div class="billete">
         <div class="footer">
@@ -97,60 +102,63 @@
       </div>
       <div class="cuerpo">
         <div class="detalle-info">
-          <div class="billeteIda">
-            <p class="fw-bolder">Aeropuerto de salida</p>
-            <p>{{ reservation.airportOut }}</p>
-            <p>{{ reservation.experience?.name }}</p>
-            <!-- <img :src="`/images/${reservation.experience?.city.images[0]}/reservation.experience?.images[7]`" alt=""> -->
+          <div class="detalle-info-columna">
+            <div class="billeteIda">
+              <p class="fw-bolder">Aeropuerto de salida</p>
+              <p>{{ reservation.airportOut }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Día</p>
+              <p>{{ reservation.dates }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Hora</p>
+              <p>{{ reservation.llegadaLastDay }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Puerta</p>
+              <p>{{ randomGate }}</p>
+            </div>
           </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Día</p>
-            <p>{{ reservation.dates }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Hora</p>
-            <p>{{ reservation.llegadaLastDay }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Puerta</p>
-            <p>{{ randomGate }}</p>
+          <div class="detalle-info-columna">
+            <div class="informacionPasajero">
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Nombre</p>
+                <p>{{ reservation.name }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">Apellidos</p>
+                <p>{{ reservation.last_name }}</p>
+              </div>
+              <div class="informaciónVuelo">
+                <p class="fw-bolder">DNI</p>
+                <p>{{ reservation.dni }}</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="detalle-info">
-          <div class="billeteIda">
-            <p class="fw-bolder">Aeropuerto de llegada</p>
-            <p>{{ reservation.airportIn }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Día</p>
-            <p>{{ reservation.dates }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Hora</p>
-            <p>{{ reservation.llegadaLastDay }}</p>
-          </div>
-          <div class="informaciónVuelo">
-            <p class="fw-bolder">Puerta</p>
-            <p>{{ randomGate }}</p>
-          </div>
-        </div>
-        <div class="vertical-line">
-          <div class="informacionPasajero">
-            <div class="informaciónVuelo">
-              <p class="fw-bolder">Nombre</p>
-              <p>{{ reservation.name }}</p>
+          <div class="detalle-info-columna">
+            <div class="billeteIda">
+              <p class="fw-bolder">Aeropuerto de llegada</p>
+              <p>{{ reservation.airportIn }}</p>
             </div>
             <div class="informaciónVuelo">
-              <p class="fw-bolder">Apellidos</p>
-              <p>{{ reservation.last_name }}</p>
+              <p class="fw-bolder">Día</p>
+              <p>{{ reservation.dates }}</p>
             </div>
             <div class="informaciónVuelo">
-              <p class="fw-bolder">DNI</p>
-              <p>{{ reservation.dni }}</p>
+              <p class="fw-bolder">Hora</p>
+              <p>{{ reservation.llegadaLastDay }}</p>
+            </div>
+            <div class="informaciónVuelo">
+              <p class="fw-bolder">Puerta</p>
+              <p>{{ randomGate }}</p>
             </div>
           </div>
         </div>
+        <div class="vertical-line"></div>
       </div>
       <div class="billete">
         <div class="footer">
@@ -162,6 +170,19 @@
               TARJETA DE EMBARQUE
             </p>
           </div>
+        </div>
+      </div>
+      <div class="container mt-4">
+        <div class="parte">
+          <font-awesome-icon icon="fa-solid fa-location-dot" class="city"/>
+          <!-- <img :src="`/images/${reservation.experience?.city.images[0]}/reservation.experience?.images[7]`" alt=""> -->
+        </div>
+        <div class="parte">
+          <font-awesome-icon icon="fa-solid fa-route" class="routes"/>
+          <p>{{ reservation.experience?.name }}</p>
+        </div>
+        <div class="parte">
+          <font-awesome-icon icon="fa-solid fa-hotel" class="hotel"/>
         </div>
       </div>
     </section>
@@ -210,10 +231,15 @@ useSeoMeta(seoMeta as UseSeoMetaInput)
 </script>
 
 <style scoped>
+.container{
+  background-color: white;
+  border-radius: 50px;
+  border-color: #D90594;
+}
+
 .background {
   background-color: rgba(171, 184, 195, 0.19);
   padding: 20px;
-  /* Agregar espacio interno */
 }
 
 .cuerpo {
@@ -256,6 +282,11 @@ useSeoMeta(seoMeta as UseSeoMetaInput)
   font-size: 25px;
 }
 
+.hotel, .routes, .city{
+  color: #D90594;
+  font-size: 60px
+}
+
 .invertirAvion {
   transform: scaleX(-1);
 }
@@ -277,18 +308,18 @@ useSeoMeta(seoMeta as UseSeoMetaInput)
   text-align: end;
 }
 
-.detalle-info,
-.informacionPasajero {
+
+.detalle-info {
   display: flex;
-  flex-wrap: wrap;
-  /* Permitir que los elementos se envuelvan si no caben en una sola línea */
-  justify-content: flex-start;
-  /* Alinear los elementos al inicio */
+  justify-content: space-between;
+  /* Alinea las columnas al inicio y al final */
   gap: 30px;
-  /* Espacio entre los elementos */
-  margin-bottom: 20px;
-  /* Agregar espacio inferior */
   text-align: center;
+  margin-right: 250px;
+}
+
+.detalle-info-columna {
+  display: flex;
 }
 
 .billeteIda p,
@@ -309,7 +340,20 @@ useSeoMeta(seoMeta as UseSeoMetaInput)
   transform: translateX(-50%);
 }
 
+.informacionPasajero {
+  display: flex;
+}
+
 .mover {
   margin-right: 80px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.parte {
+  text-align: center;
 }
 </style>
