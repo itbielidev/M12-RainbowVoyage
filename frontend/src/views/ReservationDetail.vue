@@ -1,6 +1,6 @@
 <template>
   <div class="background">
-    <button class="btn" @click="printPDF">Imprimir PDF</button>
+    <button class="btn" @click="printPDF()">Imprimir PDF</button>
     <section v-if="!isLoadingDetail && !error && reservation" class="mt-3">
       <div class="billete">
         <div class="encabezado">
@@ -248,7 +248,7 @@ const seoMeta = computed<UseSeoMetaInput>(() => {
 useSeoMeta(seoMeta as UseSeoMetaInput)
 
 const printPDF = () => {
-  const element = document.getElementById('pdf-content') // Reemplaza 'pdf-content' con el id del contenedor que deseas imprimir
+  const element = document.getElementById('pdf-content');
   if (element) {
     const opt = {
       margin:       1,
@@ -257,7 +257,7 @@ const printPDF = () => {
       html2canvas:  { scale: 2 },
       jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     }
-    html2pdf().set(opt).from(element).save()
+    html2pdf().set(opt).from(element).save();
   }
 }
 </script>
