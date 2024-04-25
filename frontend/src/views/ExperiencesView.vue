@@ -10,8 +10,13 @@ import ProgressSpinner from 'primevue/progressspinner'
 import ErrorMessages from '../components/ErrorMessages.vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import BreadCrumbs from '@/components/BreadCrumbs.vue';
 
 const props = defineProps<{ cityName: string }>()
+const items = ref([
+    { label: 'Home', route: '/policy' },
+    { label: 'Experiencias' }
+]);
 
 const {
   userIsLoggedIn,
@@ -232,6 +237,9 @@ useSeoMeta({
         </button>
       </section>
       <main class="container">
+        <section class="px-5">
+        <BreadCrumbs :items="items"></BreadCrumbs>
+        </section>
         <section class="experience-quote">
           <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
         </section>
