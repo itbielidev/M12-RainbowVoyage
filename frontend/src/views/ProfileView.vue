@@ -100,17 +100,13 @@ const { open, close } = useModal({
   }
 })
 
-const seoMeta = computed<UseSeoMetaInput>(() => {
-  return {
-    title: `Rainbow Voyage | Perfil de ${name}`,
-    description: `Perfil de ${name}`,
-    ogDescription: `Perfil de ${name}`,
-    ogTitle: `Rainbow Voyage | Perfil de ${name}`,
-    ogImage: '/images/logo.webp'
-  }
+useSeoMeta({
+  title: `Rainbow Voyage | Perfil de ${name.value}`,
+  description: `Perfil de ${name.value}`,
+  ogDescription: `Perfil de ${name.value}`,
+  ogTitle: `Rainbow Voyage | Perfil de ${name.value}`,
+  ogImage: '/images/logo.webp'
 })
-
-useSeoMeta(seoMeta as UseSeoMetaInput)
 </script>
 
 <template>
@@ -393,7 +389,6 @@ useSeoMeta(seoMeta as UseSeoMetaInput)
 }
 
 .breadcrumbs-box {
-
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
