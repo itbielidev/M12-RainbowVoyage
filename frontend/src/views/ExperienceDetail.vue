@@ -121,6 +121,7 @@ import GoToReservationFormModal from '@/components/GoToReservationFormModal.vue'
 import { useModal } from 'vue-final-modal'
 import { useRouter } from 'vue-router'
 import BreadCrumbs from '@/components/BreadCrumbs.vue'
+import { useSeoMeta, type UseSeoMetaInput } from '@unhead/vue'
 
 
 const { getExperience, experience } = useExperiences()
@@ -178,6 +179,18 @@ const { open, close } = useModal({
     }
   }
 })
+
+const seoMeta = computed<UseSeoMetaInput>(() => {
+  return {
+    title: `Rainbow Voyage | Detalle de la experiencia ${experience.value?.city.name}`,
+    description: `Detalle de la experiencia ${experience.value?.city.name}`,
+    ogDescription: `Detalle de la experiencia ${experience.value?.city.name}`,
+    ogTitle: `Rainbow Voyage | Detalle de la experiencia ${experience.value?.city.name}`,
+    ogImage: '/images/logo.webp'
+  }
+})
+
+useSeoMeta(seoMeta as UseSeoMetaInput)
 </script>
 
 <style scoped>

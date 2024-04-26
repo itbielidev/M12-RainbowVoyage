@@ -3,12 +3,13 @@ import NavBar from '../components/NavBar.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 import TripIcon from '@/components/icons/TripIcon.vue'
 import { useReservations } from '@/composables/useReservations'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import ErrorMessages from '@/components/ErrorMessages.vue'
 import Toast from 'primevue/toast'
 import BreadCrumbs from '@/components/BreadCrumbs.vue'
+import { useSeoMeta, type UseSeoMetaInput } from '@unhead/vue'
 
 import Chip from 'primevue/chip'
 
@@ -98,6 +99,18 @@ const { open, close } = useModal({
     }
   }
 })
+
+const seoMeta = computed<UseSeoMetaInput>(() => {
+  return {
+    title: `Rainbow Voyage | Perfil de ${name}`,
+    description: `Perfil de ${name}`,
+    ogDescription: `Perfil de ${name}`,
+    ogTitle: `Rainbow Voyage | Perfil de ${name}`,
+    ogImage: '/images/logo.webp'
+  }
+})
+
+useSeoMeta(seoMeta as UseSeoMetaInput)
 </script>
 
 <template>
