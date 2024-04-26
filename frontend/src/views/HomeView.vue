@@ -3,7 +3,7 @@
     <NavBar></NavBar>
     <div class="image-container">
       <div class="header-filter"></div>
-      <img :src="`/images/${closestCity?.images[0] || 'metro.webp'}`" class="img-fluid" alt="Metro Image" />
+      <img :src="`/images/${closestCity?.images[3] || 'coverMadrid.webp'}`" class="img-fluid"/>
       <div class="text-container">
         <h3>"Descubre destinos inclusivos con nuestra web para el colectivo LGTBIQ"</h3>
       </div>
