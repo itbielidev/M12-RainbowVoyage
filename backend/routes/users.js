@@ -13,8 +13,8 @@ export const createUserRouter = (userModel) => {
   userRouter.post("/preferences", authenticateToken, userController.updatePreferences);
   userRouter.get("/", authenticateToken, userController.getUser);
   userRouter.post("/updateData", authenticateToken, userController.updateData);
-  // userRouter.post("/updateEmail", authenticateToken, userController.updateEmail);
-  // userRouter.post("/updatePassword", authenticateToken, userController.updatepassword);
+  userRouter.post("/updateEmail", authenticateToken, userController.updateEmail);
+  userRouter.post("/updatePassword", authenticateToken, userController.updatePassword);
 
   return userRouter;
 };

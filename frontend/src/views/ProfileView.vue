@@ -7,6 +7,7 @@ import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import ErrorMessages from '@/components/ErrorMessages.vue'
+import Toast from 'primevue/toast'
 
 import Chip from 'primevue/chip'
 
@@ -21,16 +22,60 @@ onMounted(async () => {
 })
 
 const { reservations, getUserReservations } = useReservations()
-const { error, errorMessages, userData, email } = storeToRefs(useAuthStore())
-const { modifyUserData } = useAuthStore()
+
+const {
+  error,
+  errorMessages,
+  emailError,
+  emailErrorMessages,
+  passwordError,
+  passwordErrorMessages,
+  userData,
+  email,
+  newEmail,
+  name,
+  lastName,
+  phone,
+  newPassword
+} = storeToRefs(useAuthStore())
+const { modifyUserData, modifyEmail, getUser, modifyPassword } = useAuthStore()
 
 const reservationActivated = ref(true)
 const updatingEmail = ref(false)
 const updatingPassword = ref(false)
 
+const updateDataButtonDisabled = ref(false)
+const updateEmailButtonDisabled = ref(false)
+const updatePasswordButtonDisabled = ref(false)
+
 onMounted(async () => {
+  await getUser()
+
+  //Update user data form
+  userData.value.name = name.value as string
+  userData.value.last_name = lastName.value as string
+  userData.value.phone = phone.value as string
+
   await getUserReservations()
 })
+
+async function handleUserData() {
+  await modifyUserData()
+  updateDataButtonDisabled.value = true
+  setTimeout(() => (updateDataButtonDisabled.value = false), 5000)
+}
+
+async function handleEmail() {
+  await modifyEmail()
+  updateEmailButtonDisabled.value = true
+  setTimeout(() => (updateEmailButtonDisabled.value = false), 5000)
+}
+
+async function handlePassword() {
+  await modifyPassword()
+  updatePasswordButtonDisabled.value = true
+  setTimeout(() => (updatePasswordButtonDisabled.value = false), 5000)
+}
 
 function toggleReservationActivated() {
   reservationActivated.value = !reservationActivated.value
@@ -58,6 +103,7 @@ const { open, close } = useModal({
     class="gap-2 d-flex flex-column justify-content-center text-center pt-3 container"
     style="margin-top: 6rem"
   >
+    <Toast></Toast>
     <h2 class="text-center">Mi perfil</h2>
     <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end">
       <a href="#" class="btn pink-button" @click="toggleReservationActivated">
@@ -71,7 +117,7 @@ const { open, close } = useModal({
         <h4 class="card-header-title">Información Personal</h4>
       </div>
       <div class="card-body">
-        <form class="row g-3">
+        <form class="row g-3" novalidate @submit.prevent="">
           <!-- name -->
           <div class="col-md-6">
             <label class="form-label">
@@ -124,7 +170,13 @@ const { open, close } = useModal({
           </div>
 
           <div class="col-12 text-end">
-            <a href="#" class="btn pink-button" @click="modifyUserData">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handleUserData"
+              :disabled="updateDataButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
@@ -142,14 +194,35 @@ const { open, close } = useModal({
         <h4 class="card-header-title">Actualizar Email</h4>
       </div>
       <div class="card-body">
-        <form>
+        <form novalidate @submit.prevent="">
           <label class="form-label"> Nuevo email </label>
-          <input type="email" class="form-control" placeholder="Introduce tu nuevo email" />
+          <input
+            type="email"
+            class="form-control"
+            placeholder="user@gmail.com"
+            v-model="newEmail.email"
+          />
+          <label class="form-label mt-3"> Confirmar nuevo email </label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="user@gmail.com"
+            v-model="newEmail.confirmEmail"
+          />
           <div class="text-end mt-3">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handleEmail"
+              :disabled="updateEmailButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
+      <section v-if="emailError">
+        <ErrorMessages :messages="emailErrorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- UPDATE PASSWORD  -->
@@ -161,14 +234,35 @@ const { open, close } = useModal({
         <h4 class="card-header-title">Actualizar Contraseña</h4>
       </div>
       <div class="card-body">
-        <form>
+        <form novalidate @submit.prevent="">
           <label class="form-label"> Contraseña nueva </label>
-          <input type="password" class="form-control" placeholder="Introduce tu nueva contraseña" />
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Introduce tu nueva contraseña"
+            v-model="newPassword.password"
+          />
+          <label class="form-label mt-3"> Confirmar nueva contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Introduce tu nueva contraseña"
+            v-model="newPassword.confirmPassword"
+          />
           <div class="text-end mt-3">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handlePassword"
+              :disabled="updatePasswordButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
+      <section v-if="passwordError">
+        <ErrorMessages :messages="passwordErrorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- BOOKINGS -->

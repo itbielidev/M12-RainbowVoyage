@@ -5,6 +5,8 @@ import 'primevue/resources/themes/aura-light-green/theme.css'
 import 'vue-final-modal/style.css';
 import { createVfm } from 'vue-final-modal';
 import { createHead } from '@unhead/vue';
+import ToastService from 'primevue/toastservice';
+
 
 import App from './App.vue'
 import router from './router'
@@ -27,6 +29,7 @@ app.use(head);
 app.use(vfm);
 app.use(router)
 app.use(PrimeVue);
+app.use(ToastService);
 
 app.mount('#app')
 
