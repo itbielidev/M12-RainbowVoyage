@@ -326,6 +326,8 @@ export const useAuthStore = defineStore('auth', () => {
             price_max.value = preferences?.price_max?.toString() as string
 
             await getUser()
+            //Show toast
+            showSuccess()
         }
 
     }

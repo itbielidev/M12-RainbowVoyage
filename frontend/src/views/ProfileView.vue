@@ -87,7 +87,7 @@ import { useModal } from 'vue-final-modal'
 const { open, close } = useModal({
   component: UserPreferencesModal,
   attrs: {
-    onConfirm(data: any) {
+    onConfirm() {
       close()
     },
     onCancel() {
@@ -341,6 +341,23 @@ const { open, close } = useModal({
 
   <FooterComponent></FooterComponent>
 </template>
+
+<style>
+/*Tenemos que hacerlo de manera global para que se sobreescriban los estilos del componente Toast */
+.p-toast .p-toast-message.p-toast-message-info {
+  background: #d90594 !important;
+  color: whitesmoke !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-message-icon,
+.p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close {
+  color: whitesmoke !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-detail {
+  color: whitesmoke !important;
+}
+</style>
 
 <style scoped>
 * {
