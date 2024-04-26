@@ -6,8 +6,14 @@ import { useReservations } from '@/composables/useReservations'
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import BreadCrumbs from '@/components/BreadCrumbs.vue';
 
 import Chip from 'primevue/chip'
+
+const items = ref([
+    { label: 'Home', route: '/' },
+    { label: 'Experiencias' }
+]);
 
 const translateStates = {
   pending: 'Pendiente de confirmar',
@@ -65,6 +71,7 @@ const { open, close } = useModal({
   >
     <h2 class="text-center">Mi perfil</h2>
     <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end">
+      <BreadCrumbs :items="items" class="breadcrumbs-box"></BreadCrumbs>
       <a href="#" class="btn pink-button" @click="toggleReservationActivated">
         {{ !reservationActivated ? 'Mis datos' : 'Mis reservas' }}
       </a>
@@ -256,6 +263,12 @@ const { open, close } = useModal({
 * {
   font-family: 'Roboto';
 }
+
+.breadcrumbs-box{
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
 
 .pink-button {
   background-color: #d90594;
