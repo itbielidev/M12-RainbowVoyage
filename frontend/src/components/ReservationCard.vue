@@ -52,10 +52,14 @@ const manageEmailSending = async (reservationId: number) => {
           <p class="fs-5">Fechas: {{ reservation.dates }}</p>
           <p class="ms-lg-5 me-auto dates-price-box">{{ reservation.experience?.price }}€</p>
           <div class="text-start text-lg-end">
-            <button v-if="!loading" class="btn" @click="manageEmailSending(props.reservation.id)">
+            <button
+              v-if="!loading && reservation.state !== 'completed'"
+              class="btn"
+              @click="manageEmailSending(props.reservation.id)"
+            >
               Confirmar <font-awesome-icon icon="fa-solid fa-envelope" />
             </button>
-            <div v-else class="d-flex justify-content-center">
+            <div v-else-if="loading" class="d-flex justify-content-center">
               <ProgressSpinner></ProgressSpinner>
             </div>
           </div>
