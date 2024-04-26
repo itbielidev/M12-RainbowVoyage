@@ -27,8 +27,10 @@ export class ExperienceModel {
                 .filter(experience => experience.duration >= duration_min && experience.duration <= duration_max)
                 .filter(experience => experience.num_people >= num_people_min && experience.num_people <= num_people_max)
                 .filter(experience => experience.price >= price_min && experience.price <= price_max)
-                .filter(experience => experience.type === type)
 
+            if (type !== "all") {
+                experiences = experiences.filter(experience => experience.type === type)
+            }
 
             return experiences;
         } catch (error) {

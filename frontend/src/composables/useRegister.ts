@@ -24,11 +24,11 @@ export const useRegister = () => {
         type: "client",
         password: "",
         passwordConfirm: "",
-        num_people_min: null,
-        num_people_max: null,
-        duration_min: null,
-        duration_max: null,
-        experience_type: null,
+        num_people_min: 3,
+        num_people_max: 10,
+        duration_min: 3,
+        duration_max: 5,
+        experience_type: 'all',
         checkbox: false,
         adult: false
     })
@@ -71,7 +71,7 @@ export const useRegister = () => {
         if (formData.value.phone === "" || /[\p{L}]/u.test(formData.value.phone) || formData.value.phone.length !== 9) {
             errorMessages.value.push("El número de teléfono introducido no es correcto. El teléfono debe tener exactamente 9 dígitos.");
             error.value = true;
-        } 
+        }
 
         if (/\d/
             .test(formData.value.lastName) && formData.value.lastName.length > 0) {

@@ -1,40 +1,25 @@
 <template>
   <div class="body">
     <NavBar></NavBar>
+    <section class="breadcrumbs-box container">
+          <BreadCrumbs :items="items"></BreadCrumbs>
+    </section>
     <div class="content">
       <h1>{{ experience?.city.name }}: {{ experience?.name }}</h1>
     </div>
+  
     <div class="container mt-5 text-center">
       <div class="row">
         <div class="col-md-6">
-          <!-- <p>
-            ¡Axel Hotel Barcelona, tu oasis de estilo, confort y diversión en el corazón de
-            Barcelona!
-          </p>
-          <p>
-            Nuestro hotel, ubicado en el emblemático barrio del Eixample, es mucho más que un lugar
-            para alojarse; ¡es un destino en sí mismo! Con un enfoque único en la comunidad LGBTQ+,
-            cada detalle refleja nuestra calidez y modernidad.
-          </p>
-          <p>
-            Disfruta de lujosas habitaciones y suites, sumérgete en nuestra piscina en la azotea con
-            vistas impresionantes, y explora la rica cultura y vida nocturna de Barcelona.
-          </p>
-          <p>
-            ¡Estamos aquí para hacer que tu estancia sea inolvidable, ya sea por negocios o por
-            placer! ¡Únete a nosotros y descubre por qué somos un destino vibrante para todos!
-          </p> -->
           <p class="exp-description">{{ experience?.descriptions[1] }}</p>
         </div>
-        <section class="breadcrumbs-box">
-        <BreadCrumbs :items="items"></BreadCrumbs>
-        </section>
+     
         <div class="col-md-6">
           <!-- Carrusel de Fotos -->
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div
-                v-for="(h, index) in experience?.images.slice(7)"
+                v-for="(h, index) in experience?.images"
                 :key="index"
                 class="carousel-item"
                 :class="{ active: index === 0 }"
@@ -180,8 +165,7 @@ import DatesForm from '@/components/DatesForm.vue'
 import GoToReservationFormModal from '@/components/GoToReservationFormModal.vue'
 import { useModal } from 'vue-final-modal'
 import { useRouter } from 'vue-router'
-import BreadCrumbs from '@/components/BreadCrumbs.vue';
-
+import BreadCrumbs from '@/components/BreadCrumbs.vue'
 
 const { getExperience, experience } = useExperiences()
 const router = useRouter()
@@ -192,10 +176,13 @@ const date = ref<string>('')
 const people = ref<string>('')
 
 const items = ref([
-    { label: 'Home', route: '/' },
-    { label: `Experiencias de ${experience.value?.city.name}`, route: `/experiences/${experience.value?.city.name}` },
-    { label: 'Detalle de la experiencia' }
-]);
+  { label: 'Home', route: '/' },
+  {
+    label: `Experiencias de ${experience.value?.city.name}`,
+    route: `/experiences/${experience.value?.city.name}`
+  },
+  { label: 'Detalle de la experiencia' }
+])
 
 //var hotel = ['hotel.webp', 'habitación.webp', 'copas.webp', 'piscina.webp', 'spa.webp']
 
@@ -241,12 +228,13 @@ const { open, close } = useModal({
 
 <style scoped>
 .body {
-  background-color: rgba(171, 184, 195, 0.19);
+  background-color: #F8F9FA;
 }
 
-.breadcrumbs-box{
-  margin-left: 0 !important;
-  padding-left: 0 !important;
+.breadcrumbs-box {
+  /* el margin-top tiene que estar a 9 rem sino se oculta detras del nav */
+  margin-top: 9rem !important;
+  background-color: #F8F9FA
 }
 
 .imagenDetalle {
