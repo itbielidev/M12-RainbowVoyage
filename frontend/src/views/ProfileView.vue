@@ -8,8 +8,11 @@ import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import ErrorMessages from '@/components/ErrorMessages.vue'
 import Toast from 'primevue/toast'
+import BreadCrumbs from '@/components/BreadCrumbs.vue'
 
 import Chip from 'primevue/chip'
+
+const items = ref([{ label: 'Home', route: '/' }, { label: 'Experiencias' }])
 
 const translateStates = {
   pending: 'Pendiente de confirmar',
@@ -106,6 +109,7 @@ const { open, close } = useModal({
     <Toast></Toast>
     <h2 class="text-center">Mi perfil</h2>
     <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end">
+      <BreadCrumbs :items="items" class="breadcrumbs-box"></BreadCrumbs>
       <a href="#" class="btn pink-button" @click="toggleReservationActivated">
         {{ !reservationActivated ? 'Mis datos' : 'Mis reservas' }}
       </a>
@@ -362,6 +366,11 @@ const { open, close } = useModal({
 <style scoped>
 * {
   font-family: 'Roboto';
+}
+
+.breadcrumbs-box {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .pink-button {

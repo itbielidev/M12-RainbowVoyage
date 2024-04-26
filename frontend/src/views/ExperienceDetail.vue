@@ -1,31 +1,19 @@
 <template>
   <div class="body">
     <NavBar></NavBar>
+    <section class="breadcrumbs-box container">
+      <BreadCrumbs :items="items"></BreadCrumbs>
+    </section>
     <div class="content">
       <h1>{{ experience?.city.name }}: {{ experience?.name }}</h1>
     </div>
+
     <div class="container mt-5 text-center">
       <div class="row">
         <div class="col-md-6">
-          <!-- <p>
-            ¡Axel Hotel Barcelona, tu oasis de estilo, confort y diversión en el corazón de
-            Barcelona!
-          </p>
-          <p>
-            Nuestro hotel, ubicado en el emblemático barrio del Eixample, es mucho más que un lugar
-            para alojarse; ¡es un destino en sí mismo! Con un enfoque único en la comunidad LGBTQ+,
-            cada detalle refleja nuestra calidez y modernidad.
-          </p>
-          <p>
-            Disfruta de lujosas habitaciones y suites, sumérgete en nuestra piscina en la azotea con
-            vistas impresionantes, y explora la rica cultura y vida nocturna de Barcelona.
-          </p>
-          <p>
-            ¡Estamos aquí para hacer que tu estancia sea inolvidable, ya sea por negocios o por
-            placer! ¡Únete a nosotros y descubre por qué somos un destino vibrante para todos!
-          </p> -->
           <p class="exp-description">{{ experience?.descriptions[1] }}</p>
         </div>
+
         <div class="col-md-6">
           <!-- Carrusel de Fotos -->
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -75,17 +63,6 @@
             <div>
               <h4 class="text-center fw-bold">Tu pack incluye</h4>
               <ul class="text-center includes" style="list-style-type: none">
-                <!-- <li>Asistencia a la llegada</li>
-                <li>4 noches</li>
-                <li>Todo incluido</li>
-                <li>Teléfono de emergencias 24h/365días.</li>
-                <li>
-                  REGALO:
-                  <ul style="list-style-type: none">
-                    <li>1 día de SPA</li>
-                  </ul>
-                </li>
-                <li>Rutas</li> -->
                 <li
                   v-for="(inc, index) in experience?.descriptions.slice(-1)[0].split('.')"
                   :key="index"
@@ -110,40 +87,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 1</p>
-              <p class="info">Casa Batlló visita guida de 16:30-18:00</p>
-            </div>
-          </div>
-          <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 2</p>
-              <p class="info">Sagrada Familia visita guiada de 9:30-11:00</p>
-            </div>
-          </div>
-          <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 3</p>
-              <p class="info">Excursión a Montserrat de 9:00-18:00</p>
-            </div>
-          </div> -->
         </div>
-        <!-- <div class="d-flex justify-content-center">
-          <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 4</p>
-              <p class="info">Parc Güell viista guiada de 12:30-14:00</p>
-            </div>
-          </div>
-          <div class="circle">
-            <div class="contenidoRutas">
-              <p class="dia">DIA 5</p>
-              <p class="info">La Pedrera visita guiada de 15:00-17:00</p>
-              <p class="info">Paseo por la Ciutadella</p>
-            </div>
-          </div>
-        </div> -->
       </div>
       <button class="reserva d-none" type="submit">RESERVA</button>
     </div>
@@ -177,6 +121,7 @@ import DatesForm from '@/components/DatesForm.vue'
 import GoToReservationFormModal from '@/components/GoToReservationFormModal.vue'
 import { useModal } from 'vue-final-modal'
 import { useRouter } from 'vue-router'
+import BreadCrumbs from '@/components/BreadCrumbs.vue'
 
 const { getExperience, experience } = useExperiences()
 const router = useRouter()
@@ -186,7 +131,14 @@ const dateId = ref<number>(-1)
 const date = ref<string>('')
 const people = ref<string>('')
 
-//var hotel = ['hotel.webp', 'habitación.webp', 'copas.webp', 'piscina.webp', 'spa.webp']
+const items = ref([
+  { label: 'Home', route: '/' },
+  {
+    label: `Experiencias`,
+    route: `/experiences/${experience.value?.city.name}`
+  },
+  { label: 'Detalle de la experiencia' }
+])
 
 onMounted(async () => {
   await getExperience(props.experienceId)
@@ -230,7 +182,13 @@ const { open, close } = useModal({
 
 <style scoped>
 .body {
-  background-color: rgba(171, 184, 195, 0.19);
+  background-color: #f8f9fa;
+}
+
+.breadcrumbs-box {
+  /* el margin-top tiene que estar a 9 rem sino se oculta detras del nav */
+  margin-top: 9rem !important;
+  background-color: #f8f9fa;
 }
 
 .imagenDetalle {
