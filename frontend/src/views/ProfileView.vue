@@ -6,14 +6,13 @@ import { useReservations } from '@/composables/useReservations'
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
-import BreadCrumbs from '@/components/BreadCrumbs.vue';
+import ErrorMessages from '@/components/ErrorMessages.vue'
+import Toast from 'primevue/toast'
+import BreadCrumbs from '@/components/BreadCrumbs.vue'
 
 import Chip from 'primevue/chip'
 
-const items = ref([
-    { label: 'Home', route: '/' },
-    { label: 'Experiencias' }
-]);
+const items = ref([{ label: 'Home', route: '/' }, { label: 'Perfil' }])
 
 const translateStates = {
   pending: 'Pendiente de confirmar',
@@ -26,22 +25,60 @@ onMounted(async () => {
 })
 
 const { reservations, getUserReservations } = useReservations()
-const { name, email, phone, lastName } = storeToRefs(useAuthStore())
 
-const formData = ref({
-  name: name,
-  email: email,
-  phone: phone,
-  lastName: lastName
-})
+const {
+  error,
+  errorMessages,
+  emailError,
+  emailErrorMessages,
+  passwordError,
+  passwordErrorMessages,
+  userData,
+  email,
+  newEmail,
+  name,
+  lastName,
+  phone,
+  newPassword
+} = storeToRefs(useAuthStore())
+const { modifyUserData, modifyEmail, getUser, modifyPassword } = useAuthStore()
 
 const reservationActivated = ref(true)
 const updatingEmail = ref(false)
 const updatingPassword = ref(false)
 
+const updateDataButtonDisabled = ref(false)
+const updateEmailButtonDisabled = ref(false)
+const updatePasswordButtonDisabled = ref(false)
+
 onMounted(async () => {
+  await getUser()
+
+  //Update user data form
+  userData.value.name = name.value as string
+  userData.value.last_name = lastName.value as string
+  userData.value.phone = phone.value as string
+
   await getUserReservations()
 })
+
+async function handleUserData() {
+  await modifyUserData()
+  updateDataButtonDisabled.value = true
+  setTimeout(() => (updateDataButtonDisabled.value = false), 5000)
+}
+
+async function handleEmail() {
+  await modifyEmail()
+  updateEmailButtonDisabled.value = true
+  setTimeout(() => (updateEmailButtonDisabled.value = false), 5000)
+}
+
+async function handlePassword() {
+  await modifyPassword()
+  updatePasswordButtonDisabled.value = true
+  setTimeout(() => (updatePasswordButtonDisabled.value = false), 5000)
+}
 
 function toggleReservationActivated() {
   reservationActivated.value = !reservationActivated.value
@@ -53,7 +90,7 @@ import { useModal } from 'vue-final-modal'
 const { open, close } = useModal({
   component: UserPreferencesModal,
   attrs: {
-    onConfirm(data: any) {
+    onConfirm() {
       close()
     },
     onCancel() {
@@ -69,6 +106,7 @@ const { open, close } = useModal({
     class="gap-2 d-flex flex-column justify-content-center text-center pt-3 container"
     style="margin-top: 6rem"
   >
+    <Toast></Toast>
     <h2 class="text-center">Mi perfil</h2>
     <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end">
       <BreadCrumbs :items="items" class="breadcrumbs-box"></BreadCrumbs>
@@ -83,7 +121,7 @@ const { open, close } = useModal({
         <h4 class="card-header-title">Información Personal</h4>
       </div>
       <div class="card-body">
-        <form class="row g-3">
+        <form class="row g-3" novalidate @submit.prevent="">
           <!-- name -->
           <div class="col-md-6">
             <label class="form-label">
@@ -94,7 +132,7 @@ const { open, close } = useModal({
               type="text"
               class="form-control"
               placeholder="Introduce tu nombre"
-              v-model="formData.name"
+              v-model="userData.name"
             />
           </div>
           <!-- surnames -->
@@ -107,7 +145,7 @@ const { open, close } = useModal({
               type="text"
               class="form-control"
               placeholder="Introduce tus apellidos"
-              v-model="lastName"
+              v-model="userData.last_name"
             />
           </div>
           <!-- phone -->
@@ -120,28 +158,35 @@ const { open, close } = useModal({
               type="phone"
               class="form-control"
               placeholder="Introduce tu nº teléfono"
-              v-model="phone"
+              v-model="userData.phone"
             />
           </div>
           <!-- mail -->
           <div class="col-md-6">
-            <label class="form-label">
-              Email
-              <span class="text-danger">*</span>
-            </label>
+            <label class="form-label"> Email </label>
             <input
               type="email"
               class="form-control"
               placeholder="Introduce tu email"
               v-model="email"
+              disabled
             />
           </div>
 
           <div class="col-12 text-end">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handleUserData"
+              :disabled="updateDataButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
+      <section v-if="error">
+        <ErrorMessages :messages="errorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- UPDATE EMAIL -->
@@ -153,14 +198,35 @@ const { open, close } = useModal({
         <h4 class="card-header-title">Actualizar Email</h4>
       </div>
       <div class="card-body">
-        <form>
+        <form novalidate @submit.prevent="">
           <label class="form-label"> Nuevo email </label>
-          <input type="email" class="form-control" placeholder="Introduce tu nuevo email" />
+          <input
+            type="email"
+            class="form-control"
+            placeholder="user@gmail.com"
+            v-model="newEmail.email"
+          />
+          <label class="form-label mt-3"> Confirmar nuevo email </label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="user@gmail.com"
+            v-model="newEmail.confirmEmail"
+          />
           <div class="text-end mt-3">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handleEmail"
+              :disabled="updateEmailButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
+      <section v-if="emailError">
+        <ErrorMessages :messages="emailErrorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- UPDATE PASSWORD  -->
@@ -172,14 +238,35 @@ const { open, close } = useModal({
         <h4 class="card-header-title">Actualizar Contraseña</h4>
       </div>
       <div class="card-body">
-        <form>
+        <form novalidate @submit.prevent="">
           <label class="form-label"> Contraseña nueva </label>
-          <input type="password" class="form-control" placeholder="Introduce tu nueva contraseña" />
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Introduce tu nueva contraseña"
+            v-model="newPassword.password"
+          />
+          <label class="form-label mt-3"> Confirmar nueva contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Introduce tu nueva contraseña"
+            v-model="newPassword.confirmPassword"
+          />
           <div class="text-end mt-3">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handlePassword"
+              :disabled="updatePasswordButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
+      <section v-if="passwordError">
+        <ErrorMessages :messages="passwordErrorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- BOOKINGS -->
@@ -259,16 +346,43 @@ const { open, close } = useModal({
   <FooterComponent></FooterComponent>
 </template>
 
+<style>
+/*Tenemos que hacerlo de manera global para que se sobreescriban los estilos del componente Toast */
+.p-toast .p-toast-message.p-toast-message-info {
+  background: #d90594 !important;
+  color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-message-icon,
+.p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close {
+  color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-detail {
+  color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close:hover {
+  background: #d90594 !important;
+}
+</style>
+
 <style scoped>
 * {
   font-family: 'Roboto';
 }
 
-.breadcrumbs-box{
+.breadcrumbs-box {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
-
 
 .pink-button {
   background-color: #d90594;

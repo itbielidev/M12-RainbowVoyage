@@ -6,25 +6,38 @@
         <span class="navegador">INICIO</span>
       </RouterLink>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="color: #d90594;"></span>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+        aria-controls="navbarsExample07"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" style="color: #d90594"></span>
       </button>
-
 
       <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ show: isMenuOpen }">
         <ul class="navbar-nav ms-auto">
           <li v-if="!userIsLoggedIn" class="nav-item">
-            <button class="nav-link profile-button navegador" @click="open()" @mouseover="hoverButton = true"
-              @mouseleave="hoverButton = false">
+            <button
+              class="nav-link profile-button navegador"
+              @click="open()"
+              @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false"
+            >
               <font-awesome-icon icon="fa-solid fa-file" class="iconos"></font-awesome-icon>
               REGISTRO
             </button>
-
           </li>
           <li v-if="!userIsLoggedIn" class="nav-item">
-            <button class="nav-link navegador" @mouseover="hoverButton = true" @mouseleave="hoverButton = false"
-              @click="openLogin()">
+            <button
+              class="nav-link navegador"
+              @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false"
+              @click="openLogin()"
+            >
               <font-awesome-icon icon="fa-solid fa-user" class="iconos"></font-awesome-icon>
               INICIAR SESIÓN
             </button>
@@ -38,7 +51,11 @@
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
             <RouterLink :to="{ name: isAdmin ? 'admin' : 'profile' }">
-              <button class="nav-link" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+              <button
+                class="nav-link"
+                @mouseover="hoverButton = true"
+                @mouseleave="hoverButton = false"
+              >
                 <span class="fw-bold navegador">PERFIL</span>
               </button>
             </RouterLink>
@@ -95,7 +112,10 @@ const { open: openLogin, close: closeLogin } = useModal({
 </script>
 
 <style>
-.menu{
+a {
+  text-decoration: none !important;
+}
+.menu {
   height: 150px;
 }
 
@@ -137,14 +157,12 @@ const { open: openLogin, close: closeLogin } = useModal({
   margin-top: 15px;
 }
 
-
 .nav-link {
   background-color: transparent;
   border: none;
   padding: 5px 10px;
   outline: none;
 }
-
 
 .nav-link:hover {
   background-color: #ffb6c1;
@@ -162,11 +180,9 @@ const { open: openLogin, close: closeLogin } = useModal({
   border-radius: 5px;
 }
 
-
 .iconos,
-.barraNav
-{
-color: #d90594;
+.barraNav {
+  color: #d90594;
 }
 
 .navbar-toggler {
@@ -203,9 +219,8 @@ color: #d90594;
     margin-right: 8px; /* Reducir el margen entre los iconos y el texto */
   }
 
-  .menu{
+  .menu {
     height: 200px;
   }
 }
-
 </style>

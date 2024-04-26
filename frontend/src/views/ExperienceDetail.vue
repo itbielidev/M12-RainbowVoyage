@@ -115,7 +115,7 @@
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useExperiences } from '@/composables/useExperiences'
 import DatesForm from '@/components/DatesForm.vue'
 import GoToReservationFormModal from '@/components/GoToReservationFormModal.vue'
@@ -131,10 +131,10 @@ const dateId = ref<number>(-1)
 const date = ref<string>('')
 const people = ref<string>('')
 
-const items = ref([
+const items = computed<any>(() => [
   { label: 'Home', route: '/' },
   {
-    label: `Experiencias`,
+    label: `Experiencias de ${experience.value?.city.name}`,
     route: `/experiences/${experience.value?.city.name}`
   },
   { label: 'Detalle de la experiencia' }
