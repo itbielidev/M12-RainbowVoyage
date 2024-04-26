@@ -12,7 +12,7 @@ import BreadCrumbs from '@/components/BreadCrumbs.vue'
 
 import Chip from 'primevue/chip'
 
-const items = ref([{ label: 'Home', route: '/' }, { label: 'Experiencias' }])
+const items = ref([{ label: 'Home', route: '/' }, { label: 'Perfil' }])
 
 const translateStates = {
   pending: 'Pendiente de confirmar',
@@ -351,15 +351,26 @@ const { open, close } = useModal({
 .p-toast .p-toast-message.p-toast-message-info {
   background: #d90594 !important;
   color: whitesmoke !important;
+  font-weight: 600 !important;
 }
 
 .p-toast .p-toast-message.p-toast-message-info .p-toast-message-icon,
 .p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close {
   color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
+  font-weight: 600 !important;
 }
 
 .p-toast .p-toast-message.p-toast-message-info .p-toast-detail {
   color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close:hover {
+  background: #d90594 !important;
 }
 </style>
 
