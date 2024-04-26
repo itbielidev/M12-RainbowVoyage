@@ -40,6 +40,25 @@ const updateSchema = z.object({
     price_max: z.number().optional().nullable()
 })
 
+
+const userDataSchema = z.object({
+    name: z.string().min(1).max(100),
+    last_name: z.string().min(1).max(100),
+    phone: z.string().min(9).max(9)
+})
+
+
+const updateEmailSchema = z.object({
+    email: z.string().email().max(255),
+    confirmEmail: z.string().email().max(255)
+})
+
+
+const updatePasswordSchema = z.object({
+    password: z.string().min(6).max(20),
+    confirmPassword: z.string().min(6).max(20)
+})
+
 export function validateRegister(input) {
     return registrationSchema.safeParse(input);
 }
@@ -50,4 +69,17 @@ export function validateLogin(input) {
 
 export function validateUpdate(input) {
     return updateSchema.safeParse(input);
+}
+
+
+export function validateUserData(input) {
+    return userDataSchema.safeParse(input)
+}
+
+export function validateUpdateEmailData(input) {
+    return updateEmailSchema.safeParse(input)
+}
+
+export function validateUpdatePasswordData(input) {
+    return updatePasswordSchema.safeParse(input)
 }
