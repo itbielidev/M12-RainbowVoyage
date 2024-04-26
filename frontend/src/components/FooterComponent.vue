@@ -7,11 +7,14 @@
           <div class="contact-details">
             <p>
               <font-awesome-icon icon="fa-solid fa-phone" class="contact-icon"></font-awesome-icon>
-              <span>765 972 423</span>
+              <a href="tel:+34965972423">965 972 423</a>
             </p>
             <p>
-              <font-awesome-icon icon="fa-solid fa-envelope" class="contact-icon"></font-awesome-icon>
-              <span>rainbow@gmail.com</span>
+              <font-awesome-icon
+                icon="fa-solid fa-envelope"
+                class="contact-icon"
+              ></font-awesome-icon>
+              <a href="mailto:rainbow@gmail.com">rainbow@gmail.com</a>
             </p>
           </div>
         </div>
@@ -20,13 +23,16 @@
           <div class="social-icons">
             <font-awesome-icon icon="fa-brands fa-facebook" class="social-icon"></font-awesome-icon>
             <font-awesome-icon icon="fa-brands fa-twitter" class="social-icon"></font-awesome-icon>
-            <font-awesome-icon icon="fa-brands fa-instagram" class="social-icon"></font-awesome-icon>
+            <font-awesome-icon
+              icon="fa-brands fa-instagram"
+              class="social-icon"
+            ></font-awesome-icon>
           </div>
         </div>
         <div class="col-md-4 mb-4 newsletter mt-3">
           <p class="title">NEWSLETTER</p>
           <div class="newsletter-form text-center">
-            <input type="text" placeholder="Correo electrónico" class="newsletter-input"><br>
+            <input type="text" placeholder="Correo electrónico" class="newsletter-input" /><br />
             <button class="newsletter-button">Enviar</button>
           </div>
         </div>
@@ -92,8 +98,13 @@
   font-size: 24px;
 }
 
-.title{
+.title {
   font-size: 22px;
   font-weight: bolder;
+}
+
+a {
+  color: whitesmoke;
+  text-decoration: none;
 }
 </style>
