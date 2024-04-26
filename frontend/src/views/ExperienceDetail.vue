@@ -13,7 +13,6 @@
         <div class="col-md-6">
           <p class="exp-description">{{ experience?.descriptions[1] }}</p>
         </div>
-
         <div class="col-md-6">
           <!-- Carrusel de Fotos -->
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -123,6 +122,7 @@ import { useModal } from 'vue-final-modal'
 import { useRouter } from 'vue-router'
 import BreadCrumbs from '@/components/BreadCrumbs.vue'
 
+
 const { getExperience, experience } = useExperiences()
 const router = useRouter()
 const props = defineProps<{ experienceId: string }>()
@@ -189,6 +189,11 @@ const { open, close } = useModal({
   /* el margin-top tiene que estar a 9 rem sino se oculta detras del nav */
   margin-top: 9rem !important;
   background-color: #f8f9fa;
+}
+
+.breadcrumbs-box{
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .imagenDetalle {

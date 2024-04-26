@@ -380,6 +380,7 @@ const { open, close } = useModal({
 }
 
 .breadcrumbs-box {
+
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
