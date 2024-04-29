@@ -1,7 +1,9 @@
 <template>
   <div class="background">
-    <button class="btn" @click="printPDF()">Imprimir PDF</button>
     <section v-if="!isLoadingDetail && !error && reservation" class="mt-3">
+      <div class="print-button-container">
+        <button class="btn" @click="printPDF()">Imprimir PDF</button>
+      </div>
       <div class="billete">
         <div class="encabezado">
           <div class="mover">
@@ -29,7 +31,7 @@
               </div>
               <div class="informaciónVuelo">
                 <p class="fw-bolder">Hora</p>
-                <p>{{ reservation.llegadaFirstDay }}</p>
+                <p>{{ reservation.partidaFirstDay }}</p>
               </div>
               <div class="informaciónVuelo">
                 <p class="fw-bolder">Puerta</p>
@@ -60,7 +62,7 @@
           <div class="detalle-info">
             <div class="detalle-info-columna">
               <div class="billeteIda">
-                <p class="fw-bolder">Aeropuerto de salida</p>
+                <p class="fw-bolder">Aeropuerto de llegada</p>
                 <p>{{ reservation.airportOut }}</p>
               </div>
               <div class="informaciónVuelo">
@@ -69,7 +71,7 @@
               </div>
               <div class="informaciónVuelo">
                 <p class="fw-bolder">Hora</p>
-                <p>{{ reservation.llegadaLastDay }}</p>
+                <p>{{ reservation.llegadaFirstDay }}</p>
               </div>
               <div class="informaciónVuelo">
                 <p class="fw-bolder">Puerta</p>
@@ -121,7 +123,7 @@
               </div>
               <div class="informaciónVuelo">
                 <p class="fw-bolder">Hora</p>
-                <p>{{ reservation.llegadaFirstDay }}</p>
+                <p>{{ reservation.partidaLastDay }}</p>
               </div>
               <div class="informaciónVuelo">
                 <p class="fw-bolder">Puerta</p>
@@ -152,7 +154,7 @@
           <div class="detalle-info">
             <div class="detalle-info-columna">
               <div class="billeteIda">
-                <p class="fw-bolder">Aeropuerto de salida</p>
+                <p class="fw-bolder">Aeropuerto de llegada</p>
                 <p>{{ reservation.airportOut }}</p>
               </div>
               <div class="informaciónVuelo">
@@ -213,7 +215,6 @@ import { useReservations } from '@/composables/useReservations'
 import ErrorMessages from '@/components/ErrorMessages.vue'
 import ProgressSpinner from 'primevue/progressspinner'
 import { useSeoMeta, type UseSeoMetaInput } from '@unhead/vue'
-import jsPDF from 'jspdf'
 import html2pdf from 'html2pdf.js' // Asegúrate de incluir la biblioteca html2pdf.js en tu proyecto
 
 const props = defineProps<{ reservationId: number }>()
@@ -248,7 +249,7 @@ const seoMeta = computed<UseSeoMetaInput>(() => {
 useSeoMeta(seoMeta as UseSeoMetaInput)
 
 const printPDF = () => {
-  const element = document.getElementById('pdf-content');
+  const element = document.querySelector('.background');
   if (element) {
     const opt = {
       margin:       1,
@@ -261,6 +262,7 @@ const printPDF = () => {
   }
 }
 </script>
+
 <style scoped>
 .container{
   background-color: white;
@@ -405,5 +407,10 @@ button:hover{
   background-color: white;
   border: 2px solid #D90594;
   color: black;
+}
+.print-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
 }
 </style>
