@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        <div class="vertical-line"></div>
+        <div class="vertical-line d-md-block d-xs-none"></div>
 
         <div class="right-side">
           <!-- Información del pasajero -->
@@ -147,7 +147,7 @@
           </div>
         </div>
 
-        <div class="vertical-line"></div>
+        <div class="vertical-line d-md-block d-xs-none"></div>
 
         <div class="right-side">
           <!-- Información del pasajero -->
@@ -412,5 +412,26 @@ button:hover{
   display: flex;
   justify-content: center;
   margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+}
+
+/* Responsive CSS for tablet and mobile */
+@media (max-width: 991.98px) {
+  .mover {
+    margin-left: 0;
+  }
+  
+  .vertical-line {
+    display: none;
+  }
+
+  .billete,
+  .cuerpo {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .detalle-info {
+    margin-right: 0;
+  }
 }
 </style>
