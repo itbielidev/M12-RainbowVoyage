@@ -419,10 +419,6 @@ button:hover{
   .mover {
     margin-left: 0;
   }
-  
-  .vertical-line {
-    display: none;
-  }
 
   .billete,
   .cuerpo {
