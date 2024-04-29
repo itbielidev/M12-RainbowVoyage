@@ -121,7 +121,7 @@ import GoToReservationFormModal from '@/components/GoToReservationFormModal.vue'
 import { useModal } from 'vue-final-modal'
 import { useRouter } from 'vue-router'
 import BreadCrumbs from '@/components/BreadCrumbs.vue'
-
+import { useSeoMeta } from '@unhead/vue'
 
 const { getExperience, experience } = useExperiences()
 const router = useRouter()
@@ -137,7 +137,10 @@ const items = computed<any>(() => [
     label: `Experiencias de ${experience.value?.city.name}`,
     route: `/experiences/${experience.value?.city.name}`
   },
-  { label: 'Detalle de la experiencia' }
+  {
+    label: 'Detalle de la experiencia',
+    route: `/experiences/${experience.value?.city.name}/experienceDetail/${experience.value?.id}`
+  }
 ])
 
 onMounted(async () => {
@@ -178,6 +181,14 @@ const { open, close } = useModal({
     }
   }
 })
+
+useSeoMeta({
+  title: `Rainbow Voyage | Detalle de la experiencia.`,
+  description: `Detalle de la experiencia`,
+  ogDescription: `Detalle de la experiencia`,
+  ogTitle: `Rainbow Voyage | Detalle de la experiencia`,
+  ogImage: '/images/logo.webp'
+})
 </script>
 
 <style scoped>
@@ -191,7 +202,7 @@ const { open, close } = useModal({
   background-color: #f8f9fa;
 }
 
-.breadcrumbs-box{
+.breadcrumbs-box {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }

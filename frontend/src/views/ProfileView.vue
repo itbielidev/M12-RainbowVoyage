@@ -9,6 +9,7 @@ import { storeToRefs } from 'pinia'
 import ErrorMessages from '@/components/ErrorMessages.vue'
 import Toast from 'primevue/toast'
 import BreadCrumbs from '@/components/BreadCrumbs.vue'
+import { useSeoMeta } from '@unhead/vue'
 
 import Chip from 'primevue/chip'
 
@@ -97,6 +98,14 @@ const { open, close } = useModal({
       close()
     }
   }
+})
+
+useSeoMeta({
+  title: `Rainbow Voyage | Perfil de ${name.value}`,
+  description: `Perfil de ${name.value}`,
+  ogDescription: `Perfil de ${name.value}`,
+  ogTitle: `Rainbow Voyage | Perfil de ${name.value}`,
+  ogImage: '/images/logo.webp'
 })
 </script>
 
@@ -380,7 +389,6 @@ const { open, close } = useModal({
 }
 
 .breadcrumbs-box {
-
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
