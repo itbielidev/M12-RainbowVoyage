@@ -22,13 +22,13 @@ El público objetivo de Rainbow Voyage son personas pertenecientes a la comunida
 
 **Justificación**:
 
-  - **Demanda del Mercado**: Existe una creciente demanda de destinos y servicios turísticos que sean inclusivos y acogedores para la comunidad LGTBIQA+. LGTBIQA+ Viaja capitaliza esta demanda al ofrecer una plataforma dedicada a experiencias de viaje diseñadas específicamente para satisfacer las necesidades y preferencias de este público objetivo.
+  - **Demanda del Mercado**: Existe una creciente demanda de destinos y servicios turísticos que sean inclusivos y acogedores para la comunidad LGTBIQA+. LGTBIQA+ Rainbow Voyage aborda  esta demanda al ofrecer una plataforma dedicada a experiencias de viaje diseñadas específicamente para satisfacer las necesidades y preferencias de este público objetivo.
 
-  - **Inclusividad y Seguridad**: La comunidad LGTBIQA+ a menudo enfrenta desafíos y discriminación al viajar, lo que puede afectar negativamente su experiencia. LGTBIQA+ Viaja aborda esta preocupación al proporcionar información detallada sobre destinos seguros y experiencias amigables, garantizando así una experiencia de viaje positiva y sin preocupaciones.
+  - **Inclusividad y Seguridad**: La comunidad LGTBIQA+ a menudo enfrenta desafíos y discriminación al viajar, lo que puede afectar negativamente su experiencia. LGTBIQA+ Rainbow Voyage aborda esta preocupación al proporcionar información detallada sobre destinos seguros y experiencias amigables, garantizando así una experiencia de viaje positiva y sin preocupaciones.
 
   - **Promoción del Turismo LGTBIQA+**: La plataforma contribuye a la promoción del turismo LGTBIQA+ en España, destacando destinos y servicios que son conscientes y respetuosos de la diversidad sexual. Esto no solo beneficia a los viajeros LGTBIQA+, sino que también impulsa el desarrollo económico y social de las comunidades locales.
 
-  - **Alianzas y Colaboraciones: LGTBIQA+**: Viaja puede establecer alianzas estratégicas con empresas, organizaciones y destinos que comparten su compromiso con la inclusividad y la diversidad. Estas colaboraciones pueden ampliar el alcance de la plataforma y fortalecer su posición como líder en el mercado de viajes LGTBIQA+ en España.
+  - **Alianzas y Colaboraciones: LGTBIQA+**: Se pueden establecer alianzas estratégicas con empresas, organizaciones y destinos que comparten su compromiso con la inclusividad y la diversidad. Estas colaboraciones pueden ampliar el alcance de la plataforma y fortalecer su posición como líder en el mercado de viajes LGTBIQA+ en España.
 
 En definitiva Raibow Voyage es una plataforma necesaria y relevante que atiende las necesidades de un público objetivo diverso y en crecimiento, al tiempo que promueve la inclusión, la seguridad y el desarrollo del turismo LGTBIQA+.
 
