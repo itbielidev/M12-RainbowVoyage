@@ -1,4 +1,4 @@
-# Rainbow Voyage - Agencia de Viajes LTGTBIQA+  🛩🏳️‍🌈
+# Rainbow Voyage - Agencia de Viajes LGTBIQA+  🛩🏳️‍🌈
 
 ![Logo del Proyecto](./public/images/logo.webp)
 
@@ -118,9 +118,13 @@ También hubiera sido interesante desarrollar un programa de membresía que ofre
 
 ## Comparación de Objetivos y Logros 
 
-Consideramos que las funcionalidades que nos propusimos al inicio del proyecto estaban bien medidas en cuanto a dificultad y duración, de forma que al finalizar el proyecto hemos podido desarrollar todas las funcionalidades que teníamos en mente.
+Durante el desarrollo de nuestro proyecto, nos propusimos una serie de funcionalidades clave que consideramos fundamentales para garantizar una experiencia óptima para nuestros usuarios. Desde el inicio, priorizamos la implementación del sistema de registro de usuarios, el desarrollo del panel de administración y la creación de herramientas eficientes para la gestión de usuarios. Estas funcionalidades fueron abordadas con diligencia y dedicación, asegurando su correcto funcionamiento y su integración sin problemas en nuestra plataforma.
 
-Cabe mencionar que hay funcionalidades a las que hemos dado prioridad ya que son clave para garantizar una experiencia óptima para nuestros usuarios. Por ejemplo, tanto el registro de usuarios como el panel de administración y la gestión de usuarios, fue de lo primero en lo que nos esforzamos para que funcionase sin problemas. Una vez asimilada la creación de los usuarios. Aún así, consideramos que la interacción entre los usuarios también es importante, ya que que aporta esa conexión entre los usuarios que da personalidad a la web.
+Además, reconocimos la importancia de fomentar la interacción entre nuestros usuarios como un elemento esencial para dar personalidad a nuestra web. Por ello, nos esforzamos en desarrollar herramientas de interacción efectivas, como un sistema de chat en tiempo real, comentarios dinámicos y una plataforma de mensajería privada, permitiendo así una conexión genuina entre los usuarios.
+
+A lo largo del proceso de desarrollo, también nos enfocamos en la creación de una interfaz amigable y receptiva, diseñada para ofrecer una experiencia de usuario excepcional en cualquier dispositivo. 
+
+En resumen, hemos logrado cumplir con todos nuestros objetivos iniciales, desarrollando todas las funcionalidades planificadas y proporcionando una plataforma sólida y atractiva para nuestros usuarios. Este éxito ha sido posible gracias a una planificación cuidadosa, una ejecución eficiente y un compromiso constante con la excelencia en cada etapa del proyecto.
 
 ## Conclusiones
 
