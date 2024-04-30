@@ -21,30 +21,56 @@
         <div class="col-md-4 mb-4 social-media mt-3">
           <p class="title">REDES SOCIALES</p>
           <div class="social-icons">
-            <font-awesome-icon icon="fa-brands fa-facebook" class="social-icon"></font-awesome-icon>
-            <font-awesome-icon icon="fa-brands fa-twitter" class="social-icon"></font-awesome-icon>
-            <font-awesome-icon
-              icon="fa-brands fa-instagram"
-              class="social-icon"
-            ></font-awesome-icon>
+            <a href="https://www.facebook.com/?locale=es_ES"
+              ><font-awesome-icon
+                icon="fa-brands fa-facebook"
+                class="social-icon"
+              ></font-awesome-icon
+            ></a>
+            <a href="https://twitter.com/?lang=es">
+              <font-awesome-icon icon="fa-brands fa-twitter" class="social-icon"></font-awesome-icon
+            ></a>
+            <a href="https://www.instagram.com/"
+              ><font-awesome-icon
+                icon="fa-brands fa-instagram"
+                class="social-icon"
+              ></font-awesome-icon
+            ></a>
           </div>
         </div>
         <div class="col-md-4 mb-4 newsletter mt-3">
           <p class="title">NEWSLETTER</p>
           <div class="newsletter-form text-center">
-            <input type="text" placeholder="Correo electrónico" class="newsletter-input" /><br />
-            <button class="newsletter-button">Enviar</button>
+            <input
+              type="text"
+              placeholder="Correo electrónico"
+              class="newsletter-input py-1 px-2"
+            /><br />
+            <button class="btn">Enviar</button>
           </div>
         </div>
       </div>
     </div>
   </footer>
 </template>
-<style>
+<style scoped>
 .footer {
   background-color: #000000;
-  opacity: 0.62;
+  opacity: 0.72;
   color: white;
+}
+
+.btn {
+  background-color: rgba(217, 5, 148, 1);
+  color: white;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  width: max-content;
+  padding: 0.6rem 1rem;
+}
+
+.btn:hover {
+  background-color: rgb(233, 78, 181);
 }
 
 .contact-info,
@@ -87,15 +113,6 @@
 .newsletter-form input {
   margin-bottom: 5px;
   border-radius: 15px;
-}
-
-.newsletter-button {
-  background-color: rgba(217, 5, 148, 1);
-  color: white;
-  margin-bottom: 10px;
-  border-radius: 15px;
-  width: 130px;
-  font-size: 24px;
 }
 
 .title {

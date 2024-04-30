@@ -40,13 +40,13 @@ watch(formData.value, () => {
   >
     <section class="content-box register-box p-5">
       <font-awesome-icon @click="emit('cancel')" icon="fa-solid fa-xmark" />
-      <section class="text-center d-none d-md-block">
+      <section class="d-none d-md-flex justify-content-center">
         <img src="/images/logo.webp" alt="Logo" class="img-fluid logo-img" />
       </section>
       <form @submit.prevent="handleLogin()" novalidate>
-        <h1 class="display-5 mb-5">¡BIENVENIDX!</h1>
+        <h3 class="mb-5">¡BIENVENIDX!</h3>
         <section class="d-flex flex-column">
-          <label class="mb-2" for="email">Correo electónico *</label>
+          <label class="mb-2 fs-5" for="email">Correo electrónico *</label>
           <input
             v-model.trim="formData.email"
             type="email"
@@ -56,7 +56,7 @@ watch(formData.value, () => {
           />
         </section>
         <section class="d-flex flex-column pass-box">
-          <label class="mb-2" for="password">Contraseña *</label>
+          <label class="mb-2 fs-5" for="password">Contraseña *</label>
           <input
             v-model.trim="formData.password"
             :type="passwordRevealed ? 'password' : 'text'"
