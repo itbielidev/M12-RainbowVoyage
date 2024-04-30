@@ -186,18 +186,19 @@
         </div>
       </div>
       <div class="container mt-3">
-        <div class="parte">
-          <font-awesome-icon icon="fa-solid fa-location-dot" class="city"/>
-          <img :src="`/images/${reservation.experience?.city.name}/${reservation.experience?.city.images[0]}`" alt="">
-        </div>
-        <div class="parte">
-          <font-awesome-icon icon="fa-solid fa-route" class="routes"/>
-          <p>{{ reservation.experience?.name }}</p>
-        </div>
-        <div class="parte">
-          <font-awesome-icon icon="fa-solid fa-hotel" class="hotel"/>
-        </div>
-      </div>
+  <div class="parte col-lg-4 col-md-6 col-xs-12">
+    <font-awesome-icon icon="fa-solid fa-location-dot" class="city"/><br>
+    <img class="mt-4 rounded-5" width="300px" :src="`/images/${reservation.experience?.city.images[0]}`">
+  </div>
+  <div class="parte col-lg-4 col-md-6 col-xs-12" >
+    <font-awesome-icon icon="fa-solid fa-route" class="routes"/>
+    <p class="rutas">{{ reservation.experience?.name }}</p>
+  </div>
+  <div class="parte col-lg-4 col-md-12 col-xs-12" >
+    <font-awesome-icon icon="fa-solid fa-hotel" class="hotel"/><br>
+    <img class="mt-4 rounded-5" width="300px" :src="`/images/${reservation.experience?.city.name}/${reservation.experience?.images[7]}`">
+  </div>
+</div>
     </section>
     <section v-else-if="error" class="d-flex justify-content-center">
       <ErrorMessages :messages="errorMessages"></ErrorMessages>
@@ -247,23 +248,44 @@ const seoMeta = computed<UseSeoMetaInput>(() => {
 })
 
 useSeoMeta(seoMeta as UseSeoMetaInput)
-
 const printPDF = () => {
   const element = document.querySelector('.background');
-  if (element) {
+  const printButton = document.querySelector('.print-button-container');
+  if (element && printButton) {
+    // Oculta el botón de imprimir antes de generar el PDF
+    printButton.style.display = 'none';
+    
     const opt = {
       margin:       1,
-      filename:     'documento.pdf',
+      filename:     'confirmation_reserva.pdf',
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { scale: 2 },
       jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     }
-    html2pdf().set(opt).from(element).save();
+    html2pdf().set(opt).from(element).save().then(() => {
+      // Restaura la visibilidad del botón de imprimir después de generar el PDF
+      printButton.style.display = 'flex';
+      // Restaura el color de fondo del cuerpo del documento
+      document.body.style.backgroundColor = ''; // Restaura el color de fondo predeterminado
+    }).catch((error) => {
+      console.error('Error al generar el PDF:', error);
+      // Asegúrate de restaurar la visibilidad del botón de imprimir en caso de error
+      printButton.style.display = 'flex';
+      // Restaura el color de fondo del cuerpo del documento en caso de error
+      document.body.style.backgroundColor = ''; // Restaura el color de fondo predeterminado
+    });
   }
 }
+
 </script>
 
 <style scoped>
+.rutas{
+  font-size: 25px;
+  font-weight: bolder;
+  margin-top: 90px;
+}
+
 .container{
   background-color: white;
   border-radius: 50px;
@@ -412,22 +434,5 @@ button:hover{
   display: flex;
   justify-content: center;
   margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
-}
-
-/* Responsive CSS for tablet and mobile */
-@media (max-width: 991.98px) {
-  .mover {
-    margin-left: 0;
-  }
-
-  .billete,
-  .cuerpo {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .detalle-info {
-    margin-right: 0;
-  }
 }
 </style>
