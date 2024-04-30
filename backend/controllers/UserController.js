@@ -1,4 +1,4 @@
-import { validateRegister, validateUpdate, validateLogin } from '../schemas/users.js'
+import { validateRegister, validateUpdate, validateLogin, validateUserData, validateUpdateEmailData, validateUpdatePasswordData } from '../schemas/users.js'
 import "dotenv/config";
 
 export class UserController {
@@ -84,6 +84,80 @@ export class UserController {
 
     return res.status(500).json({ error: "Server error!" })
   };
+
+  updatePreferences = async (req, res) => {
+    const userId = req.user_id;
+
+    const [returnState, preferences] = await this.userModel.updatePreferences(userId, req.body);
+
+    if (returnState === 1) {
+      return res.status(200).json(preferences);
+    }
+
+    return res.status(500).json({ error: "Server error!" })
+  }
+
+  updateData = async (req, res) => {
+
+    //Validation
+
+    const dataValidated = validateUserData(req.body);
+
+    if (!dataValidated.success) {
+      return res.status(422).json({ error: JSON.parse(dataValidated.error.message) })
+    }
+
+    const userId = req.user_id;
+    const returnState = await this.userModel.updateData(req.body, userId);
+
+    if (returnState === 1) {
+      return res.status(200).json("Data updated!");
+    }
+
+    return res.status(500).json({ error: "Could not update user data" })
+
+  }
+
+  updateEmail = async (req, res) => {
+    //Validation
+
+    const dataValidated = validateUpdateEmailData(req.body);
+
+    if (!dataValidated.success) {
+      return res.status(422).json({ error: JSON.parse(dataValidated.error.message) })
+    }
+
+    const userId = req.user_id;
+    const returnState = await this.userModel.updateEmail(req.body, userId);
+
+    if (returnState === 1) {
+      return res.status(200).json("Email updated!");
+    }
+    else if (returnState === -2) {
+      return res.status(409).json({ error: "Email already exists" })
+    }
+
+    return res.status(500).json({ error: "Could not update email" })
+  }
+
+  updatePassword = async (req, res) => {
+    //Validation
+
+    const dataValidated = validateUpdatePasswordData(req.body);
+
+    if (!dataValidated.success) {
+      return res.status(422).json({ error: JSON.parse(dataValidated.error.message) })
+    }
+
+    const userId = req.user_id;
+    const returnState = await this.userModel.updatePassword(req.body, userId);
+
+    if (returnState === 1) {
+      return res.status(200).json("Password updated!");
+    }
+
+    return res.status(500).json({ error: "Could not update password" })
+  }
 
   // delete = async (req, res) => {
   //   //Apply validation schema to the data received

@@ -79,7 +79,6 @@ export class ReservationController {
             }
         });
 
-
         if (returnState === 1) {
             transporter.sendMail(mailOptions).then((info) => {
                 return res.status(201).json(
@@ -93,6 +92,5 @@ export class ReservationController {
             );
         }
 
-        //return res.status(500).json({ error: "There was a problem sending the email." })
     }
 }

@@ -1,11 +1,124 @@
+<script setup lang="ts">
+import NavBar from '../components/NavBar.vue'
+import FooterComponent from '@/components/FooterComponent.vue'
+import TripIcon from '@/components/icons/TripIcon.vue'
+import { useReservations } from '@/composables/useReservations'
+import { onMounted, ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
+import ErrorMessages from '@/components/ErrorMessages.vue'
+import Toast from 'primevue/toast'
+import BreadCrumbs from '@/components/BreadCrumbs.vue'
+import { useSeoMeta } from '@unhead/vue'
+
+import Chip from 'primevue/chip'
+
+const items = ref([{ label: 'Home', route: '/' }, { label: 'Perfil' }])
+
+const translateStates = {
+  pending: 'Pendiente de confirmar',
+  completed: 'Confirmada',
+  cancelled: 'Cancelada'
+}
+
+onMounted(async () => {
+  await getUserReservations()
+})
+
+const { reservations, getUserReservations } = useReservations()
+
+const {
+  error,
+  errorMessages,
+  emailError,
+  emailErrorMessages,
+  passwordError,
+  passwordErrorMessages,
+  userData,
+  email,
+  newEmail,
+  name,
+  lastName,
+  phone,
+  newPassword
+} = storeToRefs(useAuthStore())
+const { modifyUserData, modifyEmail, getUser, modifyPassword } = useAuthStore()
+
+const reservationActivated = ref(true)
+const updatingEmail = ref(false)
+const updatingPassword = ref(false)
+
+const updateDataButtonDisabled = ref(false)
+const updateEmailButtonDisabled = ref(false)
+const updatePasswordButtonDisabled = ref(false)
+
+onMounted(async () => {
+  await getUser()
+
+  //Update user data form
+  userData.value.name = name.value as string
+  userData.value.last_name = lastName.value as string
+  userData.value.phone = phone.value as string
+
+  await getUserReservations()
+})
+
+async function handleUserData() {
+  await modifyUserData()
+  updateDataButtonDisabled.value = true
+  setTimeout(() => (updateDataButtonDisabled.value = false), 5000)
+}
+
+async function handleEmail() {
+  await modifyEmail()
+  updateEmailButtonDisabled.value = true
+  setTimeout(() => (updateEmailButtonDisabled.value = false), 5000)
+}
+
+async function handlePassword() {
+  await modifyPassword()
+  updatePasswordButtonDisabled.value = true
+  setTimeout(() => (updatePasswordButtonDisabled.value = false), 5000)
+}
+
+function toggleReservationActivated() {
+  reservationActivated.value = !reservationActivated.value
+}
+
+import UserPreferencesModal from '@/components/UserPreferencesModal.vue'
+import { useModal } from 'vue-final-modal'
+
+const { open, close } = useModal({
+  component: UserPreferencesModal,
+  attrs: {
+    onConfirm() {
+      close()
+    },
+    onCancel() {
+      close()
+    }
+  }
+})
+
+useSeoMeta({
+  title: `Rainbow Voyage | Perfil de ${name.value}`,
+  description: `Perfil de ${name.value}`,
+  ogDescription: `Perfil de ${name.value}`,
+  ogTitle: `Rainbow Voyage | Perfil de ${name.value}`,
+  ogImage: '/images/logo.webp'
+})
+</script>
+
 <template>
   <NavBar></NavBar>
   <main
     class="gap-2 d-flex flex-column justify-content-center text-center pt-3 container"
     style="margin-top: 6rem"
   >
+    <Toast></Toast>
     <h2 class="text-center">Mi perfil</h2>
-    <div class="mt-3 text-center text-lg-start d-flex justify-content-start">
+    <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end">
+      <BreadCrumbs :items="items" class="breadcrumbs-box"></BreadCrumbs>
       <a href="#" class="btn pink-button" @click="toggleReservationActivated">
         {{ !reservationActivated ? 'Mis datos' : 'Mis reservas' }}
       </a>
@@ -17,7 +130,7 @@
         <h4 class="card-header-title">Información Personal</h4>
       </div>
       <div class="card-body">
-        <form class="row g-3">
+        <form class="row g-3" novalidate @submit.prevent="">
           <!-- name -->
           <div class="col-md-6">
             <label class="form-label">
@@ -28,7 +141,7 @@
               type="text"
               class="form-control"
               placeholder="Introduce tu nombre"
-              v-model="formData.name"
+              v-model="userData.name"
             />
           </div>
           <!-- surnames -->
@@ -41,7 +154,7 @@
               type="text"
               class="form-control"
               placeholder="Introduce tus apellidos"
-              v-model="lastName"
+              v-model="userData.last_name"
             />
           </div>
           <!-- phone -->
@@ -54,35 +167,35 @@
               type="phone"
               class="form-control"
               placeholder="Introduce tu nº teléfono"
-              v-model="phone"
+              v-model="userData.phone"
             />
           </div>
           <!-- mail -->
           <div class="col-md-6">
-            <label class="form-label">
-              Email
-              <span class="text-danger">*</span>
-            </label>
+            <label class="form-label"> Email </label>
             <input
               type="email"
               class="form-control"
               placeholder="Introduce tu email"
               v-model="email"
+              disabled
             />
           </div>
-          <!-- address -->
-          <!-- <div class="col-md-12">
-            <label class="form-label">
-              Dirección
-              <span class="text-danger">*</span>
-            </label>
-            <input type="text" class="form-control" placeholder="calle número población" />
-          </div> -->
+
           <div class="col-12 text-end">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handleUserData"
+              :disabled="updateDataButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
+      <section v-if="error">
+        <ErrorMessages :messages="errorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- UPDATE EMAIL -->
@@ -94,14 +207,35 @@
         <h4 class="card-header-title">Actualizar Email</h4>
       </div>
       <div class="card-body">
-        <form>
+        <form novalidate @submit.prevent="">
           <label class="form-label"> Nuevo email </label>
-          <input type="email" class="form-control" placeholder="Introduce tu nuevo email" />
+          <input
+            type="email"
+            class="form-control"
+            placeholder="user@gmail.com"
+            v-model="newEmail.email"
+          />
+          <label class="form-label mt-3"> Confirmar nuevo email </label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="user@gmail.com"
+            v-model="newEmail.confirmEmail"
+          />
           <div class="text-end mt-3">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handleEmail"
+              :disabled="updateEmailButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
+      <section v-if="emailError">
+        <ErrorMessages :messages="emailErrorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- UPDATE PASSWORD  -->
@@ -113,20 +247,49 @@
         <h4 class="card-header-title">Actualizar Contraseña</h4>
       </div>
       <div class="card-body">
-        <form>
+        <form novalidate @submit.prevent="">
           <label class="form-label"> Contraseña nueva </label>
-          <input type="password" class="form-control" placeholder="Introduce tu nueva contraseña" />
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Introduce tu nueva contraseña"
+            v-model="newPassword.password"
+          />
+          <label class="form-label mt-3"> Confirmar nueva contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Introduce tu nueva contraseña"
+            v-model="newPassword.confirmPassword"
+          />
           <div class="text-end mt-3">
-            <a href="#" class="btn pink-button">Guardar</a>
+            <button
+              class="btn pink-button"
+              @click="handlePassword"
+              :disabled="updatePasswordButtonDisabled"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>
+      <section v-if="passwordError">
+        <ErrorMessages :messages="passwordErrorMessages"></ErrorMessages>
+      </section>
     </section>
 
     <!-- BOOKINGS -->
     <section v-if="!reservationActivated" class="card border p-2 my-4 mx-5 d-flex text-start">
-      <div class="card-header border-bottom" style="background-color: white">
+      <div
+        class="card-header border-bottom d-flex justify-content-between align-items-center"
+        style="background-color: white"
+      >
         <h4 class="card-header-title">Mis Reservas</h4>
+        <h5 class="d-flex align-items-center gap-3">
+          Preferencias de Búsqueda<button @click="open" class="btn pink-button me-0">
+            Cambiar
+          </button>
+        </h5>
       </div>
       <template v-if="reservations && reservations.length > 0">
         <article v-for="reservation in reservations" :key="reservation.id" class="card-body">
@@ -175,7 +338,6 @@
                 <RouterLink
                   :to="{ name: 'reservationDetail', params: { reservationId: reservation.id } }"
                   class="btn pink-button"
-                  @click="toggleReservationActivated"
                 >
                   Ver detalle
                 </RouterLink>
@@ -193,59 +355,48 @@
   <FooterComponent></FooterComponent>
 </template>
 
-<script setup lang="ts">
-import NavBar from '../components/NavBar.vue'
-import FooterComponent from '@/components/FooterComponent.vue'
-import TripIcon from '@/components/icons/TripIcon.vue'
-import { useReservations } from '@/composables/useReservations'
-import { onMounted, ref } from 'vue'
-import { useAuthStore } from '@/stores/auth'
-import { storeToRefs } from 'pinia'
-
-import Chip from 'primevue/chip'
-
-const translateStates = {
-  pending: 'Pendiente de confirmar',
-  completed: 'Confirmada',
-  cancelled: 'Cancelada'
+<style>
+/*Tenemos que hacerlo de manera global para que se sobreescriban los estilos del componente Toast */
+.p-toast .p-toast-message.p-toast-message-info {
+  background: #d90594 !important;
+  color: whitesmoke !important;
+  font-weight: 600 !important;
 }
 
-onMounted(async () => {
-  await getUserReservations()
-})
-
-const { reservations, getUserReservations } = useReservations()
-const { name, email, phone, lastName } = storeToRefs(useAuthStore())
-
-const formData = ref({
-  name: name,
-  email: email,
-  phone: phone,
-  lastName: lastName
-})
-
-const reservationActivated = ref(true)
-const updatingEmail = ref(false)
-const updatingPassword = ref(false)
-
-onMounted(async () => {
-  await getUserReservations()
-})
-
-function toggleReservationActivated() {
-  reservationActivated.value = !reservationActivated.value
+.p-toast .p-toast-message.p-toast-message-info .p-toast-message-icon,
+.p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close {
+  color: whitesmoke !important;
+  font-weight: 600 !important;
 }
-</script>
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-detail {
+  color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close:hover {
+  background: #d90594 !important;
+}
+</style>
 
 <style scoped>
 * {
   font-family: 'Roboto';
 }
 
+.breadcrumbs-box {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
 .pink-button {
   background-color: #d90594;
   padding: 0.6rem 1rem;
-  border-radius: 12px;
+  border-radius: 4rem;
   color: white;
 }
 
@@ -255,5 +406,9 @@ function toggleReservationActivated() {
 
 .pink-button a {
   text-decoration: none;
+}
+
+h5 {
+  font-size: 1rem;
 }
 </style>
