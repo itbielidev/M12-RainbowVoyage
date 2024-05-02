@@ -127,7 +127,8 @@ h3 {
 }
 
 .main-img {
-  border-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 @media (max-width: 768px) {

@@ -26,6 +26,9 @@ export const useReservations = () => {
         checkbox: false,
         adult: false,
         numPeople: "",
+        cardNumber: "",
+        cardExpirationDate: "",
+        securityCode: "",
         dates: "",
         dateId: "",
         airportIn: "",
@@ -279,6 +282,19 @@ export const useReservations = () => {
             errorMessages.value.push("Debes especificar la dirección y la localidad.");
             error.value = true;
         }
+
+        if (!/^4[0-9]{12}(?:[0-9]{3})?$/.test(formData.value.cardNumber)) {
+            errorMessages.value.push("El número de la tarjeta de crédito no es válido");
+            error.value = true;
+        }
+
+        if (!/^[0-9]{3}$/.test(formData.value.securityCode)) {
+            errorMessages.value.push("El código de seguridad no es válido");
+            error.value = true;
+        }
+
+
+
 
     }
 
