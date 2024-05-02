@@ -128,8 +128,12 @@ En resumen, hemos logrado cumplir con todos nuestros objetivos iniciales, desarr
 
 ## Conclusiones
 
-Este proyecto nos ha ayudado a planificar y a tener en cuenta de manera realista el alcance de un proyecto web, ya que, a lo largo del proceso de desarrollo hemos tenido una disparidad de conocimientos técnicos que nos ha obligado a tener que organizar y planificar las funcionalidades que sabíamos que podíamos alcanzar/finalizar, y del mismo modo, a descartar aquellas que requerían demasiado tiempo o que era muy probable que dejásemos a medias. Y sobretodo, hemos aprendido a gestionar las responsabilidades y el tiempo que conllevan las tareas y funcionalidades que nos habíamos asignado en los diferentes sprint.
+- **Planificación y alcance del proyecto:** Este proyecto nos ha permitido realizar una planificación detallada y realista, considerando las necesidades y expectativas específicas de la comunidad LGTBI en el ámbito de los viajes. A lo largo del desarrollo, hemos enfrentado desafíos como la falta de conocimientos en nuestro equipo, lo que nos ha llevado a organizar e investigar las funcionalidades del servicio que podíamos implementar de manera efectiva.
 
-Es de las primeras veces que subíamos a producción un proyecto y hemos aprendido a familiarizarnos con la metodología de despliegue web en Vercel la cual nos ha parecido muy útil para poder aplicarla en futuros proyectos.
+- **Gestión de responsabilidades y tiempo:** Hemos aprendido a gestionar eficientemente las responsabilidades y el tiempo asignado a cada tarea y funcionalidad del proyecto. La diversidad de enfoques y habilidades dentro del equipo nos ha exigido una comunicación clara y una distribución equitativa de las tareas, lo que ha contribuido a un desarrollo más efectivo y a la consecución de nuestros objetivos en los plazos establecidos.
 
-El desarrollo de la agencia ha sido un proceso desafiante pero gratificante. Hemos superado diversos obstáculos y hemos creado una pwa que cumple con las expectativas y necesidades propuestas inicialmente. Esperamos seguir mejorando y expandiendo nuestra oferta a más destinos.
+- **Familiarización con metodologías utilizadas:** Este proyecto nos ha brindado la oportunidad de familiarizarnos con metodologías de despliegue web como Vercel, y al mismo tiempo de asentar conocimientos de JS, CSS, VUE, PostgreSQL o Prisma.
+
+- **Desafíos y logros:** El desarrollo de esta agencia de viajes LGTBIQA+ ha sido un proceso desafiante pero enormemente gratificante. Hemos superado obstáculos y adversidades, demostrando nuestra capacidad para adaptarnos y responder a las necesidades de la comunidad. La plataforma resultante cumple con las expectativas y necesidades iniciales, y estamos entusiasmados por seguir mejorando y expandiendo nuestra oferta para servir a más destinos y comunidades dentro del colectivo LGTBIQA+.
+
+Estas conclusiones reflejan el compromiso de nuestro equipo con la inclusión, la diversidad y la excelencia en el servicio, y sentamos las bases para un futuro más tolerante 🏳️‍🌈.
