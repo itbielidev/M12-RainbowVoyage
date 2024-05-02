@@ -4,6 +4,7 @@ import type { Reservation } from '@/types'
 import { useReservations } from '@/composables/useReservations'
 import { ref } from 'vue'
 import ProgressSpinner from 'primevue/progressspinner'
+import ErrorMessages from '@/components/ErrorMessages.vue'
 
 const props = defineProps<{
   reservation: Reservation
@@ -17,7 +18,7 @@ const loading = ref<boolean>(false)
 
 const { formatDateYear } = useDates()
 
-const { sendEmail } = useReservations()
+const { sendEmail, error, errorMessages } = useReservations()
 
 const manageEmailSending = async (reservationId: number) => {
   loading.value = true
@@ -26,7 +27,6 @@ const manageEmailSending = async (reservationId: number) => {
   setTimeout(() => {
     loading.value = false
   }, 2500)
-
   //emit to refresh reservations view
   emit('refresh')
 }
@@ -62,18 +62,13 @@ const manageEmailSending = async (reservationId: number) => {
             <div v-else-if="loading" class="d-flex justify-content-center">
               <ProgressSpinner></ProgressSpinner>
             </div>
+            <div v-else-if="error" class="d-flex justify-content-center">
+              <ErrorMessages :messages="errorMessages"></ErrorMessages>
+            </div>
           </div>
         </div>
       </div>
     </main>
-    <!-- <footer class="text-start text-lg-end px-3 py-2">
-      <button v-if="!loading" class="btn" @click="manageEmailSending(props.reservation.id)">
-        Confirmar <font-awesome-icon icon="fa-solid fa-envelope" />
-      </button>
-      <section v-else class="d-flex justify-content-center">
-        <ProgressSpinner></ProgressSpinner>
-      </section>
-    </footer> -->
   </article>
 </template>
 <style scoped>

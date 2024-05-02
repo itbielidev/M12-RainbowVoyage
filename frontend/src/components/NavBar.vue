@@ -62,10 +62,10 @@
           </li>
           <li
             v-if="userIsLoggedIn"
-            class="nav-item d-flex align-items-center gap-1 logout"
+            class="nav-item d-flex align-items-center gap-1 logout li-log-out"
             @click="logout()"
           >
-            <span class="fw-bold">CERRAR SESIÓN</span>
+            <span class="fs-5 fw-bold log-out">CERRAR SESIÓN</span>
             <font-awesome-icon icon="fa-solid fa-power-off" />
           </li>
         </ul>
@@ -112,6 +112,20 @@ const { open: openLogin, close: closeLogin } = useModal({
 </script>
 
 <style>
+.log-out {
+  color: #d90594;
+}
+
+.li-log-out:hover {
+  cursor: pointer;
+  background-color: #ffb6c1;
+  border-radius: 5px;
+}
+
+.fa-power-off {
+  color: #d90594;
+}
+
 a {
   text-decoration: none !important;
 }
@@ -169,6 +183,10 @@ a {
   border: none;
   color: #d90594;
   border-radius: 5px;
+}
+
+.nav-link:focus {
+  color: #d90594;
 }
 
 .navegador {

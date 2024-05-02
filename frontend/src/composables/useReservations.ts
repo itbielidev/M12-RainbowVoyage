@@ -24,6 +24,7 @@ export const useReservations = () => {
         location: "",
         type: "client",
         checkbox: false,
+        adult: false,
         numPeople: "",
         dates: "",
         dateId: "",
@@ -142,7 +143,7 @@ export const useReservations = () => {
 
     const { fetchError, getAuth, isLoading: isLoadingReservations } = useFetch<Reservation[]>();
     const { getAuth: getDetail, fetchError: fetchErrorDetail, isLoading: isLoadingDetail } = useFetch<Reservation>();
-    const { getAuth: sendEmailFetch } = useFetch<any>();
+    const { getAuth: sendEmailFetch, fetchError: sendEmailError } = useFetch<any>();
     const { postAuth: postReservation, fetchError: fetchErrorPost } = useFetch<any>();
 
     const reservations: Ref<Reservation[] | null> = ref([]);
@@ -282,8 +283,14 @@ export const useReservations = () => {
     }
 
     const validateCheckBox = () => {
+
         if (!formData.value.checkbox) {
             errorMessages.value.push("Debes aceptar las condiciones de reserva.");
+            error.value = true;
+        }
+
+        if (!formData.value.adult) {
+            errorMessages.value.push("El titular y los acompañantes deben ser mayores de edad.");
             error.value = true;
         }
     }
@@ -315,12 +322,13 @@ export const useReservations = () => {
     const sendEmail = async (reservationId: number) => {
         let reservationsData = await sendEmailFetch(`/reservations/sendEmail/${reservationId}`);
 
-        if (fetchError.value) {
+        if (sendEmailError.value) {
             error.value = true;
-            errorMessages.value.push(fetchError.value);
+            errorMessages.value.push("Ha habido un problema al enviar el correo. Inteńtalo más tarde por favor.");
         }
         else {
             reservationsData = null;
+            error.value = false;
         }
 
     }

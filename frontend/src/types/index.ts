@@ -93,6 +93,7 @@ export interface ReservationPayload {
     postalCode: string
     location: string
     checkbox: Boolean
+    adult: Boolean
     numPeople: string
     dates: string
     dateId: string

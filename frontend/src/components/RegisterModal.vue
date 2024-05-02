@@ -85,7 +85,7 @@ watch(formData.value, () => {
   >
     <section class="content-box register-box p-5">
       <font-awesome-icon @click="emit('cancel')" icon="fa-solid fa-xmark" />
-      <section class="text-center d-none d-md-block">
+      <section class="d-none d-md-flex justify-content-center mb-2">
         <img src="/images/logo.webp" alt="Logo" class="img-fluid logo-img" />
       </section>
       <section
@@ -102,9 +102,9 @@ watch(formData.value, () => {
       </section>
       <form @submit.prevent="handleRegister()" novalidate>
         <template v-if="currentIndex === 0">
-          <h1 class="display-5 mb-5">¡EMPECEMOS!</h1>
+          <h3 class="mb-5">¡EMPECEMOS!</h3>
           <section class="d-flex flex-column">
-            <label class="mb-2" for="email">Correo electónico *</label>
+            <label class="mb-2 fs-5" for="email">Correo electrónico *</label>
             <input
               v-model.trim="formData.email"
               type="email"
@@ -120,7 +120,7 @@ watch(formData.value, () => {
         </template>
         <template v-if="currentIndex === 1">
           <section class="d-flex flex-column">
-            <label class="mb-2" for="name">Nombre *</label>
+            <label class="mb-2 fs-5" for="name">Nombre *</label>
             <input
               v-model.trim="formData.name"
               type="text"
@@ -130,7 +130,7 @@ watch(formData.value, () => {
             />
           </section>
           <section class="d-flex flex-column">
-            <label class="mb-2" for="lastName">Apellidos *</label>
+            <label class="mb-2 fs-5" for="lastName">Apellidos *</label>
             <input
               v-model.trim="formData.lastName"
               type="text"
@@ -140,7 +140,7 @@ watch(formData.value, () => {
             />
           </section>
           <section class="d-flex flex-column">
-            <label class="mb-2" for="phone">Teléfono móvil *</label>
+            <label class="mb-2 fs-5" for="phone">Teléfono móvil *</label>
             <input
               v-model.trim="formData.phone"
               type="text"
@@ -150,7 +150,7 @@ watch(formData.value, () => {
             />
           </section>
           <section class="d-flex flex-column pass-box">
-            <label class="mb-2" for="password">Contraseña *</label>
+            <label class="mb-2 fs-5" for="password">Contraseña *</label>
             <input
               v-model.trim="formData.password"
               :type="passwordRevealed ? 'password' : 'text'"
@@ -173,7 +173,7 @@ watch(formData.value, () => {
             />
           </section>
           <section class="d-flex flex-column pass-box">
-            <label class="mb-2" for="passwordConfirm">Confirmar contraseña *</label>
+            <label class="mb-2 fs-5" for="passwordConfirm">Confirmar contraseña *</label>
             <input
               v-model.trim="formData.passwordConfirm"
               :type="passwordConfirmRevealed ? 'password' : 'text'"

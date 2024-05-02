@@ -27,6 +27,7 @@ const reservationPayLoadSchema = z.object({
     location: z.string().min(1).max(200),
     numPeople: z.string(),
     checkbox: z.boolean(),
+    adult: z.boolean(),
     dates: z.string(),
     dateId: z.string(),
     airportIn: z.string(),
