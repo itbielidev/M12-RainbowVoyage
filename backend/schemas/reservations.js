@@ -35,7 +35,10 @@ const reservationPayLoadSchema = z.object({
     partidaFirstDay: z.string(),
     llegadaFirstDay: z.string(),
     partidaLastDay: z.string(),
-    llegadaLastDay: z.string()
+    llegadaLastDay: z.string(),
+    cardNumber: z.string(),
+    cardExpirationDate: z.string(),
+    securityCode: z.string()
 });
 
 

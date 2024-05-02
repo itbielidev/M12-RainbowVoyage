@@ -1,4 +1,4 @@
-import { validateRegister, validateUpdate, validateLogin, validateUserData, validateUpdateEmailData, validateUpdatePasswordData } from '../schemas/users.js'
+import { validateRegister, validateUpdate, validateLogin, validateUserData, validateUpdateEmailData, validateUserPreferences, validateUpdatePasswordData } from '../schemas/users.js'
 import "dotenv/config";
 
 export class UserController {
@@ -87,6 +87,12 @@ export class UserController {
 
   updatePreferences = async (req, res) => {
     const userId = req.user_id;
+
+    const dataValidated = validateUserPreferences(req.body);
+
+    if (!dataValidated.success) {
+      return res.status(422).json({ error: JSON.parse(dataValidated.error.message) })
+    }
 
     const [returnState, preferences] = await this.userModel.updatePreferences(userId, req.body);
 

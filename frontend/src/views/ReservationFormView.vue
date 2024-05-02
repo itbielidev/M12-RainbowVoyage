@@ -28,7 +28,6 @@ const {
   validateForm,
   validateSecondForm,
   manageReservation,
-  validateCheckBox,
   availableAirportsDestination,
   availableAirportsOrigin
 } = useReservations()
@@ -153,7 +152,7 @@ onMounted(() => {
         <h1 class="display-5 mb-5">DATOS DEL TITULAR</h1>
         <section class="d-flex flex-column">
           <div class="d-flex flex-column gap-2 text-start">
-            <label class="mb-1" for="text">Nombre *</label>
+            <label class="mb-1" for="name">Nombre *</label>
             <input
               v-model.trim="formData.name"
               type="text"
@@ -161,7 +160,7 @@ onMounted(() => {
               id="name"
               placeholder="Nombre"
             />
-            <label class="mb-1" for="text">Apellidos *</label>
+            <label class="mb-1" for="lastName">Apellidos *</label>
             <input
               v-model.trim="formData.lastName"
               type="text"
@@ -171,7 +170,7 @@ onMounted(() => {
             />
           </div>
           <div class="d-flex flex-column gap-2 text-start">
-            <label class="mb-1" for="text">DNI *</label>
+            <label class="mb-1" for="dni">DNI *</label>
             <input
               v-model.trim="formData.dni"
               type="text"
@@ -179,12 +178,12 @@ onMounted(() => {
               id="dni"
               placeholder="12345678A"
             />
-            <label class="mb-1" for="text">Teléfono *</label>
+            <label class="mb-1" for="phone">Teléfono *</label>
             <input
               v-model.trim="formData.phone"
               type="text"
-              name="lastName"
-              id="lastName"
+              name="phone"
+              id="phone"
               placeholder="123 456 789"
             />
           </div>
@@ -255,6 +254,36 @@ onMounted(() => {
               :placeholder="numVisitors.toString()"
               disabled
             />
+            <label class="mb-2" for="cardNumber">Número de tarjeta*</label>
+            <input
+              v-model.trim="formData.cardNumber"
+              type="text"
+              name="cardNumber"
+              id="cardNumber"
+              placeholder="4123456789012345"
+            />
+            <div class="d-flex flex-column flex-md-row gap-2">
+              <div class="d-flex flex-column">
+                <label class="mb-2" for="securityCode">Código de seguridad *</label>
+                <input
+                  v-model.trim="formData.securityCode"
+                  type="text"
+                  name="securityCode"
+                  id="securityCode"
+                />
+              </div>
+              <div class="d-flex flex-column">
+                <label class="mb-2" for="cardExpirationDate">Fecha de validez*</label>
+                <input
+                  v-model.trim="formData.cardExpirationDate"
+                  type="text"
+                  name="cardExpirationDate"
+                  id="cardExpirationDate"
+                  placeholder="12/06/2030"
+                  disabled
+                />
+              </div>
+            </div>
           </div>
           <label class="mb-2">Aeropuerto de origen :</label>
           <select class="mb-4" v-model="formData.airportIn" @change="setHours()">
@@ -280,10 +309,10 @@ onMounted(() => {
           </select>
         </section>
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
-          <button class="button fw-bold mt-5 px-1 py-2" @click="goBack(0)" type="button">
+          <button class="button fw-bold mt-4 px-1 py-2" @click="goBack(0)" type="button">
             VOLVER ATRÁS
           </button>
-          <button class="button fw-bold mt-5 px-1 py-2" @click="modifyIndex(2)" type="button">
+          <button class="button fw-bold mt-4 px-1 py-2" @click="modifyIndex(2)" type="button">
             SIGUIENTE
           </button>
         </section>

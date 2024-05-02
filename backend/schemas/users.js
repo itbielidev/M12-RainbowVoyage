@@ -35,7 +35,17 @@ const updateSchema = z.object({
     max_people_max: z.number().optional().nullable(),
     duration_min: z.number().optional().nullable(),
     duration_max: z.number().optional().nullable(),
-    experience_type: z.enum(["gastronomic", "cultural", "festive"]).optional().nullable(),
+    experience_type: z.enum(["gastronomic", "cultural", "festive", "all"]).optional().nullable(),
+    price_min: z.number().optional().nullable(),
+    price_max: z.number().optional().nullable()
+})
+
+const updatePreferencesSchema = z.object({
+    num_people_min: z.number().optional().nullable(),
+    max_people_max: z.number().optional().nullable(),
+    duration_min: z.number().optional().nullable(),
+    duration_max: z.number().optional().nullable(),
+    experience_type: z.enum(["gastronomic", "cultural", "festive", "all"]).optional().nullable(),
     price_min: z.number().optional().nullable(),
     price_max: z.number().optional().nullable()
 })
@@ -58,6 +68,11 @@ const updatePasswordSchema = z.object({
     password: z.string().min(6).max(20),
     confirmPassword: z.string().min(6).max(20)
 })
+
+export function validateUserPreferences(input) {
+    return updatePreferencesSchema.safeParse(input);
+
+}
 
 export function validateRegister(input) {
     return registrationSchema.safeParse(input);

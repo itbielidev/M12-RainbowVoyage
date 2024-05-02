@@ -103,6 +103,9 @@ export interface ReservationPayload {
     llegadaFirstDay: string
     partidaLastDay: string
     llegadaLastDay: string
+    cardNumber: string
+    securityCode: string
+    cardExpirationDate: string
 }
 export interface User {
     id: number
