@@ -1,28 +1,24 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext'
 import ReservationCard from '@/components/ReservationCard.vue'
-import { computed, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useReservations } from '@/composables/useReservations'
 import { useAuthStore } from '@/stores/auth'
 import ErrorMessages from '@/components/ErrorMessages.vue'
 import ProgressSpinner from 'primevue/progressspinner'
-import { useSeoMeta, type UseSeoMetaInput } from '@unhead/vue'
+import { useSeoMeta } from '@unhead/vue'
 
 const route = useRoute()
 const router = useRouter()
 
-const seoMeta = computed<UseSeoMetaInput>(() => {
-  return {
-    title: `Rainbow Voyage | Panel del administrador`,
-    description: `Panel del administrador para gestionar las reservas de la web.`,
-    ogDescription: `Panel del administrador para gestionar las reservas de la web.`,
-    ogTitle: `Rainbow Voyage | Panel del administrador`,
-    ogImage: '/images/logo.webp'
-  }
+useSeoMeta({
+  title: `Rainbow Voyage | Panel del administrador`,
+  description: `Panel del administrador para gestionar las reservas de la web.`,
+  ogDescription: `Panel del administrador para gestionar las reservas de la web.`,
+  ogTitle: `Rainbow Voyage | Panel del administrador`,
+  ogImage: '/images/logo.webp'
 })
-
-useSeoMeta(seoMeta as UseSeoMetaInput)
 
 const { getReservations, reservations, errorMessages, error, isLoadingReservations } =
   useReservations()
