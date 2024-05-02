@@ -24,6 +24,7 @@ export const useReservations = () => {
         location: "",
         type: "client",
         checkbox: false,
+        adult: false,
         numPeople: "",
         dates: "",
         dateId: "",
@@ -282,8 +283,14 @@ export const useReservations = () => {
     }
 
     const validateCheckBox = () => {
+
         if (!formData.value.checkbox) {
             errorMessages.value.push("Debes aceptar las condiciones de reserva.");
+            error.value = true;
+        }
+
+        if (!formData.value.adult) {
+            errorMessages.value.push("El titular y los acompañantes deben ser mayores de edad.");
             error.value = true;
         }
     }

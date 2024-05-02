@@ -46,7 +46,7 @@
               placeholder="Correo electrónico"
               class="newsletter-input py-1 px-2"
             /><br />
-            <button class="btn">Enviar</button>
+            <button class="btn mt-3">Enviar</button>
           </div>
         </div>
       </div>
