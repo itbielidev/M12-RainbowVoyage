@@ -24,9 +24,9 @@ const props = defineProps<{
         </Breadcrumb>
     </section>
 </template>
-<style >
+<style>
 .p-breadcrumb {
-    width: fit-content !important;
+    width: fit-content;
     margin-left: 0px !important;
     padding-left: 0px !important;
     border: none;
