@@ -69,4 +69,40 @@ img.rupaul {
 .pink-button a {
   text-decoration: none;
 }
+
+@media (max-width: 994px) {
+  img.rupaul{
+    height: 25rem;
+  }
+}
+
+@media (max-width: 701px) {
+  img.rupaul{
+    height: 15rem;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  span {
+    font-size: 2em;
+  }
+  .pink-button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 504px) {
+  img.rupaul{
+    height: 13rem;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  span {
+    font-size: 2em;
+  }
+  .pink-button {
+    font-size: 1.5rem;
+  }
+}
 </style>
