@@ -87,7 +87,7 @@ useSeoMeta({
 
 <style scoped>
 .main {
-  background-color: rgba(171, 184, 195, 0.19);
+  background-color: rgba(171, 184, 195, 0.18);
 }
 
 body {
