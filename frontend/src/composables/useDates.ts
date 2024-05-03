@@ -12,7 +12,7 @@ export const useDates = () => {
 
     const formData = ref<any>({
         selectedMonth: "Mayo 2024",
-        numPeople: "2"
+        numPeople: null
     })
 
     const dateSelected = ref<string>("");

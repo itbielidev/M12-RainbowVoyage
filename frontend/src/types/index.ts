@@ -28,7 +28,7 @@ export interface RegisterPayLoad {
     num_people_max?: number | null
     duration_min?: number | null
     duration_max?: number | null
-    experience_type?: "gastronomic" | "cultural" | "festive" | "" | null
+    experience_type?: "gastronomic" | "cultural" | "festive" | "all" | "" | null
     checkbox: Boolean
     adult: Boolean
 }
@@ -93,6 +93,7 @@ export interface ReservationPayload {
     postalCode: string
     location: string
     checkbox: Boolean
+    adult: Boolean
     numPeople: string
     dates: string
     dateId: string
@@ -102,6 +103,9 @@ export interface ReservationPayload {
     llegadaFirstDay: string
     partidaLastDay: string
     llegadaLastDay: string
+    cardNumber: string
+    securityCode: string
+    cardExpirationDate: string
 }
 export interface User {
     id: number
@@ -160,6 +164,8 @@ export interface City {
     description_detail: string
     hovered?: boolean
     experiences?: Experience[]
+    latitude: number
+    longitude: number
 }
 
 export interface DateAvailability {

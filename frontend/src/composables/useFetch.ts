@@ -28,7 +28,7 @@ export const useFetch = <T>(): FetchReturn<T> => {
     const isLoading: Ref<boolean> = ref(false);
     const fetchError: Ref<string | null> = ref(null);
     const { logout } = useAuthStore();
-    const { token } = useAuthStore();
+    const { token } = storeToRefs(useAuthStore());
 
     const router = useRouter();
 
@@ -70,12 +70,13 @@ export const useFetch = <T>(): FetchReturn<T> => {
         const apiPrefix: string = import.meta.env.VITE_API_ENDPOINT;
         const apiEndpoint: string = `${apiPrefix}${url}`;
 
+        const { token } = storeToRefs(useAuthStore());
         const axiosConfig: AxiosRequestConfig = {
             method,
             url: apiEndpoint, //Cambiar esto por apiEndpoint !!!!!!!
             data: payload,
             headers: {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${token.value}`
             }
         };
 

@@ -157,6 +157,148 @@ export class UserModel {
         }
     }
 
+    static async updatePreferences(userId, preferencesData) {
+
+        try {
+
+            //Getting the preferences of the authnticated user
+            const user = await prismadb.user.findFirst({
+                where: {
+                    id: userId
+                },
+                include: {
+                    preference: true
+                }
+            })
+
+            let preference = user.preference;
+
+            //We create a new preference object if it does not exist.
+            if (!preference) {
+                preference = await prismadb.userPreference.create({
+                    data: {
+                        ...preferencesData
+                    }
+                })
+
+                //We update the preference id of the aunthenticated user.
+                await prismadb.user.update({
+                    where: {
+                        id: userId
+                    },
+                    data: {
+                        preference_id: preference.id
+                    }
+
+                })
+            }
+
+            console.log(preference);
+
+            const updatedPreference = { ...preference, ...preferencesData };
+
+            // Store updated preferences in database 
+            await prismadb.userPreference.update({
+                where: {
+                    id: preference.id
+                },
+                data: updatedPreference
+            });
+
+
+            return [1, updatedPreference];
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    static async updateData(data, userId) {
+
+        try {
+            await prismadb.user.update({
+                where: {
+                    id: userId
+                },
+                data: {
+                    name: data.name,
+                    last_name: data.last_name,
+                    phone: data.phone
+                }
+            });
+
+            return 1
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+    static async updateEmail(data, userId) {
+
+        try {
+
+            let returnState = 1;
+
+            //Check if the user email is already registered in the database.
+            const user = await prismadb.user.findFirst({
+                where: {
+                    email: data.email
+                }
+            });
+
+            if (user !== null) {
+                //console.log("User email already exists!");
+                returnState = -2;
+                return returnState;
+            };
+
+            //Otherwise we proceed to update the email.
+            await prismadb.user.update({
+                where: {
+                    id: userId
+                },
+                data: {
+                    email: data.email
+                }
+            });
+
+            return 1
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+    static async updatePassword(data, userId) {
+
+        try {
+            //Hashing and adding salt to the new password
+            const salt = await bcrypt.genSalt(2);
+
+            const hashedPassword = await bcrypt.hash(data.password, salt);
+
+            //Otherwise we proceed to update the email.
+            await prismadb.user.update({
+                where: {
+                    id: userId
+                },
+                data: {
+                    password_hash: hashedPassword,
+                    salt_hash: salt
+                }
+            });
+
+            return 1
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
     // static async delete(user_data) {
     //     try {
     //         const deletedUser = await prismadb.user.update({

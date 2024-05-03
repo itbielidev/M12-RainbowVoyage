@@ -31,6 +31,19 @@ export class ReservationController {
 
     }
 
+    find = async (req, res) => {
+
+        const reservationId = Number(req.params.reservationId);
+
+        const [returnState, reservation] = await this.reservationModel.find(reservationId);
+
+        if (returnState === 1) {
+            return res.status(200).json(reservation);
+        }
+
+        return res.status(500).json({ error: "There was a problem retrieving the specified reservation." })
+    }
+
     create = async (req, res) => {
 
         const reservationValidated = validateReservation(req.body);
@@ -66,7 +79,6 @@ export class ReservationController {
             }
         });
 
-
         if (returnState === 1) {
             transporter.sendMail(mailOptions).then((info) => {
                 return res.status(201).json(
@@ -80,6 +92,5 @@ export class ReservationController {
             );
         }
 
-        //return res.status(500).json({ error: "There was a problem sending the email." })
     }
 }

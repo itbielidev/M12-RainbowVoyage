@@ -6,25 +6,38 @@
         <span class="navegador">INICIO</span>
       </RouterLink>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="color: #d90594;"></span>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+        aria-controls="navbarsExample07"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" style="color: #d90594"></span>
       </button>
-
 
       <div class="collapse navbar-collapse" id="navbarCollapse" :class="{ show: isMenuOpen }">
         <ul class="navbar-nav ms-auto">
           <li v-if="!userIsLoggedIn" class="nav-item">
-            <button class="nav-link profile-button navegador" @click="open()" @mouseover="hoverButton = true"
-              @mouseleave="hoverButton = false">
+            <button
+              class="nav-link profile-button navegador"
+              @click="open()"
+              @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false"
+            >
               <font-awesome-icon icon="fa-solid fa-file" class="iconos"></font-awesome-icon>
               REGISTRO
             </button>
-
           </li>
           <li v-if="!userIsLoggedIn" class="nav-item">
-            <button class="nav-link navegador" @mouseover="hoverButton = true" @mouseleave="hoverButton = false"
-              @click="openLogin()">
+            <button
+              class="nav-link navegador"
+              @mouseover="hoverButton = true"
+              @mouseleave="hoverButton = false"
+              @click="openLogin()"
+            >
               <font-awesome-icon icon="fa-solid fa-user" class="iconos"></font-awesome-icon>
               INICIAR SESIÓN
             </button>
@@ -38,17 +51,21 @@
           </li>
           <li v-if="userIsLoggedIn" class="nav-item">
             <RouterLink :to="{ name: isAdmin ? 'admin' : 'profile' }">
-              <button class="nav-link" @mouseover="hoverButton = true" @mouseleave="hoverButton = false">
+              <button
+                class="nav-link"
+                @mouseover="hoverButton = true"
+                @mouseleave="hoverButton = false"
+              >
                 <span class="fw-bold navegador">PERFIL</span>
               </button>
             </RouterLink>
           </li>
           <li
             v-if="userIsLoggedIn"
-            class="nav-item d-flex align-items-center gap-1 logout"
+            class="nav-item d-flex align-items-center gap-1 logout li-log-out"
             @click="logout()"
           >
-            <span class="fw-bold">CERRAR SESIÓN</span>
+            <span class="fs-5 fw-bold log-out">CERRAR SESIÓN</span>
             <font-awesome-icon icon="fa-solid fa-power-off" />
           </li>
         </ul>
@@ -95,9 +112,25 @@ const { open: openLogin, close: closeLogin } = useModal({
 </script>
 
 <style>
-/* Agregar estilo para el contenedor de los enlaces */
-.menu{
-  height: 100px;
+.log-out {
+  color: #d90594;
+}
+
+.li-log-out:hover {
+  cursor: pointer;
+  background-color: #ffb6c1;
+  border-radius: 5px;
+}
+
+.fa-power-off {
+  color: #d90594;
+}
+
+a {
+  text-decoration: none !important;
+}
+.menu {
+  height: 180px;
 }
 
 .nav-link-container {
@@ -133,11 +166,10 @@ const { open: openLogin, close: closeLogin } = useModal({
 
 .logo {
   padding-top: 0px;
-  height: 100px;
+  height: 175px;
   width: auto;
-
+  margin-top: 15px;
 }
-
 
 .nav-link {
   background-color: transparent;
@@ -146,7 +178,6 @@ const { open: openLogin, close: closeLogin } = useModal({
   outline: none;
 }
 
-
 .nav-link:hover {
   background-color: #ffb6c1;
   border: none;
@@ -154,20 +185,22 @@ const { open: openLogin, close: closeLogin } = useModal({
   border-radius: 5px;
 }
 
+.nav-link:focus {
+  color: #d90594;
+}
+
 .navegador {
   color: #d90594;
   font-weight: bolder;
-  font-size: 15px;
+  font-size: 20px;
   border: none;
   color: #d90594;
   border-radius: 5px;
 }
 
-
 .iconos,
-.barraNav
-{
-color: #d90594;
+.barraNav {
+  color: #d90594;
 }
 
 .navbar-toggler {
@@ -204,9 +237,8 @@ color: #d90594;
     margin-right: 8px; /* Reducir el margen entre los iconos y el texto */
   }
 
-  .menu{
-    height: 150px;
+  .menu {
+    height: 200px;
   }
 }
-
 </style>

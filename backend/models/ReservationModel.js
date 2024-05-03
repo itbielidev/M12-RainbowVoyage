@@ -22,7 +22,11 @@ export class ReservationModel {
                         state: reservationState
                     },
                     include: {
-                        experience: true,
+                        experience: {
+                            include: {
+                                city: true
+                            }
+                        },
                         user: true
                     }
                 });
@@ -38,7 +42,11 @@ export class ReservationModel {
                         }
                     },
                     include: {
-                        experience: true,
+                        experience: {
+                            include: {
+                                city: true
+                            }
+                        },
                         user: true
                     }
                 });
@@ -57,7 +65,11 @@ export class ReservationModel {
             },
             include: {
                 user: true,
-                experience: true
+                experience: {
+                    include: {
+                        city: true
+                    }
+                },
             }
         })
 
@@ -65,7 +77,26 @@ export class ReservationModel {
     }
 
     static async find(reservationId) {
+        try {
+            const reservation = await prismadb.reservation.findFirst({
+                where: {
+                    id: reservationId
+                },
+                include: {
+                    user: true,
+                    experience: {
+                        include: {
+                            city: true
+                        }
+                    },
+                }
+            })
 
+            return [1, reservation]
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     static async create(userId, bodyData, experienceId) {
@@ -153,7 +184,7 @@ export class ReservationModel {
             theme: "default",
             product: {
                 name: "Rainbow Voyage",
-                link: 'hola.com'
+                link: "https://rainbow-voyage-web.vercel.app/"
             }
         })
 
@@ -179,7 +210,16 @@ export class ReservationModel {
                     ¡Esperamos que disfutes de tu viaje!
 
                 `,
-                outro: `Para cualquier duda o consulta que tengas sobre el viaje no dudes en contactarnos al siguiente teléfono <b style='color:rgba(217, 5, 148, 1)'>123456789</b>.`,
+                outro: `
+                Para cualquier duda o consulta que 
+                tengas sobre el viaje no dudes en contactarnos al 
+                siguiente teléfono <b style='color:rgba(217, 5, 148, 1)'>123456789</b>.
+                <br/>
+                <br/>
+                <span style='font-size: 14px;'>Enlaces útiles:</span><br/>
+                <a href="https://rainbow-voyage-web.vercel.app/"style="text-decoration: none; color: #000;">Inicio</a> |
+                <a href="https://rainbow-voyage-web.vercel.app/policy" style="text-decoration: none; color: #000;">Información Legal</a> 
+                `,
                 signature: 'Coordialmente',
                 table: {
                     data: [

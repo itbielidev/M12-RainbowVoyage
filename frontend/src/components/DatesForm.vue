@@ -6,6 +6,7 @@ import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import LoginModal from '@/components/LoginModal.vue'
 import { useModal } from 'vue-final-modal'
+import { ref } from 'vue'
 
 const {
   monthsSelect,
@@ -32,6 +33,15 @@ const { open: openLogin, close: closeLogin } = useModal({
   }
 })
 
+const checkAvailabilty = () => {
+  //MAYBE CHECK SOMETHING
+
+  emit('reserve', selectedDateId.value, dateSelected.value, formData.value.numPeople)
+}
+
+const monthYearSelectorisDisabled = ref<boolean>(false)
+const numPeopleSelectorisDisabled = ref<boolean>(false)
+
 const { userIsLoggedIn } = storeToRefs(useAuthStore())
 const props = defineProps<{ experienceId: string }>()
 const emit = defineEmits<{
@@ -44,6 +54,21 @@ function setSelectedDateId(event: any) {
       .id
   )
 }
+
+function disableNumPeopleSelector() {
+  //Block the selectors to not refecth other dates
+
+  numPeopleSelectorisDisabled.value = true
+}
+
+function enableSelectors() {
+  numPeopleSelectorisDisabled.value = false
+  monthYearSelectorisDisabled.value = false
+  datesAvailable.value = null
+  formData.value.numPeople = '1'
+  formData.value.dateSelected = ''
+  selectedDateId.value = -1
+}
 </script>
 <template>
   <section class="d-flex flex-column gap-2 justify-content-center align-items-center">
@@ -54,6 +79,7 @@ function setSelectedDateId(event: any) {
         id="months"
         v-model="formData.selectedMonth"
         @change="checkAvailableDates(props.experienceId)"
+        :disabled="monthYearSelectorisDisabled"
       >
         <optgroup>
           <option v-for="month in monthsSelect" :value="month" :key="month">{{ month }}</option>
@@ -66,16 +92,26 @@ function setSelectedDateId(event: any) {
         name="numPeople"
         id="numPeople"
         v-model="formData.numPeople"
-        @change="checkAvailableDates(props.experienceId)"
+        @change="disableNumPeopleSelector(), checkAvailableDates(props.experienceId)"
+        :disabled="numPeopleSelectorisDisabled"
       >
         <optgroup>
-          <option v-for="num in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :value="num" :key="num">
+          <option v-for="num in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :value="num" :key="num">
             {{ num }}
           </option>
         </optgroup>
       </select>
     </section>
-
+    <section class="d-flex flex-column justify-content-center">
+      <button
+        v-if="userIsLoggedIn"
+        @click="enableSelectors"
+        class="button fw-bold px-2 py-2 mt-2"
+        type="button"
+      >
+        REINICIAR OPCIONES
+      </button>
+    </section>
     <section v-if="datesAvailable && datesAvailable.length > 0">
       <label for="dates">Fechas disponibles para {{ formData.selectedMonth }}</label
       ><br />
@@ -85,7 +121,7 @@ function setSelectedDateId(event: any) {
             v-for="date in datesAvailable"
             :value="`${formatDate(date.start_date)} - ${formatDate(date.end_date)}`"
             :key="date.id"
-            :disabled="date.max_people - date.current_people < formData.numPeople"
+            :disabled="date.max_people - date.current_people < Number(formData.numPeople)"
             :id="date.id.toString()"
           >
             {{ formatDate(date.start_date) }} - {{ formatDate(date.end_date) }} ( plazas disponibles
@@ -99,8 +135,8 @@ function setSelectedDateId(event: any) {
       >
         <button
           v-if="userIsLoggedIn"
-          @click="emit('reserve', selectedDateId, dateSelected, formData.numPeople)"
-          class="button fw-bold mt-5 px-1 py-2"
+          @click="checkAvailabilty"
+          class="button fw-bold mt-3 px-1 py-2"
           type="button"
         >
           REALIZAR RESERVA
@@ -120,9 +156,11 @@ function setSelectedDateId(event: any) {
       Comprobando fechas para {{ formData.selectedMonth }}
       <ProgressSpinner />
     </section>
-    <section v-else-if="datesAvailable && datesAvailable.length === 0">
+    <!-- <section v-else-if="!datesAvailable">Escoge fechas para empezar la reserva.</section> -->
+    <section v-else-if="!datesAvailable || datesAvailable.length === 0">
       No hay fechas disponibles
     </section>
+
     <section v-else-if="!isLoading && error">
       <ErrorMessages :messages="errorMessages"></ErrorMessages>
     </section>
@@ -145,6 +183,7 @@ button {
   border-radius: 5px;
   background-color: #d90594;
   border: none;
+  width: fit-content;
   transition: all 0.3s ease-in-out;
 }
 </style>

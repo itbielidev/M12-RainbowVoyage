@@ -1,3 +1,7 @@
 body{
-    font-family: "Roboto Slab", serif;
+    font-family: "Roboto", serif;
+}
+
+div#app{
+    background-color: #EFF2F4;
 }

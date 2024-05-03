@@ -21,6 +21,8 @@
     "@unhead/vue": "^1.9.3",
     "@vueuse/core": "10.9.0",
     "axios": "^1.6.7",
+    "html2pdf.js": "^0.10.1",
+    "jspdf": "^2.5.1",
     "pinia": "2.1.7",
     "primevue": "^3.50.0",
     "vue": "3.4.15",
