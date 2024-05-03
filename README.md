@@ -1,6 +1,6 @@
 # Rainbow Voyage - Agencia de Viajes LGTBIQA+  🛩🏳️‍🌈
 
-![Logo del Proyecto](./public/images/logo.webp)
+![Logo del Proyecto](./frontend/public/images/logo.webp)
 
 ## Descripción del Proyecto 
 
@@ -22,9 +22,9 @@ El público objetivo de Rainbow Voyage son personas pertenecientes a la comunida
 
 **Justificación**:
 
-  - **Demanda del Mercado**: Existe una creciente demanda de destinos y servicios turísticos que sean inclusivos y acogedores para la comunidad LGTBIQA+. LGTBIQA+ Rainbow Voyage aborda  esta demanda al ofrecer una plataforma dedicada a experiencias de viaje diseñadas específicamente para satisfacer las necesidades y preferencias de este público objetivo.
+  - **Demanda del Mercado**: Existe una creciente demanda de destinos y servicios turísticos que sean inclusivos y acogedores para la comunidad LGTBIQA+. Rainbow Voyage aborda  esta demanda al ofrecer una plataforma dedicada a experiencias de viaje diseñadas específicamente para satisfacer las necesidades y preferencias de este público objetivo.
 
-  - **Inclusividad y Seguridad**: La comunidad LGTBIQA+ a menudo enfrenta desafíos y discriminación al viajar, lo que puede afectar negativamente su experiencia. LGTBIQA+ Rainbow Voyage aborda esta preocupación al proporcionar información detallada sobre destinos seguros y experiencias amigables, garantizando así una experiencia de viaje positiva y sin preocupaciones.
+  - **Inclusividad y Seguridad**: La comunidad LGTBIQA+ a menudo enfrenta desafíos y discriminación al viajar, lo que puede afectar negativamente su experiencia. Rainbow Voyage aborda esta preocupación al proporcionar información detallada sobre destinos seguros y experiencias amigables, garantizando así una experiencia de viaje positiva y sin preocupaciones.
 
   - **Promoción del Turismo LGTBIQA+**: La plataforma contribuye a la promoción del turismo LGTBIQA+ en España, destacando destinos y servicios que son conscientes y respetuosos de la diversidad sexual. Esto no solo beneficia a los viajeros LGTBIQA+, sino que también impulsa el desarrollo económico y social de las comunidades locales.
 
@@ -44,19 +44,19 @@ En definitiva Raibow Voyage es una plataforma necesaria y relevante que atiende 
 
 ## Wireframes y mockups 
 
-[Figma]
+<!-- [Figma] -->
 
 ## Modelo E-R 
 
-![Modelo E-R Final]()
+<!-- ![Modelo E-R Final]() -->
 
 ## Diagrama de Casos de Uso 
 
-![Diagrama de Casos de Uso Final]()
+<!-- ![Diagrama de Casos de Uso Final]() -->
 
 ## Diagrama de Arquitectura de Producción 
 
-![Diagrama de Arquitectura de Producción]()
+<!-- ![Diagrama de Arquitectura de Producción]() -->
 
 ## Gif de Demos de la Aplicación 
 
@@ -64,37 +64,37 @@ En definitiva Raibow Voyage es una plataforma necesaria y relevante que atiende 
   Mediante el botón ‘Iniciar sesión’ podremos visualizar el formulario de inicio de sesión. En el caso del registro mediante el botón 'Registrarse' que nos pedirá los datos correspondientes (nombre de usuario, correo electrónico, contraseña,...).
   Ambos formularios tienen un sistema de validación de campos, en caso de que no se introduzcan los datos correctamente, se mostrarán mensajes de error.
 
-![Gif de Demos]()
+<!-- ![Gif de Demos]() -->
 
 - ### Reserva de una experiencia
  Tanto como con la sesión iniciada como si no, dentro del detalle de la experiencia que queramos, podemos realizar la reserva pulsando el botón de "Desde ***€" para realizar la compra posteriormente. Nos aparecerá la reserva en 
   nuestra lista de reservas en Perfil > Mis Reservas.
   
-![Gif de Demos]()
+<!-- ![Gif de Demos]() -->
 
 - ### Editar datos de la cuenta
 
   Una vez iniciado sesión, en Perfil podemos modificiar sus datos además de especificar preferencias y filtros como pueden ser: precio, número de personas, tipo de experiencia, duración en días, etc. Para una búsqueda de experiencias más personalizada.
       
-![Gif de Demos]()
+<!-- ![Gif de Demos]() -->
 
 - ### Consulta del estado de las reservas
 
   Una vez iniciado sesión, en Perfil. El usuario visualizar las reservas que ha realizado a lo largo del tiempo en su perfil, las que están pendientes de aceptar por el gerente/administrador y las aceptadas.
  
-![Gif de Demos]()
+<!-- ![Gif de Demos]() -->
 
 - ### Búsqueda y filtrado de destinos
 
   Los usuarios buscar podrán buscar destinos  basados en sus preferencias de perfil y por filtros generales (precio, número de personas, tipo de experiencia, etc).
 
-![Gif de Demos]()
+<!-- ![Gif de Demos]() -->
 
 - ### Panel de control del administrador
 
   Como administrador de la web, una vez se ha iniciado sesión, desde el panel de control podemos estionar las diferentes reservas de los usuarios y enviar un correo electrónico al usuario confirmando su reserva o informando que su reserva se ha descartado.
 
-![Gif de Demos]()
+<!-- ![Gif de Demos]() -->
 
 
 ## Problemas Encontrados y Soluciones
