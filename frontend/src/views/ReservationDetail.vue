@@ -1,94 +1,100 @@
 <template>
-  <div class="background">
+  <div class="container">
     <section v-if="!isLoadingDetail && !error && reservation">
       <div class="print-button-container">
         <button class="btn mt-4" @click="printPDF()">Imprimir PDF</button>
       </div>
-      <div class="cuerpo">
-        <div class="header">
-          <h1>RESERVA</h1>
-        </div>
-        <div class="alinear">
-        <h3>Billetes de ida</h3>
-        <div class="informacion text-center">
-          <p class="fw-bolder">Nombre:</p>
-          <p>{{ reservation.name }}</p>
-          <p class="fw-bolder">Apellidos:</p>
-          <p>{{ reservation.name }}</p>
-          <p class="fw-bolder">DNI:</p>
-          <p>{{ reservation.name }}</p>
-        </div>
-        <div class="informacion">
-          <p class="fw-bolder">Aeropuerto de salida:</p>
-          <p>{{ reservation.airportIn }}</p>
-          <p class="fw-bolder">Fecha:</p>
-          <p>{{ reservation.dates }}</p>
-          <p class="fw-bolder">Hora:</p>
-          <p>{{ reservation.partidaFirstDay }}</p>
-          <p class="fw-bolder">Puerta:</p>
-          <p>{{ randomGate }}</p>
-        </div>
-        <div class="informacion">
-          <p class="fw-bolder">Aeropuerto de llegada:</p>
-          <p>{{ reservation.airportOut }}</p>
-          <p class="fw-bolder">Fecha:</p>
-          <p>{{ reservation.dates }}</p>
-          <p class="fw-bolder">Hora:</p>
-          <p>{{ reservation.llegadaFirstDay }}</p>
-        </div>
-
-        <h3>Billetes de vuelta</h3>
-        <div class="informacion text-center">
-          <p class="fw-bolder">Nombre:</p>
-          <p>{{ reservation.name }}</p>
-          <p class="fw-bolder">Apellidos:</p>
-          <p>{{ reservation.name }}</p>
-          <p class="fw-bolder">DNI:</p>
-          <p>{{ reservation.name }}</p>
-        </div>
-        <div class="informacion">
-          <p class="fw-bolder">Aeropuerto de salida:</p>
-          <p>{{ reservation.airportIn }}</p>
-          <p class="fw-bolder">Fecha:</p>
-          <p>{{ reservation.dates }}</p>
-          <p class="fw-bolder">Hora:</p>
-          <p>{{ reservation.partidaLastDay }}</p>
-          <p class="fw-bolder">Puerta:</p>
-          <p>{{ randomGate2 }}</p>
-        </div>
-        <div class="informacion">
-          <p class="fw-bolder">Aeropuerto de llegada:</p>
-          <p>{{ reservation.airportOut }}</p>
-          <p class="fw-bolder">Fecha:</p>
-          <p>{{ reservation.dates }}</p>
-          <p class="fw-bolder">Hora:</p>
-          <p>{{ reservation.llegadaLastDay }}</p>
-        </div>
-        <div class="mt-3 d-flex justify-content-around fotos">
-          <div class="parte col-lg-4 col-md-4 col-xs-12">
-            <font-awesome-icon icon="fa-solid fa-location-dot" class="city" /><br />
-            <img
-              class="mt-4 rounded-5"
-              :style="{ maxHeight: '200px', width: 'auto' }"
-              :src="`/images/${reservation.experience?.city.images[0]}`"
-            />
-          </div>
-          <div class="parte col-lg-4 col-md-4 col-xs-12">
-            <font-awesome-icon icon="fa-solid fa-route" class="routes" /><br />
-            <p class="rutas">{{ reservation.experience?.name }}</p>
-          </div>
-          <div class="parte col-lg-4 col-md-4 col-xs-12">
-            <font-awesome-icon icon="fa-solid fa-hotel" class="hotel" /><br />
-            <img
-              class="mt-4 rounded-5"
-              :style="{ maxHeight: '200px', width: 'auto' }"
-              :src="`/images/${reservation.experience?.city.name}/${reservation.experience?.images[7]}`"
-            />
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center mt-5 title-pdf">RESUMEN DE TU RESERVA</h1>
+          <div class="text-center">
+            <p class="fw-bolder">Nombre:</p>
+            <p>{{ reservation?.name }}</p>
+            <p class="fw-bolder">Apellidos:</p>
+            <p>{{ reservation?.last_name }}</p>
+            <p class="fw-bolder">DNI:</p>
+            <p>{{ reservation?.dni }}</p>
           </div>
         </div>
       </div>
-        <img src="../../public/images/logo.webp" width="200px" class="img-fluid mx-auto d-block" />
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title">Billetes de ida</h5>
+              <p class="fw-bolder">Aeropuerto de salida:</p>
+              <p class="card-text">{{ reservation?.airportIn }}</p>
+              <p class="fw-bolder">Fecha</p>
+              <p class="card-text">{{ reservation?.dates }}</p>
+              <p class="fw-bolder">Hora:</p>
+              <p>{{ reservation?.partidaFirstDay }}</p>
+              <p class="fw-bolder">Puerta:</p>
+              <p>{{ randomGate }}</p><br>
+              <p class="fw-bolder">Aeropuerto de llegada:</p>
+              <p class="card-text">{{ reservation?.airportOut }}</p>
+              <p class="fw-bolder">Fecha</p>
+              <p class="card-text">{{ reservation?.dates }}</p>
+              <p class="fw-bolder">Hora:</p>
+              <p>{{ reservation?.llegadaFirstDay }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title">Billetes de vuelta</h5>
+              <p class="fw-bolder">Aeropuerto de salida:</p>
+              <p class="card-text">{{ reservation?.airportOut }}</p>
+              <p class="fw-bolder">Fecha</p>
+              <p class="card-text">{{ reservation?.dates }}</p>
+              <p class="fw-bolder">Hora:</p>
+              <p>{{ reservation?.partidaLastDay }}</p>
+              <p class="fw-bolder">Puerta:</p>
+              <p>{{ randomGate2 }}</p><br>
+              <p class="fw-bolder">Aeropuerto de llegada:</p>
+              <p class="card-text">{{ reservation?.airportIn }}</p>
+              <p class="fw-bolder">Fecha</p>
+              <p class="card-text">{{ reservation?.dates }}</p>
+              <p class="fw-bolder">Hora:</p>
+              <p>{{ reservation?.llegadaLastDay }}</p>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="card mt-4">
+              <div class="card-body text-center">
+                <!-- Primer icono -->
+                <div class="icon-containerm">
+                  <font-awesome-icon icon="fa-solid fa-location-dot" class="city" /><br />
+                  <img
+                    class="mt-4 rounded-5"
+                    :style="{ maxHeight: '200px', width: 'auto' }"
+                    :src="`/images/${reservation.experience?.city.images[0]}`"
+                  />
+                </div>
+                <!-- Segundo icono -->
+                <div class="icon-container">
+                  <font-awesome-icon icon="fa-solid fa-route" class="routes" /><br />
+                  <p class="rutas">{{ reservation.experience?.name }}</p>
+                </div>
+                <!-- Tercer icono -->
+                <div class="icon-container">
+                  <font-awesome-icon icon="fa-solid fa-hotel" class="hotel" /><br />
+                  <img
+                    class="mt-4 rounded-5"
+                    :style="{ maxHeight: '200px', width: 'auto' }"
+                    :src="`/images/${reservation.experience?.city.name}/${reservation.experience?.images[7]}`"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img src="../../public/images/logo.webp" width="200px" class="img-fluid mx-auto d-block" />
     </section>
     <section v-else-if="error" class="d-flex justify-content-center">
       <ErrorMessages :messages="errorMessages"></ErrorMessages>
@@ -143,7 +149,7 @@ const seoMeta = computed<UseSeoMetaInput>(() => {
 useSeoMeta(seoMeta as UseSeoMetaInput)
 
 const printPDF = () => {
-  const element = document.querySelector('.background')
+  const element = document.querySelector('.container')
 
   if (element) {
     const contentToPrint = element.cloneNode(true)
@@ -158,6 +164,23 @@ const printPDF = () => {
       printButtonContainer.style.display = 'none'
     }
 
+    // Eliminar estilos, clases y elementos no deseados
+
+    const contentWithoutStyles = document.createElement('div')
+    contentWithoutStyles.appendChild(contentToPrint)
+
+    // Mover el h1 más arriba
+    const title = contentWithoutStyles.querySelector('.title-pdf')
+    if (title) {
+      title.style.marginTop = '-50px'; // Ajusta el margen superior según tus necesidades
+    }
+
+    // Agregar salto de página antes del último recuadro
+    const lastCard = contentWithoutStyles.querySelector('.container > .row:last-child')
+    if (lastCard) {
+      lastCard.insertAdjacentHTML('afterend', '<div style="page-break-before: always;"></div>')
+    }
+
     const opt = {
       margin: 1,
       filename: 'confirmation_reserva.pdf',
@@ -168,7 +191,7 @@ const printPDF = () => {
 
     html2pdf()
       .set(opt)
-      .from(contentToPrint.innerHTML)
+      .from(contentWithoutStyles.innerHTML)
       .save()
       .then(() => {
         if (printButtonContainer) {
@@ -183,42 +206,11 @@ const printPDF = () => {
       })
   }
 }
+
 </script>
 
 <style scoped>
-.alinear{
-  margin-left: 25px;
-  margin-top: 25px;
-}
-.rutas{
-  font-size: 25px;
-  font-weight: bolder;
-  margin-top: 90px;
-}
-.parte {
-  text-align: center; /* Para centrar el contenido de cada parte */
-}
-.fotos{
-  margin-bottom: 15px;
-}
-.cuerpo {
-  background-color: white;
-  border-radius: 25px;
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
-}
-.header {
-  background-color: #d90594;
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-}
-h1 {
-  color: white;
-  text-align: center;
-  padding: 10px;
-  margin: 0;
-}
+
 button {
   border-radius: 50px;
   background-color: #d90594;
@@ -237,14 +229,41 @@ button:hover {
   justify-content: center;
   margin-bottom: 20px;
 }
-.informacion p {
-  display: inline-block;
-  margin-right: 10px;
+.rutas{
+  font-size: 25px;
+  font-weight: bolder;
+  margin-top: 15px;
 }
 .hotel,
 .routes,
 .city {
   color: #d90594;
   font-size: 60px;
+  margin-top: 15px;
+}
+.container{
+  background-color: white;
+  border-radius: 25px;
+}
+
+h1{
+  color: #d90594;
+  font-size: 50px;
+}
+
+p{
+  display: inline;
+  margin-left: 15px;
+}
+.card-title{
+  background-color: #d90594;
+  color: white;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+}
+
+.card{
+  border: 2px solid #d90594;
 }
 </style>
