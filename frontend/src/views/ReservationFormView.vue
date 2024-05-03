@@ -28,7 +28,6 @@ const {
   validateForm,
   validateSecondForm,
   manageReservation,
-  validateCheckBox,
   availableAirportsDestination,
   availableAirportsOrigin
 } = useReservations()
@@ -50,7 +49,7 @@ async function handleReservation() {
 function modifyIndex(num: number) {
   if (num === 1) validateForm()
   else if (num === 2) validateSecondForm()
-  else if (num === 3) validateCheckBox()
+  // else if (num === 3) validateCheckBox()
   if (!error.value) {
     currentIndex.value = num
   }
@@ -153,7 +152,7 @@ onMounted(() => {
         <h1 class="display-5 mb-5">DATOS DEL TITULAR</h1>
         <section class="d-flex flex-column">
           <div class="d-flex flex-column gap-2 text-start">
-            <label class="mb-1" for="text">Nombre *</label>
+            <label class="mb-1" for="name">Nombre *</label>
             <input
               v-model.trim="formData.name"
               type="text"
@@ -161,7 +160,7 @@ onMounted(() => {
               id="name"
               placeholder="Nombre"
             />
-            <label class="mb-1" for="text">Apellidos *</label>
+            <label class="mb-1" for="lastName">Apellidos *</label>
             <input
               v-model.trim="formData.lastName"
               type="text"
@@ -171,7 +170,7 @@ onMounted(() => {
             />
           </div>
           <div class="d-flex flex-column gap-2 text-start">
-            <label class="mb-1" for="text">DNI *</label>
+            <label class="mb-1" for="dni">DNI *</label>
             <input
               v-model.trim="formData.dni"
               type="text"
@@ -179,12 +178,12 @@ onMounted(() => {
               id="dni"
               placeholder="12345678A"
             />
-            <label class="mb-1" for="text">Teléfono *</label>
+            <label class="mb-1" for="phone">Teléfono *</label>
             <input
               v-model.trim="formData.phone"
               type="text"
-              name="lastName"
-              id="lastName"
+              name="phone"
+              id="phone"
               placeholder="123 456 789"
             />
           </div>
@@ -255,6 +254,36 @@ onMounted(() => {
               :placeholder="numVisitors.toString()"
               disabled
             />
+            <label class="mb-2" for="cardNumber">Número de tarjeta*</label>
+            <input
+              v-model.trim="formData.cardNumber"
+              type="text"
+              name="cardNumber"
+              id="cardNumber"
+              placeholder="4123456789012345"
+            />
+            <div class="d-flex flex-column flex-md-row gap-2">
+              <div class="d-flex flex-column">
+                <label class="mb-2" for="securityCode">Código de seguridad *</label>
+                <input
+                  v-model.trim="formData.securityCode"
+                  type="text"
+                  name="securityCode"
+                  id="securityCode"
+                />
+              </div>
+              <div class="d-flex flex-column">
+                <label class="mb-2" for="cardExpirationDate">Fecha de validez*</label>
+                <input
+                  v-model.trim="formData.cardExpirationDate"
+                  type="text"
+                  name="cardExpirationDate"
+                  id="cardExpirationDate"
+                  placeholder="12/06/2030"
+                  disabled
+                />
+              </div>
+            </div>
           </div>
           <label class="mb-2">Aeropuerto de origen :</label>
           <select class="mb-4" v-model="formData.airportIn" @change="setHours()">
@@ -280,19 +309,19 @@ onMounted(() => {
           </select>
         </section>
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
-          <button class="button fw-bold mt-5 px-1 py-2" @click="goBack(0)" type="button">
+          <button class="button fw-bold mt-4 px-1 py-2" @click="goBack(0)" type="button">
             VOLVER ATRÁS
           </button>
-          <button class="button fw-bold mt-5 px-1 py-2" @click="modifyIndex(2)" type="button">
+          <button class="button fw-bold mt-4 px-1 py-2" @click="modifyIndex(2)" type="button">
             SIGUIENTE
           </button>
         </section>
         <ErrorMessages :messages="errorMessages"></ErrorMessages>
       </template>
       <template v-if="currentIndex === 2">
-        <h1 class="mb-3">Resumen de la reserva</h1>
+        <h1 class="display-4 text-start mb-5">Resumen de la reserva</h1>
         <section class="d-flex flex-row gap-3 mb-3 w-100 flex-wrap">
-          <p class="display-4">{{ props.experienceName }}</p>
+          <p class="display-5">{{ props.experienceName }}</p>
           <img :src="`./images/${props.image}`" alt="Experience photo" class="rounded exp_photo" />
         </section>
         <section class="w-100 row">
@@ -317,14 +346,14 @@ onMounted(() => {
             <section class="d-flex flex-column">
               <p><b>Fechas reservadas: </b>{{ props.date }}</p>
             </section>
-          </div>
-          <div class="col-12 col-md-6">
             <section class="d-flex flex-column">
               <p><b>Localidad: </b>{{ formData.location }}</p>
             </section>
             <section class="d-flex flex-column">
               <p><b>Dirección: </b>{{ formData.address }}</p>
             </section>
+          </div>
+          <div class="col-12 col-md-6">
             <section>
               <h3 class="text-start">
                 IDA: <font-awesome-icon class="ms-2" icon="fa-solid fa-plane" />
@@ -343,7 +372,7 @@ onMounted(() => {
             </section>
             <section>
               <h3 class="text-start">
-                VUELTA: <font-awesome-icon class="ms-2" icon="fa-solid fa-plane" />
+                VUELTA: <font-awesome-icon class="ms-2 reverse" icon="fa-solid fa-plane" />
               </h3>
               <p>
                 <b>{{ props.cityName }} - {{ selectedAirportIn }}</b>
@@ -360,14 +389,35 @@ onMounted(() => {
           </div>
         </section>
         <section class="mt-5">
-          <div class="d-flex gap-2 align-items-baseline">
-            <input v-model="formData.checkbox" type="checkbox" name="confirm" id="confirm" />
-            <label for="confirm" id="confirm">
-              Acepto las condiciones de reserva de Rainbow Voyage.</label
-            >
+          <div class="d-flex flex-column gap-2 align-items-baseline">
+            <div class="d-flex d-lg-block align-items-center mb-1">
+              <input
+                v-model="formData.checkbox"
+                type="checkbox"
+                name="confirm"
+                id="confirm"
+                class="me-2"
+              />
+              <label for="confirm" id="confirm">
+                Acepto las condiciones de reserva de Rainbow Voyage.</label
+              >
+            </div>
+            <div class="d-flex d-lg-block mb-4 align-items-center">
+              <input
+                v-model="formData.adult"
+                type="checkbox"
+                name="adult"
+                id="adult"
+                class="me-2"
+              />
+              <label for="adult" id="adult">
+                Declaro que tanto el titular (yo) como los acompañantes han cumplido la mayoría de
+                edad.</label
+              >
+            </div>
           </div>
         </section>
-        <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
+        <section class="d-flex flex-column align-items-center flex-sm-row gap-2 gap-sm-5">
           <button class="button fw-bold mt-2 px-1 py-2" @click="goBack(1)" type="button">
             ATRÁS
           </button>
@@ -409,6 +459,9 @@ onMounted(() => {
 }
 </style>
 <style scoped>
+.reverse {
+  transform: scaleX(-1);
+}
 main {
   background-color: rgba(171, 184, 195, 0.19);
 }

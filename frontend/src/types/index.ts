@@ -93,6 +93,7 @@ export interface ReservationPayload {
     postalCode: string
     location: string
     checkbox: Boolean
+    adult: Boolean
     numPeople: string
     dates: string
     dateId: string
@@ -102,6 +103,9 @@ export interface ReservationPayload {
     llegadaFirstDay: string
     partidaLastDay: string
     llegadaLastDay: string
+    cardNumber: string
+    securityCode: string
+    cardExpirationDate: string
 }
 export interface User {
     id: number

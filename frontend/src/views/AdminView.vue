@@ -12,6 +12,11 @@ import { useSeoMeta } from '@unhead/vue'
 const route = useRoute()
 const router = useRouter()
 
+import Toast from 'primevue/toast'
+import useCustomToast from '@/composables/useCustomToast'
+
+const { showSuccessEmail } = useCustomToast()
+
 useSeoMeta({
   title: `Rainbow Voyage | Panel del administrador`,
   description: `Panel del administrador para gestionar las reservas de la web.`,
@@ -39,6 +44,7 @@ const query = ref({
 
 const refreshReservations = async () => {
   await getData()
+  showSuccessEmail()
 }
 
 watch(
@@ -105,6 +111,7 @@ onMounted(async () => await getData())
     </ul>
   </section>
   <main class="d-flex gap-3 flex-column flex-lg-row p-3">
+    <Toast></Toast>
     <!-- Desktop Menu-->
     <section
       class="d-none d-lg-flex flex-column justify-content-start align-items-center tabs-menu w-25 p-5"
@@ -168,6 +175,13 @@ onMounted(async () => await getData())
       <h3>No hay reservas que mostrar.</h3>
     </section>
     <section class="d-flex justify-content-center" v-else-if="error">
+      <h2 class="fw-bold">Reservas recientes</h2>
+      <ReservationCard
+        v-for="reservation in reservations"
+        :key="reservation.id"
+        :reservation="reservation"
+        @refresh="refreshReservations()"
+      ></ReservationCard>
       <ErrorMessages :messages="errorMessages"></ErrorMessages>
     </section>
     <section class="d-flex justify-content-center" v-else-if="isLoadingReservations">

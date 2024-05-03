@@ -1,12 +1,21 @@
 <template>
   <div v-if="!error && !isLoading" class="container">
     <div class="row">
-      <div v-for="(city, index) in hoveredCities" :key="index" class="col-md-6 mb-3 position-relative text-center"
-        style="overflow: hidden">
+      <div
+        v-for="(city, index) in hoveredCities"
+        :key="index"
+        class="col-md-6 mb-3 position-relative text-center city"
+        style="overflow: hidden"
+      >
         <RouterLink :to="{ name: 'experiences', params: { cityName: city.name } }">
           <div class="image-container">
-            <img :src="`/images/${city.images[0]}`" class="img-fluid imgCities" alt="City photo"
-              @mouseover="hoverCity(index, true)" @mouseout="hoverCity(index, false)" />
+            <img
+              :src="`/images/${city.images[0]}`"
+              class="img-fluid imgCities"
+              alt="City photo"
+              @mouseover="hoverCity(index, true)"
+              @mouseout="hoverCity(index, false)"
+            />
             <div class="overlay">
               <p>{{ city.description }}</p>
             </div>
@@ -14,6 +23,12 @@
               <p class="m-0 fw-bolder text">{{ city.name }}</p>
             </div>
           </div>
+          <RouterLink :to="{ name: 'experiences', params: { cityName: city.name } }">
+            <button class="btn btn-lg mt-3">
+              Visitar {{ city.name }}
+              <font-awesome-icon icon="ms-1 fa-solid fa-arrow-up-right-from-square" />
+            </button>
+          </RouterLink>
         </RouterLink>
       </div>
     </div>
@@ -39,13 +54,27 @@ const hoverCity = (index: number, hovered: boolean) => {
 }
 </script>
 
-<style>
+<style scoped>
+.btn {
+  background-color: rgba(217, 5, 148, 1);
+  color: white;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  width: max-content;
+  padding: 0.6rem 1rem;
+}
+
+.btn:hover {
+  background-color: rgb(234, 96, 188);
+  color: white;
+}
+
 .image-container {
   position: relative;
   width: 100%;
 }
 
-.text{
+.text {
   text-transform: uppercase;
 }
 
@@ -106,6 +135,7 @@ const hoverCity = (index: number, hovered: boolean) => {
 .imgCities {
   width: 100%;
   border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .col-md-6:hover .overlay {

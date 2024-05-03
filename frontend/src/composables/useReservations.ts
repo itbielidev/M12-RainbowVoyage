@@ -24,7 +24,11 @@ export const useReservations = () => {
         location: "",
         type: "client",
         checkbox: false,
+        adult: false,
         numPeople: "",
+        cardNumber: "",
+        cardExpirationDate: "",
+        securityCode: "",
         dates: "",
         dateId: "",
         airportIn: "",
@@ -142,7 +146,7 @@ export const useReservations = () => {
 
     const { fetchError, getAuth, isLoading: isLoadingReservations } = useFetch<Reservation[]>();
     const { getAuth: getDetail, fetchError: fetchErrorDetail, isLoading: isLoadingDetail } = useFetch<Reservation>();
-    const { getAuth: sendEmailFetch } = useFetch<any>();
+    const { getAuth: sendEmailFetch, fetchError: sendEmailError } = useFetch<any>();
     const { postAuth: postReservation, fetchError: fetchErrorPost } = useFetch<any>();
 
     const reservations: Ref<Reservation[] | null> = ref([]);
@@ -279,11 +283,30 @@ export const useReservations = () => {
             error.value = true;
         }
 
+        if (!/^4[0-9]{12}(?:[0-9]{3})?$/.test(formData.value.cardNumber)) {
+            errorMessages.value.push("El número de la tarjeta de crédito no es válido");
+            error.value = true;
+        }
+
+        if (!/^[0-9]{3}$/.test(formData.value.securityCode)) {
+            errorMessages.value.push("El código de seguridad no es válido");
+            error.value = true;
+        }
+
+
+
+
     }
 
     const validateCheckBox = () => {
+
         if (!formData.value.checkbox) {
             errorMessages.value.push("Debes aceptar las condiciones de reserva.");
+            error.value = true;
+        }
+
+        if (!formData.value.adult) {
+            errorMessages.value.push("El titular y los acompañantes deben ser mayores de edad.");
             error.value = true;
         }
     }
@@ -315,12 +338,13 @@ export const useReservations = () => {
     const sendEmail = async (reservationId: number) => {
         let reservationsData = await sendEmailFetch(`/reservations/sendEmail/${reservationId}`);
 
-        if (fetchError.value) {
+        if (sendEmailError.value) {
             error.value = true;
-            errorMessages.value.push(fetchError.value);
+            errorMessages.value.push("Ha habido un problema al enviar el correo. Inteńtalo más tarde por favor.");
         }
         else {
             reservationsData = null;
+            error.value = false;
         }
 
     }

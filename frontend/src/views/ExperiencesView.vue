@@ -2,7 +2,7 @@
 import NavBar from '@/components/NavBar.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
-import { onMounted, ref, watch, type Ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useExperiences } from '@/composables/useExperiences'
 import { useCitiesStore } from '@/stores/cities'
 import { useSeoMeta } from '@unhead/vue'
@@ -10,13 +10,12 @@ import ProgressSpinner from 'primevue/progressspinner'
 import ErrorMessages from '../components/ErrorMessages.vue'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
-import BreadCrumbs from '@/components/BreadCrumbs.vue';
+import BreadCrumbs from '@/components/BreadCrumbs.vue'
+import Toast from 'primevue/toast'
+import useCustomToast from '@/composables/useCustomToast'
 
 const props = defineProps<{ cityName: string }>()
-const items = ref([
-    { label: 'Home', route: '/' },
-    { label: 'Experiencias' }
-]);
+const items = ref([{ label: 'Home', route: '/' }, { label: 'Experiencias' }])
 
 const {
   userIsLoggedIn,
@@ -46,6 +45,10 @@ const queries = ref({
   duration_max: '5',
   ...route.query
 })
+
+const { showSuccessPreferences } = useCustomToast()
+
+const preferencesButtonDisabled = ref<boolean>(false)
 
 const checkConstraints = (min: string, max: string, tag: string) => {
   if (Number(min) > Number(max) || Number(max) < Number(min)) {
@@ -88,6 +91,14 @@ async function setPreferences() {
   queries.value.price_max = price_max.value as string
 
   await getExps()
+
+  showSuccessPreferences()
+
+  preferencesButtonDisabled.value = true
+
+  setTimeout(() => {
+    preferencesButtonDisabled.value = false
+  }, 4000)
 }
 
 onMounted(async () => {
@@ -118,6 +129,7 @@ useSeoMeta({
   </header>
   <body>
     <div class="container">
+      <Toast></Toast>
       <!-- el div engloba todo menos el footer, asi el footer ocupa todo el ancho de pantalla -->
       <section class="filters container flex-wrap gap-2">
         <button type="button" class="btn btn-light">
@@ -233,16 +245,17 @@ useSeoMeta({
           class="btn-preferences mt-3 align-self-center"
           value="Activar preferencias"
           @click="setPreferences"
+          :disabled="preferencesButtonDisabled"
         >
-          Activar preferencias
+          Activar tus filtros
         </button>
       </section>
       <main class="container">
         <section class="breadcrumbs-box">
-        <BreadCrumbs :items="items"></BreadCrumbs>
+          <BreadCrumbs :items="items"></BreadCrumbs>
         </section>
-        <section class="experience-quote">
-          <p>❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
+        <section class="experience-quote w-100 mb-3">
+          <p class="display-5 w-100">❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
         </section>
         <section v-if="!isLoading && experiences && experiences.length > 0" class="our-experiences">
           <h2 class="title-our-experiences">Nuestras Experiencias</h2>
@@ -298,6 +311,33 @@ useSeoMeta({
     <FooterComponent></FooterComponent>
   </body>
 </template>
+<style>
+/*Tenemos que hacerlo de manera global para que se sobreescriban los estilos del componente Toast */
+.p-toast .p-toast-message.p-toast-message-info {
+  background: #d90594 !important;
+  color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-message-icon,
+.p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close {
+  color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-detail {
+  color: whitesmoke !important;
+  font-weight: 600 !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close:hover {
+  background: #d90594 !important;
+}
+</style>
 
 <style scoped>
 * {
@@ -311,6 +351,10 @@ useSeoMeta({
   border-radius: 12px;
   width: max-content;
   padding: 0.6rem 1rem;
+}
+
+.btn-preferences:disabled {
+  background-color: #ed44b5;
 }
 
 .cover-city {
@@ -341,6 +385,8 @@ section.filters {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .btn-light {
@@ -355,7 +401,7 @@ body {
   background-color: #eff2f4;
 }
 
-.breadcrumbs-box{
+.breadcrumbs-box {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
@@ -451,6 +497,10 @@ button.price {
   flex-direction: column;
   cursor: pointer;
   justify-content: center;
+}
+
+button.price:hover {
+  background-color: #f66ac7;
 }
 
 /* Tablet */
