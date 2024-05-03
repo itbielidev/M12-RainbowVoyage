@@ -143,12 +143,20 @@ h3 {
 
 /* Media query para pantallas extra pequeñas (tamaño xs) */
 @media screen and (max-width: 575.98px) {
+  .main-img {
+    width: 95%;
+  }
+  
   .info-container p {
     font-size: 18px; /* Reducir el tamaño de fuente para pantallas xs */
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0.8rem;
   }
 
   h3 {
     font-size: 12px;
   }
-}
+
+ }
 </style>
