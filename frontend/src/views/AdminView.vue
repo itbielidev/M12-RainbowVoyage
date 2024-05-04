@@ -91,7 +91,7 @@ onMounted(async () => await getData())
   <section
     class="d-flex d-xs-flex d-md-none w-100 fixed-bottom p-1 justify-content-center align-items-center mobile-menu"
   >
-    <ul class="d-flex flex-row gap-3 justify-content-center">
+    <ul class="d-flex flex-row gap-3 justify-content-center m-0">
       <li>
         <input
           type="button"
@@ -226,10 +226,13 @@ ul {
 .btn {
   background-color: rgba(217, 5, 148, 1);
   color: white;
-  margin-bottom: 10px;
   border-radius: 12px;
   width: max-content;
   padding: 0.6rem 1rem;
+}
+
+.btn:hover {
+  background-color: rgb(241, 78, 187);
 }
 
 @media screen and (max-width: 991px) {

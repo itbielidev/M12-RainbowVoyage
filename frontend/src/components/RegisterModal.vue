@@ -406,6 +406,7 @@ watch(formData.value, () => {
 @media screen and (max-width: 568px) {
   .confirm-modal-content {
     width: 95% !important;
+    padding: 0 !important;
   }
 
   .fa-xmark {
