@@ -117,9 +117,9 @@ useSeoMeta({
   >
     <Toast></Toast>
     <h2 class="text-center">Mi perfil</h2>
-    <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end">
+    <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end breadcrumbs-bookings">
       <BreadCrumbs :items="items" class="breadcrumbs-box"></BreadCrumbs>
-      <a href="#" class="btn pink-button" @click="toggleReservationActivated">
+      <a href="#" class="btn pink-button my-bookings" @click="toggleReservationActivated">
         {{ !reservationActivated ? 'Mis datos' : 'Mis reservas' }}
       </a>
     </div>
@@ -281,7 +281,7 @@ useSeoMeta({
     <!-- BOOKINGS -->
     <section v-if="!reservationActivated" class="card border p-2 my-4 mx-5 d-flex text-start">
       <div
-        class="card-header border-bottom d-flex justify-content-between align-items-center"
+        class="card-header border-bottom d-flex justify-content-between align-items-center bookings-header"
         style="background-color: white"
       >
         <h4 class="card-header-title">Mis Reservas</h4>
@@ -347,7 +347,7 @@ useSeoMeta({
         </article>
       </template>
       <template v-else-if="reservations && reservations.length === 0">
-        <h3>Todavía no has hecho ninguna reserva</h3>
+        <h3 class="m-3">Todavía no has hecho ninguna reserva</h3>
       </template>
     </section>
   </main>
@@ -387,11 +387,31 @@ useSeoMeta({
 * {
   font-family: 'Roboto';
 }
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column
+}
+
+main {
+  display: flex;
+  flex: 1 !important;
+}
 
 .breadcrumbs-box {
-  margin-left: 0 !important;
+  margin-left: 3rem !important;
   padding-left: 0 !important;
 }
+
+.my-bookings {
+    width: 12rem;
+    height: 3rem;
+    text-align: center;
+    justify-content: center;
+    align-self:center;
+    font-size: 1.2rem;
+    margin-right: 3rem;
+  }
 
 .pink-button {
   background-color: #d90594;
@@ -410,5 +430,34 @@ useSeoMeta({
 
 h5 {
   font-size: 1rem;
+}
+
+@media screen and (max-width: 575.98px) {
+  .breadcrumbs-bookings{
+    flex-direction: column;
+    align-items: center;
+    margin-right: 0;
+    gap: 0.6rem;
+  }
+
+  .breadcrumbs-box {
+    margin-left: 6rem !important;
+    padding-left: 0 !important;
+  }
+
+  .my-bookings {
+    width: 12rem;
+    height: 3rem;
+    text-align: center;
+    justify-content: center;
+    margin-left: 6rem;
+    font-size: 1.2rem;
+  }
+
+  .bookings-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
 }
 </style>
