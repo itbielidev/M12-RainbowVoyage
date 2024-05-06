@@ -130,7 +130,7 @@ onMounted(() => {
 
 <template>
   <main
-    class="content-box register-box p-5 d-flex justify-content-center flex-column align-items-center"
+    class="content-box register-box d-flex justify-content-center flex-column align-items-center"
   >
     <section class="text-center d-none d-md-block">
       <img src="/images/logo.webp" alt="Logo" class="img-fluid logo-img" />
@@ -147,7 +147,7 @@ onMounted(() => {
         {{ num + 1 }}
       </div>
     </section>
-    <form class="w-75 px-5 py-2" @submit.prevent="handleReservation()" novalidate>
+    <form class="px-5 py-2" @submit.prevent="handleReservation()" novalidate>
       <template v-if="currentIndex === 0">
         <h1 class="display-5 mb-5">DATOS DEL TITULAR</h1>
         <section class="d-flex flex-column">
@@ -209,10 +209,10 @@ onMounted(() => {
         </section>
 
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
-          <button class="button fw-bold mt-5 px-1 py-2" @click="$router.back()" type="button">
+          <button class="button fw-bold mt-3 px-1 py-2" @click="$router.back()" type="button">
             VOLVER ATRÁS
           </button>
-          <button class="button fw-bold mt-5 px-1 py-2" @click="modifyIndex(1)" type="button">
+          <button class="button fw-bold mt-3 px-1 py-2" @click="modifyIndex(1)" type="button">
             SIGUIENTE
           </button>
         </section>
@@ -309,17 +309,17 @@ onMounted(() => {
           </select>
         </section>
         <section class="d-flex flex-column flex-sm-row gap-2 gap-sm-5">
-          <button class="button fw-bold mt-4 px-1 py-2" @click="goBack(0)" type="button">
+          <button class="button fw-bold mt-3 px-1 py-2" @click="goBack(0)" type="button">
             VOLVER ATRÁS
           </button>
-          <button class="button fw-bold mt-4 px-1 py-2" @click="modifyIndex(2)" type="button">
+          <button class="button fw-bold mt-3 px-1 py-2" @click="modifyIndex(2)" type="button">
             SIGUIENTE
           </button>
         </section>
         <ErrorMessages :messages="errorMessages"></ErrorMessages>
       </template>
       <template v-if="currentIndex === 2">
-        <h1 class="display-4 text-start mb-5">Resumen de la reserva</h1>
+        <h1 class="display-4 text-start mb-3">Resumen de la reserva</h1>
         <section class="d-flex flex-row gap-3 mb-3 w-100 flex-wrap">
           <p class="display-5">{{ props.experienceName }}</p>
           <img :src="`./images/${props.image}`" alt="Experience photo" class="rounded exp_photo" />
@@ -430,8 +430,8 @@ onMounted(() => {
           v-if="!loading"
           class="d-flex flex-column justify-content-center align-items-center"
         >
-          <p>¡Reserva realizada con éxito!</p>
-          <p>Ya puedes consultar tu reserva en tu perfil.</p>
+          <p class="fw-bold fs-4">¡Reserva realizada con éxito!</p>
+          <p class="text-center">Ya puedes consultar tu reserva en tu perfil.</p>
           <RouterLink to="/profile">
             <button class="button fw-bold mt-2 px-1 py-2" type="button">IR AL PERFIL</button>
           </RouterLink>
@@ -464,6 +464,7 @@ onMounted(() => {
 }
 main {
   background-color: rgba(171, 184, 195, 0.19);
+  padding: 3rem;
 }
 
 form {
@@ -471,6 +472,7 @@ form {
   flex-direction: column;
   border: 2px solid #d90594;
   border-radius: 5px;
+  width: 75%;
 }
 
 form input {
@@ -591,6 +593,14 @@ select {
   .exp_photo {
     min-width: 30%;
     width: 100%;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  main {
+    padding: 1rem;
   }
 }
 </style>

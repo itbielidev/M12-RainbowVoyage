@@ -325,7 +325,7 @@ export const useReservations = () => {
             });
 
         if (fetchErrorPost.value) {
-            data.null;
+            data.value = null;
             error.value = true;
             errorMessages.value.push(fetchErrorPost.value);
 

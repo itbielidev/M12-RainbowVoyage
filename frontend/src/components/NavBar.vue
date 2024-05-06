@@ -52,7 +52,7 @@
           <li v-if="userIsLoggedIn" class="nav-item">
             <RouterLink :to="{ name: isAdmin ? 'admin' : 'profile' }">
               <button
-                class="nav-link"
+                class="nav-link p-0"
                 @mouseover="hoverButton = true"
                 @mouseleave="hoverButton = false"
               >
@@ -65,7 +65,7 @@
             class="nav-item d-flex align-items-center gap-1 logout li-log-out"
             @click="logout()"
           >
-            <span class="fs-5 fw-bold log-out">CERRAR SESIÓN</span>
+            <span class="fw-bold log-out">CERRAR SESIÓN</span>
             <font-awesome-icon icon="fa-solid fa-power-off" />
           </li>
         </ul>
@@ -114,6 +114,7 @@ const { open: openLogin, close: closeLogin } = useModal({
 <style>
 .log-out {
   color: #d90594;
+  font-size: 20px;
 }
 
 .li-log-out:hover {
@@ -239,6 +240,11 @@ a {
 
   .menu {
     height: 200px;
+  }
+
+  .log-out,
+  .li-log-out {
+    font-size: 13px;
   }
 }
 </style>
