@@ -16,9 +16,23 @@ Realizar una reserva es simple y fácil. Después de elegir una experiencia y un
 
 Rainbow Voyage is an innovative website designed to offer unique and safe travel experiences in selected destinations in the peninsula and archipelagos for the LGTBIQA+ community. This project addresses the need for inclusive destinations by providing detailed information on festive, cultural and gastronomic experiences in cities. The platform allows users to filter experiences according to their preferences, make reservations easily and manage their profiles and bookings. This project highlights the importance of LGTBIQA+ in creating a welcoming and authentic space for LGTBIQA+ travellers in the country.
 
+## Miembros
+
+- Carolina Blanco 
+- Carlos Tarrias
+- Nerea Tirado
+
 ## Público Objetivo y Justificación 
 
-El público objetivo de Rainbow Voyage son personas pertenecientes a la comunidad LGTBIQA+ que buscan experiencias de viaje inclusivas y seguras en diferentes ciudades. Este grupo demográfico incluye a individuos de todas las edades, géneros y orientaciones sexuales que valoran la autenticidad, la diversidad y la aceptación en sus experiencias de viaje. Además, también se dirige a aquellos que desean apoyar y promover destinos inclusivos y respetuosos con la diversidad sexual.
+Nuestra aplicación de agencia de viajes está enfocada a satisfacer las necesidades turísticas del público LGTBIQ+ de España que quieran realizar viajes o rutas a ciudades, visitar puntos turísticos LGTBI friendly, lugares emblemáticos y simbólicos para la comunidad, de manera que tengan una experiencia acogedora y segura.
+
+Esta comunidad abarca una amplia gama de identidades de género y orientaciones sexuales, lo que requiere un enfoque inclusivo y respetuoso en todos los aspectos de la aplicación.
+
+La web está dirigida a personas que quieren viajar en grupo con miembros de la comunidad.
+Nuestro público objetivo abarca a personas adultas de todas las edades, ya que entendemos que hay necesidades y preferencias diferentes entre los diferentes grupos de edad.
+
+Estará disponible a nivel nacional tanto para viajeros locales que buscan experiencias dentro de su propia comunidad autónoma, así como a aquellos que desean explorar otras ciudades o comunidades.
+
 
 **Justificación**:
 
@@ -44,19 +58,33 @@ En definitiva Raibow Voyage es una plataforma necesaria y relevante que atiende 
 
 ## Wireframes y mockups 
 
-<!-- [Figma] -->
+[[Figma](https://www.figma.com/file/SNy6ifs3bIzQ96xvRYjtSJ/Dise%C3%B1o-UI-Rainbow-Voyage?type=design&node-id=0-1&mode=design)] 
 
-## Modelo E-R 
-
-<!-- ![Modelo E-R Final]() -->
 
 ## Diagrama de Casos de Uso 
 
-<!-- ![Diagrama de Casos de Uso Final]() -->
+ ![Diagrama de Casos de Uso](./readme_assets/usecase.png) 
 
-## Diagrama de Arquitectura de Producción 
+## Diagrama de Arquitectura 
 
-<!-- ![Diagrama de Arquitectura de Producción]() -->
+![Diagrama de Arquitectura](./readme_assets/arquitecture.png) 
+
+## Diagrama de Despliegue 
+
+![Diagrama de Despliegue](./readme_assets/deployment.png) 
+
+## Diagrama de Tipos
+
+![Diagrama de Tipos](./readme_assets/types.png) 
+
+## Modelo E-R 
+
+ ![Modelo E-R](./readme_assets/er.png) 
+
+## Modelo Relacional 
+  ![Modelo Relacional](./readme_assets/relational.png) 
+
+
 
 ## Gif de Demos de la Aplicación 
 
