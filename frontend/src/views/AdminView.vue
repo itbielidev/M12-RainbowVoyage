@@ -235,6 +235,10 @@ ul {
   background-color: rgb(241, 78, 187);
 }
 
+.fa-power-off {
+  color: white;
+}
+
 @media screen and (max-width: 991px) {
   .reservations-section {
     width: 100%;
