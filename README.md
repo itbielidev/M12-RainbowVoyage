@@ -95,30 +95,41 @@ Estará disponible a nivel nacional para aquellos que desean explorar otras ciud
 
 
 
-## Gif de Demos de la Aplicación 
+## Gif de Demos de la Aplicación en Producción
 
 - ### Inicio de sesión y registro en la web
   Mediante el botón ‘Iniciar sesión’ podremos visualizar el formulario de inicio de sesión. En el caso del registro mediante el botón 'Registrarse' que nos pedirá los datos correspondientes (nombre de usuario, correo electrónico, contraseña,...).
   Ambos formularios tienen un sistema de validación de campos, en caso de que no se introduzcan los datos correctamente, se mostrarán mensajes de error.
 
+  [Enlace a demostración de inicio de sesión y registro]()
+
 <!-- ![Gif de Demos]() -->
 
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/wbbaisQFKKw?si=LhqkEycNzyzESQ9j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  
 
 - ### Reserva de una experiencia
   Tanto como con la sesión iniciada como si no, dentro del listado de experiencias de una ciudad, podemos entrar al detalle de una experiencia pulsando el botón de "Desde ***€". Una vez en el detalle podremos selccionar el mes y la fecha que queramos reservar. Una vez establecida la fecha accederemos al formulario de reserva donde habrá que especificar varios datos (dni, coreo, aeropuertos,...). Al cumplimentar el formulario, nos aparecerá la reserva en nuestra lista de reservas en Perfil > Mis Reservas.
+
+    [Enlace a demostración de inicio de sesión y registro]()
+
     
 <!-- ![Gif de Demos]() -->
 
 - ### Editar datos de la cuenta
 
   Una vez iniciado sesión, en Perfil podemos modificar nustros datos además de especificar preferencias y filtros como pueden ser: precio, número de personas, tipo de experiencia, duración en días, etc. Para una búsqueda de experiencias más personalizada.
+
+    [Enlace a demostración de inicio de sesión y registro]()
+
       
 <!-- ![Gif de Demos]() -->
 
 - ### Consulta del estado de las reservas
 
   Una vez iniciado sesión, en Perfil. El usuario podrá visualizar las reservas que ha realizado a lo largo del tiempo en su perfil, las que están pendientes de aceptar por el gerente/administrador y las aceptadas.
+
+    [Enlace a demostración de inicio de sesión y registro]()
+
  
 <!-- ![Gif de Demos]() -->
 
@@ -126,11 +137,17 @@ Estará disponible a nivel nacional para aquellos que desean explorar otras ciud
 
   Los usuarios podrán buscar destinos basados en sus preferencias de perfil y por filtros generales (precio, número de personas, tipo de experiencia, etc).
 
+    [Enlace a demostración de inicio de sesión y registro]()
+
+
 <!-- ![Gif de Demos]() -->
 
 - ### Panel de control del administrador
 
   Como administrador de la web, una vez se ha iniciado sesión, desde el panel de control podemos estionar las diferentes reservas de los usuarios y enviar un correo electrónico al titular de la reserva, confirmando su reserva.
+
+    [Enlace a demostración de inicio de sesión y registro]()
+
 
 <!-- ![Gif de Demos]() -->
 
