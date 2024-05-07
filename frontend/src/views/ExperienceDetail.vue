@@ -284,4 +284,16 @@ p {
     width: 95%;
   }
 }
+
+@media screen and (min-width: 412px) and (max-width: 915px) {
+  h1 {
+    font-size: 25px; /* Tamaño de fuente para pantallas dentro del rango */
+  }
+  .exp-description, .img-carousel{
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+
 </style>
