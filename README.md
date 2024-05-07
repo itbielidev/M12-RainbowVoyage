@@ -144,7 +144,7 @@ Estará disponible a nivel nacional para aquellos que desean explorar otras ciud
 
 - ### Panel de control del administrador
 
-  Como administrador de la web, una vez se ha iniciado sesión, desde el panel de control podemos estionar las diferentes reservas de los usuarios y enviar un correo electrónico al titular de la reserva, confirmando su reserva.
+  Como administrador de la web, una vez se ha iniciado sesión, desde el panel de control podemos gestionar las diferentes reservas de los usuarios y enviar un correo electrónico al titular de la reserva, confirmando su reserva. Las reservas
 
     [Enlace a demostración de inicio de sesión y registro]()
 
