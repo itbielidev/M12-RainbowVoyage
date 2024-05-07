@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-12">
           <h1 class="text-center mt-5 title-pdf">RESUMEN DE TU RESERVA</h1>
-          <div class="text-center">
+          <div class="text-center pasajero">
             <p class="fw-bolder">Nombre:</p>
             <p>{{ reservation?.name }}</p>
             <p class="fw-bolder">Apellidos:</p>
@@ -86,7 +86,7 @@
                 <div class="icon-container">
                   <font-awesome-icon icon="fa-solid fa-hotel" class="hotel" /><br />
                   <img
-                    class="mt-4 rounded-5"
+                    class="mt-4 rounded-5 hotel"
                     :style="{ maxHeight: '200px', width: 'auto' }"
                     :src="`/images/${reservation.experience?.city.name}/${reservation.experience?.images[7]}`"
                   />
@@ -265,5 +265,14 @@ p {
 
 .card {
   border: 2px solid #d90594;
+}
+
+@media screen and (min-width: 412px) and (max-width: 915px) {
+  h1{
+    font-size: 30px;
+  }
+  .pasajero{
+    font-size: 13px;
+  }
 }
 </style>
