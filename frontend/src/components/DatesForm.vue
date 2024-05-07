@@ -71,7 +71,7 @@ function enableSelectors() {
 }
 </script>
 <template>
-  <section class="d-flex flex-column gap-2 justify-content-center align-items-center">
+  <section class="d-flex flex-column gap-2 justify-content-center align-items-center p-1">
     <div class="d-flex gap-1">
       <label class="me-1" for="months">Escoge el mes: </label>
       <select
@@ -103,19 +103,24 @@ function enableSelectors() {
       </select>
     </section>
     <section class="d-flex flex-column justify-content-center">
-      <button
-        v-if="userIsLoggedIn"
-        @click="enableSelectors"
-        class="button fw-bold px-2 py-2 mt-2"
-        type="button"
-      >
+      <button @click="enableSelectors" class="button fw-bold px-2 py-2 mt-2" type="button">
         REINICIAR OPCIONES
       </button>
     </section>
-    <section v-if="datesAvailable && datesAvailable.length > 0">
-      <label for="dates">Fechas disponibles para {{ formData.selectedMonth }}</label
+    <section
+      class="d-flex flex-column align-items-center justify-content-center"
+      v-if="datesAvailable && datesAvailable.length > 0"
+    >
+      <label for="dates" class="fw-bold fs-5 mt-3"
+        >Fechas disponibles para {{ formData.selectedMonth }}</label
       ><br />
-      <select name="dates" id="dates" v-model="dateSelected" @change="setSelectedDateId($event)">
+      <select
+        name="dates"
+        id="dates"
+        v-model="dateSelected"
+        @change="setSelectedDateId($event)"
+        class="mb-3"
+      >
         <optgroup>
           <option
             v-for="date in datesAvailable"
@@ -141,8 +146,10 @@ function enableSelectors() {
         >
           REALIZAR RESERVA
         </button>
-        <div v-else class="d-flex flex-column align-items-center gap-1">
-          <p class="p-0 m-0">Tienes que iniciar sesión para poder hacer una reserva</p>
+        <div v-else class="d-flex flex-column align-items-center justify-content-center gap-1">
+          <p class="p-0 m-0 fw-bold fs-5 text-center">
+            Tienes que iniciar sesión para poder hacer una reserva
+          </p>
           <button @click="openLogin()" class="button fw-bold mt-1 px-1 py-2" type="button">
             INICIAR SESIÓN
           </button>
@@ -171,6 +178,8 @@ select {
   background-color: white;
   border: none;
   border: 2px solid #d90594;
+  border-radius: 50px;
+  padding: 1px 3px 1px 3px;
 }
 
 button {

@@ -93,7 +93,7 @@ const router = createRouter({
       props: route => ({ ...route.params, reservationId: Number(route.params.reservationId) }),
       beforeEnter: (to, from, next) => {
         const authStore = useAuthStore()
-        if (authStore.userIsLoggedIn && !authStore.isAdmin) { next() }
+        if (authStore.userIsLoggedIn) { next() }
         else {
           next("/")
         }

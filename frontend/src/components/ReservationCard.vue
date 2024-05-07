@@ -65,6 +65,15 @@ const manageEmailSending = async (reservationId: number) => {
             <div v-else-if="error" class="d-flex justify-content-center">
               <ErrorMessages :messages="errorMessages"></ErrorMessages>
             </div>
+            <RouterLink
+              :to="{ name: 'reservationDetail', params: { reservationId: reservation.id } }"
+              class="btn ms-md-2"
+            >
+              Ver detalle <font-awesome-icon icon="fa-solid fa-file" />
+            </RouterLink>
+            <!-- <button class="btn ms-md-2">
+              Ver detalle <font-awesome-icon icon="fa-solid fa-file" />
+            </button> -->
           </div>
         </div>
       </div>
