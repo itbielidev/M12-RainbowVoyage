@@ -25,7 +25,14 @@ Rainbow Voyage is an innovative website designed to offer unique and safe travel
     - Usuario administrador:
       - Correo: admin@gmail.com
       - Contraseña: admin2024
+  - Nota PWA
+      - Para poder instalar la aplicación en el móvil o en el escritorio hay que acceder al enlace proporcionado desde el navegador Google Chrome.
+      - Para efectuar la instalación de la PWA hay que pulsar el siguiente icono ubicado en el extremo derecho en la barra de navegación:
 
+        ![Imagen icono](./readme_assets/pwa.png) 
+   - Nota Reservas
+      - Se pueden hacer reservas en junio de 2024 en todas las experiencias.
+ 
 
 ## Miembrxs
 
@@ -95,7 +102,7 @@ Estará disponible a nivel nacional para aquellos que desean explorar otras ciud
 
 
 
-## Gif de Demos de la Aplicación en Producción
+## Videos de Demo de la Aplicación 
 
 - ### Inicio de sesión y registro en la web
   Mediante el botón ‘Iniciar sesión’ podremos visualizar el formulario de inicio de sesión. En el caso del registro mediante el botón 'Registro' que nos pedirá los datos correspondientes (nombre de usuario, correo electrónico, contraseña,...).
@@ -108,7 +115,7 @@ Estará disponible a nivel nacional para aquellos que desean explorar otras ciud
   
 
 - ### Reserva de una experiencia
-  Tanto como con la sesión iniciada como si no, dentro del listado de experiencias de una ciudad, podemos entrar al detalle de una experiencia pulsando el botón de "Desde ***€". Una vez en el detalle podremos selccionar el mes y la fecha que queramos reservar. Una vez establecida la fecha accederemos al formulario de reserva donde habrá que especificar varios datos (dni, coreo, aeropuertos,...). Al cumplimentar el formulario, nos aparecerá la reserva en nuestra lista de reservas en Perfil > Mis Reservas.
+  Tanto como con la sesión iniciada como si no, dentro del listado de experiencias de una ciudad, podemos entrar al detalle de una experiencia pulsando el botón de "Desde ***€". Una vez en el detalle podremos seleccionar el mes y la fecha que queramos reservar. Una vez establecida la fecha accederemos al formulario de reserva donde habrá que especificar varios datos (dni, coreo, aeropuertos,...). Al cumplimentar el formulario, nos aparecerá la reserva en nuestra lista de reservas en Perfil > Mis Reservas.
 
     [Enlace a demostración de reserva de una experiencia](https://www.youtube.com/watch?v=046VfNfy0sY)
 
@@ -117,7 +124,7 @@ Estará disponible a nivel nacional para aquellos que desean explorar otras ciud
 
 - ### Editar datos de la cuenta
 
-  Una vez iniciado sesión, en Perfil podemos modificar nustros datos además de especificar preferencias y filtros como pueden ser: precio, número de personas, tipo de experiencia, duración en días, etc. Para una búsqueda de experiencias más personalizada.
+  Una vez iniciada sesión, en Perfil podemos modificar nuestros datos además de especificar preferencias y filtros como pueden ser: precio, número de personas, tipo de experiencia, duración en días, etc. Para una búsqueda de experiencias más personalizada.
 
     [Enlace a la demostración de edición de datos de perfil](https://youtu.be/ocNBoCGSgSc)
  
@@ -173,7 +180,7 @@ Gracias a una planificación cuidadosa, y un compromiso constante en todos los s
 
 Este proyecto nos ha permitido realizar una planificación detallada y realista, considerando las necesidades y expectativas específicas de la comunidad LGTBI en el ámbito de los viajes. 
 
-A lo largo del desarrollo, hemos enfrentado desafíos como la falta de conocimientos en nuestro equipo, lo que nos ha llevado a organizar e investigar las funcionalidades que podíamos implementar de manera efectiva.
+A lo largo del desarrollo, hemos enfrentado desafíos como la falta de conocimientos en nuestro equipo, lo que nos ha llevado a organizar e investigar las funcionalidades que podríamos implementar de manera efectiva.
 
 Cabe mencionar que la diversidad de enfoques y habilidades dentro del equipo nos ha exigido una comunicación clara y una distribución equitativa de las tareas, lo que ha contribuido a conseguir nuestros objetivos en los plazos establecidos.
 Este proyecto nos ha permitido asentar conocimientos de JS, CSS, VUE, PostgreSQL y Prisma.

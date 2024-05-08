@@ -82,7 +82,7 @@ useSeoMeta({
   <div class="body">
     <NavBar></NavBar>
     <div class="container">
-      <h1 class="py-2">{{ experience?.city.name }}: {{ experience?.name }}</h1>
+      <h1 class="py-2 px-3">{{ experience?.city.name }}: {{ experience?.name }}</h1>
       <section class="breadcrumbs-box">
         <BreadCrumbs :items="items"></BreadCrumbs>
       </section>
@@ -289,11 +289,14 @@ p {
   h1 {
     font-size: 25px; /* Tamaño de fuente para pantallas dentro del rango */
   }
-  .exp-description, .img-carousel{
+  .exp-description,
+  .img-carousel {
     margin-left: 15px;
     margin-right: 15px;
   }
+
+  .pack {
+    width: 100%;
+  }
 }
-
-
 </style>

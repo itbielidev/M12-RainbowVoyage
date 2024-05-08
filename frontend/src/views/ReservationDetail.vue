@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <BreadCrumbs :items="items" class="p-5"></BreadCrumbs>
     <section v-if="!isLoadingDetail && !error && reservation">
       <div class="print-button-container">
         <button class="btn mt-4" @click="printPDF()">Imprimir PDF</button>
@@ -21,7 +22,7 @@
         <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
           <div class="card">
             <div class="card-body text-center">
-              <h5 class="card-title">Billetes de ida</h5>
+              <h5 class="card-title rounded">Billetes de ida</h5>
               <p class="fw-bolder">Aeropuerto de salida:</p>
               <p class="card-text">{{ reservation?.airportIn }}</p>
               <p class="fw-bolder">Fecha</p>
@@ -43,7 +44,7 @@
         <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
           <div class="card">
             <div class="card-body text-center">
-              <h5 class="card-title">Billetes de vuelta</h5>
+              <h5 class="card-title rounded">Billetes de vuelta</h5>
               <p class="fw-bolder">Aeropuerto de salida:</p>
               <p class="card-text">{{ reservation?.airportOut }}</p>
               <p class="fw-bolder">Fecha</p>
@@ -96,7 +97,7 @@
           </div>
         </div>
       </div>
-      <img src="../../public/images/logo.webp" width="200px" class="img-fluid mx-auto d-block" />
+      <img src="/images/logo.webp" width="200px" class="img-fluid mx-auto d-block" />
     </section>
     <section v-else-if="error" class="d-flex justify-content-center">
       <ErrorMessages :messages="errorMessages"></ErrorMessages>
@@ -114,12 +115,28 @@ import ErrorMessages from '@/components/ErrorMessages.vue'
 import ProgressSpinner from 'primevue/progressspinner'
 import { useSeoMeta, type UseSeoMetaInput } from '@unhead/vue'
 import html2pdf from 'html2pdf.js'
+import BreadCrumbs from '@/components/BreadCrumbs.vue'
 
 const props = defineProps<{ reservationId: number }>()
 const { getReservation, reservation, error, errorMessages, isLoadingDetail } = useReservations()
 
 onMounted(async () => {
   await getReservation(props.reservationId)
+})
+
+const items = computed<any>(() => [
+  { label: 'Página principal', route: '/' },
+  {
+    label: `Detalle reserva`
+  }
+])
+
+useSeoMeta({
+  title: `Rainbow Voyage | Detalle de reserva`,
+  description: `Detalle con toda la información de la reserva que has realizado`,
+  ogDescription: `Detalle con toda la información de la reserva que has realizado`,
+  ogTitle: `Rainbow Voyage | Detalle de reserva`,
+  ogImage: '/images/logo.webp'
 })
 
 const randomGate = computed(() => {
@@ -268,10 +285,10 @@ p {
 }
 
 @media screen and (min-width: 412px) and (max-width: 915px) {
-  h1{
+  h1 {
     font-size: 30px;
   }
-  .pasajero{
+  .pasajero {
     font-size: 13px;
   }
 }

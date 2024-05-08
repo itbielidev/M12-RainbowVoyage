@@ -117,8 +117,8 @@ useSeoMeta({
 })
 </script>
 <template>
+  <NavBar></NavBar>
   <header class="container">
-    <NavBar></NavBar>
     <section class="cover-city">
       <img class="cover" :src="`/images/${getCityCoverImgByName(props.cityName, 1)}`" />
       <div class="title-box">
@@ -255,7 +255,9 @@ useSeoMeta({
           <BreadCrumbs :items="items"></BreadCrumbs>
         </section>
         <section class="experience-quote w-100 mb-3">
-          <p class="display-5 w-100 city-quote">❝{{ getDescriptionDetailByName(props.cityName) }}❞</p>
+          <p class="display-5 w-100 city-quote">
+            ❝{{ getDescriptionDetailByName(props.cityName) }}❞
+          </p>
         </section>
         <section v-if="!isLoading && experiences && experiences.length > 0" class="our-experiences">
           <h2 class="title-our-experiences">Nuestras Experiencias</h2>
@@ -394,6 +396,7 @@ section.filters {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  gap: 6px;
 }
 
 main,
@@ -543,7 +546,7 @@ button.price:hover {
   }
 
   h2.title-our-experiences {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   article.art-experience {
@@ -594,7 +597,7 @@ button.price:hover {
   }
 
   div.experience-description p {
-    font-size: 0.8rem;
+    font-size: 1.1rem;
   }
 
   section.filters {
@@ -608,12 +611,11 @@ button.price:hover {
   }
 }
 
-@media (min-width: 400px){
-
-  section.cover-city img.cover{
+@media (min-width: 400px) {
+  section.cover-city img.cover {
     height: 18rem;
   }
-  img.title{
+  img.title {
     height: 100%;
     margin: 0rem 0.5rem;
   }
@@ -622,30 +624,27 @@ button.price:hover {
     width: 100%;
   }
 
-  p.city-quote{
-    font-size: 1.3rem;
+  p.city-quote {
+    font-size: 1.6rem;
     margin: 1rem;
   }
 
-  section.our-experiences{
+  section.our-experiences {
     margin: 0;
     padding: 0;
   }
 
-  h2.title-our-experiences{
-    font-size: 1.5rem;
+  h2.title-our-experiences {
     align-self: center;
     padding-left: 0%;
-  
   }
 
-  article.art-experience{
-   width: 100%;
+  article.art-experience {
+    width: 100%;
   }
 
-  button.price{
+  button.price {
     width: 8rem;
   }
 }
-
 </style>
