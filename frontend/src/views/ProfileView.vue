@@ -117,7 +117,9 @@ useSeoMeta({
   >
     <Toast></Toast>
     <h2 class="text-center">Mi perfil</h2>
-    <div class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end breadcrumbs-bookings">
+    <div
+      class="mt-3 me-5 text-center text-lg-start d-flex justify-content-end breadcrumbs-bookings"
+    >
       <BreadCrumbs :items="items" class="breadcrumbs-box"></BreadCrumbs>
       <a href="#" class="btn pink-button my-bookings" @click="toggleReservationActivated">
         {{ !reservationActivated ? 'Mis datos' : 'Mis reservas' }}
@@ -390,7 +392,7 @@ useSeoMeta({
 body {
   height: 100vh;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 main {
@@ -404,19 +406,19 @@ main {
 }
 
 .my-bookings {
-    width: 12rem;
-    height: 3rem;
-    text-align: center;
-    justify-content: center;
-    align-self:center;
-    font-size: 1.2rem;
-    margin-right: 3rem;
-  }
+  width: 12rem;
+  height: 3rem;
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  font-size: 1.2rem;
+  margin-right: 3rem;
+}
 
 .pink-button {
   background-color: #d90594;
   padding: 0.6rem 1rem;
-  border-radius: 4rem;
+  border-radius: 6px;
   color: white;
 }
 
@@ -433,7 +435,7 @@ h5 {
 }
 
 @media screen and (max-width: 575.98px) {
-  .breadcrumbs-bookings{
+  .breadcrumbs-bookings {
     flex-direction: column;
     align-items: center;
     margin-right: 0;
@@ -458,6 +460,5 @@ h5 {
     flex-direction: column;
     align-items: center;
   }
-
 }
 </style>

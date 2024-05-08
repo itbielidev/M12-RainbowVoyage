@@ -43,7 +43,7 @@
           <div class="newsletter-form text-center">
             <input
               type="text"
-              placeholder="Correo electrónico"
+              placeholder="user@gmail.com"
               class="newsletter-input py-1 px-2"
             /><br />
             <button class="btn mt-3">Enviar</button>
@@ -113,6 +113,7 @@
 .newsletter-form input {
   margin-bottom: 5px;
   border-radius: 15px;
+  border: 2px solid #d90594;
 }
 
 .title {

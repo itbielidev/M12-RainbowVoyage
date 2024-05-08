@@ -4,9 +4,9 @@ import FooterComponent from '@/components/FooterComponent.vue'
 </script>
 <template>
     <NavBar></NavBar>
-    <h1>Aviso Legal y Términos de uso</h1>
-    <h2>del servicio de RainbowVoyage</h2>
-    <section class="container">
+    <h1 class="mt-4">Aviso Legal y Términos de uso</h1>
+    <h2 class="mb-3">del servicio de RainbowVoyage</h2>
+    <section class="container mb-2">
         <p>Los términos y condiciones que se indican a continuación regulan el acceso y el uso del sitio <a
                 style="color: #d90594;"
                 href="https://rainbow-voyage-web.vercel.app">www.rainbow-voyage-web.vercel.app</a> propiedad de RAINBOW
@@ -14,7 +14,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
     </section>
     <section class="ownership container">
         <p>
-        <h3>Titularidad del sitio web</h3>
+        <h3 class="fw-bold">Titularidad del sitio web</h3>
         La titular del presente sitio web <a style="color: #d90594;"
             href="https://rainbow-voyage-web.vercel.app">www.rainbow-voyage-web.vercel.app</a> es RAINBOW VOYAGE.,
         titular del NIF 92198103G con domicilio social en C/ Aiguablava 121, 08033, Barcelona, España, Inscrita en el
@@ -28,7 +28,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
         </p>
     </section>
     <section class="web-usage container">
-        <h3>Acceso y uso del sitio web</h3>
+        <h3 class="fw-bold">Acceso y uso del sitio web</h3>
         <p>
             El sitio web está dirigido al consumidor final (en adelante “Usuario”) que accede a la página para
             informarse y contratar los servicios ofertados a través del sitio web.
@@ -67,7 +67,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
         </p>
     </section>
     <section class="information-content container">
-        <h3>Contenido de la información y limitación de responsabilidad</h3>
+        <h3 class="fw-bold">Contenido de la información y limitación de responsabilidad</h3>
         <p>
             La información contenida en el sitio web es ofrecida para conveniencia del Usuario. La elaboración y
             actualización de la información sobre ofertas, productos o servicios, precios, rutas, circuitos,
@@ -94,7 +94,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
         </p>
     </section>
     <section class="guarantee container">
-        <h3>Exclusión de garantías</h3>
+        <h3 class="fw-bold">Exclusión de garantías</h3>
         <p>
             En la máxima medida permitida por la legislación aplicable, Rainbow Voyage no garantiza ni se hace
             responsable de:
@@ -117,7 +117,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
         </p>
     </section>
     <section class="user-responsabilities container">
-        <h3>Obligaciones del Usuario</h3>
+        <h3 class="fw-bold">Obligaciones del Usuario</h3>
         <p>
             El Usuario se compromete a hacer un uso adecuado de los servicios y contenidos que Rainbow Voyage ofrece y
             no emplearlos para:
@@ -145,7 +145,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
         </p>
     </section>
     <section class="products-services container">
-        <h3>Adquisición de productos y servicios</h3>
+        <h3 class="fw-bold">Adquisición de productos y servicios</h3>
         <p>
             A través del sitio web, el Usuario tiene acceso a información sobre productos y servicios de terceros
             relacionados con el turismo y los viajes y, en determinados casos, podrá realizar reservas y compras de
@@ -175,7 +175,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
             establezcan para cada caso, que se mostrarán en la pantalla de pago y que el Usuario deberá aceptar
             explícitamente para finalizar su reserva o compra.
         </p>
-        <h4>Precios</h4>
+        <h4 class="fw-bold">Precios</h4>
         <p>
             La cifra que será objeto de la comunicación a la que se refiere el punto 3º del apartado anterior será el
             “precio de venta al público” con los impuestos incluidos. Si bien, no incluye la tasa sobre estancia en
@@ -190,7 +190,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
             reserva, durante el período comprendido entre esta última y el pago o inicio de los servicios, incurrirá en
             la correspondiente regularización.
         </p>
-        <h4>Modificación y/o cancelación de reservas </h4>
+        <h4 class="fw-bold">Modificación y/o cancelación de reservas </h4>
         <p>
             Tras la formalización de la reserva, el Usuario deberá revisar el contenido de la misma a fin de identificar
             posibles errores materiales en la introducción de datos.
@@ -206,7 +206,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
         </p>
     </section>
     <section class="payment container">
-        <h3>Forma de pago</h3>
+        <h3 class="fw-bold">Forma de pago</h3>
         <p>
             El Usuario se compromete a pagar los servicios o productos contratados mediante la utilización de tarjeta de
             débito(Visa Electrón y Maestro) o crédito (Visa y Master Card):
@@ -220,13 +220,13 @@ import FooterComponent from '@/components/FooterComponent.vue'
         </p>
     </section>
     <section class="documentation container">
-        <h3>Entrega de documentación</h3>
+        <h3 class="fw-bold">Entrega de documentación</h3>
         <p>
             Una vez realizado el pago del viaje, Rainbow Voyage entregará al cliente la documentación de viaje enviándola directamente a su dirección de correo electrónico cuando se trate de documentos o bonos de presentación electrónicos, enviándola por mensajero al domicilio o dirección de entrega especificada por el cliente o entregándola en la oficina de Rainbow Voyage elegida por el cliente durante el proceso de contratación.
         </p>
     </section>
     <section class="withdrawal container">
-        <h3>Derecho de desistimiento</h3>
+        <h3 class="fw-bold">Derecho de desistimiento</h3>
         <p>
             Derecho de desistimiento
 
@@ -244,13 +244,13 @@ El organizador podrá cancelar el contrato y reembolsar al Usuario la totalidad 
         </p>
     </section>
     <section class="personal-information container">
-        <h3>Información sobre el uso de datos de carácter personal. Política de Privacidad</h3>
+        <h3 class="fw-bold">Información sobre el uso de datos de carácter personal. Política de Privacidad</h3>
         <p>
             La información o datos personales que nos facilite sobre usted serán tratados con arreglo a lo establecido en la Política de Privacidad y Cookies. Al hacer uso de esta página web usted consiente el tratamiento de dicha información y datos y declara que toda la información o datos que nos facilite son veraces y se corresponden con la realidad.
         </p>
     </section>
     <section class="software container">
-        <h3>Derechos de autor, marcas registradas, software</h3>
+        <h3 class="fw-bold">Derechos de autor, marcas registradas, software</h3>
         <p>
             Todos los contenidos del sitio web de www.rainbow-voyage-web.vercel.app , incluyendo contenidos, marcas, gráficos, logotipos, iconos, botones, imágenes y software, son propiedad de Rainbow Voyage o de sus proveedores de contenidos y están protegidos por las normas nacionales e internacionales de propiedad industrial e intelectual. La compilación (entendiéndose como tal la recopilación, ordenación y montaje) de todo el contenido del sitio web es propiedad de Rainbow Voyage se encuentra protegida por las normas nacionales e internacionales de propiedad industrial e intelectual. Todo el software utilizado en el sitio web, es propiedad de Rainbow Voyage o de sus proveedores de software se encuentra protegido por las leyes nacionales e internacionales de propiedad industrial e intelectual. Los iconos circulares representativos de plataformas sociales son propiedad de MediaLoot
 
