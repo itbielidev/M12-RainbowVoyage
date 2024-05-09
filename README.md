@@ -139,6 +139,24 @@ Estará disponible a nivel nacional para aquellos que desean explorar otras ciud
 
 <!-- ![Gif de Demos]() -->
 
+- ### Información y detalle de la reserva
+
+  Una vez el usuario ha realizado una reserva puede consultar su detalle (y si se ha confirmado o no) 
+  en su perfil. Además puede imprimir la información en formato PDF. 
+
+  [Enlace a demostración de detalle de reserva](https://youtu.be/qwO0rO7LHb4)
+
+- ### Foto de portada varía en función de la ubicación
+
+  La foto de la página principal cambia en función de la ubicación del usuario. 
+  En la foto se muestra la ciudad más cercana a la posición del usuario.
+  En la siguiente demo podemos ver como un usuario simulado se conecta desde Mumbai (India) ve la foto
+  de la ubicación más cercana, en este caso, Málaga.
+
+  [Enlace a demostración de foto de portada](https://youtu.be/0btZLmRBkys)
+
+<!-- ![Gif de Demos]() -->
+
 - ### Panel de control del administrador
 
   Como administrador de la web, una vez se ha iniciado sesión, desde el panel de control podemos gestionar las diferentes reservas de los usuarios y enviar un correo electrónico al titular de la reserva, confirmando su reserva. 
