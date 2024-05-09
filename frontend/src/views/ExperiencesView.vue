@@ -611,7 +611,7 @@ button.price:hover {
   }
 }
 
-@media (min-width: 400px) {
+@media (min-width: 350px) {
   section.cover-city img.cover {
     height: 18rem;
   }

@@ -435,6 +435,10 @@ h5 {
 }
 
 @media screen and (max-width: 575.98px) {
+  .card {
+    margin: 3px 5px !important;
+  }
+
   .breadcrumbs-bookings {
     flex-direction: column;
     align-items: center;

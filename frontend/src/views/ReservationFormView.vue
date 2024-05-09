@@ -589,7 +589,7 @@ select {
   padding: 5px;
 }
 
-@media screen and (max-width: 569px) {
+@media screen and (max-width: 598px) {
   .exp_photo {
     min-width: 30%;
     width: 100%;
@@ -600,7 +600,7 @@ select {
   }
 
   main {
-    padding: 1rem;
+    padding: 10px;
   }
 }
 </style>

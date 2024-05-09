@@ -73,8 +73,7 @@
                 <div class="icon-containerm">
                   <font-awesome-icon icon="fa-solid fa-location-dot" class="city" /><br />
                   <img
-                    class="mt-4 rounded-5"
-                    :style="{ maxHeight: '200px', width: 'auto' }"
+                    class="mt-4 rounded-5 experience"
                     :src="`/images/${reservation.experience?.city.images[0]}`"
                   />
                 </div>
@@ -88,7 +87,6 @@
                   <font-awesome-icon icon="fa-solid fa-hotel" class="hotel" /><br />
                   <img
                     class="mt-4 rounded-5 hotel"
-                    :style="{ maxHeight: '200px', width: 'auto' }"
                     :src="`/images/${reservation.experience?.city.name}/${reservation.experience?.images[7]}`"
                   />
                 </div>
@@ -236,6 +234,16 @@ button {
   font-weight: bold;
   justify-content: center;
 }
+
+.experience {
+  max-height: 200px;
+  width: auto;
+}
+
+.hotel {
+  max-height: 200px;
+  width: auto;
+}
 button:hover {
   background-color: white;
   border: 2px solid #d90594;
@@ -284,12 +292,17 @@ p {
   border: 2px solid #d90594;
 }
 
-@media screen and (min-width: 412px) and (max-width: 915px) {
+@media screen and (min-width: 350px) and (max-width: 915px) {
   h1 {
     font-size: 30px;
   }
   .pasajero {
     font-size: 13px;
+  }
+
+  .hotel,
+  .experience {
+    width: 100%;
   }
 }
 </style>

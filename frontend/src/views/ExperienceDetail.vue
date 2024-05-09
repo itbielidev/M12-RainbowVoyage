@@ -285,7 +285,7 @@ p {
   }
 }
 
-@media screen and (min-width: 412px) and (max-width: 915px) {
+@media screen and (min-width: 350px) and (max-width: 915px) {
   h1 {
     font-size: 25px; /* Tamaño de fuente para pantallas dentro del rango */
   }
