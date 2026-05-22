@@ -16,15 +16,7 @@ Realizar una reserva es simple y fácil. Después de elegir una experiencia y un
 
 Rainbow Voyage is an innovative website designed to offer unique and safe travel experiences in selected destinations in the peninsula and archipelagos for the LGTBIQA+ community. This project addresses the need for inclusive destinations by providing detailed information on festive, cultural and gastronomic experiences in cities. The platform allows users to filter experiences according to their preferences, make reservations easily and manage their profiles and bookings. This project highlights the importance of LGTBIQA+ in creating a welcoming and authentic space for LGTBIQA+ travellers in the country.
 
-## Enlace de producción
-- Enlace de producción: https://rainbow-voyage-web.vercel.app/
-  - USUARIOS DE PRUEBA
-    - Usuario cliente:
-      - Correo : test@gmail.com
-      - Contraseña: test1234
-    - Usuario administrador:
-      - Correo: admin@gmail.com
-      - Contraseña: admin2024
+## Producción
   - Nota PWA
       - Para poder instalar la aplicación en el móvil o en el escritorio hay que acceder al enlace proporcionado desde el navegador Google Chrome.
       - Para efectuar la instalación de la PWA hay que pulsar el siguiente icono ubicado en el extremo derecho en la barra de navegación:
